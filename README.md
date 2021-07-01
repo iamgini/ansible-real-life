@@ -6,4 +6,4 @@ If you are new to Ansible, please see the **FREE Course**, **[Ansible for Absolu
 
 This repository is for Ansible real life samples and use cases.
 
-Do you have a use case to discuss ? Let's learn it together; leave and email to [gini](mailto:gini@techbeatly.com).
+Do you have a use case to discuss ? Let's learn it together; leave a message to [gini](mailto:gini@techbeatly.com).
