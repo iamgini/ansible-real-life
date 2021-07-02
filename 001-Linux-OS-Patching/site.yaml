@@ -12,7 +12,8 @@
       - nginx
       - mysqld
       - httpd
-
+    running_services: ""
+    any_service_running: false
   tasks:
     - name: "Pre-Patching: Sending Email to Server and App Owners"
       include_role:

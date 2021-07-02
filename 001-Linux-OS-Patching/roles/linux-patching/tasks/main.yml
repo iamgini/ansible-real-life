@@ -16,6 +16,11 @@
   register: package_update_status
   when: dopatch is defined
 
+- name: Package Upadte Status
+  debug:
+    msg: "{{ package_update_status }}"
+  when: dopatch is defined
+
 - name: Comparing last updated kernel and running kernel
   shell: |
     LAST_KERNEL=$(rpm -q --last kernel |head -1 | awk '{print $1}' | sed 's/kernel-//');
@@ -25,15 +30,28 @@
       # Set reboot flag
       touch /tmp/reboot
       echo "KERNEL_CHANGED"
-      # Shutdown/stop any services before reboot if exists.
-      #if [[ -f /opt/home/svc_cls/pre_reboot.sh ]]; then
-      #  /opt/home/svc_cls/pre_reboot.sh
-      #fi
+    else
+      echo "No KERNEL Change Detected"
     fi
   register: kernel_update_status
+
+- name: Reboot Requirement
+  debug:
+    msg: "{{ kernel_update_status.stdout }}"
+
+
+# Shutdown/stop any services before reboot if needed
+- name: Pre-Reboot Scripts 
+  debug:
+    msg: "Running Pre-Reboot scripts............."
 
 - name: Reboot the machine (Wait for 5 min or 300 Sec)
   reboot:
     reboot_timeout: 300
     test_command: uptime
   when: package_update_status.changed or kernel_update_status.stdout == "KERNEL_CHANGED"
+  register: reboot_status
+
+- name: Machine after reboot
+  debug:
+    msg: "{{ reboot_status }}"

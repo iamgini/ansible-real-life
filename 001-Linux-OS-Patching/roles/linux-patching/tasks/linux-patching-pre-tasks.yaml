@@ -10,20 +10,22 @@
 - name: Get Service Facts
   service_facts:
 
-- name: "Check Service List Status"
+- name: "Filter Running Services"
+  set_fact:
+    running_services: "{{ ansible_facts | json_query('services.* | [?state == `running`].name') }}"
+
+- name: "Runnig Services"
   debug:
-    var: ansible_facts.services
+    msg: "{{ running_services }}"
 
 - name: "Check Services and Set Status"
-  debug:
-    msg: "{{ item[0] }}"
-  #set_facts:
-  #  any_service_running: true
-  when: item[1] in item[0]
-  with_nested: 
-    - "{{ ansible_facts.services }}"
+  #debug:
+  #  msg: "{{ item }}"
+  set_fact:
+    any_service_running: true
+  when: running_services is search(item)
+  with_items: 
     - "{{ service_list }}"
-
 
 - name: "Some listed services still running. Do you want to continue patching ?"
   pause:
@@ -36,4 +38,4 @@
 
 - name: Initiating Snapshot
   debug:
-    msg: "Calling Snapshot job"    
+    msg: "Calling Snapshot job............................."    
