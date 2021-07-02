@@ -12,14 +12,18 @@
 
 - name: "Check Service List Status"
   debug:
-    var: ansible_facts.services["{{ item }}"].state
-  with_items: "{{ service_list }}"
+    var: ansible_facts.services
 
-- name: "Set Service Status Fact"
-  set_fact:
-    any_service_running: true
-  when: ansible_facts.services["{{ item }}"].state == "running"
-  with_items: "{{ service_list }}"
+- name: "Check Services and Set Status"
+  debug:
+    msg: "{{ item[0] }}"
+  #set_facts:
+  #  any_service_running: true
+  when: item[1] in item[0]
+  with_nested: 
+    - "{{ ansible_facts.services }}"
+    - "{{ service_list }}"
+
 
 - name: "Some listed services still running. Do you want to continue patching ?"
   pause:

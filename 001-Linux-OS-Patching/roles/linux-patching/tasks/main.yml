@@ -14,6 +14,7 @@
     update_cache: yes
     update_only: no
   register: package_update_status
+  when: dopatch is defined
 
 - name: Comparing last updated kernel and running kernel
   shell: |

@@ -1,9 +1,8 @@
 ---
 - name: Performing Linux OS Patching
+  ## give NODES during playbook -> -e "NODES=mynodes"
   hosts: "{{ NODES }}"
-  # give NODES during playbook -> -e "NODES=mynodes"
   become: true
-  
   vars:
     email_notificaiton: false
     email_to_address: app-owners@lab.local
@@ -15,12 +14,12 @@
       - httpd
 
   tasks:
-    - name: "Pre-Task: Sending Email to Server and App Owners"
+    - name: "Pre-Patching: Sending Email to Server and App Owners"
       include_role:
         name: send-email
       vars:
         email_subject: 'OS patching is beginning now'
-      when: email_notificaiton is true
+      when: email_notificaiton
       tags: pretaskemail
     
     - name: "Patching Pre-tasks"
@@ -37,11 +36,11 @@
         name: linux-patching
         tasks_from: linux-patching-post-tasks.yaml
 
-    - name: "Pre-Task: Sending Email to Server and App Owners"
+    - name: "Post-Patching: Sending Email to Server and App Owners"
       include_role:
         name: send-email
       vars:
         email_subject: 'OS patching has been completed'
-      when: email_notificaiton is true
+      when: email_notificaiton
       tags: 
         - posttaskemail
