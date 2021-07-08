@@ -1,0 +1,61 @@
+---
+- name: String Search
+  hosts: localhost
+  gather_facts: False
+  vars:
+    url_list_final: []
+    url_list_to_search:
+      - "abc.com"
+      - "bc.com"
+      - "xyz.com"
+    url_list:
+      [
+        {
+        "name": "bc.com"
+        },
+        {
+        "name": "aabc.com"
+        },
+        {
+        "name": "abc.com.sg"
+        },
+        {
+        "name": "yz.com"
+        },
+        {
+        "name": "xyz.com.sg"
+        }
+      ]
+  tasks:
+    - debug:
+        msg: "{{ url_list }}, {{ url_list_to_search }}"
+
+    - name: "Searching for exact String in a list of Strings"
+      debug:
+        msg: "{{ url_item['name'] }}"
+      with_items: "{{ url_list }}"
+      loop_control:
+        loop_var: url_item
+
+    - name: "Add to List"
+      set_fact:
+        url_list_final: "{{ url_list_final + [ url_item['name'] ] }}"
+        #url_list_final: "{{ url_list_final + '\n' + url_item['name']  }}"
+      with_items: "{{ url_list }}"
+      loop_control:
+        loop_var: url_item
+
+
+    - debug:
+        msg: "{{ url_list_final }}"
+    
+    - name: "Search Items in List"
+      debug:
+        msg: "{{ url_item_search }}"
+      when: "url_item_search in url_list_final"
+      #when: url_list_final is regex("^bc.com$")
+      #when: url_list_final | regex_search('^' + url_item_search + '$') | string
+      with_items: "{{ url_list_to_search }}"
+      loop_control:
+        loop_var: url_item_search
+        
