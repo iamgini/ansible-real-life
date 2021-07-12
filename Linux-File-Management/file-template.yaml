@@ -1,0 +1,22 @@
+---
+- name: Configure system
+  hosts: all
+  
+  become: true
+  tasks:
+    - name: Configure a custom /etc/motd
+      template:
+        src: motd.j2
+        dest: /etc/motd
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Check file exists
+      stat:
+        path: /etc/motd
+      register: motd
+
+    - name: Display stat results
+      debug:
+        var: motd

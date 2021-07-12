@@ -1,0 +1,8 @@
+
+This system is managed by Ansible
+System Name             : {{ ansible_facts['fqdn'] }}
+Operating System        : {{ ansible_facts['distribution'] }} version {{ ansible_facts['distribution_version'] }}
+System total memory     : {{ ansible_facts['memtotal_mb'] }} MiB.
+System processor count  : {{ ansible_facts['processor_count'] }}
+
+

@@ -1,0 +1,29 @@
+---
+- name: Cleanup Node
+  hosts: all
+
+  become: true
+  tasks:
+    - name: Remove files
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - '/home/ansible/demo-text-file.txt'
+        - '/home/ansible/link-to-demo.txt'
+        - '/home/ansible/new-file.txt'
+        - '/home/ansible/get-pip.py'
+        - '/home/ansible/files'
+        - '/home/ansible/new-dir'
+    
+    - name: Reset motd
+      copy:
+        content: ""
+        dest: /etc/motd
+        owner: root
+        group: root
+        mode: 0644
+        
+
+
+        

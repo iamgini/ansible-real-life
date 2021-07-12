@@ -1,0 +1,9 @@
+---
+- name: Use the file module to remove a file
+  hosts: all
+  become: true
+  tasks:
+    - name: Remove a file from managed hosts
+      file:
+        path: /home/ansible/link-to-demo.txt
+        state: absent

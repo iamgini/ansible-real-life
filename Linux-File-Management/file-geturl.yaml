@@ -1,0 +1,10 @@
+---
+- name: Download files from Internet or Intranet
+  hosts: all
+  become: true
+  tasks:
+    - name: Download python pip
+      get_url:
+        url: https://bootstrap.pypa.io/get-pip.py
+        dest: /home/ansible/get-pip.py
+        mode: '0755'

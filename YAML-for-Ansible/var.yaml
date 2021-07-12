@@ -1,0 +1,14 @@
+---
+  - name: Play 1 - Install and Start Apache HTTPD
+    hosts: localhost
+    #become: yes
+    vars_files:
+      - vars.yaml
+    vars:
+      firewall_service: firewalld
+      packages:
+        - httpd-2.1
+        - firewalld
+    tasks:
+      - debug:
+          msg: "{{ firewall_service }}"

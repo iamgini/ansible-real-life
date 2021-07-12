@@ -1,0 +1,9 @@
+---
+- name: Sync Directory Content
+  hosts: all
+  become: true
+  tasks:
+    - name: Synchronize local file to remote files
+      synchronize:
+        src: files
+        dest: /home/ansible/files

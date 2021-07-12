@@ -1,0 +1,2 @@
+[nodes]
+rhel8-node01.lab.local ansible_host=10.1.10.125

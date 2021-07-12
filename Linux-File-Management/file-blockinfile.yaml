@@ -1,0 +1,13 @@
+---
+- name: Add block of text to a file
+  hosts: all
+  become: true
+  tasks:
+    - name: Add a block of text to an existing file
+      blockinfile:
+        path: /home/ansible/demo-text-file.txt
+        block: |
+          This block of text consists of two lines.
+          They have been added by Ansible using the blockinfile module.
+        state: present
+        insertbefore: 'line 2'

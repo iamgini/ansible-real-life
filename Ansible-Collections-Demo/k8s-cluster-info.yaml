@@ -1,0 +1,15 @@
+---
+- name: Ansible k8s Test
+  hosts: localhost
+  tasks:
+    
+    - name: Get a list of all pods from any namespace
+      community.kubernetes.k8s_info:
+        host: https://212.2.242.88:6443
+        kubeconfig: /home/devops/.kube/config
+        kind: Pod
+      register: pod_list
+    
+    - name: Display k8s Cluster details
+      debug:
+        msg: "{{ pod_list }}"

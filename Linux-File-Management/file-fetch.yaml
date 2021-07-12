@@ -1,0 +1,11 @@
+---
+- name: Use the fetch module to retrieve secure log files
+  hosts: all
+
+  become: True
+  tasks:
+    - name: Fetch the /var/log/secure log file from managed hosts
+      fetch:
+        src: /var/log/secure
+        dest: secure-logs
+        flat: no

@@ -1,0 +1,26 @@
+---
+- name: Using the file module to ensure SELinux file context
+  hosts: all
+  become: true
+  tasks:
+    - name:  SELinux file context is set to defaults
+      file:
+        path: /home/ansible/demo-text-file.txt
+        seuser: _default
+        serole: _default
+        setype: _default
+        selevel: _default
+
+    - name: Create a symbolic link
+      file:
+        src: /home/ansible/demo-text-file.txt
+        dest: /home/ansible/link-to-demo.txt
+        owner: ansible
+        group: ansible
+        state: link
+    
+    - name: Create a new directory if it does not exist
+      file:
+        path: /home/ansible/new-dir
+        state: directory
+        mode: '0755'

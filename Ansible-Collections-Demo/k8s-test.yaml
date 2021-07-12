@@ -1,0 +1,13 @@
+---
+- name: k8s Test
+  hosts: localhost
+  tasks:
+    
+    - name: Scale deployment up, and extend timeout
+      community.kubernetes.k8s_scale:
+        api_version: v1
+        kind: Deployment
+        name: elastic
+        namespace: myproject
+        replicas: 3
+        wait_timeout: 60

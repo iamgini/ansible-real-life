@@ -1,0 +1,19 @@
+
+---
+- name: Blocks Demo 
+  hosts: node1
+  tasks:
+   - block:
+      - name: check the file
+        file:
+         path: /var/tmp/create.html
+     rescue:
+      - name: create file
+        copy:
+         content: "File is present"
+         dest: /var/tmp/create.html
+         mode: 0644
+     always:
+      - name: Display Message
+        debug:
+         msg: "File is present"

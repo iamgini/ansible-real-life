@@ -1,0 +1,19 @@
+---
+- name: Using the copy module
+  hosts: all
+  become: True
+  tasks:
+    - name: Copy a file to managed hosts and set attributes
+      copy:
+        src: files/demo-text-file.txt
+        dest: /home/ansible/demo-text-file.txt
+        owner: ansible
+        group: ansible
+        mode: u+rw,g-wx,o-rwx
+        # mode: 0755
+        setype: samba_share_t
+
+    - name: Copy
+      copy: 
+        content: "This is a file"
+        dest: /home/ansible/newfile.txt

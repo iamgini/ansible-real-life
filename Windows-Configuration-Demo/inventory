@@ -1,0 +1,2 @@
+[windows2016]
+vm-win2016-dev ansible_host=10.1.10.101

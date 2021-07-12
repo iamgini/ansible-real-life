@@ -1,0 +1,16 @@
+---
+- name: URI Examples
+  hosts: all
+  remote_user: devops
+  become: true
+  tasks:
+    - name: Create a JIRA issue
+      uri:
+        url: https://your.jira.example.com/rest/api/2/issue/
+        user: "{{ your_username }}"
+        password: "{{ your_pass }}"
+        method: POST
+        body: "{{ lookup('file','issue.json') }}"
+        force_basic_auth: yes
+        status_code: 201
+        body_format: json
