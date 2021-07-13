@@ -1,0 +1,17 @@
+[me]
+localhost ansible_connection=local
+
+[ansible]
+ansible-engine ansible_host=ip-172-31-2-149.ap-southeast-1.compute.internal ansible_connection=local
+
+[nodes]
+node1 ansible_host=ip-172-31-11-251.ap-southeast-1.compute.internal
+node2 ansible_host=ip-172-31-1-228.ap-southeast-1.compute.internal
+
+[all:vars]
+ansible_user=devops
+ansible_password=devops
+ansible_connection=ssh
+#ansible_python_interpreter=/usr/bin/python3
+ansible_ssh_private_key_file=/home/vagrant/.ssh/id_rsa
+ansible_ssh_extra_args=' -o StrictHostKeyChecking=no -o PreferredAuthentications=password '
