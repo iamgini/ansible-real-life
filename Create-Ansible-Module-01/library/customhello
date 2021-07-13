@@ -1,5 +1,0 @@
-#!/bin/bash
-
-display="A simple bash module.."
-
-echo -e "{\"Hello,\":\""$display"\"}"
