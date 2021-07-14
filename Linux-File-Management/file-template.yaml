@@ -1,6 +1,6 @@
 ---
 - name: Configure system
-  hosts: all
+  hosts: nodes
   
   become: true
   tasks:

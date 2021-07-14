@@ -9,12 +9,12 @@
         path: "{{ item }}"
         state: absent
       loop:
-        - '/home/ansible/demo-text-file.txt'
-        - '/home/ansible/link-to-demo.txt'
-        - '/home/ansible/new-file.txt'
-        - '/home/ansible/get-pip.py'
-        - '/home/ansible/files'
-        - '/home/ansible/new-dir'
+        - '/home/devops/demo-text-file.txt'
+        - '/home/devops/link-to-demo.txt'
+        - '/home/devops/new-file.txt'
+        - '/home/devops/get-pip.py'
+        - '/home/devops/files'
+        - '/home/devops/new-dir'
     
     - name: Reset motd
       copy:

@@ -1,6 +1,6 @@
 ---
 - name: URI Examples
-  hosts: all
+  hosts: nodes
   remote_user: devops
   become: true
   tasks:

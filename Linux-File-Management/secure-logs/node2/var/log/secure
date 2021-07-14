@@ -1,0 +1,553 @@
+Jul  6 08:22:20 ansible-node-2 sshd[3671]: Accepted publickey for vagrant from 10.0.2.2 port 61537 ssh2: RSA SHA256:1M4RzhMyWuFS/86uPY/ce2prh/dVTHW7iD2RhpquOZA
+Jul  6 08:22:20 ansible-node-2 systemd[3675]: pam_unix(systemd-user:session): session opened for user vagrant by (uid=0)
+Jul  6 08:22:20 ansible-node-2 sshd[3671]: pam_unix(sshd:session): session opened for user vagrant by (uid=0)
+Jul  6 08:22:21 ansible-node-2 sudo[4097]: vagrant : TTY=unknown ; PWD=/home/vagrant ; USER=root ; COMMAND=/bin/bash -l
+Jul  6 08:22:21 ansible-node-2 sudo[4097]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul  6 08:22:21 ansible-node-2 sudo[4097]: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jul  6 08:22:21 ansible-node-2 sudo[4097]: pam_unix(sudo:session): session closed for user root
+Jul  6 08:22:21 ansible-node-2 sudo[4140]: vagrant : TTY=unknown ; PWD=/home/vagrant ; USER=root ; COMMAND=/bin/bash -l
+Jul 14 11:58:32 ansible-node-2 polkitd[629]: Loading rules from directory /etc/polkit-1/rules.d
+Jul 14 11:58:32 ansible-node-2 polkitd[629]: Loading rules from directory /usr/share/polkit-1/rules.d
+Jul 14 11:58:32 ansible-node-2 polkitd[629]: Finished loading, compiling and executing 2 rules
+Jul 14 11:58:32 ansible-node-2 polkitd[629]: Acquired the name org.freedesktop.PolicyKit1 on the system bus
+Jul 14 11:58:37 ansible-node-2 sshd[702]: Server listening on 0.0.0.0 port 22.
+Jul 14 11:58:37 ansible-node-2 sshd[702]: Server listening on :: port 22.
+Jul 14 11:58:43 ansible-node-2 sshd[1160]: Accepted publickey for vagrant from 10.0.2.2 port 61740 ssh2: RSA SHA256:1M4RzhMyWuFS/86uPY/ce2prh/dVTHW7iD2RhpquOZA
+Jul 14 11:58:43 ansible-node-2 systemd[1164]: pam_unix(systemd-user:session): session opened for user vagrant by (uid=0)
+Jul 14 11:58:43 ansible-node-2 sshd[1160]: pam_unix(sshd:session): session opened for user vagrant by (uid=0)
+Jul 14 11:58:48 ansible-node-2 sudo[1699]: vagrant : TTY=unknown ; PWD=/home/vagrant ; USER=root ; COMMAND=/bin/bash -l
+Jul 14 11:58:48 ansible-node-2 sudo[1699]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 11:58:48 ansible-node-2 sudo[1699]: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jul 14 11:58:48 ansible-node-2 sudo[1699]: pam_unix(sudo:session): session closed for user root
+Jul 14 11:58:49 ansible-node-2 sudo[1909]: vagrant : TTY=unknown ; PWD=/home/vagrant ; USER=root ; COMMAND=/bin/bash -l
+Jul 14 11:58:49 ansible-node-2 sudo[1909]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 11:58:49 ansible-node-2 sudo[1909]: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jul 14 11:58:49 ansible-node-2 sudo[1909]: pam_unix(sudo:session): session closed for user root
+Jul 14 11:58:49 ansible-node-2 sudo[1954]: vagrant : TTY=unknown ; PWD=/home/vagrant ; USER=root ; COMMAND=/bin/bash -l
+Jul 14 11:58:49 ansible-node-2 sudo[1954]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 11:58:49 ansible-node-2 sudo[1954]: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jul 14 11:58:49 ansible-node-2 sudo[1954]: pam_unix(sudo:session): session closed for user root
+Jul 14 11:58:49 ansible-node-2 sudo[1999]: vagrant : TTY=unknown ; PWD=/home/vagrant ; USER=root ; COMMAND=/bin/bash -l
+Jul 14 11:58:49 ansible-node-2 sudo[1999]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 11:58:49 ansible-node-2 sudo[1999]: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jul 14 11:58:49 ansible-node-2 sudo[1999]: pam_unix(sudo:session): session closed for user root
+Jul 14 11:58:50 ansible-node-2 sshd[2169]: ssh_dispatch_run_fatal: Connection from 10.0.2.2 port 61738: Broken pipe [preauth]
+Jul 14 11:58:50 ansible-node-2 sudo[2254]: vagrant : TTY=unknown ; PWD=/home/vagrant ; USER=root ; COMMAND=/bin/bash -l
+Jul 14 11:58:50 ansible-node-2 sudo[2254]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 11:58:50 ansible-node-2 sudo[2254]: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jul 14 11:58:51 ansible-node-2 sudo[2254]: pam_unix(sudo:session): session closed for user root
+Jul 14 11:58:53 ansible-node-2 sudo[2847]: vagrant : TTY=unknown ; PWD=/home/vagrant ; USER=root ; COMMAND=/bin/bash -l
+Jul 14 11:58:53 ansible-node-2 sudo[2847]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 11:58:53 ansible-node-2 sudo[2847]: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jul 14 11:58:53 ansible-node-2 sudo[2847]: pam_unix(sudo:session): session closed for user root
+Jul 14 11:58:53 ansible-node-2 sshd[2876]: Accepted publickey for vagrant from 10.0.2.2 port 61741 ssh2: RSA SHA256:1M4RzhMyWuFS/86uPY/ce2prh/dVTHW7iD2RhpquOZA
+Jul 14 11:58:53 ansible-node-2 sshd[2876]: pam_unix(sshd:session): session opened for user vagrant by (uid=0)
+Jul 14 11:58:53 ansible-node-2 sudo[2880]: vagrant : TTY=unknown ; PWD=/home/vagrant ; USER=root ; COMMAND=/bin/rsync --server -vlDtprz --delete . /vagrant
+Jul 14 11:58:53 ansible-node-2 sudo[2880]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 11:58:53 ansible-node-2 sudo[2880]: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jul 14 11:58:53 ansible-node-2 sudo[2880]: pam_unix(sudo:session): session closed for user root
+Jul 14 11:58:53 ansible-node-2 sshd[2879]: Received disconnect from 10.0.2.2 port 61741:11: disconnected by user
+Jul 14 11:58:53 ansible-node-2 sshd[2879]: Disconnected from user vagrant 10.0.2.2 port 61741
+Jul 14 11:58:53 ansible-node-2 sshd[2876]: pam_unix(sshd:session): session closed for user vagrant
+Jul 14 11:58:54 ansible-node-2 sudo[3024]: vagrant : TTY=unknown ; PWD=/home/vagrant ; USER=root ; COMMAND=/bin/bash -l
+Jul 14 11:58:54 ansible-node-2 sudo[3024]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 11:58:54 ansible-node-2 sudo[3024]: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jul 14 11:58:54 ansible-node-2 sudo[3024]: pam_unix(sudo:session): session closed for user root
+Jul 14 11:58:55 ansible-node-2 sudo[3221]: vagrant : TTY=unknown ; PWD=/home/vagrant ; USER=root ; COMMAND=/bin/bash -l
+Jul 14 11:58:55 ansible-node-2 sudo[3221]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 11:58:55 ansible-node-2 sudo[3221]: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jul 14 11:58:55 ansible-node-2 sudo[3221]: pam_unix(sudo:session): session closed for user root
+Jul 14 11:58:55 ansible-node-2 sudo[3263]: vagrant : TTY=unknown ; PWD=/home/vagrant ; USER=root ; COMMAND=/bin/bash -l
+Jul 14 11:58:55 ansible-node-2 sudo[3263]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 11:58:55 ansible-node-2 sudo[3263]: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jul 14 11:58:55 ansible-node-2 sudo[3263]: pam_unix(sudo:session): session closed for user root
+Jul 14 11:59:53 ansible-node-2 sshd[2895]: Connection reset by 10.0.2.2 port 61739 [preauth]
+Jul 14 11:59:54 ansible-node-2 sshd[1160]: pam_unix(sshd:session): session closed for user vagrant
+Jul 14 12:03:23 ansible-node-2 sshd[3320]: Accepted publickey for devops from 192.168.50.11 port 56890 ssh2: RSA SHA256:+zP1ZognoKumCJEB+EXYajfcZHtt1lLAb3jFwOIUZMo
+Jul 14 12:03:23 ansible-node-2 systemd[3324]: pam_unix(systemd-user:session): session opened for user devops by (uid=0)
+Jul 14 12:03:24 ansible-node-2 sshd[3320]: pam_unix(sshd:session): session opened for user devops by (uid=0)
+Jul 14 12:03:24 ansible-node-2 sudo[3442]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-xaopqmpwsxqwzcfrlyarhoxcilfdwclk ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264204.1831348-3456-119265939275802/AnsiballZ_setup.py
+Jul 14 12:03:24 ansible-node-2 sudo[3442]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:03:24 ansible-node-2 sudo[3442]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:03:25 ansible-node-2 sudo[3442]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:03:26 ansible-node-2 sudo[3567]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-mphbwgfbbmnxujtmcfybgzzosjshyxqb ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264206.221281-3540-99870696146271/AnsiballZ_file.py
+Jul 14 12:03:26 ansible-node-2 sudo[3567]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:03:26 ansible-node-2 sudo[3567]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:03:27 ansible-node-2 sudo[3567]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:03:27 ansible-node-2 sudo[3663]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-oqrwqfwsbnwitpytrotrdgopdmcgsabt ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264207.2077193-3540-23996635997051/AnsiballZ_file.py
+Jul 14 12:03:27 ansible-node-2 sudo[3663]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:03:27 ansible-node-2 sudo[3663]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:03:27 ansible-node-2 sudo[3663]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:03:28 ansible-node-2 sudo[3759]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-jrrhjzuadbtenhwcdxhriltzoxmsqhaq ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264208.0843894-3540-37708050340566/AnsiballZ_file.py
+Jul 14 12:03:28 ansible-node-2 sudo[3759]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:03:28 ansible-node-2 sudo[3759]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:03:28 ansible-node-2 sudo[3759]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:03:29 ansible-node-2 sudo[3855]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-lkxikzjreufzeockupwhyvakifkhfrgd ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264208.9230063-3540-9648656091457/AnsiballZ_file.py
+Jul 14 12:03:29 ansible-node-2 sudo[3855]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:03:29 ansible-node-2 sudo[3855]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:03:29 ansible-node-2 sudo[3855]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:03:29 ansible-node-2 sudo[3951]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-werblnfmmubmvutewoppqsrmeaynokxz ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264209.6074347-3540-99650711780628/AnsiballZ_file.py
+Jul 14 12:03:29 ansible-node-2 sudo[3951]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:03:29 ansible-node-2 sudo[3951]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:03:30 ansible-node-2 sudo[3951]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:03:30 ansible-node-2 sudo[4047]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-lsiplruolbuiylfrxezjbhcawaddvzdj ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264210.1673193-3540-242950979342758/AnsiballZ_file.py
+Jul 14 12:03:30 ansible-node-2 sudo[4047]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:03:30 ansible-node-2 sudo[4047]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:03:30 ansible-node-2 sudo[4047]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:03:31 ansible-node-2 sudo[4143]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-rlhbnvowuxkxkaqurjcuqgdegwphqywa ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264210.870421-3732-158012026816655/AnsiballZ_stat.py
+Jul 14 12:03:31 ansible-node-2 sudo[4143]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:03:31 ansible-node-2 sudo[4143]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:03:31 ansible-node-2 sudo[4143]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:03:32 ansible-node-2 sudo[4222]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-hcbayruaosrrlhptmemjrtbcruvzwhwz ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264210.870421-3732-158012026816655/AnsiballZ_copy.py
+Jul 14 12:03:32 ansible-node-2 sudo[4222]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:03:32 ansible-node-2 sudo[4222]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:03:32 ansible-node-2 sudo[4222]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:04:04 ansible-node-2 sudo[4349]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-eegscgdlngdfmpxvfisjntmggfccphvi ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264243.1121693-3815-248962647597903/AnsiballZ_setup.py
+Jul 14 12:04:04 ansible-node-2 sudo[4349]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:04:04 ansible-node-2 sudo[4349]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:04:04 ansible-node-2 sudo[4349]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:04:05 ansible-node-2 sudo[4474]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-sqtojdshgzknvcogojfqsjfetrjpaclo ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264244.974346-3892-151067088911985/AnsiballZ_stat.py
+Jul 14 12:04:05 ansible-node-2 sudo[4474]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:04:05 ansible-node-2 sudo[4474]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:04:05 ansible-node-2 sudo[4474]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:04:06 ansible-node-2 sudo[4551]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-hapomyfiwdyfukofzhvzxqmfuqmxzylf ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264244.974346-3892-151067088911985/AnsiballZ_copy.py
+Jul 14 12:04:06 ansible-node-2 sudo[4551]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:04:06 ansible-node-2 sudo[4551]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:04:06 ansible-node-2 sudo[4551]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:05:06 ansible-node-2 sshd[3334]: Received disconnect from 192.168.50.11 port 56890:11: disconnected by user
+Jul 14 12:05:06 ansible-node-2 sshd[3334]: Disconnected from user devops 192.168.50.11 port 56890
+Jul 14 12:05:06 ansible-node-2 sshd[3320]: pam_unix(sshd:session): session closed for user devops
+Jul 14 12:05:06 ansible-node-2 systemd[3328]: pam_unix(systemd-user:session): session closed for user devops
+Jul 14 12:05:20 ansible-node-2 sshd[4582]: Accepted publickey for devops from 192.168.50.11 port 56894 ssh2: RSA SHA256:+zP1ZognoKumCJEB+EXYajfcZHtt1lLAb3jFwOIUZMo
+Jul 14 12:05:20 ansible-node-2 systemd[4586]: pam_unix(systemd-user:session): session opened for user devops by (uid=0)
+Jul 14 12:05:20 ansible-node-2 sshd[4582]: pam_unix(sshd:session): session opened for user devops by (uid=0)
+Jul 14 12:05:21 ansible-node-2 sudo[4704]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-purbbsqotvlikdwoujkmitbrzxkefctb ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264320.4423869-4034-177328642025062/AnsiballZ_setup.py
+Jul 14 12:05:21 ansible-node-2 sudo[4704]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:05:21 ansible-node-2 sudo[4704]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:05:21 ansible-node-2 sudo[4704]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:05:22 ansible-node-2 sudo[4829]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-ivoqvuvywivftjqutdzsnzxqjulmuclc ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264322.1222005-4115-245452462095324/AnsiballZ_stat.py
+Jul 14 12:05:22 ansible-node-2 sudo[4829]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:05:22 ansible-node-2 sudo[4829]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:05:22 ansible-node-2 sudo[4829]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:05:23 ansible-node-2 sudo[4906]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-umhkmjxdrjxrhwuoviydrtgtqxugswes ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264322.1222005-4115-245452462095324/AnsiballZ_copy.py
+Jul 14 12:05:23 ansible-node-2 sudo[4906]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:05:23 ansible-node-2 sudo[4906]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:05:23 ansible-node-2 sudo[4906]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:05:38 ansible-node-2 sudo[5033]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-hrtesptopgobdncgovepcvmghpgjjiby ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264337.6008701-4184-239931873046128/AnsiballZ_setup.py
+Jul 14 12:05:38 ansible-node-2 sudo[5033]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:05:38 ansible-node-2 sudo[5033]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:05:38 ansible-node-2 sudo[5033]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:05:39 ansible-node-2 sudo[5158]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-mpornzngwzvkjpyakwclthowieryojfc ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264339.162665-4206-118977288888971/AnsiballZ_stat.py
+Jul 14 12:05:39 ansible-node-2 sudo[5158]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:05:39 ansible-node-2 sudo[5158]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:05:39 ansible-node-2 sudo[5158]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:05:40 ansible-node-2 sudo[5210]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-itamwiefzixadqprtkhsvnnjpedukesc ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264339.162665-4206-118977288888971/AnsiballZ_file.py
+Jul 14 12:05:40 ansible-node-2 sudo[5210]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:05:40 ansible-node-2 sudo[5210]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:05:40 ansible-node-2 sudo[5210]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:06:40 ansible-node-2 sshd[4596]: Received disconnect from 192.168.50.11 port 56894:11: disconnected by user
+Jul 14 12:06:40 ansible-node-2 sshd[4596]: Disconnected from user devops 192.168.50.11 port 56894
+Jul 14 12:06:40 ansible-node-2 sshd[4582]: pam_unix(sshd:session): session closed for user devops
+Jul 14 12:06:40 ansible-node-2 systemd[4590]: pam_unix(systemd-user:session): session closed for user devops
+Jul 14 12:06:48 ansible-node-2 sshd[5238]: Accepted publickey for vagrant from 192.168.50.11 port 56898 ssh2: RSA SHA256:+zP1ZognoKumCJEB+EXYajfcZHtt1lLAb3jFwOIUZMo
+Jul 14 12:06:48 ansible-node-2 systemd[5242]: pam_unix(systemd-user:session): session opened for user vagrant by (uid=0)
+Jul 14 12:06:48 ansible-node-2 sshd[5238]: pam_unix(sshd:session): session opened for user vagrant by (uid=0)
+Jul 14 12:06:59 ansible-node-2 sudo[5323]: vagrant : TTY=pts/0 ; PWD=/home/vagrant ; USER=root ; COMMAND=/bin/vi /etc/selinux/config
+Jul 14 12:06:59 ansible-node-2 sudo[5323]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:06:59 ansible-node-2 sudo[5323]: pam_unix(sudo:session): session opened for user root by vagrant(uid=0)
+Jul 14 12:07:08 ansible-node-2 sudo[5323]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:07:29 ansible-node-2 polkitd[615]: Loading rules from directory /etc/polkit-1/rules.d
+Jul 14 12:07:29 ansible-node-2 polkitd[615]: Loading rules from directory /usr/share/polkit-1/rules.d
+Jul 14 12:07:29 ansible-node-2 polkitd[615]: Finished loading, compiling and executing 2 rules
+Jul 14 12:07:29 ansible-node-2 polkitd[615]: Acquired the name org.freedesktop.PolicyKit1 on the system bus
+Jul 14 12:07:32 ansible-node-2 sshd[687]: Server listening on 0.0.0.0 port 22.
+Jul 14 12:07:32 ansible-node-2 sshd[687]: Server listening on :: port 22.
+Jul 14 12:07:42 ansible-node-2 sshd[1148]: Accepted publickey for vagrant from 192.168.50.11 port 56902 ssh2: RSA SHA256:+zP1ZognoKumCJEB+EXYajfcZHtt1lLAb3jFwOIUZMo
+Jul 14 12:07:42 ansible-node-2 systemd[1151]: pam_unix(systemd-user:session): session opened for user vagrant by (uid=0)
+Jul 14 12:07:42 ansible-node-2 sshd[1148]: pam_unix(sshd:session): session opened for user vagrant by (uid=0)
+Jul 14 12:08:00 ansible-node-2 sshd[1160]: Received disconnect from 192.168.50.11 port 56902:11: disconnected by user
+Jul 14 12:08:00 ansible-node-2 sshd[1160]: Disconnected from user vagrant 192.168.50.11 port 56902
+Jul 14 12:08:00 ansible-node-2 sshd[1148]: pam_unix(sshd:session): session closed for user vagrant
+Jul 14 12:08:00 ansible-node-2 systemd[1154]: pam_unix(systemd-user:session): session closed for user vagrant
+Jul 14 12:08:05 ansible-node-2 sshd[1198]: Accepted publickey for devops from 192.168.50.11 port 56904 ssh2: RSA SHA256:+zP1ZognoKumCJEB+EXYajfcZHtt1lLAb3jFwOIUZMo
+Jul 14 12:08:05 ansible-node-2 systemd[1201]: pam_unix(systemd-user:session): session opened for user devops by (uid=0)
+Jul 14 12:08:05 ansible-node-2 sshd[1198]: pam_unix(sshd:session): session opened for user devops by (uid=0)
+Jul 14 12:08:06 ansible-node-2 sudo[1318]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-rsjdzydezboopeursmmvwznvsnwahtis ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264485.7806504-4263-83521650600222/AnsiballZ_setup.py
+Jul 14 12:08:06 ansible-node-2 sudo[1318]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:08:06 ansible-node-2 sudo[1318]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:08:07 ansible-node-2 sudo[1318]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:08:07 ansible-node-2 sudo[1442]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-gjsjtsmyabdpygjaclupmvzajsmhrbhv ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264487.3949792-4292-260682682811101/AnsiballZ_stat.py
+Jul 14 12:08:07 ansible-node-2 sudo[1442]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:08:07 ansible-node-2 sudo[1442]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:08:08 ansible-node-2 sudo[1442]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:08:08 ansible-node-2 sudo[1493]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-ifcaulbjesuskipkmfioiayhkxdfkbxn ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264487.3949792-4292-260682682811101/AnsiballZ_file.py
+Jul 14 12:08:08 ansible-node-2 sudo[1493]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:08:08 ansible-node-2 sudo[1493]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:08:08 ansible-node-2 sudo[1493]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:08:20 ansible-node-2 sudo[1617]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-ibqpreafljafxnqicpcpihqxleobxbim ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264500.0204155-4325-226126154716959/AnsiballZ_setup.py
+Jul 14 12:08:20 ansible-node-2 sudo[1617]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:08:20 ansible-node-2 sudo[1617]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:08:21 ansible-node-2 sudo[1617]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:08:22 ansible-node-2 sudo[1741]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-juxlbmiqspsbyzogsyvloowtclfmdbqa ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264501.8823335-4400-179658587385877/AnsiballZ_file.py
+Jul 14 12:08:22 ansible-node-2 sudo[1741]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:08:22 ansible-node-2 sudo[1741]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:08:22 ansible-node-2 sudo[1741]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:08:23 ansible-node-2 sudo[1836]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-zvghnsjzsyklpzajesakduuigefbbatt ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264503.0519137-4400-35935463960233/AnsiballZ_file.py
+Jul 14 12:08:23 ansible-node-2 sudo[1836]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:08:23 ansible-node-2 sudo[1836]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:08:23 ansible-node-2 sudo[1836]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:08:24 ansible-node-2 sudo[1931]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-nwirjyzlkpvnpijhxlkauzmtjzermchd ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264503.8651469-4400-128407073398659/AnsiballZ_file.py
+Jul 14 12:08:24 ansible-node-2 sudo[1931]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:08:24 ansible-node-2 sudo[1931]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:08:24 ansible-node-2 sudo[1931]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:08:25 ansible-node-2 sudo[2026]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-sxjsajewdcdlfujddhfscjpljsglddpf ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264504.635274-4400-201600491739700/AnsiballZ_file.py
+Jul 14 12:08:25 ansible-node-2 sudo[2026]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:08:25 ansible-node-2 sudo[2026]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:08:25 ansible-node-2 sudo[2026]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:08:25 ansible-node-2 sudo[2121]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-mxozjbcnkgmodowcphpyrrklliaumxrm ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264505.3627448-4400-217890606214626/AnsiballZ_file.py
+Jul 14 12:08:25 ansible-node-2 sudo[2121]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:08:25 ansible-node-2 sudo[2121]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:08:25 ansible-node-2 sudo[2121]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:08:26 ansible-node-2 sudo[2216]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-nerhogilcuxtnepxnssabqugkxyqfaxd ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264505.947655-4400-194915785225013/AnsiballZ_file.py
+Jul 14 12:08:26 ansible-node-2 sudo[2216]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:08:26 ansible-node-2 sudo[2216]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:08:26 ansible-node-2 sudo[2216]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:08:27 ansible-node-2 sudo[2311]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-mnklmmjiubwhmhacyeodztsdvftcislt ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264506.6734545-4593-212040916487994/AnsiballZ_stat.py
+Jul 14 12:08:27 ansible-node-2 sudo[2311]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:08:27 ansible-node-2 sudo[2311]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:08:27 ansible-node-2 sudo[2311]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:08:27 ansible-node-2 sudo[2362]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-pjwflseftlxykrbqtcqmrqzjhynrrcun ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264506.6734545-4593-212040916487994/AnsiballZ_file.py
+Jul 14 12:08:27 ansible-node-2 sudo[2362]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:08:27 ansible-node-2 sudo[2362]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:08:27 ansible-node-2 sudo[2362]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:08:30 ansible-node-2 sudo[2486]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-qbtyhjlahroqpouddfqygnjrsjjyrrez ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264510.0593984-4655-25468500214667/AnsiballZ_setup.py
+Jul 14 12:08:30 ansible-node-2 sudo[2486]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:08:30 ansible-node-2 sudo[2486]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:08:31 ansible-node-2 sudo[2486]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:08:31 ansible-node-2 sudo[2610]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-yfwjwppfdacovvnthbcvemrxzqplbwue ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264511.5739572-4677-136791188907800/AnsiballZ_stat.py
+Jul 14 12:08:31 ansible-node-2 sudo[2610]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:08:31 ansible-node-2 sudo[2610]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:08:32 ansible-node-2 sudo[2610]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:08:32 ansible-node-2 sudo[2661]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-hhojscpmhocjsshjeabmrgpsaslqbruh ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264511.5739572-4677-136791188907800/AnsiballZ_file.py
+Jul 14 12:08:32 ansible-node-2 sudo[2661]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:08:32 ansible-node-2 sudo[2661]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:08:32 ansible-node-2 sudo[2661]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:09:06 ansible-node-2 sudo[2785]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-hbywrkhygvupubqsnjyambogxzxyqifl ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264545.9702015-4736-67510401836954/AnsiballZ_setup.py
+Jul 14 12:09:06 ansible-node-2 sudo[2785]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:09:06 ansible-node-2 sudo[2785]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:09:07 ansible-node-2 sudo[2785]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:09:07 ansible-node-2 sudo[2909]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-lntxqwoqimzprnghhrgsleukimgeauzn ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264547.4923778-4758-277566657508668/AnsiballZ_stat.py
+Jul 14 12:09:07 ansible-node-2 sudo[2909]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:09:07 ansible-node-2 sudo[2909]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:09:08 ansible-node-2 sudo[2909]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:09:08 ansible-node-2 sudo[2960]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-kbyjqrutfslzexbyqdwucqzehnzhdvzj ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264547.4923778-4758-277566657508668/AnsiballZ_file.py
+Jul 14 12:09:08 ansible-node-2 sudo[2960]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:09:08 ansible-node-2 sudo[2960]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:09:08 ansible-node-2 sudo[2960]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:09:09 ansible-node-2 sudo[3055]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-czwslhyxfqxutqundpxdjpfhnfakaqml ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264549.0327966-4784-223741833650524/AnsiballZ_stat.py
+Jul 14 12:09:09 ansible-node-2 sudo[3055]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:09:09 ansible-node-2 sudo[3055]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:09:09 ansible-node-2 sudo[3055]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:09:09 ansible-node-2 sudo[3131]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-vviljomvzlcdtrclmlqkwuyykjfglguf ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264549.0327966-4784-223741833650524/AnsiballZ_copy.py
+Jul 14 12:09:09 ansible-node-2 sudo[3131]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:09:09 ansible-node-2 sudo[3131]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:09:10 ansible-node-2 sudo[3131]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:10:02 ansible-node-2 sudo[3257]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-wwuocfpxtrqqxwhvvfvyaayeshhpguiy ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264601.4846077-4862-22661663868651/AnsiballZ_setup.py
+Jul 14 12:10:02 ansible-node-2 sudo[3257]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:10:02 ansible-node-2 sudo[3257]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:10:02 ansible-node-2 sudo[3257]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:10:03 ansible-node-2 sudo[3381]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-qcdwxxqlkcqppiwigqvyxrraeunmtghe ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264603.0168483-4884-193764772010892/AnsiballZ_slurp.py
+Jul 14 12:10:03 ansible-node-2 sudo[3381]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:10:03 ansible-node-2 sudo[3381]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:10:03 ansible-node-2 sudo[3381]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:11:04 ansible-node-2 sshd[1210]: Received disconnect from 192.168.50.11 port 56904:11: disconnected by user
+Jul 14 12:11:04 ansible-node-2 sshd[1210]: Disconnected from user devops 192.168.50.11 port 56904
+Jul 14 12:11:04 ansible-node-2 sshd[1198]: pam_unix(sshd:session): session closed for user devops
+Jul 14 12:11:04 ansible-node-2 systemd[1204]: pam_unix(systemd-user:session): session closed for user devops
+Jul 14 12:11:15 ansible-node-2 sshd[3411]: Accepted publickey for devops from 192.168.50.11 port 56968 ssh2: RSA SHA256:+zP1ZognoKumCJEB+EXYajfcZHtt1lLAb3jFwOIUZMo
+Jul 14 12:11:15 ansible-node-2 systemd[3414]: pam_unix(systemd-user:session): session opened for user devops by (uid=0)
+Jul 14 12:11:15 ansible-node-2 sshd[3411]: pam_unix(sshd:session): session opened for user devops by (uid=0)
+Jul 14 12:11:16 ansible-node-2 sudo[3531]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-cllnfhzjzzlciqqtngrqhabszsyxxmxw ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264675.9738774-4970-246075898404489/AnsiballZ_setup.py
+Jul 14 12:11:16 ansible-node-2 sudo[3531]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:11:16 ansible-node-2 sudo[3531]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:11:17 ansible-node-2 sudo[3531]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:11:17 ansible-node-2 sudo[3655]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-znjnnjxpifknqmzfysgjsbfrehtvlxki ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264677.4679506-4999-191297343583090/AnsiballZ_file.py
+Jul 14 12:11:17 ansible-node-2 sudo[3655]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:11:17 ansible-node-2 sudo[3655]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:11:18 ansible-node-2 sudo[3655]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:11:51 ansible-node-2 sudo[3779]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-noosmfsfjwovtwfmypxqwpuhrhqwytsp ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264710.8162336-5025-150035715687404/AnsiballZ_setup.py
+Jul 14 12:11:51 ansible-node-2 sudo[3779]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:11:51 ansible-node-2 sudo[3779]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:11:52 ansible-node-2 sudo[3779]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:11:52 ansible-node-2 sudo[3903]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-kdimzpaylvfzuovzjmfttajlwwryolxa ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264712.2784588-5047-187018610600125/AnsiballZ_file.py
+Jul 14 12:11:52 ansible-node-2 sudo[3903]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:11:52 ansible-node-2 sudo[3903]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:11:52 ansible-node-2 sudo[3903]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:11:53 ansible-node-2 sudo[3998]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-foqtsbfytaelzwhmxwibbtxwcgylomtf ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264713.0844858-5065-89671369354051/AnsiballZ_file.py
+Jul 14 12:11:53 ansible-node-2 sudo[3998]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:11:53 ansible-node-2 sudo[3998]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:11:53 ansible-node-2 sudo[3998]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:12:23 ansible-node-2 sudo[4122]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-fifmadtwcmnvyvplinbakrtljowpoibi ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264742.4324098-5121-199559540088494/AnsiballZ_setup.py
+Jul 14 12:12:23 ansible-node-2 sudo[4122]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:12:23 ansible-node-2 sudo[4122]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:12:23 ansible-node-2 sudo[4122]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:12:24 ansible-node-2 sudo[4246]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-ldhpphhaidngxvwgxvoevduacpfuflgq ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264743.8744442-5143-201292324003808/AnsiballZ_get_url.py
+Jul 14 12:12:24 ansible-node-2 sudo[4246]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:12:24 ansible-node-2 sudo[4246]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:12:24 ansible-node-2 sudo[4246]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:12:34 ansible-node-2 sudo[4372]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-scfqcapgktivkuzrayqzuypcwuodsass ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264753.981403-5174-83473461754052/AnsiballZ_setup.py
+Jul 14 12:12:34 ansible-node-2 sudo[4372]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:12:34 ansible-node-2 sudo[4372]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:12:35 ansible-node-2 sudo[4372]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:12:36 ansible-node-2 sudo[4496]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-ofcslszytbuvcwxwtbbgebsyufcyhqvz ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264755.7586882-5249-207204787672624/AnsiballZ_lineinfile.py
+Jul 14 12:12:36 ansible-node-2 sudo[4496]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:12:36 ansible-node-2 sudo[4496]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:12:36 ansible-node-2 sudo[4496]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:13:26 ansible-node-2 sudo[4620]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-ngvrbeflczcollzjlcdphkwrctpwxpge ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264805.8596642-5327-218693515464159/AnsiballZ_setup.py
+Jul 14 12:13:26 ansible-node-2 sudo[4620]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:13:26 ansible-node-2 sudo[4620]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:13:27 ansible-node-2 sudo[4620]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:13:27 ansible-node-2 sudo[4744]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-hadursmvpjudfrkjojitsnioxeimyfuw ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264807.2899659-5350-246774649441801/AnsiballZ_lineinfile.py
+Jul 14 12:13:27 ansible-node-2 sudo[4744]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:13:27 ansible-node-2 sudo[4744]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:13:27 ansible-node-2 sudo[4744]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:13:52 ansible-node-2 sudo[4868]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-vcxzrpughylmrnkfeoaptossdovuphuk ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264831.8925729-5386-124930934574670/AnsiballZ_setup.py
+Jul 14 12:13:52 ansible-node-2 sudo[4868]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:13:52 ansible-node-2 sudo[4868]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:13:53 ansible-node-2 sudo[4868]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:13:53 ansible-node-2 sudo[4992]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-wxybyqitvapsizmcgaoyvmxunqvbenyf ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264833.3954806-5408-33030697022450/AnsiballZ_blockinfile.py
+Jul 14 12:13:53 ansible-node-2 sudo[4992]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:13:53 ansible-node-2 sudo[4992]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:13:53 ansible-node-2 sudo[4992]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:14:12 ansible-node-2 sudo[5118]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-rvdomuzfcqwwejfyonrhtwkuvpcacngu ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264851.4871397-5456-8193081506622/AnsiballZ_setup.py
+Jul 14 12:14:12 ansible-node-2 sudo[5118]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:14:12 ansible-node-2 sudo[5118]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:14:12 ansible-node-2 sudo[5118]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:14:13 ansible-node-2 sudo[5242]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-huewejavgvlksovlzfncnicweoealjiv ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264852.9788005-5478-113751050124323/AnsiballZ_stat.py
+Jul 14 12:14:13 ansible-node-2 sudo[5242]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:14:13 ansible-node-2 sudo[5242]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:14:13 ansible-node-2 sudo[5242]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:14:14 ansible-node-2 sudo[5320]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-lbihzbqjerxkguuqcothalhqgupqzfmy ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264852.9788005-5478-113751050124323/AnsiballZ_copy.py
+Jul 14 12:14:14 ansible-node-2 sudo[5320]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:14:14 ansible-node-2 sudo[5320]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:14:14 ansible-node-2 sudo[5320]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:14:14 ansible-node-2 sudo[5417]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-ziihkmqodmaehdxmcwzjaibtpolhaskz ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264854.625241-5510-34652378387210/AnsiballZ_stat.py
+Jul 14 12:14:14 ansible-node-2 sudo[5417]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:14:14 ansible-node-2 sudo[5417]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:14:15 ansible-node-2 sudo[5417]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:15:13 ansible-node-2 sudo[5543]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-mtzkxhmhfgvdknxenrlxsfuwkfelrvmk ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264912.9260662-5582-157091728059434/AnsiballZ_setup.py
+Jul 14 12:15:13 ansible-node-2 sudo[5543]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:15:13 ansible-node-2 sudo[5543]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:15:14 ansible-node-2 sudo[5543]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:15:15 ansible-node-2 sshd[5589]: Accepted publickey for devops from 192.168.50.11 port 56972 ssh2: RSA SHA256:+zP1ZognoKumCJEB+EXYajfcZHtt1lLAb3jFwOIUZMo
+Jul 14 12:15:15 ansible-node-2 sshd[5589]: pam_unix(sshd:session): session opened for user devops by (uid=0)
+Jul 14 12:15:15 ansible-node-2 sudo[5592]:  devops : TTY=unknown ; PWD=/home/devops ; USER=root ; COMMAND=/bin/rsync --server -logDtprze.iLsfxC --log-format=%i --delay-updates . /home/devops/files
+Jul 14 12:15:15 ansible-node-2 sudo[5592]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:15:15 ansible-node-2 sudo[5592]: pam_unix(sudo:session): session opened for user root by (uid=0)
+Jul 14 12:15:15 ansible-node-2 sudo[5592]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:15:15 ansible-node-2 sshd[5591]: Received disconnect from 192.168.50.11 port 56972:11: disconnected by user
+Jul 14 12:15:15 ansible-node-2 sshd[5591]: Disconnected from user devops 192.168.50.11 port 56972
+Jul 14 12:15:15 ansible-node-2 sshd[5589]: pam_unix(sshd:session): session closed for user devops
+Jul 14 12:15:40 ansible-node-2 sudo[5715]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-ibnflfpeloxyiklowppyvgkbkboyuzve ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264939.4662588-5665-55594816726968/AnsiballZ_setup.py
+Jul 14 12:15:40 ansible-node-2 sudo[5715]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:15:40 ansible-node-2 sudo[5715]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:15:41 ansible-node-2 sudo[5715]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:15:41 ansible-node-2 sudo[5839]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-fanffompvuxvgepuehucbeydvnxplzww ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264941.3231144-5740-166607080470244/AnsiballZ_file.py
+Jul 14 12:15:41 ansible-node-2 sudo[5839]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:15:41 ansible-node-2 sudo[5839]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:15:42 ansible-node-2 sudo[5839]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:15:42 ansible-node-2 sudo[5934]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-zugfygbcvgsttpnhgmfyekaignfjalft ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264942.2302005-5740-11082654089458/AnsiballZ_file.py
+Jul 14 12:15:42 ansible-node-2 sudo[5934]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:15:42 ansible-node-2 sudo[5934]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:15:42 ansible-node-2 sudo[5934]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:15:43 ansible-node-2 sudo[6029]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-dylicskhnrxmahypjmyfjnvdwnjwmbiw ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264942.9630451-5740-125375687985118/AnsiballZ_file.py
+Jul 14 12:15:43 ansible-node-2 sudo[6029]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:15:43 ansible-node-2 sudo[6029]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:15:43 ansible-node-2 sudo[6029]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:15:44 ansible-node-2 sudo[6124]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-dnfweohjatqepndfowunltrkudqitjhj ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264943.7927115-5740-79252661174133/AnsiballZ_file.py
+Jul 14 12:15:44 ansible-node-2 sudo[6124]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:15:44 ansible-node-2 sudo[6124]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:15:44 ansible-node-2 sudo[6124]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:15:44 ansible-node-2 sudo[6219]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-aefmrczeicxyzgtjlkkmfwvwooupwsvz ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264944.5034811-5740-248818023926786/AnsiballZ_file.py
+Jul 14 12:15:44 ansible-node-2 sudo[6219]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:15:44 ansible-node-2 sudo[6219]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:15:44 ansible-node-2 sudo[6219]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:15:45 ansible-node-2 sudo[6314]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-jahlpnfyavuywhmxpeuivxcdzpfmipci ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264945.080735-5740-277497340980068/AnsiballZ_file.py
+Jul 14 12:15:45 ansible-node-2 sudo[6314]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:15:45 ansible-node-2 sudo[6314]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:15:45 ansible-node-2 sudo[6314]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:15:46 ansible-node-2 sudo[6409]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-tjclgxsnagcbofsrxugipgcpljzfzetg ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264945.7550838-5932-131557952378783/AnsiballZ_stat.py
+Jul 14 12:15:46 ansible-node-2 sudo[6409]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:15:46 ansible-node-2 sudo[6409]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:15:46 ansible-node-2 sudo[6409]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:15:47 ansible-node-2 sudo[6487]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-seobqpykjxnyiebflclvozdyynyyewbk ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626264945.7550838-5932-131557952378783/AnsiballZ_copy.py
+Jul 14 12:15:47 ansible-node-2 sudo[6487]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:15:47 ansible-node-2 sudo[6487]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:15:47 ansible-node-2 sudo[6487]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:16:47 ansible-node-2 sshd[3423]: Received disconnect from 192.168.50.11 port 56968:11: disconnected by user
+Jul 14 12:16:47 ansible-node-2 sshd[3423]: Disconnected from user devops 192.168.50.11 port 56968
+Jul 14 12:16:47 ansible-node-2 sshd[3411]: pam_unix(sshd:session): session closed for user devops
+Jul 14 12:16:47 ansible-node-2 systemd[3417]: pam_unix(systemd-user:session): session closed for user devops
+Jul 14 12:17:31 ansible-node-2 sshd[6535]: Accepted publickey for devops from 192.168.50.11 port 56976 ssh2: RSA SHA256:+zP1ZognoKumCJEB+EXYajfcZHtt1lLAb3jFwOIUZMo
+Jul 14 12:17:31 ansible-node-2 systemd[6539]: pam_unix(systemd-user:session): session opened for user devops by (uid=0)
+Jul 14 12:17:31 ansible-node-2 sshd[6535]: pam_unix(sshd:session): session opened for user devops by (uid=0)
+Jul 14 12:17:32 ansible-node-2 sudo[6656]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-wuzypwncgxdwapcfoksdrqnoixtucfho ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265051.9641044-6031-177472063587128/AnsiballZ_setup.py
+Jul 14 12:17:32 ansible-node-2 sudo[6656]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:17:32 ansible-node-2 sudo[6656]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:17:33 ansible-node-2 sudo[6656]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:17:34 ansible-node-2 sudo[6781]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-nqnrrwekzbsnekbcxhkoqzhhlmwcolgo ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265053.685648-6112-117497981143753/AnsiballZ_file.py
+Jul 14 12:17:34 ansible-node-2 sudo[6781]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:17:34 ansible-node-2 sudo[6781]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:17:34 ansible-node-2 sudo[6781]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:17:35 ansible-node-2 sudo[6876]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-pgbhrghlbfyjmvbqcvyijotsatlsvdaa ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265054.7286625-6112-140421343488601/AnsiballZ_file.py
+Jul 14 12:17:35 ansible-node-2 sudo[6876]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:17:35 ansible-node-2 sudo[6876]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:17:35 ansible-node-2 sudo[6876]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:17:35 ansible-node-2 sudo[6972]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-ohlbnkzvmaehojltlptlnjfsqwwwemlj ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265055.5543668-6112-18926909715105/AnsiballZ_file.py
+Jul 14 12:17:35 ansible-node-2 sudo[6972]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:17:35 ansible-node-2 sudo[6972]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:17:36 ansible-node-2 sudo[6972]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:17:36 ansible-node-2 sudo[7067]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-qdkvmzhvlphxjwyvhrjzthcozsimolqz ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265056.311379-6112-210173810436784/AnsiballZ_file.py
+Jul 14 12:17:36 ansible-node-2 sudo[7067]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:17:36 ansible-node-2 sudo[7067]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:17:36 ansible-node-2 sudo[7067]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:17:37 ansible-node-2 sudo[7162]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-nfompegolqvtdsvyyupaenshnrzomuff ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265057.0329368-6112-41589711237325/AnsiballZ_file.py
+Jul 14 12:17:37 ansible-node-2 sudo[7162]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:17:37 ansible-node-2 sudo[7162]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:17:37 ansible-node-2 sudo[7162]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:17:37 ansible-node-2 sudo[7257]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-dqfdrmwpkgtbknzowbkmqzvvdxxejvvb ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265057.5853841-6112-118501118738910/AnsiballZ_file.py
+Jul 14 12:17:37 ansible-node-2 sudo[7257]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:17:37 ansible-node-2 sudo[7257]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:17:38 ansible-node-2 sudo[7257]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:17:38 ansible-node-2 sudo[7352]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-ssokegkmvmvcgachlybzeiulequvbymy ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265058.229186-6304-82447722229327/AnsiballZ_stat.py
+Jul 14 12:17:38 ansible-node-2 sudo[7352]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:17:38 ansible-node-2 sudo[7352]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:17:38 ansible-node-2 sudo[7352]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:17:39 ansible-node-2 sudo[7403]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-klynosalbssajembrumnujxmjnukekwy ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265058.229186-6304-82447722229327/AnsiballZ_file.py
+Jul 14 12:17:39 ansible-node-2 sudo[7403]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:17:39 ansible-node-2 sudo[7403]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:17:39 ansible-node-2 sudo[7403]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:18:39 ansible-node-2 sshd[6548]: Received disconnect from 192.168.50.11 port 56976:11: disconnected by user
+Jul 14 12:18:39 ansible-node-2 sshd[6548]: Disconnected from user devops 192.168.50.11 port 56976
+Jul 14 12:18:39 ansible-node-2 sshd[6535]: pam_unix(sshd:session): session closed for user devops
+Jul 14 12:18:39 ansible-node-2 systemd[6542]: pam_unix(systemd-user:session): session closed for user devops
+Jul 14 12:19:04 ansible-node-2 sshd[7430]: Accepted publickey for devops from 192.168.50.11 port 56980 ssh2: RSA SHA256:+zP1ZognoKumCJEB+EXYajfcZHtt1lLAb3jFwOIUZMo
+Jul 14 12:19:04 ansible-node-2 systemd[7433]: pam_unix(systemd-user:session): session opened for user devops by (uid=0)
+Jul 14 12:19:04 ansible-node-2 sshd[7430]: pam_unix(sshd:session): session opened for user devops by (uid=0)
+Jul 14 12:19:05 ansible-node-2 sudo[7550]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-fyzayckbprzoykfjqjehhkiknyvsbnow ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265144.9593694-6366-50684560659082/AnsiballZ_setup.py
+Jul 14 12:19:05 ansible-node-2 sudo[7550]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:19:05 ansible-node-2 sudo[7550]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:19:06 ansible-node-2 sudo[7550]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:19:07 ansible-node-2 sudo[7674]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-qxslvjfheqruxigmabebvvzwszwdmzzg ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265146.6393278-6447-83990205169364/AnsiballZ_file.py
+Jul 14 12:19:07 ansible-node-2 sudo[7674]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:19:07 ansible-node-2 sudo[7674]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:19:07 ansible-node-2 sudo[7674]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:19:07 ansible-node-2 sudo[7769]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-uiasuyakgmxagvxqzmnucgxgibibdfmd ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265147.519548-6447-180822501599306/AnsiballZ_file.py
+Jul 14 12:19:07 ansible-node-2 sudo[7769]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:19:07 ansible-node-2 sudo[7769]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:19:08 ansible-node-2 sudo[7769]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:19:08 ansible-node-2 sudo[7864]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-yxrytkheqctofzvabfnzyvslwwsgdhvg ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265148.2559004-6447-214679763077254/AnsiballZ_file.py
+Jul 14 12:19:08 ansible-node-2 sudo[7864]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:19:08 ansible-node-2 sudo[7864]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:19:08 ansible-node-2 sudo[7864]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:19:09 ansible-node-2 sudo[7959]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-qvlmwtepcvdrsvatysxorsrguyhtnngq ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265149.0913727-6447-67255527660490/AnsiballZ_file.py
+Jul 14 12:19:09 ansible-node-2 sudo[7959]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:19:09 ansible-node-2 sudo[7959]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:19:09 ansible-node-2 sudo[7959]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:19:10 ansible-node-2 sudo[8054]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-wjwszwlbwxnvahopsjfwbqxhqaaapibs ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265149.8148131-6447-26780484099018/AnsiballZ_file.py
+Jul 14 12:19:10 ansible-node-2 sudo[8054]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:19:10 ansible-node-2 sudo[8054]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:19:10 ansible-node-2 sudo[8054]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:19:10 ansible-node-2 sudo[8149]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-efyljjgygotufhohrfzyoubrndfxqtnw ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265150.4153214-6447-252866301278287/AnsiballZ_file.py
+Jul 14 12:19:10 ansible-node-2 sudo[8149]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:19:10 ansible-node-2 sudo[8149]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:19:10 ansible-node-2 sudo[8149]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:19:11 ansible-node-2 sudo[8244]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-wcjcmqplmbyixvjudqghqqzsabagcaqt ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265151.0905871-6640-71353573471345/AnsiballZ_stat.py
+Jul 14 12:19:11 ansible-node-2 sudo[8244]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:19:11 ansible-node-2 sudo[8244]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:19:11 ansible-node-2 sudo[8244]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:19:12 ansible-node-2 sudo[8295]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-rxwdzchpgffwztqwmodondhfozvlrdhf ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626265151.0905871-6640-71353573471345/AnsiballZ_file.py
+Jul 14 12:19:12 ansible-node-2 sudo[8295]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:19:12 ansible-node-2 sudo[8295]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:19:12 ansible-node-2 sudo[8295]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:20:12 ansible-node-2 sshd[7442]: Received disconnect from 192.168.50.11 port 56980:11: disconnected by user
+Jul 14 12:20:12 ansible-node-2 sshd[7442]: Disconnected from user devops 192.168.50.11 port 56980
+Jul 14 12:20:12 ansible-node-2 sshd[7430]: pam_unix(sshd:session): session closed for user devops
+Jul 14 12:20:12 ansible-node-2 systemd[7436]: pam_unix(systemd-user:session): session closed for user devops
+Jul 14 12:38:22 ansible-node-2 sshd[8327]: Accepted publickey for devops from 192.168.50.11 port 56986 ssh2: RSA SHA256:+zP1ZognoKumCJEB+EXYajfcZHtt1lLAb3jFwOIUZMo
+Jul 14 12:38:22 ansible-node-2 systemd[8330]: pam_unix(systemd-user:session): session opened for user devops by (uid=0)
+Jul 14 12:38:22 ansible-node-2 sshd[8327]: pam_unix(sshd:session): session opened for user devops by (uid=0)
+Jul 14 12:38:23 ansible-node-2 sudo[8448]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-eqejsqbfwgfntclpwbnlhpkkxnogkrrp ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626266302.8636692-6741-253957754320997/AnsiballZ_setup.py
+Jul 14 12:38:23 ansible-node-2 sudo[8448]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:38:23 ansible-node-2 sudo[8448]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:38:24 ansible-node-2 sudo[8448]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:38:25 ansible-node-2 sudo[8572]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-cwspcylpzigrvudrdqabelgoayjliwfg ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626266304.7594714-6769-53024170242348/AnsiballZ_stat.py
+Jul 14 12:38:25 ansible-node-2 sudo[8572]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:38:25 ansible-node-2 sudo[8572]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:38:25 ansible-node-2 sudo[8572]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:38:26 ansible-node-2 sudo[8648]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-gecdgblgsdzcyorymmjljdnckmieoznc ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626266304.7594714-6769-53024170242348/AnsiballZ_copy.py
+Jul 14 12:38:26 ansible-node-2 sudo[8648]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:38:26 ansible-node-2 sudo[8648]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:38:26 ansible-node-2 sudo[8648]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:38:26 ansible-node-2 sudo[8745]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-tswnijjliycsutwlskjfqlqqhcqcuxhq ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626266306.5790372-6801-153241406287355/AnsiballZ_stat.py
+Jul 14 12:38:26 ansible-node-2 sudo[8745]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:38:26 ansible-node-2 sudo[8745]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:38:27 ansible-node-2 sudo[8745]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:38:27 ansible-node-2 sudo[8796]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-rmfnngpcsinlzhpegnqzxrzvzkwwmito ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626266306.5790372-6801-153241406287355/AnsiballZ_file.py
+Jul 14 12:38:27 ansible-node-2 sudo[8796]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:38:27 ansible-node-2 sudo[8796]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:38:28 ansible-node-2 sudo[8796]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:39:09 ansible-node-2 sudo[8920]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-bwblciskznmmzsmlclpuxahazevwwlyv ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626266347.8301916-6855-189762161801656/AnsiballZ_setup.py
+Jul 14 12:39:09 ansible-node-2 sudo[8920]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:39:09 ansible-node-2 sudo[8920]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:39:10 ansible-node-2 sudo[8920]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:39:12 ansible-node-2 sudo[9044]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-kjzvebrrformohkdhtacmzgrzkxbabum ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626266350.9989994-6877-72437118586112/AnsiballZ_stat.py
+Jul 14 12:39:12 ansible-node-2 sudo[9044]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:39:12 ansible-node-2 sudo[9044]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:39:12 ansible-node-2 sudo[9044]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:39:14 ansible-node-2 sudo[9095]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-prpnwohwgmqifwgspxkahxwsdtpudtxd ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626266350.9989994-6877-72437118586112/AnsiballZ_file.py
+Jul 14 12:39:14 ansible-node-2 sudo[9095]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:39:14 ansible-node-2 sudo[9095]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:39:15 ansible-node-2 sudo[9095]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:39:16 ansible-node-2 sudo[9190]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-sfrwvxdzhyiqgzsbnkioeepdrrlrerxl ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626266355.7232678-6903-100612699336713/AnsiballZ_stat.py
+Jul 14 12:39:16 ansible-node-2 sudo[9190]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:39:16 ansible-node-2 sudo[9190]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:39:17 ansible-node-2 sudo[9190]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:39:18 ansible-node-2 sudo[9268]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-qnncgvyazzvwccydzyxdaprdpgouxosh ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626266355.7232678-6903-100612699336713/AnsiballZ_copy.py
+Jul 14 12:39:18 ansible-node-2 sudo[9268]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:39:18 ansible-node-2 sudo[9268]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:39:19 ansible-node-2 sudo[9268]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:40:02 ansible-node-2 sudo[9394]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-gsskcnxtvowogezsvnchqbylrnmheovj ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626266400.612328-6944-276157839261149/AnsiballZ_setup.py
+Jul 14 12:40:02 ansible-node-2 sudo[9394]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:40:02 ansible-node-2 sudo[9394]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:40:04 ansible-node-2 sudo[9394]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:40:06 ansible-node-2 sudo[9518]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-ylidtkusjokaxwzxmckgbpuockkjrwsa ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626266404.9875133-6967-120470504341728/AnsiballZ_stat.py
+Jul 14 12:40:06 ansible-node-2 sudo[9518]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:40:06 ansible-node-2 sudo[9518]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:40:07 ansible-node-2 sudo[9518]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:40:08 ansible-node-2 sudo[9569]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-dsthxvjruqavqwjpseczcmuhfxuazudu ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626266404.9875133-6967-120470504341728/AnsiballZ_file.py
+Jul 14 12:40:08 ansible-node-2 sudo[9569]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:40:08 ansible-node-2 sudo[9569]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:40:08 ansible-node-2 sudo[9569]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:40:10 ansible-node-2 sudo[9664]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-zkjsjqdnuxtodzsmywsdtwweowhwehtb ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626266409.465197-6992-64519912172211/AnsiballZ_stat.py
+Jul 14 12:40:10 ansible-node-2 sudo[9664]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:40:10 ansible-node-2 sudo[9664]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:40:11 ansible-node-2 sudo[9664]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:40:11 ansible-node-2 sudo[9715]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-qlmgkiyylruougcwvpshhgnwrvssuvdf ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626266409.465197-6992-64519912172211/AnsiballZ_file.py
+Jul 14 12:40:11 ansible-node-2 sudo[9715]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:40:11 ansible-node-2 sudo[9715]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:40:12 ansible-node-2 sudo[9715]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:41:12 ansible-node-2 sshd[8340]: Received disconnect from 192.168.50.11 port 56986:11: disconnected by user
+Jul 14 12:41:12 ansible-node-2 sshd[8340]: Disconnected from user devops 192.168.50.11 port 56986
+Jul 14 12:41:12 ansible-node-2 sshd[8327]: pam_unix(sshd:session): session closed for user devops
+Jul 14 12:41:12 ansible-node-2 systemd[8333]: pam_unix(systemd-user:session): session closed for user devops
+Jul 14 12:42:29 ansible-node-2 sshd[9746]: Accepted publickey for devops from 192.168.50.11 port 56990 ssh2: RSA SHA256:+zP1ZognoKumCJEB+EXYajfcZHtt1lLAb3jFwOIUZMo
+Jul 14 12:42:29 ansible-node-2 systemd[9749]: pam_unix(systemd-user:session): session opened for user devops by (uid=0)
+Jul 14 12:42:29 ansible-node-2 sshd[9746]: pam_unix(sshd:session): session opened for user devops by (uid=0)
+Jul 14 12:42:31 ansible-node-2 sudo[9866]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-nvnfxinyrvbbgujnvmguvpgtsiojqauw ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626266549.3897798-7054-222776835356746/AnsiballZ_setup.py
+Jul 14 12:42:31 ansible-node-2 sudo[9866]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:42:31 ansible-node-2 sudo[9866]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
+Jul 14 12:42:34 ansible-node-2 sudo[9866]: pam_unix(sudo:session): session closed for user root
+Jul 14 12:42:37 ansible-node-2 sudo[9990]:  devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/bin/sh -c echo BECOME-SUCCESS-lahqcjvbbaolxvmpieowxhhrpolqpbei ; /usr/libexec/platform-python /home/devops/.ansible/tmp/ansible-tmp-1626266555.0199869-7082-148614528665953/AnsiballZ_slurp.py
+Jul 14 12:42:37 ansible-node-2 sudo[9990]: pam_systemd(sudo:session): Cannot create session: Already running in a session or user slice
+Jul 14 12:42:37 ansible-node-2 sudo[9990]: pam_unix(sudo:session): session opened for user root by devops(uid=0)
