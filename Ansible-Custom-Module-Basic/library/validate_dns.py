@@ -34,19 +34,30 @@ author:
 '''
 
 EXAMPLES = '''
-# Ping an IP
-- name: Ping an IP
-  icmp:
-    target: 127.0.0.1
-# Ping a host
-- name: Ping a host
-  icmp:
-    target: centos1
+# Validate single URL
+- name: validate_dns
+  validate_dns:
+    target_ip_address: 10.1.10.10
+    dns_server_ip: 1.1.1.1
+    dns_address:
+      - example.com
+    
+# Validate Multiple URLs
+- name: validate_dns
+  validate_dns:
+    target_ip_address: 10.1.10.10
+    dns_server_ip: 1.1.1.1
+    dns_address:
+      - example.com
+      - abc.com
+      - xyz.com
 '''
 
 RETURN = '''
 '''
-# Version 2.2.0 - net.gini@gmail.com
+
+from ansible.module_utils.basic import AnsibleModule
+
 
 #import os
 #import socket
