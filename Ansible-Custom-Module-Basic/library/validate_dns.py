@@ -26,9 +26,9 @@ options:
         type: list
     target_ip_address:
         description:
-            - The DNS Address to be validated.
+            - The Target IP Address to be matched.
         required: true
-        type: list
+      
 author:
     - Gineesh Madapparambath (@ginigangadharan)
 '''
