@@ -11,6 +11,8 @@
     - vars/aws-common-vars.yml
     - vars/aws-elb-vars.yml
     - vars/aws-cred.yml
+  vars:
+    aws_boto_profile: ansible
   environment:
         PYTHONPATH: "/opt/rh/rh-python36/root/lib/python3.6/site-packages"
   roles:

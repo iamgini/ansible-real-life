@@ -1,0 +1,13 @@
+---
+
+# variables aws environment
+vpc_id: vpc-0addd87696a5457ff
+region: ap-southeast-1
+elbgroupname: webtarget
+webgroupinventory: ec2webservers
+security_group: SG-Ansible-Demo
+subnet1: subnet-0352cb0c0810ca5f0
+subnet2: subnet-0b53d9ad74d47486c
+ap_zone1: ap-southeast-1a
+ap_zone2: ap-southeast-1b
+aws_key_pem: /home/ansible/.ssh/akey.pem

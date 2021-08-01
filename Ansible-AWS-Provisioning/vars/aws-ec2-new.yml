@@ -1,0 +1,19 @@
+---
+
+# list of ec2 instances
+ec2_new_list:
+  aws_poc_web_az1_101:
+    name: AWS_POC_WEB_AZ1_101
+    key_name: Key-Ansible-Lab-Demo
+    group: SG-Ansible-Demo
+    instance_type: t2.micro
+    #image: ami-048a01c78f7bae4aa
+    vpc_subnet_id: subnet-0352cb0c0810ca5f0   
+
+  aws_poc_web_az2_101:
+    name: AWS_POC_WEB_AZ2_101
+    key_name: Key-Ansible-Lab-Demo
+    group: SG-Ansible-Demo
+    instance_type: t2.micro
+    #image: ami-048a01c78f7bae4aa
+    vpc_subnet_id: subnet-0b53d9ad74d47486c       
