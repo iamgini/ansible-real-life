@@ -1,0 +1,18 @@
+---
+#author : gineesh
+##Version : 1.0
+
+- name: Remove ELB Target Group
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+    - vars/aws-ec2-new.yml
+    - vars/aws-common-vars.yml
+    - vars/aws-elb-vars.yml
+    - vars/aws-cred.yml
+  environment:
+        PYTHONPATH: "/opt/rh/rh-python36/root/lib/python3.6/site-packages"
+  roles:
+    - aws-delete-targetgrp
+  tags: targetgroupdelete

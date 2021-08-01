@@ -1,0 +1,69 @@
+---
+# tasks file for aws-create-vm
+
+- name: Launching EC2 instances
+  ec2:
+    aws_access_key: "{{ec2_access_key}}"
+    aws_secret_key: "{{ec2_secret_key}}"
+    key_name: "{{ item.value.key_name }}"
+    group: "{{ item.value.group }}"
+    instance_type: "{{ item.value.instance_type }}"
+    image: ami-048a01c78f7bae4aa # Amazon Linux 2 AMI
+    wait: yes
+    wait_timeout: 500
+    count: 1
+    region: "{{ region }}"
+    instance_tags:
+       Name: "{{ item.value.name }}"
+    monitoring: no
+    vpc_subnet_id: "{{ item.value.vpc_subnet_id }}"
+    assign_public_ip: yes
+  loop: "{{ lookup('dict', ec2_new_list, wantlist=True) }}"
+  register: created_ec2
+
+- name: Add newly created ec2 instance to a host group
+  add_host:
+    name: "{{ item.instances[0].public_ip }}"
+    groups: "{{ elbgroupname }}"
+    #ansible_ssh_private_key_file: "{{ aws_key_pem }}"
+  loop: "{{ created_ec2.results }}"
+
+#- debug:
+#    msg: "{{ item.instances[0] }}"
+#  loop: "{{ created_ec2.results }}"
+
+- name: Register instance target to a target group
+  elb_target:
+    aws_access_key: "{{ec2_access_key}}"
+    aws_secret_key: "{{ec2_secret_key}}"
+    target_group_name: "{{ elb_target_group }}"
+    target_id: "{{ item.instances[0].id }}"
+    region: "{{ region }}"
+    state: present
+  loop: "{{ created_ec2.results }}"
+
+- name: Create a temp list for ec2
+  set_fact:
+    new_ec2_list: []
+ 
+- name: Collect ec2 in a list
+  set_fact:
+    new_ec2_list: "{{ new_ec2_list }} + [ '{{ item.instances[0].public_ip }}' ]"
+  loop: "{{ created_ec2.results }}"
+
+- name: Status
+  debug:
+    msg: "{{ item }} : Waiting for instances online..."
+  #loop: "{{ created_ec2.results }}"
+  with_items: "{{ new_ec2_list }}"
+
+- name: Wait for SSH
+  wait_for:
+    host: "{{ item }}"
+    port: 22
+    delay: 3
+    #timout: 300
+    connect_timeout: 180
+    sleep: 5
+    state: started
+  with_items: "{{ new_ec2_list }}"

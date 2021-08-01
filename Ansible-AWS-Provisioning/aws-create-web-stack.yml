@@ -1,0 +1,60 @@
+---
+#author : gineesh
+##Version : 1.0
+
+- name: AWS - Create webstack with ELB
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+    - vars/aws-ec2-new.yml
+    - vars/aws-common-vars.yml
+    - vars/aws-elb-vars.yml
+    - vars/aws-cred.yml
+  vars:
+    # variables for AWS Access 
+  environment:
+        PYTHONPATH: "/opt/rh/rh-python36/root/lib/python3.6/site-packages"
+  tasks:
+    #- name: Create an ELB target-group
+    #  include_role: 
+    #    name: aws-create-targetgrp
+    #  tags: createtargetgrp
+    
+    - name: Create ec2 instances and add to target-group
+      include_role: 
+        name: aws-create-ec2
+      tags: createec2
+
+    #- name: Create ELB and attach target group
+    #  include_role: 
+    #    name: aws-create-elb
+    #  tags: createec2
+
+- name: Deploy Webserver to EC2 instances
+  hosts: "{{ elbgroupname }}"
+  remote_user: ec2-user
+  become: true
+  vars_files:
+    - vars/aws-ec2-new.yml
+    - vars/aws-common-vars.yml
+    - vars/aws-elb-vars.yml
+    - vars/aws-cred.yml
+  environment:
+        PYTHONPATH: "/opt/rh/rh-python36/root/lib/python3.6/site-packages"
+  tasks:
+    - name: Deploy Web service
+      include_role: 
+        name: deploy-httpd-server
+      tags: createtargetgrp
+      
+#- name: Report Webstack details
+#  hosts: localhost
+#  gather_facts: no   
+#  connection: local
+#  environment:
+#    PYTHONPATH: "/opt/rh/rh-python36/root/lib/python3.6/site-packages"
+#  tasks:
+#    - name: "AWS ELB Public URL for Web stack"
+#      debug:
+#        msg: "Public Url: {{ elb_public_dns }}"    

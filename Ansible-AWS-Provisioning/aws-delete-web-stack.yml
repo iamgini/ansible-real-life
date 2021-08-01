@@ -1,0 +1,37 @@
+---
+#author : gineesh
+##Version : 1.0
+
+- name: AWS - Delete webstack
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+    - vars/aws-ec2-new.yml
+    - vars/aws-common-vars.yml
+    - vars/aws-elb-vars.yml
+    - vars/aws-cred.yml
+  environment:
+        PYTHONPATH: "/opt/rh/rh-python36/root/lib/python3.6/site-packages"
+  tasks:
+    - name: Delete ec2 instances 
+      include_role: 
+        name: aws-delete-ec2
+      tags: deleteec2
+    
+    #- name: Delete ELB
+    #  include_role: 
+    #    name: aws-delete-elb
+    #  tags: deleteelb
+
+    #- name: Wait for some time to compete ELB removal
+    #  pause:
+    #    seconds: 15
+
+    #- name: Delete ELB target-group
+    #  include_role: 
+    #    name: aws-delete-targetgrp
+    #  tags: deletetargetgrp
+    
+
+

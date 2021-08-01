@@ -1,0 +1,19 @@
+---
+#author : gineesh
+##Version : 1.0
+
+- name: Provision AWS EC2 Instance as per list
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+    - vars/aws-ec2-new.yml
+    - vars/aws-common-vars.yml
+    - vars/aws-elb-vars.yml
+    - vars/aws-cred.yml
+  environment:
+        PYTHONPATH: "/opt/rh/rh-python36/root/lib/python3.6/site-packages"
+  roles:
+    - aws-create-ec2
+  tags: ec2create
+  

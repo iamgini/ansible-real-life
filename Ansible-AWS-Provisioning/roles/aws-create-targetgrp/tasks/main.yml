@@ -1,0 +1,13 @@
+---
+# tasks file for aws-create-targetgrp
+
+# Create a target group with a default health check
+- elb_target_group:
+    aws_access_key: "{{ec2_access_key}}"
+    aws_secret_key: "{{ec2_secret_key}}"
+    name: "{{ elb_target_group }}"
+    region: "{{ region }}"
+    protocol: http
+    port: 80
+    vpc_id: "{{ vpc_id }}"
+    state: present
