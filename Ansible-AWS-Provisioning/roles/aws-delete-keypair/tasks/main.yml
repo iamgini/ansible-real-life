@@ -1,0 +1,9 @@
+---
+# tasks file for aws-delete-keypair
+- name: Delete key pair
+  amazon.aws.ec2_key:
+    name: "{{ aws_demo_key }}"
+    key_material: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    profile: "{{ aws_boto_profile }}"
+    region: "{{ aws_region }}"
+    state: absent

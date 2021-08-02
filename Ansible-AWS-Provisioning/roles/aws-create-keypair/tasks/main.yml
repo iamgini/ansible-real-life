@@ -1,0 +1,8 @@
+---
+# tasks file for aws-create-keypair
+- name: Create key pair
+  amazon.aws.ec2_key:
+    name: "{{ aws_demo_key }}"
+    key_material: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    profile: "{{ aws_boto_profile }}"
+    region: "{{ aws_region }}"

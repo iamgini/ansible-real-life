@@ -4,7 +4,7 @@
 ec2_new_list:
   aws_poc_web_az1_101:
     name: AWS_POC_WEB_AZ1_101
-    key_name: Key-Ansible-Lab-Demo
+    key_name: "{{ aws_demo_key }}"
     group: SG-Ansible-Demo
     instance_type: t2.micro
     #image: ami-048a01c78f7bae4aa
@@ -12,7 +12,7 @@ ec2_new_list:
 
   aws_poc_web_az2_101:
     name: AWS_POC_WEB_AZ2_101
-    key_name: Key-Ansible-Lab-Demo
+    key_name: "{{ aws_demo_key }}"
     group: SG-Ansible-Demo
     instance_type: t2.micro
     #image: ami-048a01c78f7bae4aa

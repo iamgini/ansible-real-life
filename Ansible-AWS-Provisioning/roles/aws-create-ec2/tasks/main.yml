@@ -1,23 +1,33 @@
 ---
 # tasks file for aws-create-vm
 
+- name: Fetch Available Subnet
+  ec2_vpc_subnet_info:
+    profile: "{{ aws_boto_profile }}"
+    region: "{{ aws_region }}"
+  register: vpc_subnets
+
+- name: Display Subnet info
+  debug:
+    msg: "{{ vpc_subnets.subnets[0].subnet_id }}"    
+
 - name: Launching EC2 instances
   ec2:
-    aws_access_key: "{{ec2_access_key}}"
-    aws_secret_key: "{{ec2_secret_key}}"
-    #profile: "{{ aws_boto_profile }}"
-    key_name: "{{ item.value.key_name }}"
-    group: "{{ item.value.group }}"
+    #aws_access_key: "{{ec2_access_key}}"
+    #aws_secret_key: "{{ec2_secret_key}}"
+    profile: "{{ aws_boto_profile }}"
+    key_name: "{{ aws_demo_key }}"
+    group: "{{ aws_security_group }}"
     instance_type: "{{ item.value.instance_type }}"
-    image: ami-048a01c78f7bae4aa # Amazon Linux 2 AMI
+    image: ami-02f26adf094f51167 # Amazon Linux 2 AMI
     wait: yes
     wait_timeout: 500
     count: 1
-    region: "{{ region }}"
+    region: "{{ aws_region }}"
     instance_tags:
        Name: "{{ item.value.name }}"
     monitoring: no
-    vpc_subnet_id: "{{ item.value.vpc_subnet_id }}"
+    vpc_subnet_id: "{{ vpc_subnets.subnets[0].subnet_id }}" #"{{ item.value.vpc_subnet_id }}"
     assign_public_ip: yes
   loop: "{{ lookup('dict', ec2_new_list, wantlist=True) }}"
   register: created_ec2
@@ -37,7 +47,7 @@
   elb_target:
     aws_access_key: "{{ec2_access_key}}"
     aws_secret_key: "{{ec2_secret_key}}"
-    target_group_name: "{{ elb_target_group }}"
+    target_group_name: "{{ aws_elb_target_group }}"
     target_id: "{{ item.instances[0].id }}"
     region: "{{ region }}"
     state: present

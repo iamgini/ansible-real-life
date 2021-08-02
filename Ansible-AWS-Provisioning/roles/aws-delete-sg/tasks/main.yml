@@ -1,0 +1,9 @@
+---
+# tasks file for aws-delete-sg
+- name: Delete Security group
+  amazon.aws.ec2_group:
+    profile: "{{ aws_boto_profile }}"
+    name: "{{ aws_security_group }}"
+    state: absent
+    #vpc_id: vpc-xxxxxxxx
+    region: "{{ aws_region }}"
