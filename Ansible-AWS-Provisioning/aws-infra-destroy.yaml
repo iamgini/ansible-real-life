@@ -18,18 +18,27 @@
   tasks:
     - name: Fetch VPC ID
       include_role:
-        name: aws-get-vpc-id
+        name: aws-get-vpc-details
 
     - name: Delete ec2 instances
       include_role:
         name: aws-delete-ec2
       tags: ec2delete
+    
+    - name: Delete App ELB
+      include_role:
+        name: aws-delete-elb
+      tags: elbdelete
 
     - name: Delete Keypair
       include_role:
         name: aws-delete-keypair
       tags: keydelete     
 
+    - name: Pause for a while to complete Termination 
+      pause:
+        seconds: 60
+        
     - name: Delete ELB Target Group
       include_role:
         name: aws-delete-targetgrp

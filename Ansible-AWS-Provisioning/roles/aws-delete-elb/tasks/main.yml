@@ -2,9 +2,8 @@
 # tasks file for aws-delete-elb
 - name: Delete ELB
   elb_application_lb:
-    aws_access_key: "{{ec2_access_key}}"
-    aws_secret_key: "{{ec2_secret_key}}"
-    region: "{{ region }}"
-    name: "{{ elb_name }}"
+    profile: "{{ aws_boto_profile }}"
+    region: "{{ aws_region }}"
+    name: "{{ aws_elb_app_lb }}"
     state: absent
     wait: yes

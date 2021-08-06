@@ -5,8 +5,8 @@
   amazon.aws.ec2_group:
     profile: "{{ aws_boto_profile }}"
     name: "{{ aws_security_group }}"
-    description: SG with SSH and HTTP rules
-    #vpc_id: vpc-xxxxxxxx
+    description: 'Security Group with SSH and HTTP rules'
+    vpc_id: "{{ aws_vpc_id }}"
     region: "{{ aws_region }}"
     rules:
       - proto: tcp

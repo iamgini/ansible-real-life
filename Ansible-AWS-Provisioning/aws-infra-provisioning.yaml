@@ -2,6 +2,9 @@
 #author : gineesh
 ##Version : 1.0
 
+# Pass the dynamic inventory_group name
+# % ansible-playbook aws-infra-provisioning.yaml -e "inventory_webgroup=ec2webservers"
+
 - name: Provision AWS Infrastructure
   hosts: localhost
   gather_facts: no
@@ -9,16 +12,12 @@
   vars_files:
     - vars/aws-ec2-new.yml
     - vars/aws-common-vars.yml
-    #- vars/aws-elb-vars.yml
-    #- vars/aws-cred.yml
   vars:
     aws_boto_profile: ansible
-  environment:
-        PYTHONPATH: "/opt/rh/rh-python36/root/lib/python3.6/site-packages"
   tasks:
     - name: Fetch VPC ID
       include_role:
-        name: aws-get-vpc-id
+        name: aws-get-vpc-details
 
     - name: Create Security Group
       include_role:
@@ -34,6 +33,11 @@
       include_role:
         name: aws-create-targetgrp
       tags: targetgrpcreate      
+    
+    - name: Create ELB
+      include_role:
+        name: aws-create-elb
+      tags: targetgrpcreate  
 
     - name: Create ec2 instances
       include_role:
@@ -44,23 +48,16 @@
   hosts: "{{ inventory_webgroup }}"
   remote_user: ec2-user
   become: true
-  #vars_files:
-  #  - vars/aws-ec2-new.yml
-  #  - vars/aws-common-vars.yml
-  #  - vars/aws-elb-vars.yml
-  #  - vars/aws-cred.yml
-  #environment:
-  #      PYTHONPATH: "/opt/rh/rh-python36/root/lib/python3.6/site-packages"
   tasks:
     - name: Deploy Web service
       include_role: 
         name: deploy-web-server
       #tags: createtargetgrp
+      #when: a is defined
 
-# name: Deploy Web
-# hosts: "{{ elbgroupname }}"
-# gather_facts: yes
-# tasks:
-#   - debug:
-#       msg: "{{ inventory_hostname }}"
-#
+- name: IaC Summary
+  hosts: localhost
+  tasks:
+    - debug:
+        msg: "Website is accessible on Appication ELB: {{ elb_public_dns }}"
+ 

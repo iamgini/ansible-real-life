@@ -33,7 +33,3 @@
     #wait_timeout: 300
   loop: "{{ ec2_collection | json_query('results[*].instances[*].instance_id') }}"
   register: deleted_ec2
-
-- name: Pause for a while to complete Termination 
-  pause:
-    seconds: 60
