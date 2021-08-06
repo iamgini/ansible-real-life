@@ -2,34 +2,42 @@
 #author : gineesh
 ##Version : 1.0
 
-- name: Provision AWS Infrastructure
+- name: Destroy AWS Infrastructure
   hosts: localhost
   gather_facts: no
   connection: local
   vars_files:
     - vars/aws-ec2-new.yml
     - vars/aws-common-vars.yml
-    - vars/aws-elb-vars.yml
-    - vars/aws-cred.yml
+    #- vars/aws-elb-vars.yml
+    #- vars/aws-cred.yml
   vars:
     aws_boto_profile: ansible
   environment:
         PYTHONPATH: "/opt/rh/rh-python36/root/lib/python3.6/site-packages"
   tasks:
+    - name: Fetch VPC ID
+      include_role:
+        name: aws-get-vpc-id
+
     - name: Delete ec2 instances
       include_role:
         name: aws-delete-ec2
       tags: ec2delete
-      
-    - name: Delete Security Group
-      include_role:
-        name: aws-delete-sg
-      tags: sgdelete
 
     - name: Delete Keypair
       include_role:
         name: aws-delete-keypair
       tags: keydelete     
 
+    - name: Delete ELB Target Group
+      include_role:
+        name: aws-delete-targetgrp
+      tags: targetgrpdelete
+
+    - name: Delete Security Group
+      include_role:
+        name: aws-delete-sg
+      tags: sgdelete
 
   

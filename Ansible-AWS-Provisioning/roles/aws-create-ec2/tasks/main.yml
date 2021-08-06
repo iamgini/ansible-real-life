@@ -11,6 +11,30 @@
   debug:
     msg: "{{ vpc_subnets.subnets[0].subnet_id }}"    
 
+- name: Fetch Instances by tag, subnet and type
+  ec2_instance_info:
+    profile: "{{ aws_boto_profile }}"
+    region: "{{ aws_region }}"
+    filters:
+      "tag:Name": "{{ item.value.name }}"
+      #network-interface.subnet-id: "{{ item.value.vpc_subnet_id }}"
+      instance-type: "{{ item.value.instance_type }}"
+      instance-state-name: ["running", "stopped", "stopping", "starting", "pending"]
+  loop: "{{ lookup('dict', ec2_new_list, wantlist=True) }}"
+  register: ec2_collected
+
+- name: Create and set variables
+  set_fact:
+    existing_ec2_list: []
+    aws_ec2_created: false
+
+- name: Collect ec2 in a list
+  set_fact:
+    existing_ec2_list: "{{ existing_ec2_list }} + [ '{{ item }}' ]"
+  #debug:
+  #  msg: "{{ item }}"
+  loop: "{{ ec2_collected | json_query('results[*].instances[*].tags.Name') }}"
+
 - name: Launching EC2 instances
   ec2:
     #aws_access_key: "{{ec2_access_key}}"
@@ -27,45 +51,24 @@
     instance_tags:
        Name: "{{ item.value.name }}"
     monitoring: no
-    vpc_subnet_id: "{{ vpc_subnets.subnets[0].subnet_id }}" #"{{ item.value.vpc_subnet_id }}"
+    vpc_subnet_id: "{{ vpc_subnets.subnets[0].subnet_id }}"
     assign_public_ip: yes
   loop: "{{ lookup('dict', ec2_new_list, wantlist=True) }}"
+  when: "not item.value.name in existing_ec2_list"
   register: created_ec2
-
-- name: Add newly created ec2 instance to a host group
-  add_host:
-    name: "{{ item.instances[0].public_ip }}"
-    groups: "{{ elbgroupname }}"
-    #ansible_ssh_private_key_file: "{{ aws_key_pem }}"
-  loop: "{{ created_ec2.results }}"
-
-#- debug:
-#    msg: "{{ item.instances[0] }}"
-#  loop: "{{ created_ec2.results }}"
-
-- name: Register instance target to a target group
-  elb_target:
-    aws_access_key: "{{ec2_access_key}}"
-    aws_secret_key: "{{ec2_secret_key}}"
-    target_group_name: "{{ aws_elb_target_group }}"
-    target_id: "{{ item.instances[0].id }}"
-    region: "{{ region }}"
-    state: present
-  loop: "{{ created_ec2.results }}"
 
 - name: Create a temp list for ec2
   set_fact:
     new_ec2_list: []
- 
-- name: Collect ec2 in a list
-  set_fact:
-    new_ec2_list: "{{ new_ec2_list }} + [ '{{ item.instances[0].public_ip }}' ]"
+
+- name: Execute ec2 post creation tasks
+  include_tasks: ec2-create-post-task.yaml
+  when: item.instances[0].public_ip is defined
   loop: "{{ created_ec2.results }}"
 
 - name: Status
   debug:
     msg: "{{ item }} : Waiting for instances online..."
-  #loop: "{{ created_ec2.results }}"
   with_items: "{{ new_ec2_list }}"
 
 - name: Wait for SSH
@@ -73,8 +76,33 @@
     host: "{{ item }}"
     port: 22
     delay: 3
-    #timout: 300
     connect_timeout: 180
     sleep: 5
     state: started
   with_items: "{{ new_ec2_list }}"
+
+- name: Fetch Exsiting Running Instances by tag, subnet and type
+  ec2_instance_info:
+    profile: "{{ aws_boto_profile }}"
+    region: "{{ aws_region }}"
+    filters:
+      "tag:Name": "{{ item.value.name }}"
+      #network-interface.subnet-id: "{{ item.value.vpc_subnet_id }}"
+      instance-type: "{{ item.value.instance_type }}"
+      instance-state-name: ["running"] #, "stopped", "stopping", "starting", "pending"]
+  loop: "{{ lookup('dict', ec2_new_list, wantlist=True) }}"
+  register: ec2_existing_collected
+
+- debug:
+    msg: "{{ item.instances[0].public_ip_address }}"
+  loop: "{{ ec2_existing_collected.results }}"
+
+- name: Add ec2 instance to a host group
+  add_host:
+    name: "{{ item.instances[0].public_ip_address }}"
+    groups: "{{ inventory_webgroup }}"
+    ansible_ssh_extra_args: ' -o StrictHostKeyChecking=no '
+    # -o PreferredAuthentications=password 
+    #ansible_ssh_private_key_file: "{{ aws_key_pem }}"
+  #loop: "{{ ec2_collected | json_query('results[*].instances[*].tags.Name') }}"
+  loop: "{{ ec2_existing_collected.results }}"

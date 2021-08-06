@@ -1,5 +1,0 @@
----
-
-# variables for elb and target group
-elb_target_group : elb-targetgrp-ansibe-demo
-elb_name: elb-ansibe-demo   

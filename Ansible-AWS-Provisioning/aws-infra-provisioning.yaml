@@ -9,8 +9,8 @@
   vars_files:
     - vars/aws-ec2-new.yml
     - vars/aws-common-vars.yml
-    - vars/aws-elb-vars.yml
-    - vars/aws-cred.yml
+    #- vars/aws-elb-vars.yml
+    #- vars/aws-cred.yml
   vars:
     aws_boto_profile: ansible
   environment:
@@ -39,4 +39,28 @@
       include_role:
         name: aws-create-ec2
       tags: ec2create
-  
+
+- name: Deploy Webserver to EC2 instances
+  hosts: "{{ inventory_webgroup }}"
+  remote_user: ec2-user
+  become: true
+  #vars_files:
+  #  - vars/aws-ec2-new.yml
+  #  - vars/aws-common-vars.yml
+  #  - vars/aws-elb-vars.yml
+  #  - vars/aws-cred.yml
+  #environment:
+  #      PYTHONPATH: "/opt/rh/rh-python36/root/lib/python3.6/site-packages"
+  tasks:
+    - name: Deploy Web service
+      include_role: 
+        name: deploy-web-server
+      #tags: createtargetgrp
+
+# name: Deploy Web
+# hosts: "{{ elbgroupname }}"
+# gather_facts: yes
+# tasks:
+#   - debug:
+#       msg: "{{ inventory_hostname }}"
+#

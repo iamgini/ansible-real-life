@@ -28,10 +28,12 @@
     profile: "{{ aws_boto_profile }}"
     region: "{{ aws_region }}"
     state: absent
-    instance_ids: "{{ item }}"  
+    instance_ids: "{{ item }}"
+    wait: yes
+    #wait_timeout: 300
   loop: "{{ ec2_collection | json_query('results[*].instances[*].instance_id') }}"
   register: deleted_ec2
 
-#- name: "Deleted ec2"
-#  debug:
-#    msg: "{{ deleted_ec2 }}"
+- name: Pause for a while to complete Termination 
+  pause:
+    seconds: 60
