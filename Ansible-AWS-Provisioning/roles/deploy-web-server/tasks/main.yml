@@ -43,3 +43,9 @@
     repo: 'https://github.com/everimus/one-page-website'
     dest: /var/www/html
     version: gh-pages
+
+- name: Set Hostname on Site
+  replace:
+    path: /var/www/html/index.html
+    regexp: 'Installed using Ansible'
+    replace: "Installed using Ansible. {{ inventory_hostname }}"
