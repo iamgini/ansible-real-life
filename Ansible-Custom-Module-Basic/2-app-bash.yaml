@@ -1,0 +1,16 @@
+---
+- name: Testing Custom Module
+  hosts: localhost
+  gather_facts: false
+  vars:
+    app_name: "python"
+    app_version: "3.8"
+  tasks:
+    - name: Application Name and Version
+      customapp:
+        application_name: "{{ app_name }}"
+        application_version: "{{ app_version }}"
+      register: custom_value
+
+    - debug:
+        msg: "{{ custom_value }}"

@@ -1,12 +1,10 @@
 ---
 - name: Testing Custom Module
-  hosts: localhost
+  hosts: node1
   gather_facts: false
   tasks:
-    - name: Application Name and Version
-      customapp:
-        application_name: python
-        application_version: 3.8
+    - name: Calling customhello module
+      customhello:
       register: custom_value
 
     - debug:

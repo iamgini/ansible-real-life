@@ -1,10 +1,12 @@
 ---
 - name: Testing Custom Module
-  hosts: localhost
+  hosts: node1
   gather_facts: false
   tasks:
-    - name: Calling customhello module
-      customhello:
+    - name: Calling customhello2 module
+      hello_message:
+        message: "Hello"
+        name: "John"
       register: custom_value
 
     - debug:

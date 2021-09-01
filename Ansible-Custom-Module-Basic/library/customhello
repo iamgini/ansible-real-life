@@ -1,5 +1,0 @@
-#!/bin/bash
-
-display="This is a simple bash module"
-OS="$(uname)" 
-echo -e "{\"changed\": false, \"operating_system\": \"$OS\", \"Message\":\"Hello, "$display"\"}"
