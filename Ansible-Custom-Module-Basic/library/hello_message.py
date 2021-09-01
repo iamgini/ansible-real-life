@@ -45,7 +45,6 @@ os_version:
 '''
 
 from ansible.module_utils.basic import *
-from datetime import date
 
 def main():
     module_args = dict(
