@@ -3,7 +3,8 @@
 
 ```shell
 $ mkdir library
-touch library/customhello
+touch library/customhello.sh
+# add content
 ```
 
 ## Variables
@@ -13,7 +14,7 @@ touch library/customhello
       customapp:
         application_name: python
         application_version: 3.8
-```        
+```
 
 We have variables `application_name` and `application_version`. We can get the name of this file from the `$1` variable (make sure bash syntax is correct). Source the variable content to convert these arguments to bash variables.
 
