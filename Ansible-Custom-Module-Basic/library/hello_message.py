@@ -53,7 +53,7 @@ def main():
     )
     result = dict(
         changed=False,
-        greeting='',
+        greeting='Sample Message',
         os_version=''
     )
     module = AnsibleModule(
