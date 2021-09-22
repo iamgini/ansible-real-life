@@ -1,8 +1,6 @@
 ---
 - name: User input data and templating config
   hosts: localhost
-  vars_files:
-    - vars.yaml
   vars_prompt:
     - name: entry_count
       prompt: "How many entries you want to input ?"
