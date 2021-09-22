@@ -1,0 +1,14 @@
+grpc-address: "10.1.10.10:9003"
+prom-listen-address: ":50090"
+zones:
+     - name: {{ zone_name }}
+       gobgp-gw-address:
+         - "{{ zone_gobgp_gw_address }}"
+pops:
+{% for pops in pops_list %} 
+     - name: {{ pops.name }}
+       stargate-rc-address:
+         - "{{ pops.stargate_rc_address }}"
+       stargate-even-clientid: "{{ pops.stargate_even_clientid }}"
+       stargate-odd-clientid: "{{ pops.stargate_odd_clientid }}"
+{% endfor %}

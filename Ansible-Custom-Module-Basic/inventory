@@ -7,6 +7,7 @@ localhost ansible_connection=local
 [nodes]
 node1 ansible_host=127.0.0.1 ansible_port=2222
 node2 ansible_host=127.0.0.1 ansible_port=2200
+node3 ansible_host=127.0.0.1 ansible_port=2211
 
 [all:vars]
 ansible_user=vagrant
