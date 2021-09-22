@@ -1,0 +1,10 @@
+---
+- name: "Get item {{ outer_item }} of {{ entry_count }}"
+  pause:
+    prompt: "Please enter item {{ outer_item }} of {{ entry_count }} "
+    echo: yes
+  register: result
+
+- name: Add to list
+  set_fact:
+    my_entry_list: "{{ my_entry_list }} + [ '{{ result.user_input  }}' ]"

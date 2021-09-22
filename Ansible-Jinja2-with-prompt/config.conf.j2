@@ -1,0 +1,12 @@
+<Location /{{ location_name }}>
+          ProxyPass balancer://{{ balancer_name }}
+          proxyPassReverse balancer://{{ balancer_name }}
+</Location>
+
+<Proxy balancer://{{ balancer_name }}>
+{% for entry in my_entry_list %} 
+       BalancerMember {{ entry }}
+{% endfor %}
+</proxy>
+
+

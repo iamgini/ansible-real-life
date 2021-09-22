@@ -1,0 +1,30 @@
+---
+- name: User input data and templating config
+  hosts: localhost
+  vars_files:
+    - vars.yaml
+  vars_prompt:
+    - name: entry_count
+      prompt: "How many entries you want to input ?"
+      private: no
+  vars:
+    my_entry_list: []
+    location_name: "Chennai"
+    balancer_name: "SSO2"
+
+  tasks:
+    - name: Get user input
+      include_tasks: task-file.yaml
+      with_sequence: start=1 end={{ entry_count }} stride=1
+      loop_control:
+        loop_var: outer_item
+    - debug:
+        msg: "{{ my_entry_list }}"
+
+    - name: use config template
+      template:
+        #dest: /ngs/app/gncssdip/vortex/styx/config/styx.conf
+        #src: /Users/gowthamkattamreddy/ansible/styx/templates/styxmod.j2
+        src: config.conf.j2
+        dest: newconfig.conf
+      #when: a is defined
