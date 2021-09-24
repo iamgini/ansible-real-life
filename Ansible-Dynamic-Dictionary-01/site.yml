@@ -1,0 +1,35 @@
+---
+- name: User input data and templating config
+  hosts: localhost
+
+  vars:
+    file1: "myfile1"
+    file2: "myfile2"
+    file3: "myfile3"
+    file4: "myfile4"
+
+    myfulldict: {}
+
+  tasks:
+    - name: "File1. Check variable and add to the dictinary"
+      set_fact: 
+        myfulldict: "{{ myfulldict | combine( { 'image1': { 'content': 'file1 content', 'filename': 'file1-name', 'type': 'file1 type'  }} ) }}"
+      when: file1 is defined and file1 | length > 0
+
+    - name: "File2. Check variable and add to the dictinary"
+      set_fact: 
+        myfulldict: "{{ myfulldict | combine( { 'image2': { 'content': 'file2 content', 'filename': 'file2-name', 'type': 'file2 type'  }} ) }}"
+      when: file2 is defined and file2 | length > 0
+
+    - name: "File3. Check variable and add to the dictinary"
+      set_fact: 
+        myfulldict: "{{ myfulldict | combine( { 'image3': { 'content': 'file3 content', 'filename': 'file3-name', 'type': 'file3 type'  }} ) }}"
+      when: file3 is defined and file3 | length > 0
+
+    - name: "File4. Check variable and add to the dictinary"
+      set_fact: 
+        myfulldict: "{{ myfulldict | combine( { 'image4': { 'content': 'file4 content', 'filename': 'file4-name', 'type': 'file4 type'  }} ) }}"
+      when: file4 is defined and file4 | length > 0
+
+    - debug:
+        msg: "{{ myfulldict }}"
