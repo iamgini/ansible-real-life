@@ -1,0 +1,17 @@
+- name: "02 Checking if AD Group exists"
+  debug:
+    msg: "{{ ad_group_item.value.members }}"
+
+- name: "02 Creating AD Group"
+  debug:
+    msg: "Creating {{ ad_group_item.key }}...."
+  #when:.......
+
+- name: "02 Looping through email list"
+  include_tasks: add-user-to-group-subtask.yaml
+  with_items: "{{ ad_group_item.value.members }}"
+  loop_control:
+    loop_var: ad_member_email_item
+  vars:
+    member_email_to_add: "{{ ad_member_email_item }}"
+    ad_group_name: "{{ ad_group_item.key }}"

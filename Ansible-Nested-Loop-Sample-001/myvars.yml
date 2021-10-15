@@ -1,0 +1,18 @@
+---
+az_group_config_data_new:
+  ghe-test-users:
+    az_group_name: ghe-test-users
+    aws_account: sbx
+    environment: poc
+    state: present
+    members:
+      - name@name.com
+      - abc@abc.com
+  ghe-dev-users:
+    az_group_name: ghe-dev-users
+    aws_account: sbx
+    environment: poc
+    state: present
+    members:
+      - name@abc.com
+      - abc@cde.com

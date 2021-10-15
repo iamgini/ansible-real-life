@@ -1,0 +1,10 @@
+- name: "03 Fetching user ID of {{ member_email_to_add }}"
+  debug:
+    msg: "Retrieving used_id of {{ ad_member_email_item }}....."
+  #use appropriate tasks and get the user ID
+
+- name: "03 Adding user {{ ad_member_email_item }} to {{ ad_group_name }}"
+  debug:
+    msg: "Adding {{ ad_member_email_item }} (USERID) to the AD Group {{ ad_group_name }}....."
+
+  
