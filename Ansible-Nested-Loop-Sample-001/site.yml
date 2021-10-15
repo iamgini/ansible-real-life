@@ -5,14 +5,8 @@
     - myvars.yml
 
   tasks:
-    - name: "01-Looping through Group list"
+    - name: "01 Looping through Group list"
       include_tasks: create-group-subtask.yaml
-      #vars:
-      #  url_to_check_dns: "{{ address_item | lower }}"
       loop: "{{ query('dict', az_group_config_data_new, wantlist=True)}}"
       loop_control:
         loop_var: ad_group_item
-      #with_items: "{{ dns_name_substitute_url_list_to_add.splitlines() }}"
-      #loop_control:
-      #  loop_var: address_item
-      #when: address_item | regex_search('^[a-zA-Z0-9\.\-_]+$')
