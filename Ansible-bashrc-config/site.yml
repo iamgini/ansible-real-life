@@ -1,0 +1,25 @@
+---
+- name: Customize bash prompt
+  hosts: node1
+  tasks:
+    - name: "run a command to change bash prompt"
+      become: yes
+      become_user: root
+      lineinfile:
+        create: true
+        dest: /home/vagrant/.bashrc
+        line: 'PS1="\u \s \v \$ "'
+        state: present
+        mode: 0600
+        owner: vagrant
+        regexp: ^PS1=
+
+    - name: check PS1
+      shell: |
+        source ~/.bashrc
+        echo $PS1
+      register: ps1_output
+
+    - name: Print PS1 Output
+      debug:
+        msg: "{{ ps1_output.stdout_lines }}"
