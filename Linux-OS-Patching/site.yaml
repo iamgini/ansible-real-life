@@ -1,6 +1,6 @@
 ---
 - name: Performing Linux OS Patching
-  ## give NODES during playbook -> -e "NODES=mynodes"
+  
   hosts: "{{ NODES }}"
   become: true
   vars:

@@ -1,0 +1,75 @@
+---
+- name: User input data and templating config
+  hosts: localhost
+
+  vars:
+    headerLogo_url: "URL1"
+    footerLogo_url: "URL2"
+    loginLogo_url: "URL3"
+    favicon: "URL4"
+
+    LPath: "/tmp/logoFiles"
+
+    ABI_1: header_image_name.jpg
+    ABI_2: footer_image_name.jpg
+    ABI_3: login_image_name.jpg
+    ABI_4: favicon_image_name.ico
+    
+    #Emply Dict
+    myfulldict: {}
+
+  tasks:
+    - name: set_fact the filename
+      set_fact:
+        image_filename1: "{{ ABI_1 }}"
+        image_type_1: "image/{{ ABI_1.rsplit(\".\",1)[1] }}"
+        full_path_1: "{{ LPath }}/{{ ABI_1 }}"
+      when: headerLogo_url is defined and headerLogo_url | length > 0
+    
+    - name: set_fact the filename
+      set_fact:
+        image_filename2: "{{ ABI_2 }}"
+        image_type_2: "image/{{ ABI_2.rsplit(\".\",1)[1] }}"
+        full_path_2: "{{ LPath }}/{{ ABI_2 }}"
+      when: footerLogo_url is defined and footerLogo_url | length > 0
+
+    - name: set_fact the filename
+      set_fact:
+        image_filename3: "{{ ABI_3 }}"
+        image_type_3: "image/{{ ABI_3.rsplit(\".\",1)[1] }}"
+        full_path_3: "{{ LPath }}/{{ ABI_3 }}"
+      when: loginLogo_url is defined and loginLogo_url | length > 0
+
+    - name: set_fact the filename
+      set_fact:
+        image_filename4: "{{ ABI_4 }}"
+        image_type_4: "image/{{ ABI_4.rsplit(\".\",1)[1] }}"
+        full_path_4: "{{ LPath }}/{{ ABI_4 }}"
+      when: favicon is defined and favicon | length > 0
+
+    # - debug:
+    #     msg: "{{image_filename1}} and {{image_type}} and {{full_path_1}}"
+
+    - name: "headerLogo_url. Check variable and add to the dictinary"
+      set_fact: 
+        myfulldict: "{{ myfulldict | combine( { 'imageType': 'headerLogo.File', 'LocalPath': '{{full_path_1}}', 'image_filename': '{{image_filename1}}', 'type': '{{image_type_1}}' } ) }}"
+        myfulldict: "{{ myfulldict | combine( { 'image1': { 'content': 'file1 content', 'filename': 'file1-name', 'type': 'file1 type'  }} ) }}"
+      when: headerLogo_url is defined and headerLogo_url | length > 0
+
+    - name: "footerLogo_url. Check variable and add to the dictinary"
+      set_fact: 
+        myfulldict: "{{ myfulldict | combine( { 'imageType': 'footerLogo.File', 'LocalPath': '{{full_path_2}}', 'image_filename': '{{image_filename2}}', 'type': '{{image_type_2}}' } ) }}"
+      when: footerLogo_url is defined and footerLogo_url | length > 0
+
+    - name: "loginLogo_url. Check variable and add to the dictinary"
+      set_fact: 
+        myfulldict: "{{ myfulldict | combine( { 'imageType': 'loginLogo.File', 'LocalPath': '{{full_path_3}}', 'image_filename': '{{image_filename3}}', 'type': '{{image_type_3}}' } ) }}"
+      when: loginLogo_url is defined and loginLogo_url | length > 0
+
+    - name: "favicon. Check variable and add to the dictinary"
+      set_fact: 
+        myfulldict: "{{ myfulldict | combine( { 'imageType': 'favicon.File', 'LocalPath': '{{full_path_4}}', 'image_filename': '{{image_filename4}}', 'type': '{{image_type_4}}' } ) }}"
+      when: favicon is defined and favicon | length > 0
+
+    - debug:
+        msg: "{{ myfulldict }}"
