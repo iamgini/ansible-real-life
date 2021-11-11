@@ -1,0 +1,9 @@
+---
+# tasks file for aws-delete-elb
+- name: Delete ELB
+  elb_application_lb:
+    profile: "{{ aws_boto_profile }}"
+    region: "{{ aws_region }}"
+    name: "{{ aws_elb_app_lb }}"
+    state: absent
+    wait: yes

@@ -13,8 +13,8 @@ version_added: 1.0.0
 short_description: manage objects in S3.
 description:
     - This module allows the user to manage S3 buckets and the objects within them. Includes support for creating and
-      deleting both objects and buckets, retrieving objects as files or strings and generating download links.
-      This module has a dependency on boto3 and botocore.
+      deleting both objects and buckets, retrieving objects as files or strings, generating download links and
+      copy of an object that is already stored in Amazon S3.
 options:
   bucket:
     description:
@@ -23,11 +23,11 @@ options:
     type: str
   dest:
     description:
-      - The destination file path when downloading an object/key with a GET operation.
+      - The destination file path when downloading an object/key with a C(GET) operation.
     type: path
   encrypt:
     description:
-      - When set for PUT mode, asks for server-side encryption.
+      - When set for PUT/COPY mode, asks for server-side encryption.
     default: true
     type: bool
   encryption_mode:
@@ -46,7 +46,7 @@ options:
     type: int
   headers:
     description:
-      - Custom headers for PUT operation, as a dictionary of C(key=value) and C(key=value,key=value).
+      - Custom headers for C(PUT) operation, as a dictionary of C(key=value) and C(key=value,key=value).
     type: dict
   marker:
     description:
@@ -59,15 +59,15 @@ options:
     type: int
   metadata:
     description:
-      - Metadata for PUT operation, as a dictionary of C(key=value) and C(key=value,key=value).
+      - Metadata for PUT/COPY operation, as a dictionary of C(key=value) and C(key=value,key=value).
     type: dict
   mode:
     description:
-      - Switches the module behaviour between C(put) (upload), C(get) (download), C(geturl) (return download url, Ansible 1.3+),
+      - Switches the module behaviour between C(PUT) (upload), C(GET) (download), C(geturl) (return download URL, Ansible 1.3+),
         C(getstr) (download object as string (1.3+)), C(list) (list keys, Ansible 2.0+), C(create) (bucket), C(delete) (bucket),
-        and delobj (delete object, Ansible 2.0+).
+        delobj (delete object, Ansible 2.0+) and C(copy) object that is already stored in another (bucket).
     required: true
-    choices: ['get', 'put', 'delete', 'create', 'geturl', 'getstr', 'delobj', 'list']
+    choices: ['get', 'put', 'delete', 'create', 'geturl', 'getstr', 'delobj', 'list', 'copy']
     type: str
   object:
     description:
@@ -78,7 +78,8 @@ options:
       - This option lets the user set the canned permissions on the object/bucket that are created.
         The permissions that can be set are C(private), C(public-read), C(public-read-write), C(authenticated-read) for a bucket or
         C(private), C(public-read), C(public-read-write), C(aws-exec-read), C(authenticated-read), C(bucket-owner-read),
-        C(bucket-owner-full-control) for an object. Multiple permissions can be specified as a list.
+        C(bucket-owner-full-control) for an object. Multiple permissions can be specified as a list; although only the first one
+        will be used during the initial upload of the file
     default: ['private']
     type: list
     elements: str
@@ -93,7 +94,7 @@ options:
     type: str
   overwrite:
     description:
-      - Force overwrite either locally on the filesystem or remotely with the object/key. Used with PUT and GET operations.
+      - Force overwrite either locally on the filesystem or remotely with the object/key. Used with C(PUT) and C(GET) operations.
       - Must be a Boolean, C(always), C(never) or C(different).
       - C(true) is the same as C(always).
       - C(false) is equal to C(never).
@@ -117,7 +118,6 @@ options:
   dualstack:
     description:
       - Enables Amazon S3 Dual-Stack Endpoints, allowing S3 communications using both IPv4 and IPv6.
-      - Requires at least botocore version 1.4.45.
     type: bool
     default: false
   rgw:
@@ -127,28 +127,28 @@ options:
     type: bool
   src:
     description:
-      - The source file path when performing a PUT operation.
-      - Either I(content), I(content_base64) or I(src) must be specified for a PUT operation. Ignored otherwise.
+      - The source file path when performing a C(PUT) operation.
+      - Either I(content), I(content_base64) or I(src) must be specified for a C(PUT) operation. Ignored otherwise.
     type: path
   content:
     description:
-      - The content to PUT into an object.
+      - The content to C(PUT) into an object.
       - The parameter value will be treated as a string and converted to UTF-8 before sending it to S3.
         To send binary data, use the I(content_base64) parameter instead.
-      - Either I(content), I(content_base64) or I(src) must be specified for a PUT operation. Ignored otherwise.
+      - Either I(content), I(content_base64) or I(src) must be specified for a C(PUT) operation. Ignored otherwise.
     version_added: "1.3.0"
     type: str
   content_base64:
     description:
-      - The base64-encoded binary data to PUT into an object.
+      - The base64-encoded binary data to C(PUT) into an object.
       - Use this if you need to put raw binary data, and don't forget to encode in base64.
-      - Either I(content), I(content_base64) or I(src) must be specified for a PUT operation. Ignored otherwise.
+      - Either I(content), I(content_base64) or I(src) must be specified for a C(PUT) operation. Ignored otherwise.
     version_added: "1.3.0"
     type: str
   ignore_nonexistent_bucket:
     description:
       - "Overrides initial bucket lookups in case bucket or iam policies are restrictive. Example: a user may have the
-        GetObject permission but no other permissions. In this case using the option mode: get will fail without specifying
+        C(GetObject) permission but no other permissions. In this case using the option mode: get will fail without specifying
         I(ignore_nonexistent_bucket=true)."
     type: bool
     default: false
@@ -156,10 +156,43 @@ options:
     description:
       - KMS key id to use when encrypting objects using I(encrypting=aws:kms). Ignored if I(encryption) is not C(aws:kms).
     type: str
-requirements: [ "boto3", "botocore" ]
+  tags:
+    description:
+      - Tags dict to apply to the S3 object.
+    type: dict
+    version_added: 2.0.0
+  purge_tags:
+    description:
+      - Whether or not to remove tags assigned to the S3 object if not specified in the playbook.
+      - To remove all tags set I(tags) to an empty dictionary in conjunction with this.
+    type: bool
+    default: True
+    version_added: 2.0.0
+  copy_src:
+    description:
+    - The source details of the object to copy.
+    - Required if I(mode) is C(copy).
+    type: dict
+    version_added: 2.0.0
+    suboptions:
+      bucket:
+        type: str
+        description:
+        - The name of the source bucket.
+        required: true
+      object:
+        type: str
+        description:
+        - key name of the source object.
+        required: true
+      version_id:
+        type: str
+        description:
+        - version ID of the source object.
 author:
     - "Lester Wade (@lwade)"
     - "Sloane Hertel (@s-hertel)"
+    - "Alina Buzachis (@linabuzachis)"
 extends_documentation_fragment:
 - amazon.aws.aws
 - amazon.aws.ec2
@@ -265,6 +298,15 @@ EXAMPLES = '''
     bucket: mybucket
     object: /my/desired/key.txt
     mode: delobj
+
+- name: Copy an object already stored in another bucket
+  amazon.aws.aws_s3:
+    bucket: mybucket
+    object: /my/desired/key.txt
+    mode: copy
+    copy_src:
+        bucket: srcbucket
+        object: /source/key.txt
 '''
 
 RETURN = '''
@@ -304,6 +346,7 @@ import os
 import io
 from ssl import SSLError
 import base64
+import time
 
 try:
     import botocore
@@ -320,9 +363,12 @@ from ..module_utils.core import is_boto3_error_message
 from ..module_utils.ec2 import AWSRetry
 from ..module_utils.ec2 import boto3_conn
 from ..module_utils.ec2 import get_aws_connection_info
+from ..module_utils.ec2 import ansible_dict_to_boto3_tag_list
+from ..module_utils.ec2 import boto3_tag_list_to_ansible_dict
 from ..module_utils.s3 import HAS_MD5
 from ..module_utils.s3 import calculate_etag
 from ..module_utils.s3 import calculate_etag_content
+from ..module_utils.s3 import validate_bucket_name
 
 IGNORE_S3_DROP_IN_EXCEPTIONS = ['XNotImplemented', 'NotImplemented']
 
@@ -469,7 +515,7 @@ def delete_key(module, s3, bucket, obj):
         module.fail_json_aws(e, msg="Failed while trying to delete %s." % obj)
 
 
-def create_dirkey(module, s3, bucket, obj, encrypt):
+def create_dirkey(module, s3, bucket, obj, encrypt, expiry):
     if module.check_mode:
         module.exit_json(msg="PUT operation skipped - running in check mode", changed=True)
     try:
@@ -486,7 +532,20 @@ def create_dirkey(module, s3, bucket, obj, encrypt):
         module.warn("PutObjectAcl is not implemented by your storage provider. Set the permissions parameters to the empty list to avoid this warning")
     except (botocore.exceptions.BotoCoreError, botocore.exceptions.ClientError) as e:  # pylint: disable=duplicate-except
         module.fail_json_aws(e, msg="Failed while creating object %s." % obj)
-    module.exit_json(msg="Virtual directory %s created in bucket %s" % (obj, bucket), changed=True)
+
+    # Tags
+    tags, changed = ensure_tags(s3, module, bucket, obj)
+
+    try:
+        url = s3.generate_presigned_url(ClientMethod='put_object',
+                                        Params={'Bucket': bucket, 'Key': obj},
+                                        ExpiresIn=expiry)
+    except (botocore.exceptions.ClientError, botocore.exceptions.BotoCoreError) as e:
+        module.fail_json_aws(e, msg="Unable to generate presigned URL")
+
+    url = put_download_url(module, s3, bucket, obj, expiry)
+
+    module.exit_json(msg="Virtual directory %s created in bucket %s" % (obj, bucket), url=url, tags=tags, changed=True)
 
 
 def path_check(path):
@@ -531,6 +590,13 @@ def upload_s3file(module, s3, bucket, obj, expiry, metadata, encrypt, headers, s
                 else:
                     extra['Metadata'][option] = metadata[option]
 
+        if module.params.get('permission'):
+            permissions = module.params['permission']
+            if isinstance(permissions, str):
+                extra['ACL'] = permissions
+            elif isinstance(permissions, list):
+                extra['ACL'] = permissions[0]
+
         if 'ContentType' not in extra:
             content_type = None
             if src is not None:
@@ -554,13 +620,13 @@ def upload_s3file(module, s3, bucket, obj, expiry, metadata, encrypt, headers, s
         module.warn("PutObjectAcl is not implemented by your storage provider. Set the permission parameters to the empty list to avoid this warning")
     except (botocore.exceptions.BotoCoreError, botocore.exceptions.ClientError) as e:  # pylint: disable=duplicate-except
         module.fail_json_aws(e, msg="Unable to set object ACL")
-    try:
-        url = s3.generate_presigned_url(ClientMethod='put_object',
-                                        Params={'Bucket': bucket, 'Key': obj},
-                                        ExpiresIn=expiry)
-    except (botocore.exceptions.ClientError, botocore.exceptions.BotoCoreError) as e:
-        module.fail_json_aws(e, msg="Unable to generate presigned URL")
-    module.exit_json(msg="PUT operation complete", url=url, changed=True)
+
+    # Tags
+    tags, changed = ensure_tags(s3, module, bucket, obj)
+
+    url = put_download_url(module, s3, bucket, obj, expiry)
+
+    module.exit_json(msg="PUT operation complete", url=url, tags=tags, changed=True)
 
 
 def download_s3file(module, s3, bucket, obj, dest, retries, version=None):
@@ -618,14 +684,70 @@ def download_s3str(module, s3, bucket, obj, version=None, validate=True):
         module.fail_json_aws(e, msg="Failed while getting contents of object %s as a string." % obj)
 
 
-def get_download_url(module, s3, bucket, obj, expiry, changed=True):
+def get_download_url(module, s3, bucket, obj, expiry, tags=None, changed=True):
     try:
         url = s3.generate_presigned_url(ClientMethod='get_object',
                                         Params={'Bucket': bucket, 'Key': obj},
                                         ExpiresIn=expiry)
-        module.exit_json(msg="Download url:", url=url, expiry=expiry, changed=changed)
+        module.exit_json(msg="Download url:", url=url, tags=tags, expiry=expiry, changed=changed)
     except (botocore.exceptions.ClientError, botocore.exceptions.BotoCoreError) as e:
         module.fail_json_aws(e, msg="Failed while getting download url.")
+
+
+def put_download_url(module, s3, bucket, obj, expiry):
+    try:
+        url = s3.generate_presigned_url(ClientMethod='put_object',
+                                        Params={'Bucket': bucket, 'Key': obj},
+                                        ExpiresIn=expiry)
+    except (botocore.exceptions.ClientError, botocore.exceptions.BotoCoreError) as e:
+        module.fail_json_aws(e, msg="Unable to generate presigned URL")
+    return url
+
+
+def copy_object_to_bucket(module, s3, bucket, obj, encrypt, metadata, validate, d_etag):
+    if module.check_mode:
+        module.exit_json(msg="COPY operation skipped - running in check mode", changed=True)
+    try:
+        params = {'Bucket': bucket, 'Key': obj}
+        bucketsrc = {'Bucket': module.params['copy_src'].get('bucket'), 'Key': module.params['copy_src'].get('object')}
+        version = None
+        if module.params['copy_src'].get('version_id') is not None:
+            version = module.params['copy_src'].get('version_id')
+            bucketsrc.update({'VersionId': version})
+        keyrtn = key_check(module, s3, bucketsrc['Bucket'], bucketsrc['Key'], version=version, validate=validate)
+        if keyrtn:
+            s_etag = get_etag(s3, bucketsrc['Bucket'], bucketsrc['Key'], version=version)
+            if s_etag == d_etag:
+                # Tags
+                tags, changed = ensure_tags(s3, module, bucket, obj)
+                if not changed:
+                    module.exit_json(msg="ETag from source and destination are the same", changed=False)
+            else:
+                params.update({'CopySource': bucketsrc})
+                if encrypt:
+                    params['ServerSideEncryption'] = module.params['encryption_mode']
+                if module.params['encryption_kms_key_id'] and module.params['encryption_mode'] == 'aws:kms':
+                    params['SSEKMSKeyId'] = module.params['encryption_kms_key_id']
+                if metadata:
+                    params['Metadata'] = {}
+                    # determine object metadata and extra arguments
+                    for option in metadata:
+                        extra_args_option = option_in_extra_args(option)
+                        if extra_args_option is not None:
+                            params[extra_args_option] = metadata[option]
+                        else:
+                            params['Metadata'][option] = metadata[option]
+
+                copy_result = s3.copy_object(**params)
+                for acl in module.params.get('permission'):
+                    s3.put_object_acl(ACL=acl, Bucket=bucket, Key=obj)
+                # Tags
+                tags, changed = ensure_tags(s3, module, bucket, obj)
+    except is_boto3_error_code(IGNORE_S3_DROP_IN_EXCEPTIONS):
+        module.warn("PutObjectAcl is not implemented by your storage provider. Set the permissions parameters to the empty list to avoid this warning")
+    except (botocore.exceptions.BotoCoreError, botocore.exceptions.ClientError) as e:  # pylint: disable=duplicate-except
+        module.fail_json_aws(e, msg="Failed while copying object %s from bucket %s." % (obj, module.params['copy_src'].get('Bucket')))
+    module.exit_json(msg="Object copied from bucket %s to bucket %s." % (bucketsrc['Bucket'], bucket), tags=tags, changed=True)
 
 
 def is_fakes3(s3_url):
@@ -669,6 +791,80 @@ def get_s3_connection(module, aws_connect_kwargs, location, rgw, s3_url, sig_4=F
     return boto3_conn(**params)
 
 
+def get_current_object_tags_dict(s3, bucket, obj, version=None):
+    try:
+        if version:
+            current_tags = s3.get_object_tagging(Bucket=bucket, Key=obj, VersionId=version).get('TagSet')
+        else:
+            current_tags = s3.get_object_tagging(Bucket=bucket, Key=obj).get('TagSet')
+    except is_boto3_error_code('NoSuchTagSet'):
+        return {}
+    except is_boto3_error_code('NoSuchTagSetError'):  # pylint: disable=duplicate-except
+        return {}
+
+    return boto3_tag_list_to_ansible_dict(current_tags)
+
+
+@AWSRetry.jittered_backoff(max_delay=120, catch_extra_error_codes=['NoSuchBucket', 'OperationAborted'])
+def put_object_tagging(s3, bucket, obj, tags):
+    s3.put_object_tagging(Bucket=bucket, Key=obj, Tagging={'TagSet': ansible_dict_to_boto3_tag_list(tags)})
+
+
+@AWSRetry.jittered_backoff(max_delay=120, catch_extra_error_codes=['NoSuchBucket', 'OperationAborted'])
+def delete_object_tagging(s3, bucket, obj):
+    s3.delete_object_tagging(Bucket=bucket, Key=obj)
+
+
+def wait_tags_are_applied(module, s3, bucket, obj, expected_tags_dict, version=None):
+    for dummy in range(0, 12):
+        try:
+            current_tags_dict = get_current_object_tags_dict(s3, bucket, obj, version)
+        except (botocore.exceptions.ClientError, botocore.exceptions.BotoCoreError) as e:
+            module.fail_json_aws(e, msg="Failed to get object tags.")
+        if current_tags_dict != expected_tags_dict:
+            time.sleep(5)
+        else:
+            return current_tags_dict
+
+    module.fail_json(msg="Object tags failed to apply in the expected time.",
+                     requested_tags=expected_tags_dict, live_tags=current_tags_dict)
+
+
+def ensure_tags(client, module, bucket, obj):
+    tags = module.params.get("tags")
+    purge_tags = module.params.get("purge_tags")
+    changed = False
+
+    try:
+        current_tags_dict = get_current_object_tags_dict(client, bucket, obj)
+    except is_boto3_error_code(IGNORE_S3_DROP_IN_EXCEPTIONS):
+        module.warn("GetObjectTagging is not implemented by your storage provider. Set the permission parameters to the empty list to avoid this warning.")
+    except (botocore.exceptions.BotoCoreError, botocore.exceptions.ClientError) as e:  # pylint: disable=duplicate-except
+        module.fail_json_aws(e, msg="Failed to get object tags.")
+    else:
+        if tags is not None:
+            if not purge_tags:
+                # Ensure existing tags that aren't updated by desired tags remain
+                current_copy = current_tags_dict.copy()
+                current_copy.update(tags)
+                tags = current_copy
+            if current_tags_dict != tags:
+                if tags:
+                    try:
+                        put_object_tagging(client, bucket, obj, tags)
+                    except (botocore.exceptions.BotoCoreError, botocore.exceptions.ClientError) as e:
+                        module.fail_json_aws(e, msg="Failed to update object tags.")
+                else:
+                    if purge_tags:
+                        try:
+                            delete_object_tagging(client, bucket, obj)
+                        except (botocore.exceptions.BotoCoreError, botocore.exceptions.ClientError) as e:
+                            module.fail_json_aws(e, msg="Failed to delete object tags.")
+                current_tags_dict = wait_tags_are_applied(module, client, bucket, obj, tags)
+                changed = True
+    return current_tags_dict, changed
+
+
 def main():
     argument_spec = dict(
         bucket=dict(required=True),
@@ -680,7 +876,7 @@ def main():
         marker=dict(default=""),
         max_keys=dict(default=1000, type='int', no_log=False),
         metadata=dict(type='dict'),
-        mode=dict(choices=['get', 'put', 'delete', 'create', 'geturl', 'getstr', 'delobj', 'list'], required=True),
+        mode=dict(choices=['get', 'put', 'delete', 'create', 'geturl', 'getstr', 'delobj', 'list', 'copy'], required=True),
         object=dict(),
         permission=dict(type='list', elements='str', default=['private']),
         version=dict(default=None),
@@ -694,7 +890,10 @@ def main():
         content=dict(),
         content_base64=dict(),
         ignore_nonexistent_bucket=dict(default=False, type='bool'),
-        encryption_kms_key_id=dict()
+        encryption_kms_key_id=dict(),
+        tags=dict(type='dict'),
+        purge_tags=dict(type='bool', default=True),
+        copy_src=dict(type='dict', options=dict(bucket=dict(required=True), object=dict(required=True), version_id=dict())),
     )
     module = AnsibleAWSModule(
         argument_spec=argument_spec,
@@ -702,7 +901,8 @@ def main():
         required_if=[['mode', 'put', ['object']],
                      ['mode', 'get', ['dest', 'object']],
                      ['mode', 'getstr', ['object']],
-                     ['mode', 'geturl', ['object']]],
+                     ['mode', 'geturl', ['object']],
+                     ['mode', 'copy', ['copy_src']]],
         mutually_exclusive=[['content', 'content_base64', 'src']],
     )
 
@@ -730,6 +930,8 @@ def main():
 
     object_canned_acl = ["private", "public-read", "public-read-write", "aws-exec-read", "authenticated-read", "bucket-owner-read", "bucket-owner-full-control"]
     bucket_canned_acl = ["private", "public-read", "public-read-write", "authenticated-read"]
+
+    validate_bucket_name(module, bucket)
 
     if overwrite not in ['always', 'never', 'different']:
         if module.boolean(overwrite):
@@ -768,9 +970,6 @@ def main():
     if dualstack and s3_url is not None and 'amazonaws.com' not in s3_url:
         module.fail_json(msg='dualstack only applies to AWS S3')
 
-    if dualstack and not module.botocore_at_least('1.4.45'):
-        module.fail_json(msg='dualstack requires botocore >= 1.4.45')
-
     # rgw requires an explicit url
     if rgw and not s3_url:
         module.fail_json(msg='rgw flavour requires s3_url')
@@ -794,7 +993,7 @@ def main():
     # First, we check to see if the bucket exists, we get "bucket" returned.
     bucketrtn = bucket_check(module, s3, bucket, validate=validate)
 
-    if validate and mode not in ('create', 'put', 'delete') and not bucketrtn:
+    if validate and mode not in ('create', 'put', 'delete', 'copy') and not bucketrtn:
         module.fail_json(msg="Source bucket cannot be found.")
 
     if mode == 'get':
@@ -823,9 +1022,9 @@ def main():
         # these were separated into the variables bucket_acl and object_acl above
 
         if content is None and content_base64 is None and src is None:
-            module.fail_json('Either content, content_base64 or src must be specified for PUT operations')
+            module.fail_json(msg='Either content, content_base64 or src must be specified for PUT operations')
         if src is not None and not path_check(src):
-            module.fail_json('Local object "%s" does not exist for PUT operation' % (src))
+            module.fail_json(msg='Local object "%s" does not exist for PUT operation' % (src))
 
         keyrtn = None
         if bucketrtn:
@@ -845,8 +1044,9 @@ def main():
 
         if keyrtn and overwrite != 'always':
             if overwrite == 'never' or etag_compare(module, s3, bucket, obj, version=version, local_file=src, content=bincontent):
-                # Return the download URL for the existing object
-                get_download_url(module, s3, bucket, obj, expiry, changed=False)
+                # Return the download URL for the existing object and ensure tags are updated
+                tags, tags_update = ensure_tags(s3, module, bucket, obj)
+                get_download_url(module, s3, bucket, obj, expiry, tags, changed=tags_update)
 
         # only use valid object acls for the upload_s3file function
         module.params['permission'] = object_acl
@@ -907,14 +1107,14 @@ def main():
                 else:
                     # setting valid object acls for the create_dirkey function
                     module.params['permission'] = object_acl
-                    create_dirkey(module, s3, bucket, dirobj, encrypt)
+                    create_dirkey(module, s3, bucket, dirobj, encrypt, expiry)
             else:
                 # only use valid bucket acls for the create_bucket function
                 module.params['permission'] = bucket_acl
                 created = create_bucket(module, s3, bucket, location)
                 # only use valid object acls for the create_dirkey function
                 module.params['permission'] = object_acl
-                create_dirkey(module, s3, bucket, dirobj, encrypt)
+                create_dirkey(module, s3, bucket, dirobj, encrypt, expiry)
 
     # Support for grabbing the time-expired URL for an object in S3/Walrus.
     if mode == 'geturl':
@@ -923,7 +1123,8 @@ def main():
 
         keyrtn = key_check(module, s3, bucket, obj, version=version, validate=validate)
         if keyrtn:
-            get_download_url(module, s3, bucket, obj, expiry)
+            tags = get_current_object_tags_dict(s3, bucket, obj, version=version)
+            get_download_url(module, s3, bucket, obj, expiry, tags)
         else:
             module.fail_json(msg="Key %s does not exist." % obj)
 
@@ -940,6 +1141,21 @@ def main():
                 module.fail_json(msg="Key %s with version id %s does not exist." % (obj, version))
             else:
                 module.fail_json(msg="Key %s does not exist." % obj)
+
+    if mode == 'copy':
+        # if copying an object in a bucket yet to be created, acls for the bucket and/or the object may be specified
+        # these were separated into the variables bucket_acl and object_acl above
+        d_etag = None
+        if bucketrtn:
+            d_etag = get_etag(s3, bucket, obj)
+        else:
+            # If the bucket doesn't exist we should create it.
+            # only use valid bucket acls for create_bucket function
+            module.params['permission'] = bucket_acl
+            create_bucket(module, s3, bucket, location)
+        # only use valid object acls for the copy operation
+        module.params['permission'] = object_acl
+        copy_object_to_bucket(module, s3, bucket, obj, encrypt, metadata, validate, d_etag)
 
     module.exit_json(failed=False)
 

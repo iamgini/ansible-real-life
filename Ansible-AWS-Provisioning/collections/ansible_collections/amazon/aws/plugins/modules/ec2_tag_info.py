@@ -15,7 +15,6 @@ description:
     - Lists tags for any EC2 resource.
     - Resources are referenced by their resource id (e.g. an instance being i-XXXXXXX, a vpc being vpc-XXXXXX).
     - Resource tags can be managed using the M(amazon.aws.ec2_tag) module.
-requirements: [ "boto3", "botocore" ]
 options:
   resource:
     description:
@@ -51,11 +50,6 @@ tags:
   returned: always
   type: dict
 '''
-
-try:
-    from botocore.exceptions import BotoCoreError, ClientError
-except Exception:
-    pass    # Handled by AnsibleAWSModule
 
 from ..module_utils.core import AnsibleAWSModule
 from ..module_utils.ec2 import describe_ec2_tags

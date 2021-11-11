@@ -684,9 +684,12 @@ def detach_eni(connection, eni, module):
         connection.detach_network_interface(
             aws_retry=True,
             AttachmentId=eni["Attachment"]["AttachmentId"],
-            Force=force_detach
+            Force=force_detach,
         )
-        get_waiter(connection, 'network_interface_available').wait(NetworkInterfaceIds=[eni_id])
+        get_waiter(connection, 'network_interface_available').wait(
+            NetworkInterfaceIds=[eni_id],
+            WaiterConfig={'Delay': 5, 'MaxAttempts': 80},
+        )
         return True
 
     return False
@@ -769,7 +772,7 @@ def get_sec_group_list(groups):
     # Build list of remote security groups
     remote_security_groups = []
     for group in groups:
-        remote_security_groups.append(group["GroupId"].encode())
+        remote_security_groups.append(group["GroupId"])
 
     return remote_security_groups
 

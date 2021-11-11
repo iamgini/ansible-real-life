@@ -1,0 +1,25 @@
+---
+# tasks file for aws-create-elb
+
+- name: Create an ELB and attach target group
+  elb_application_lb:
+    profile: "{{ aws_boto_profile }}"
+    name: "{{ aws_elb_app_lb }}"
+    state: present
+    region: "{{ aws_region }}"
+    wait: yes
+    security_groups: 
+      - "{{ aws_security_group }}"
+     #vpc_id: "{{ vpc_id }}"
+    subnets: "{{ vpc_subnet_list }}"
+    listeners:
+      - Protocol: HTTP
+        Port: 80
+        DefaultActions:
+          - Type: forward
+            TargetGroupName: "{{ aws_elb_target_group }}"
+  register: elbcreated
+
+- name: Collect ELB Public DNS
+  set_fact:
+    elb_public_dns: "{{ elbcreated.dns_name }}"

@@ -14,7 +14,6 @@ short_description: Gather information about ec2 volumes in AWS
 description:
     - Gather information about ec2 volumes in AWS.
     - This module was called C(ec2_vol_facts) before Ansible 2.9. The usage did not change.
-requirements: [ boto3 ]
 author: "Rob White (@wimnat)"
 options:
   filters:
@@ -110,6 +109,10 @@ volumes:
             description: The Availability Zone of the volume.
             type: str
             sample: "us-east-1b"
+        throughput:
+            description: The throughput that the volume supports, in MiB/s.
+            type: int
+            sample: 131
 '''
 
 try:
@@ -129,6 +132,16 @@ def get_volume_info(volume, region):
 
     attachment = volume["attachments"]
 
+    attachment_data = []
+    for data in volume["attachments"]:
+        attachment_data.append({
+            'attach_time': data.get('attach_time', None),
+            'device': data.get('device', None),
+            'instance_id': data.get('instance_id', None),
+            'status': data.get('state', None),
+            'delete_on_termination': data.get('delete_on_termination', None)
+        })
+
     volume_info = {
         'create_time': volume["create_time"],
         'id': volume["volume_id"],
@@ -140,15 +153,12 @@ def get_volume_info(volume, region):
         'type': volume["volume_type"],
         'zone': volume["availability_zone"],
         'region': region,
-        'attachment_set': {
-            'attach_time': attachment[0]["attach_time"] if len(attachment) > 0 else None,
-            'device': attachment[0]["device"] if len(attachment) > 0 else None,
-            'instance_id': attachment[0]["instance_id"] if len(attachment) > 0 else None,
-            'status': attachment[0]["state"] if len(attachment) > 0 else None,
-            'delete_on_termination': attachment[0]["delete_on_termination"] if len(attachment) > 0 else None
-        },
+        'attachment_set': attachment_data,
         'tags': boto3_tag_list_to_ansible_dict(volume['tags']) if "tags" in volume else None
     }
+
+    if 'throughput' in volume:
+        volume_info['throughput'] = volume["throughput"]
 
     return volume_info
 

@@ -12,7 +12,6 @@ DOCUMENTATION = '''
 module: ec2_group
 version_added: 1.0.0
 author: "Andrew de Quincey (@adq)"
-requirements: [ boto3 ]
 short_description: maintain an ec2 VPC security group.
 description:
     - Maintains ec2 security groups.
@@ -96,10 +95,16 @@ options:
             - The IP protocol name (C(tcp), C(udp), C(icmp), C(icmpv6)) or number (U(https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers))
         from_port:
             type: int
-            description: The start of the range of ports that traffic is coming from.  A value of C(-1) indicates all ports.
+            description:
+            - The start of the range of ports that traffic is coming from.
+            - A value can be between C(0) to C(65535).
+            - A value of C(-1) indicates all ports (only supported when I(proto=icmp)).
         to_port:
             type: int
-            description: The end of the range of ports that traffic is coming from.  A value of C(-1) indicates all ports.
+            description:
+            - The end of the range of ports that traffic is coming from.
+            - A value can be between C(0) to C(65535).
+            - A value of C(-1) indicates all ports (only supported when I(proto=icmp)).
         rule_desc:
             type: str
             description: A description for the rule.
@@ -157,10 +162,16 @@ options:
             - The IP protocol name (C(tcp), C(udp), C(icmp), C(icmpv6)) or number (U(https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers))
         from_port:
             type: int
-            description: The start of the range of ports that traffic is going to.  A value of C(-1) indicates all ports.
+            description:
+            - The start of the range of ports that traffic is going to.
+            - A value can be between C(0) to C(65535).
+            - A value of C(-1) indicates all ports (only supported when I(proto=icmp)).
         to_port:
             type: int
-            description: The end of the range of ports that traffic is going to.  A value of C(-1) indicates all ports.
+            description:
+            - The end of the range of ports that traffic is going to.
+            - A value can be between C(0) to C(65535).
+            - A value of C(-1) indicates all ports (only supported when I(proto=icmp)).
         rule_desc:
             type: str
             description: A description for the rule.
@@ -270,7 +281,7 @@ EXAMPLES = '''
         # the containing group name may be specified here
         group_name: example
       - proto: all
-        # in the 'proto' attribute, if you specify -1, all, or a protocol number other than tcp, udp, icmp, or 58 (ICMPv6),
+        # in the 'proto' attribute, if you specify -1 (only supported when I(proto=icmp)), all, or a protocol number other than tcp, udp, icmp, or 58 (ICMPv6),
         # traffic on all ports is allowed, regardless of any ports you specify
         from_port: 10050 # this value is ignored
         to_port: 10050 # this value is ignored
@@ -390,12 +401,14 @@ owner_id:
   returned: on create/update
 '''
 
+import itertools
 import json
 import re
-import itertools
-from copy import deepcopy
-from time import sleep
 from collections import namedtuple
+from copy import deepcopy
+from ipaddress import IPv6Network
+from ipaddress import ip_network
+from time import sleep
 
 try:
     from botocore.exceptions import BotoCoreError, ClientError
@@ -408,8 +421,6 @@ from ansible.module_utils.common.network import to_ipv6_subnet
 from ansible.module_utils.common.network import to_subnet
 from ansible.module_utils.six import string_types
 
-from ..module_utils.compat._ipaddress import IPv6Network
-from ..module_utils.compat._ipaddress import ip_network
 from ..module_utils.core import AnsibleAWSModule
 from ..module_utils.core import is_boto3_error_code
 from ..module_utils.ec2 import AWSRetry
@@ -1023,13 +1034,6 @@ def group_exists(client, module, vpc_id, group_id, name):
     return None, {}
 
 
-def verify_rules_with_descriptions_permitted(client, module, rules, rules_egress):
-    if not hasattr(client, "update_security_group_rule_descriptions_egress"):
-        all_rules = rules if rules else [] + rules_egress if rules_egress else []
-        if any('rule_desc' in rule for rule in all_rules):
-            module.fail_json(msg="Using rule descriptions requires botocore version >= 1.7.2.")
-
-
 def get_diff_final_resource(client, module, security_group):
     def get_account_id(security_group, module):
         try:
@@ -1209,7 +1213,6 @@ def main():
     changed = False
     client = module.client('ec2', AWSRetry.jittered_backoff())
 
-    verify_rules_with_descriptions_permitted(client, module, rules, rules_egress)
     group, groups = group_exists(client, module, vpc_id, group_id, name)
     group_created_new = not bool(group)
 
@@ -1313,7 +1316,7 @@ def main():
         if purge_rules:
             revoke_ingress = []
             for p in present_ingress:
-                if not any([rule_cmp(p, b) for b in named_tuple_ingress_list]):
+                if not any(rule_cmp(p, b) for b in named_tuple_ingress_list):
                     revoke_ingress.append(to_permission(p))
         else:
             revoke_ingress = []
@@ -1326,7 +1329,7 @@ def main():
             else:
                 revoke_egress = []
                 for p in present_egress:
-                    if not any([rule_cmp(p, b) for b in named_tuple_egress_list]):
+                    if not any(rule_cmp(p, b) for b in named_tuple_egress_list):
                         revoke_egress.append(to_permission(p))
         else:
             revoke_egress = []

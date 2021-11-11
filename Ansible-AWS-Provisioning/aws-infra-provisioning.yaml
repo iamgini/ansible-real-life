@@ -29,10 +29,10 @@
         name: aws-create-keypair
       tags: keycreate
 
-    - name: Create ELB Target Group
-      include_role:
-        name: aws-create-targetgrp
-      tags: targetgrpcreate      
+    #- name: Create ELB Target Group
+    #  include_role:
+    #    name: aws-create-targetgrp
+    #  tags: targetgrpcreate      
     
     - name: Create ELB
       include_role:

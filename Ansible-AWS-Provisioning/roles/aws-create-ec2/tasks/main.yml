@@ -2,7 +2,7 @@
 # tasks file for aws-create-vm
 
 - name: Fetch Instances by tag, subnet and type
-  ec2_instance_info:
+  amazon.aws.ec2_instance_info:
     profile: "{{ aws_boto_profile }}"
     region: "{{ aws_region }}"
     filters:
@@ -13,6 +13,13 @@
   loop: "{{ lookup('dict', ec2_new_list, wantlist=True) }}"
   register: ec2_collected
 
+- debug:
+    msg: "{{ ec2_collected.results }}"
+
+- debug:
+    msg: "{{ item }}"
+  loop: "{{ ec2_collected | json_query('results[*].invocation.module_args.instance_ids') }}"
+
 - name: Create and set variables
   set_fact:
     existing_ec2_list: []
@@ -22,31 +29,37 @@
     existing_ec2_list: "{{ existing_ec2_list }} + [ '{{ item }}' ]"
   #debug:
   #  msg: "{{ item }}"
-  loop: "{{ ec2_collected | json_query('results[*].instances[*].tags.Name') }}"
+  #loop: "{{ ec2_collected | json_query('results[*].instances[*].tags.Name') }}"
+  loop: "{{ ec2_collected | json_query('results[*].invocation.module_args.instance_ids') }}"
+
+- debug:
+    msg: "{{ existing_ec2_list }}"
 
 - name: Launching EC2 instances
-  ec2:
+  amazon.aws.ec2_instance:
     #aws_access_key: "{{ec2_access_key}}"
     #aws_secret_key: "{{ec2_secret_key}}"
     profile: "{{ aws_boto_profile }}"
     key_name: "{{ aws_demo_key }}"
-    group: "{{ aws_security_group }}"
+    security_group: "{{ aws_security_group }}"
     instance_type: "{{ item.value.instance_type }}"
-    image: "{{ aws_ami_id }}" 
+    image_id: "{{ aws_ami_id }}" 
+    state: present
     wait: yes
-    wait_timeout: 500
-    count: 1
+    wait_timeout: 300
+    #count: 1
     region: "{{ aws_region }}"
-    instance_tags:
+    tags:
        Name: "{{ item.value.name }}"
-    monitoring: no
+    detailed_monitoring: no
     vpc_subnet_id: "{{ vpc_subnet_list | random }}"
-    assign_public_ip: yes
+    network:
+      assign_public_ip: yes
   loop: "{{ lookup('dict', ec2_new_list, wantlist=True) }}"
   when: "not item.value.name in existing_ec2_list"
   register: created_ec2
 
-- name: Create a temp list for ec2
+- name: Create a temp list for new ec2
   set_fact:
     new_ec2_list: []
 
@@ -77,7 +90,7 @@
   with_items: "{{ new_ec2_list }}"
 
 - name: Fetch Exsiting Running Instances by tag, subnet and type
-  ec2_instance_info:
+  amazon.aws.ec2_instance_info:
     profile: "{{ aws_boto_profile }}"
     region: "{{ aws_region }}"
     filters:
@@ -88,19 +101,43 @@
   loop: "{{ lookup('dict', ec2_new_list, wantlist=True) }}"
   register: ec2_existing_collected
 
-#- debug:
-#    msg: "{{ item }}" #".instances[0].public_ip_address }}"
+- debug:
+    msg: "{{ item }}" #".instances[0].public_ip_address }}"
+  loop: "{{ ec2_existing_collected.results }}"
+
+- name: Update Amazon ELB and add instance ids
+  amazon.aws.ec2_elb_lb:
+    profile: "{{ aws_boto_profile }}"
+    name: "{{ aws_elb_target_group }}"
+    region: "{{ aws_region }}"
+    zones:
+      - "{{ ap_zone1 }}"
+      - "{{ ap_zone2 }}"
+    listeners:
+      - protocol: http
+        load_balancer_port: 80
+        instance_port: 80
+        proxy_protocol: True
+    instance_ids:
+      - "{{ item.instances[0].instance_id }}"
+    state: present
+  register: elbcreated
+  loop: "{{ ec2_existing_collected.results }}"
+
+#- name: Register instance target to a target group
+#  elb_target:
+#    #aws_access_key: "{{ec2_access_key}}"
+#    #aws_secret_key: "{{ec2_secret_key}}"
+#    profile: "{{ aws_boto_profile }}"
+#    target_group_name: "{{ aws_elb_target_group }}"
+#    target_id: "{{ item.instances[0].instance_id }}"
+#    region: "{{ region }}"
+#    state: present
 #  loop: "{{ ec2_existing_collected.results }}"
 
-- name: Register instance target to a target group
-  elb_target:
-    #aws_access_key: "{{ec2_access_key}}"
-    #aws_secret_key: "{{ec2_secret_key}}"
-    profile: "{{ aws_boto_profile }}"
-    target_group_name: "{{ aws_elb_target_group }}"
-    target_id: "{{ item.instances[0].instance_id }}"
-    region: "{{ region }}"
-    state: present
+- name: Add ec2 instances to a host group
+  debug:
+    msg: "{{ item.instances[0].public_ip_address }}"
   loop: "{{ ec2_existing_collected.results }}"
 
 - name: Add ec2 instances to a host group

@@ -1,0 +1,4 @@
+---
+# defaults file for aws-create-vm
+
+aws_boto_profile: default

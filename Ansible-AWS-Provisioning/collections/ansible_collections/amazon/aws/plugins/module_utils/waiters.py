@@ -162,6 +162,19 @@ ec2_data = {
                 },
             ]
         },
+        "SnapshotCompleted": {
+            "delay": 15,
+            "operation": "DescribeSnapshots",
+            "maxAttempts": 40,
+            "acceptors": [
+                {
+                    "expected": "completed",
+                    "matcher": "pathAll",
+                    "state": "success",
+                    "argument": "Snapshots[].State"
+                }
+            ]
+        },
         "SubnetAvailable": {
             "delay": 15,
             "operation": "DescribeSubnets",
@@ -464,6 +477,62 @@ rds_data = {
                     "expected": "stopped"
                 },
             ]
+        },
+        "DBClusterAvailable": {
+            "delay": 20,
+            "maxAttempts": 60,
+            "operation": "DescribeDBClusters",
+            "acceptors": [
+                {
+                    "state": "success",
+                    "matcher": "pathAll",
+                    "argument": "DBClusters[].Status",
+                    "expected": "available"
+                },
+                {
+                    "state": "retry",
+                    "matcher": "error",
+                    "expected": "DBClusterNotFoundFault"
+                }
+            ]
+        },
+        "DBClusterDeleted": {
+            "delay": 20,
+            "maxAttempts": 60,
+            "operation": "DescribeDBClusters",
+            "acceptors": [
+                {
+                    "state": "success",
+                    "matcher": "pathAll",
+                    "argument": "DBClusters[].Status",
+                    "expected": "stopped"
+                },
+                {
+                    "state": "success",
+                    "matcher": "error",
+                    "expected": "DBClusterNotFoundFault"
+                }
+            ]
+        },
+    }
+}
+
+
+route53_data = {
+    "version": 2,
+    "waiters": {
+        "ResourceRecordSetsChanged": {
+            "delay": 30,
+            "maxAttempts": 60,
+            "operation": "GetChange",
+            "acceptors": [
+                {
+                    "matcher": "path",
+                    "expected": "INSYNC",
+                    "argument": "ChangeInfo.Status",
+                    "state": "success"
+                }
+            ]
         }
     }
 }
@@ -506,6 +575,11 @@ def eks_model(name):
 def rds_model(name):
     rds_models = core_waiter.WaiterModel(waiter_config=_inject_limit_retries(rds_data))
     return rds_models.get_waiter(name)
+
+
+def route53_model(name):
+    route53_models = core_waiter.WaiterModel(waiter_config=_inject_limit_retries(route53_data))
+    return route53_models.get_waiter(name)
 
 
 waiters_by_name = {
@@ -556,6 +630,12 @@ waiters_by_name = {
         ec2_model('SecurityGroupExists'),
         core_waiter.NormalizedOperationMethod(
             ec2.describe_security_groups
+        )),
+    ('EC2', 'snapshot_completed'): lambda ec2: core_waiter.Waiter(
+        'snapshot_completed',
+        ec2_model('SnapshotCompleted'),
+        core_waiter.NormalizedOperationMethod(
+            ec2.describe_snapshots
         )),
     ('EC2', 'subnet_available'): lambda ec2: core_waiter.Waiter(
         'subnet_available',
@@ -670,6 +750,24 @@ waiters_by_name = {
         rds_model('DBInstanceStopped'),
         core_waiter.NormalizedOperationMethod(
             rds.describe_db_instances
+        )),
+    ('RDS', 'cluster_available'): lambda rds: core_waiter.Waiter(
+        'cluster_available',
+        rds_model('DBClusterAvailable'),
+        core_waiter.NormalizedOperationMethod(
+            rds.describe_db_clusters
+        )),
+    ('RDS', 'cluster_deleted'): lambda rds: core_waiter.Waiter(
+        'cluster_deleted',
+        rds_model('DBClusterDeleted'),
+        core_waiter.NormalizedOperationMethod(
+            rds.describe_db_clusters
+        )),
+    ('Route53', 'resource_record_sets_changed'): lambda route53: core_waiter.Waiter(
+        'resource_record_sets_changed',
+        route53_model('ResourceRecordSetsChanged'),
+        core_waiter.NormalizedOperationMethod(
+            route53.get_change
         )),
 }
 

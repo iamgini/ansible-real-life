@@ -1,0 +1,35 @@
+---
+# tasks file for aws-delete-ec2
+
+- name: Collect Instance infromation by tag, subnet and type
+  ec2_instance_info:
+    profile: "{{ aws_boto_profile }}"
+    region: "{{ aws_region }}"
+    filters:
+      "tag:Name": "{{ item.value.name }}"
+      #network-interface.subnet-id: "{{ item.value.vpc_subnet_id }}"
+      instance-type: "{{ item.value.instance_type }}"
+  loop: "{{ lookup('dict', ec2_new_list, wantlist=True) }}"
+  register: ec2_collection
+
+- name: Remove Security Group from ec2 instances
+  ec2:
+    profile: "{{ aws_boto_profile }}"
+    region: "{{ aws_region }}"
+    state: absent
+    instance_ids: "{{ item }}"
+    group: ""
+  loop: "{{ ec2_collection | json_query('results[*].instances[*].instance_id') }}"
+  register: deleted_ec2
+
+- name: Terminate ec2 instances
+  ignore_errors: True
+  ec2:
+    profile: "{{ aws_boto_profile }}"
+    region: "{{ aws_region }}"
+    state: absent
+    instance_ids: "{{ item }}"
+    wait: yes
+    #wait_timeout: 300
+  loop: "{{ ec2_collection | json_query('results[*].instances[*].instance_id') }}"
+  register: deleted_ec2

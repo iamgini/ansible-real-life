@@ -1,0 +1,1 @@
+test_file: "{{ remote_tmp_dir }}/foo.txt"

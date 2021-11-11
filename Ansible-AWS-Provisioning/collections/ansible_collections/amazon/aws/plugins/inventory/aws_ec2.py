@@ -188,6 +188,23 @@ include_filters:
 exclude_filters:
 - tag:Name:
   - 'my_first_tag'
+
+# Example using groups to assign the running hosts to a group based on vpc_id
+plugin: aws_ec2
+boto_profile: aws_profile
+# Populate inventory with instances in these regions
+regions:
+  - us-east-2
+filters:
+  # All instances with their state as `running`
+  instance-state-name: running
+keyed_groups:
+  - prefix: tag
+    key: tags
+compose:
+  ansible_host: public_dns_name
+groups:
+  libvpc: vpc_id == 'vpc-####'
 '''
 
 import re
@@ -205,7 +222,6 @@ from ansible.plugins.inventory import BaseInventoryPlugin
 from ansible.plugins.inventory import Cacheable
 from ansible.plugins.inventory import Constructable
 from ansible.template import Templar
-from ansible.utils.display import Display
 
 from ansible_collections.amazon.aws.plugins.module_utils.ec2 import HAS_BOTO3
 from ansible_collections.amazon.aws.plugins.module_utils.ec2 import ansible_dict_to_boto3_filter_list
@@ -471,7 +487,7 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
         for connection, region in self._boto3_conn(regions):
             try:
                 # By default find non-terminated/terminating instances
-                if not any([f['Name'] == 'instance-state-name' for f in filters]):
+                if not any(f['Name'] == 'instance-state-name' for f in filters):
                     filters.append({'Name': 'instance-state-name', 'Values': ['running', 'pending', 'stopping', 'stopped']})
                 paginator = connection.get_paginator('describe_instances')
                 reservations = paginator.paginate(Filters=filters).build_full_result().get('Reservations')
@@ -694,6 +710,14 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
         self.display.debug("aws_ec2 inventory filename must end with 'aws_ec2.yml' or 'aws_ec2.yaml'")
         return False
 
+    def build_include_filters(self):
+        if self.get_option('filters'):
+            return [self.get_option('filters')] + self.get_option('include_filters')
+        elif self.get_option('include_filters'):
+            return self.get_option('include_filters')
+        else:  # no filter
+            return [{}]
+
     def parse(self, inventory, loader, path, cache=True):
 
         super(InventoryModule, self).parse(inventory, loader, path)
@@ -710,7 +734,7 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
 
         # get user specifications
         regions = self.get_option('regions')
-        include_filters = [self.get_option('filters')] + self.get_option('include_filters')
+        include_filters = self.build_include_filters()
         exclude_filters = self.get_option('exclude_filters')
         hostnames = self.get_option('hostnames')
         strict_permissions = self.get_option('strict_permissions')

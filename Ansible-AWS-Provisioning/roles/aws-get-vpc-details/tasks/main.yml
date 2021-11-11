@@ -13,7 +13,7 @@
     aws_vpc_id: "{{ aws_vpc_details.vpcs[0].vpc_id }}"
 
 - name: Fetch VPC Subnets
-  ec2_vpc_subnet_info:
+  amazon.aws.ec2_vpc_subnet_info:
     profile: "{{ aws_boto_profile }}"
     region: "{{ aws_region }}"
   register: aws_vpc_subnet_details

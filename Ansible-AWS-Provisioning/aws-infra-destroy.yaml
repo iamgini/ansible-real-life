@@ -39,10 +39,10 @@
       pause:
         seconds: 60
         
-    - name: Delete ELB Target Group
-      include_role:
-        name: aws-delete-targetgrp
-      tags: targetgrpdelete
+    #- name: Delete ELB Target Group
+    #  include_role:
+    #    name: aws-delete-targetgrp
+    #  tags: targetgrpdelete
 
     - name: Delete Security Group
       include_role:

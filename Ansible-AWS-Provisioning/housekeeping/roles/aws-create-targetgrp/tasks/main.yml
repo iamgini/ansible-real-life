@@ -1,0 +1,13 @@
+---
+# tasks file for aws-create-targetgrp
+
+# Create a target group with a default health check
+- name: Create ELB Target Group
+  elb_target_group:
+    profile: "{{ aws_boto_profile }}"
+    name: "{{ aws_elb_target_group }}"
+    region: "{{ aws_region }}"
+    protocol: http
+    port: 80
+    vpc_id: "{{ aws_vpc_id }}"
+    state: present

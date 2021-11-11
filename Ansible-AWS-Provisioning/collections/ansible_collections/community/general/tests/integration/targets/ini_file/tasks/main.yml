@@ -1,0 +1,53 @@
+---
+####################################################################
+# WARNING: These are designed specifically for Ansible tests       #
+# and should not be used as examples of how to write Ansible roles #
+####################################################################
+
+# test code for ini_file plugins
+# (c) 2017 Red Hat Inc.
+
+# This file is part of Ansible
+#
+# Ansible is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Ansible is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
+
+- name: record the output directory
+  set_fact:
+    output_file: "{{ remote_tmp_dir }}/foo.ini"
+    non_existing_file: "{{ remote_tmp_dir }}/bar.ini"
+
+- name: include tasks
+  block:
+
+    - name: include tasks to perform basic tests
+      include_tasks: tests/00-basic.yml
+
+    - name: reset output file
+      file:
+        path: "{{ output_file }}"
+        state: absent
+
+    - name: include tasks to perform tests with parameter "value"
+      include_tasks: tests/01-value.yml
+
+    - name: reset output file
+      file:
+        path: "{{ output_file }}"
+        state: absent
+
+    - name: include tasks to perform tests with parameter "values"
+      include_tasks: tests/02-values.yml
+
+    - name: include tasks to test regressions
+      include_tasks: tests/03-encoding.yml

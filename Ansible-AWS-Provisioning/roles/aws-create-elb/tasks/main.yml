@@ -1,25 +1,27 @@
 ---
 # tasks file for aws-create-elb
-
-- name: Create an ELB and attach target group
-  elb_application_lb:
+- name: Create Amazon ELB
+  amazon.aws.ec2_elb_lb:
     profile: "{{ aws_boto_profile }}"
     name: "{{ aws_elb_app_lb }}"
-    state: present
     region: "{{ aws_region }}"
-    wait: yes
-    security_groups: 
-      - "{{ aws_security_group }}"
-     #vpc_id: "{{ vpc_id }}"
-    subnets: "{{ vpc_subnet_list }}"
+    zones:
+      - "{{ ap_zone1 }}"
+      - "{{ ap_zone2 }}"
     listeners:
-      - Protocol: HTTP
-        Port: 80
-        DefaultActions:
-          - Type: forward
-            TargetGroupName: "{{ aws_elb_target_group }}"
+      - protocol: http
+        load_balancer_port: 80
+        instance_port: 80
+        proxy_protocol: True
+    state: present
   register: elbcreated
+
+- name: Print Public DNS
+  debug:
+    msg: "{{ elbcreated.elb.dns_name }}"
 
 - name: Collect ELB Public DNS
   set_fact:
-    elb_public_dns: "{{ elbcreated.dns_name }}"
+    elb_public_dns: "{{ elbcreated.elb.dns_name }}"
+
+

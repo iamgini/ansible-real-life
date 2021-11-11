@@ -121,9 +121,17 @@ class AnsibleAWSModule(object):
 
         self._module = AnsibleAWSModule.default_settings["module_class"](**kwargs)
 
-        if local_settings["check_boto3"] and not HAS_BOTO3:
-            self._module.fail_json(
-                msg=missing_required_lib('botocore or boto3'))
+        if local_settings["check_boto3"]:
+            if not HAS_BOTO3:
+                self._module.fail_json(
+                    msg=missing_required_lib('botocore or boto3'))
+            current_versions = self._gather_versions()
+            if not self.botocore_at_least('1.18.0'):
+                self.warn('botocore < 1.18.0 is not supported or tested.'
+                          '  Some features may not work.')
+            if not self.boto3_at_least("1.15.0"):
+                self.warn('boto3 < 1.15.0 is not supported or tested.'
+                          '  Some features may not work.')
 
         self.check_mode = self._module.check_mode
         self._diff = self._module._diff
@@ -190,8 +198,8 @@ class AnsibleAWSModule(object):
                           region=region, endpoint=ec2_url, **aws_connect_kwargs)
 
     @property
-    def region(self, boto3=True):
-        return get_aws_region(self, boto3)
+    def region(self):
+        return get_aws_region(self, True)
 
     def fail_json_aws(self, exception, msg=None, **kwargs):
         """call fail_json with processed exception
@@ -244,6 +252,25 @@ class AnsibleAWSModule(object):
         return dict(boto3_version=boto3.__version__,
                     botocore_version=botocore.__version__)
 
+    def require_boto3_at_least(self, desired, **kwargs):
+        """Check if the available boto3 version is greater than or equal to a desired version.
+
+        calls fail_json() when the boto3 version is less than the desired
+        version
+
+        Usage:
+            module.require_boto3_at_least("1.2.3", reason="to update tags")
+            module.require_boto3_at_least("1.1.1")
+
+        :param desired the minimum desired version
+        :param reason why the version is required (optional)
+        """
+        if not self.boto3_at_least(desired):
+            self._module.fail_json(
+                msg=missing_required_lib('boto3>={0}'.format(desired), **kwargs),
+                **self._gather_versions()
+            )
+
     def boto3_at_least(self, desired):
         """Check if the available boto3 version is greater than or equal to a desired version.
 
@@ -254,6 +281,25 @@ class AnsibleAWSModule(object):
         """
         existing = self._gather_versions()
         return LooseVersion(existing['boto3_version']) >= LooseVersion(desired)
+
+    def require_botocore_at_least(self, desired, **kwargs):
+        """Check if the available botocore version is greater than or equal to a desired version.
+
+        calls fail_json() when the botocore version is less than the desired
+        version
+
+        Usage:
+            module.require_botocore_at_least("1.2.3", reason="to update tags")
+            module.require_botocore_at_least("1.1.1")
+
+        :param desired the minimum desired version
+        :param reason why the version is required (optional)
+        """
+        if not self.botocore_at_least(desired):
+            self._module.fail_json(
+                msg=missing_required_lib('botocore>={0}'.format(desired), **kwargs),
+                **self._gather_versions()
+            )
 
     def botocore_at_least(self, desired):
         """Check if the available botocore version is greater than or equal to a desired version.
@@ -360,7 +406,7 @@ def get_boto3_client_method_parameters(client, method_name, required=False):
     return parameters
 
 
-def scrub_none_parameters(parameters, descend_into_lists=False):
+def scrub_none_parameters(parameters, descend_into_lists=True):
     """
     Iterate over a dictionary removing any keys that have a None value
 

@@ -8,6 +8,14 @@
       region: "{{ aws_region }}"
 
   block:
+    - name: get ARN of calling user
+      aws_caller_info:
+      register: aws_caller_info
+
+    - name: register account id
+      set_fact:
+        aws_account: "{{ aws_caller_info.account }}"
+
     - name: Create temporary directory
       tempfile:
         state: directory
@@ -29,6 +37,17 @@
         that:
           - result is failed
           - "result.msg != 'MODULE FAILURE'"
+
+    - name: test create bucket with an invalid name
+      aws_s3:
+        bucket: "{{ bucket_name }}-"
+        mode: create
+      register: result
+      ignore_errors: yes
+
+    - assert:
+        that:
+          - result is failed
 
     - name: test create bucket
       aws_s3:
@@ -444,7 +463,7 @@
 
     - name: test create a bucket with a dot in the name
       aws_s3:
-        bucket: "{{ bucket_name | hash('md5') + '.bucket' }}"
+        bucket: "{{ bucket_name_with_dot }}"
         mode: create
       register: result
 
@@ -454,7 +473,7 @@
 
     - name: test delete a bucket with a dot in the name
       aws_s3:
-        bucket: "{{ bucket_name | hash('md5') + '.bucket' }}"
+        bucket: "{{ bucket_name_with_dot }}"
         mode: delete
       register: result
 
@@ -464,7 +483,7 @@
 
     - name: test delete a nonexistent bucket
       aws_s3:
-        bucket: "{{ bucket_name | hash('md5') + '.bucket' }}"
+        bucket: "{{ bucket_name_with_dot }}"
         mode: delete
       register: result
 
@@ -525,6 +544,47 @@
             that:
               - result is not changed
       when: ansible_system == 'Linux' or ansible_distribution == 'MacOSX'
+
+    - name: make a bucket with the bucket-owner-full-control ACL
+      s3_bucket:
+        name: "{{ bucket_name_acl }}"
+        state: present
+        policy: "{{ lookup('template', 'policy.json.j2') }}"
+      register: bucket_with_policy
+
+    - assert:
+        that:
+          - bucket_with_policy is changed
+
+    - name: fail to upload the file to the bucket with an ACL
+      aws_s3:
+        bucket: "{{ bucket_name_acl }}"
+        mode: put
+        src: "{{ tmpdir.path }}/upload.txt"
+        object: file-with-permissions.txt
+        permission: private
+        ignore_nonexistent_bucket: True
+      register: upload_private
+      ignore_errors: True
+
+    # XXX Doesn't fail...
+    # - assert:
+    #     that:
+    #       - upload_private is failed
+
+    - name: upload the file to the bucket with an ACL
+      aws_s3:
+        bucket: "{{ bucket_name_acl }}"
+        mode: put
+        src: "{{ tmpdir.path }}/upload.txt"
+        object: file-with-permissions.txt
+        permission: bucket-owner-full-control
+        ignore_nonexistent_bucket: True
+      register: upload_owner
+
+    - assert:
+        that:
+          - upload_owner is changed
 
     - name: create an object from static content
       aws_s3:
@@ -628,21 +688,253 @@
         that:
           - binary_files.results[0].stat.checksum == binary_files.results[1].stat.checksum
 
+    - include_tasks: copy_object.yml
+
+    # ============================================================  
+    - name: 'Run tagging tests'
+      block:
+    # ============================================================  
+      - name: create an object from static content
+        aws_s3:
+          bucket: "{{ bucket_name }}"
+          object: put-content.txt
+          mode: put
+          content: >-
+            test content
+          tags:
+            tag_one: '{{ resource_prefix }} One'
+            "Tag Two": 'two {{ resource_prefix }}'
+        register: result
+
+      - assert:
+          that:
+            - result is changed
+            - "'tags' in result"
+            - (result.tags | length) == 2
+            - result.tags["tag_one"] == '{{ resource_prefix }} One'
+            - result.tags["Tag Two"] == 'two {{ resource_prefix }}'
+
+      - name: ensure idempotency on static content
+        aws_s3:
+          bucket: "{{ bucket_name }}"
+          object: put-content.txt
+          mode: put
+          overwrite: different
+          content: >-
+            test content
+          tags:
+            tag_one: '{{ resource_prefix }} One'
+            "Tag Two": 'two {{ resource_prefix }}'
+        register: result
+
+      - assert:
+          that:
+            - result is not changed
+            - "'tags' in result"
+            - (result.tags | length) == 2
+            - result.tags["tag_one"] == '{{ resource_prefix }} One'
+            - result.tags["Tag Two"] == 'two {{ resource_prefix }}'
+
+      - name: Remove a tag from an S3 object
+        aws_s3:
+          bucket: "{{ bucket_name }}"
+          object: put-content.txt
+          mode: put
+          content: >-
+            test content
+          tags:
+            tag_one: '{{ resource_prefix }} One'
+        register: result
+
+      - assert:
+          that:
+            - result is changed
+            - "'tags' in result"
+            - (result.tags | length) == 1
+            - result.tags["tag_one"] == "{{ resource_prefix }} One"
+            - "'Tag Two' not in result.tags"
+
+      - name: Remove the tag from an S3 object (idempotency)
+        aws_s3:
+          bucket: "{{ bucket_name }}"
+          object: put-content.txt
+          mode: put
+          content: >-
+            test content
+          overwrite: different
+          tags:
+            tag_one: '{{ resource_prefix }} One'
+        register: result
+
+      - assert:
+          that:
+            - result is not changed
+            - "'tags' in result"
+            - (result.tags | length) == 1
+            - result.tags["tag_one"] == "{{ resource_prefix }} One"
+            - "'Tag Two' not in result.tags"
+      
+      - name: Add a tag for an S3 object with purge_tags False
+        aws_s3:
+          bucket: "{{ bucket_name }}"
+          object: put-content.txt
+          mode: put
+          overwrite: different
+          content: >-
+            test content
+          tags:
+            tag_three: '{{ resource_prefix }} Three'
+          purge_tags: no
+        register: result
+
+      - assert:
+          that:
+            - result is changed
+            - "'tags' in result"
+            - (result.tags | length) == 2
+            - result.tags["tag_three"] == '{{ resource_prefix }} Three'
+            - result.tags["tag_one"] == '{{ resource_prefix }} One'
+
+      - name: Add a tag for an S3 object with purge_tags False (idempotency)
+        aws_s3:
+          bucket: "{{ bucket_name }}"
+          object: put-content.txt
+          mode: put
+          overwrite: different
+          content: >-
+            test content
+          tags:
+            tag_three: '{{ resource_prefix }} Three'
+          purge_tags: no
+        register: result
+
+      - assert:
+          that:
+            - result is not changed
+            - "'tags' in result"
+            - (result.tags | length) == 2
+            - result.tags["tag_three"] == '{{ resource_prefix }} Three'
+            - result.tags["tag_one"] == '{{ resource_prefix }} One'
+      
+      - name: Update tags for an S3 object with purge_tags False
+        aws_s3:
+          bucket: "{{ bucket_name }}"
+          object: put-content.txt
+          mode: put
+          overwrite: different
+          content: >-
+            test content
+          tags:
+            "TagFour": '{{ resource_prefix }} tag_four'
+          purge_tags: no
+        register: result
+
+      - assert:
+          that:
+            - result is changed
+            - "'tags' in result"
+            - (result.tags | length) == 3
+            - result.tags["tag_one"] == '{{ resource_prefix }} One'
+            - result.tags["tag_three"] == '{{ resource_prefix }} Three'
+            - result.tags["TagFour"] == '{{ resource_prefix }} tag_four'
+
+      - name:  Update tags for an S3 object with purge_tags False (idempotency)
+        aws_s3:
+          bucket: "{{ bucket_name }}"
+          object: put-content.txt
+          mode: put
+          overwrite: different
+          content: >-
+            test content
+          tags:
+            "TagFour": '{{ resource_prefix }} tag_four'
+          purge_tags: no
+        register: result
+
+      - assert:
+          that:
+            - result is not changed
+            - "'tags' in result"
+            - (result.tags | length) == 3
+            - result.tags["tag_one"] == '{{ resource_prefix }} One'
+            - result.tags["tag_three"] == '{{ resource_prefix }} Three'
+            - result.tags["TagFour"] == '{{ resource_prefix }} tag_four'
+      
+      - name: Specify empty tags for an S3 object with purge_tags False
+        aws_s3:
+          bucket: "{{ bucket_name }}"
+          object: put-content.txt
+          mode: put
+          overwrite: different
+          content: >-
+            test content
+          tags: {}
+          purge_tags: no
+        register: result
+
+      - assert:
+          that:
+            - result is not changed
+            - "'tags' in result"
+            - (result.tags | length) == 3
+            - result.tags["tag_one"] == '{{ resource_prefix }} One'
+            - result.tags["tag_three"] == '{{ resource_prefix }} Three'
+            - result.tags["TagFour"] == '{{ resource_prefix }} tag_four'
+      
+      - name: Do not specify any tag to ensure previous tags are not removed
+        aws_s3:
+          bucket: "{{ bucket_name }}"
+          object: put-content.txt
+          mode: put
+          overwrite: different
+          content: >-
+            test content
+        register: result
+
+      - assert:
+          that:
+            - result is not changed
+            - "'tags' in result"
+            - (result.tags | length) == 3
+            - result.tags["tag_one"] == '{{ resource_prefix }} One'
+            - result.tags["tag_three"] == '{{ resource_prefix }} Three'
+            - result.tags["TagFour"] == '{{ resource_prefix }} tag_four'
+      
+      - name: Remove all tags
+        aws_s3:
+          bucket: "{{ bucket_name }}"
+          object: put-content.txt
+          mode: put
+          overwrite: different
+          content: >-
+            test content
+          tags: {}
+        register: result
+
+      - assert:
+          that:
+            - result is changed
+            - "'tags' in result"
+            - (result.tags | length) == 0
+      
+      - name: Remove all tags (idempotency)
+        aws_s3:
+          bucket: "{{ bucket_name }}"
+          object: put-content.txt
+          mode: put
+          overwrite: different
+          content: >-
+            test content
+          tags: {}
+        register: result
+
+      - assert:
+          that:
+            - result is not changed
+            - "'tags' in result"
+            - (result.tags | length) == 0
+  
   always:
-    - name: remove uploaded files
-      aws_s3:
-        bucket: "{{ bucket_name }}"
-        mode: delobj
-        object: "{{ item }}"
-      loop:
-        - hello.txt
-        - delete.txt
-        - delete_encrypt.txt
-        - delete_encrypt_kms.txt
-        - put-content.txt
-        - put-template.txt
-        - put-binary.txt
-      ignore_errors: yes
 
     - name: delete temporary files
       file:
@@ -650,14 +942,8 @@
         path: "{{ tmpdir.path }}"
       ignore_errors: yes
 
-    - name: delete the bucket
-      aws_s3:
-        bucket: "{{ bucket_name }}"
-        mode: delete
-      ignore_errors: yes
-
-    - name: delete the dot bucket
-      aws_s3:
-        bucket: "{{ bucket_name + '.bucket' }}"
-        mode: delete
-      ignore_errors: yes
+    - include_tasks: delete_bucket.yml
+      with_items:
+        - "{{ bucket_name }}"
+        - "{{ bucket_name_with_dot }}"
+        - "{{ bucket_name_acl }}"

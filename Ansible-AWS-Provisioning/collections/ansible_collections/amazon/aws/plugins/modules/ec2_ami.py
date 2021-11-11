@@ -457,7 +457,6 @@ def create_image(module, connection):
         }
 
         block_device_mapping = None
-
         # Remove empty values injected by using options
         if device_mapping:
             block_device_mapping = []
@@ -474,6 +473,14 @@ def create_image(module, connection):
                 device = rename_item_if_exists(device, 'volume_size', 'VolumeSize', 'Ebs', attribute_type=int)
                 device = rename_item_if_exists(device, 'iops', 'Iops', 'Ebs')
                 device = rename_item_if_exists(device, 'encrypted', 'Encrypted', 'Ebs')
+
+                # The NoDevice parameter in Boto3 is a string. Empty string omits the device from block device mapping
+                # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.create_image
+                if 'NoDevice' in device:
+                    if device['NoDevice'] is True:
+                        device['NoDevice'] = ""
+                    else:
+                        del device['NoDevice']
                 block_device_mapping.append(device)
         if block_device_mapping:
             params['BlockDeviceMappings'] = block_device_mapping
@@ -511,8 +518,13 @@ def create_image(module, connection):
         waiter.wait(ImageIds=[image_id], WaiterConfig=dict(Delay=delay, MaxAttempts=max_attempts))
 
     if tags:
+        resources_to_tag = [image_id]
+        image_info = get_image_by_id(module, connection, image_id)
+        if image_info and image_info.get('BlockDeviceMappings'):
+            for mapping in image_info.get('BlockDeviceMappings'):
+                resources_to_tag.append(mapping.get('Ebs').get('SnapshotId'))
         try:
-            connection.create_tags(aws_retry=True, Resources=[image_id], Tags=ansible_dict_to_boto3_tag_list(tags))
+            connection.create_tags(aws_retry=True, Resources=resources_to_tag, Tags=ansible_dict_to_boto3_tag_list(tags))
         except (botocore.exceptions.BotoCoreError, botocore.exceptions.ClientError) as e:
             module.fail_json_aws(e, msg="Error tagging image")
 

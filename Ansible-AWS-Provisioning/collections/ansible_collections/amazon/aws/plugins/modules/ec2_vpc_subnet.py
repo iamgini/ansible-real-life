@@ -16,7 +16,6 @@ description:
 author:
 - Robert Estelle (@erydo)
 - Brad Davidson (@brandond)
-requirements: [ boto3 ]
 options:
   az:
     description:
@@ -216,10 +215,7 @@ from ansible.module_utils.common.dict_transformations import camel_dict_to_snake
 from ..module_utils.core import AnsibleAWSModule
 from ..module_utils.ec2 import AWSRetry
 from ..module_utils.ec2 import ansible_dict_to_boto3_filter_list
-from ..module_utils.ec2 import ansible_dict_to_boto3_tag_list
 from ..module_utils.ec2 import boto3_tag_list_to_ansible_dict
-from ..module_utils.ec2 import compare_aws_tags
-from ..module_utils.ec2 import describe_ec2_tags
 from ..module_utils.ec2 import ensure_ec2_tags
 from ..module_utils.waiters import get_waiter
 
@@ -254,9 +250,8 @@ def get_subnet_info(subnet):
 
 
 def waiter_params(module, params, start_time):
-    if not module.botocore_at_least("1.7.0"):
-        remaining_wait_timeout = int(module.params['wait_timeout'] + start_time - time.time())
-        params['WaiterConfig'] = {'Delay': 5, 'MaxAttempts': remaining_wait_timeout // 5}
+    remaining_wait_timeout = int(module.params['wait_timeout'] + start_time - time.time())
+    params['WaiterConfig'] = {'Delay': 5, 'MaxAttempts': remaining_wait_timeout // 5}
     return params
 
 
@@ -542,9 +537,6 @@ def main():
 
     if module.params.get('assign_instances_ipv6') and not module.params.get('ipv6_cidr'):
         module.fail_json(msg="assign_instances_ipv6 is True but ipv6_cidr is None or an empty string")
-
-    if not module.botocore_at_least("1.7.0"):
-        module.warn("botocore >= 1.7.0 is required to use wait_timeout for custom wait times")
 
     retry_decorator = AWSRetry.jittered_backoff(retries=10)
     connection = module.client('ec2', retry_decorator=retry_decorator)
