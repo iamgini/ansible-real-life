@@ -16,9 +16,9 @@
 - debug:
     msg: "{{ ec2_collected.results }}"
 
-- debug:
-    msg: "{{ item }}"
-  loop: "{{ ec2_collected | json_query('results[*].invocation.module_args.instance_ids') }}"
+#- debug:
+#    msg: "{{ item }}"
+#  loop: "{{ ec2_collected | json_query('results[*].invocation.module_args.instance_ids') }}"
 
 - name: Create and set variables
   set_fact:
@@ -36,7 +36,7 @@
     msg: "{{ existing_ec2_list }}"
 
 - name: Launching EC2 instances
-  amazon.aws.ec2_instance:
+  community.aws.ec2_instance:
     #aws_access_key: "{{ec2_access_key}}"
     #aws_secret_key: "{{ec2_secret_key}}"
     profile: "{{ aws_boto_profile }}"
@@ -56,7 +56,7 @@
     network:
       assign_public_ip: yes
   loop: "{{ lookup('dict', ec2_new_list, wantlist=True) }}"
-  when: "not item.value.name in existing_ec2_list"
+  #when: "not item.value.name in existing_ec2_list"
   register: created_ec2
 
 - name: Create a temp list for new ec2

@@ -1,0 +1,2 @@
+Ansible Collection: community.aws
+=================================================
