@@ -9,18 +9,9 @@
       "tag:Name": "{{ item.value.name }}"
       #network-interface.subnet-id: "{{ item.value.vpc_subnet_id }}"
       instance-type: "{{ item.value.instance_type }}"
+      instance-state-name: ["running", "stopped", "stopping", "starting", "pending"]
   loop: "{{ lookup('dict', ec2_new_list, wantlist=True) }}"
   register: ec2_collection
-
-#- name: Remove Security Group from ec2 instances
-#  amazon.aws.ec2_instance:
-#    profile: "{{ aws_boto_profile }}"
-#    region: "{{ aws_region }}"
-#    state: absent
-#    instance_ids: "{{ item }}"
-#    #group: "[]"
-#  loop: "{{ ec2_collection | json_query('results[*].instances[*].instance_id') }}"
-#  register: deleted_ec2
 
 - name: Terminate ec2 instances
   ignore_errors: True

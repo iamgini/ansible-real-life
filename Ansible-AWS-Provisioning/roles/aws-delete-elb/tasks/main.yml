@@ -6,15 +6,5 @@
     profile: "{{ aws_boto_profile }}"
     name: "{{ aws_elb_app_lb }}"
     region: "{{ aws_region }}"
-    #zones:
-    #  - "{{ ap_zone1 }}"
-    #  - "{{ ap_zone2 }}"
-    #listeners:
-    #  - protocol: http
-    #    load_balancer_port: 80
-    #    instance_port: 80
-    #    proxy_protocol: True
     state: absent
     wait: yes
-    #wait_timeout: 600
-  #register: elbcreated

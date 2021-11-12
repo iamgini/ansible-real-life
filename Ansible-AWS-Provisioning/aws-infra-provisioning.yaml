@@ -1,9 +1,5 @@
 ---
 #author : gineesh
-##Version : 1.0
-
-# Pass the dynamic inventory_group name
-# % ansible-playbook aws-infra-provisioning.yaml -e "inventory_webgroup=ec2webservers"
 
 - name: Provision AWS Infrastructure
   hosts: localhost
@@ -28,11 +24,6 @@
       include_role:
         name: aws-create-keypair
       tags: keycreate
-
-    #- name: Create ELB Target Group
-    #  include_role:
-    #    name: aws-create-targetgrp
-    #  tags: targetgrpcreate      
     
     - name: Create ELB
       include_role:
@@ -45,19 +36,17 @@
       tags: ec2create
 
 - name: Deploy Webserver to EC2 instances
-  hosts: "{{ inventory_webgroup }}"
+  hosts: ec2webservers
   remote_user: ec2-user
   become: true
   tasks:
     - name: Deploy Web service
       include_role: 
         name: deploy-web-server
-      #tags: createtargetgrp
-      #when: a is defined
 
 - name: IaC Summary
   hosts: localhost
   tasks:
     - debug:
-        msg: "Website is accessible on Appication ELB: {{ elb_public_dns }}"
+        msg: "Website is accessible on Appication ELB: {{ elb_public_dns }} (It may take some time to get the backend instance to come InService)"
  

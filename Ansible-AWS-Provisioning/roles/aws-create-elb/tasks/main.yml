@@ -17,11 +17,11 @@
   register: elbcreated
 
 - name: Print Public DNS
-  debug:
+  ansible.builtin.debug:
     msg: "{{ elbcreated.elb.dns_name }}"
 
 - name: Collect ELB Public DNS
-  set_fact:
+  ansible.builtin.set_fact:
     elb_public_dns: "{{ elbcreated.elb.dns_name }}"
 
 

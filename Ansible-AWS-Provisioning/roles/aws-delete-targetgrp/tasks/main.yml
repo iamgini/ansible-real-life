@@ -4,7 +4,7 @@
 - name: Delete target group
   elb_target_group:
     profile: "{{ aws_boto_profile }}"
-    name: "{{ aws_elb_target_group }}"
+    name: "{{ aws_elb_app_lb }}"
     region: "{{ aws_region }}"
     protocol: http
     port: 80

@@ -9,7 +9,7 @@
   #    "tag:Name": Example
 
 - name: Collect VPC ID
-  set_fact:
+  ansible.builtin.set_fact:
     aws_vpc_id: "{{ aws_vpc_details.vpcs[0].vpc_id }}"
 
 - name: Fetch VPC Subnets
@@ -19,8 +19,6 @@
   register: aws_vpc_subnet_details
 
 - name: Collect VPC Subnets
-  #debug:
-  #  msg: "{{ item.subnet_id }}"
-  set_fact:  
+  ansible.builtin.set_fact:  
     vpc_subnet_list: "{{ vpc_subnet_list }} + [ '{{ item.subnet_id }}' ]"
   loop: "{{ aws_vpc_subnet_details.subnets }}"
