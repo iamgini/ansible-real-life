@@ -1,0 +1,1958 @@
+{
+ "files": [
+  {
+   "name": ".",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "Makefile",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8346ec1486eae9adfdc6ebb7608a8f890edb31c9b93c9018a88faa7cf14f44b6",
+   "format": 1
+  },
+  {
+   "name": "CONTRIBUTING.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5a96179224855c796561d451fd8eb4430a8ec054ef34ad3201423b8e7fa4c75f",
+   "format": 1
+  },
+  {
+   "name": "molecule",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/molecule.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "449d27884d5cc1cfd85e7b1cbf0da1bc0974b4f6d480418aa46b8554572bf8e4",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/converge.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9138df1113c0842352eb7ce72854c54b8f8695024b0ddf53b83a503d8dcb8fe9",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/files",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/files/deployment.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7aace180b64cf64511b9d3f32d42e177e8f7dac0c7c752ac104852a20146c332",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/lookup_kustomize.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "41fc5f969f4d673f36bc2f906b4226679ff2f96b12fb8830446bdd024bac8c88",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/rollback.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "669597125d9825b4c13c4178c6f6b09a93434a438df0bc1b9064535832d3dcdf",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/scale.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "58afbee96684b7306847bb3dbc8afb74a2f38f6024cbdfeb4795aba046ba8c7d",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/cluster_info.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5b78e9afdbf59243a6b1b668c12ccc83e368ad7b941af028a2fe8b801e25510e",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/info.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "de7fd4ca0b3eec16889ce0d6ff5683c5d4d33525c40df334e8cc14e87742c3ee",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/access_review.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "aa73c4a87e4a54f6f58904b793357b19e297a1db6625e6a49e5ed24181cde560",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/gc.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5e0822ef353bc1d0cb267239b13d58314a94ce25e9507d3e53395f39368eef0c",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/log.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "23263a92617fd8dd5fd502a1caf08a6f70d4ce3dd62dede7689987d9f5ddd821",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/lists.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "438d0c1801b1c2ee6d101484091b3e9af3a8fe2b6b578407fe42e84d28ca1b88",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/json_patch.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5fb11ceafeacb58a29ffd7ea1a52a7758708f0366c8be768656d04c1d6d074cd",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/full.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "46a8a9aed743161548d5ff6506f81c0819c81a67de912a61af910065184d5ced",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/validate.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e6b5b5d5d9fd7f226b0dfc9969e95fbff5dbe21a7c1ddf44ef559a9e651661ea",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/label_selectors.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "82a20eb59fdb95eb950530ff3ccaa2fc19f25ce83b3aa4ee0f583b4755860cac",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/exec.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "45db978f4ee78c8de2119917d15d39e906289b662b0c2ca13dc7ad3c189bb699",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/lookup_k8s.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "400fababa14f7ff7c37803c156f42ff852ab8cee0e269dbc7226230f899e6ad5",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/delete.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "462c29b6500d053414f2ea253f578a1606e065bbcf799287d31e42bbf5afd74e",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/template.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f0ec2e74bfd1547843c4d19bd52ff314f0cd064c01dba75d90124426df04a5cf",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/waiter.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "30a8381d996a9fe99d59240e701441dde97c7aa204141b72341afbd7314a6163",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/apply.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "2bd189b5772aafdec190d2033469ad46c3528027df58ecd25955dcda4fe0aafd",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/merge_type.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5683c0a0596af08955943b2664a4874191ef9dacd34e31ba7a1bf1ae5eb4cc11",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/drain.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "dad84468c04bc4e335e1cc014db7968dd0164a72ea542bb2399c94d26a54a3d8",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/patched.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e635ec473c67180d3847fba70402a6ac5e8a60b04c210e7156fea6754d22d437",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/append_hash.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "575f3d1f8721cc64912187466ce43449a4e1efe95ef429ad61147ce319fb9849",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/crd.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "4c809d990471e08c39da06c8648f916d8995b51af7109273ddcc2e55262b2e7b",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/tasks/diff.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "77d6bf81158e5ac6da8fdd1a7c1f4296fd570a20379a58f8731272dfdde6255a",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/prepare.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "96d78d63467a4bfe8c1881cc6e6589faa13c0991ec8a9bbae00b00d45ae14a12",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/templates",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/templates/pod_diff.j2",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "3da43f180f8b1af880478c8006f25698bade02f3bff3efe024c3b49b56b1be75",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/templates/pod_template_one.j2",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f406fafaee09dfaa626acfa30bdca5a211e3a23c5ce9bdbd709dfad382636e9f",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/templates/pod_template_three.j2",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a9260813cfbc5f9c354da71c35c7bfb4a0bb3854448bd3172a5c672ca58cc827",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/templates/pod_with_bad_namespace.j2",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "2d47b2e060a0ffe2fb0ec36f9e9fae51a2d3bfed0a1527def18cb4ce7a9d5a0c",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/templates/pod_template_two.j2",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "41da088ff2b14211959cade261eeb291e7b4aea00ff3a3deb76b1595d795a221",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/vars",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/vars/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "4e04f9731d67f2929f59059ce9699b84c5f507a698f9002c13c2d6d193cad63a",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/defaults/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "054fa40b96e4829daa6cc60882b3f9ed740f39d3d13992f8e4e1438c0cda77cd",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "65f0b88ba54774c971ec3b0f3faf3da0758ee00a877cd245ce8422981089c862",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/test-crds",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/test-crds/Chart.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a3098e5531bbeea8677e05205809430b1b65749ef96ffc61c0bbc2ccd534191e",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/test-crds/crds",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/test-crds/crds/crd.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "cabbd06eaf633206eb5fd9ca3f51c0fc209c1e79df5d4839751fda26cd36c6ba",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/test-chart-v2",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/test-chart-v2/Chart.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "cc34a7fb5f306592164960bda0f3be7160a0a95e0680c26e094e68f9d7b17e61",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/test-chart-v2/templates",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/test-chart-v2/templates/configmap.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9979f18c89ec57fb48ad851cd33e760f0ff1807a47cd4999fc2d562e155fd098",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/values.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "dcaf3f49ec12d4365ac0b9dba73255eeba9fea38895c7e63dc6e1ea0fe1fdb02",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/test-chart",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/test-chart/Chart.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b1d6b7aaa7b3de76b01f935c002b06f7897477042f872aa732d9847894a2e6af",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/test-chart/templates",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/test-chart/templates/configmap.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "18f299d28d316f4f389d902630342476cad9fa39e71b118f9653c2b768671a45",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/appversionless-chart",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/appversionless-chart/Chart.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "fa6d86a1333abbc0bce9320952b49ceeda05fed029ab498c2bc9633b0507d62a",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/appversionless-chart/templates",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/appversionless-chart/templates/configmap.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "18f299d28d316f4f389d902630342476cad9fa39e71b118f9653c2b768671a45",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/sample_plugin",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/sample_plugin/plugin.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "1a0e33cd8669e3052458cb1a25a1af6bd9ef76e58eca5e3720637e8ab516111d",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/appversionless-chart-v2",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/appversionless-chart-v2/Chart.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "1c09667591633d997f2a6ef625d6aec9b0854b6fa7ec51bbee42b8ac460d6f3c",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/appversionless-chart-v2/templates",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/files/appversionless-chart-v2/templates/configmap.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9979f18c89ec57fb48ad851cd33e760f0ff1807a47cd4999fc2d562e155fd098",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/tasks/tests_helm_plugin.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "97d1e25de903433588fb49435fb40cee43c9d9bddb944feb0a8d2b0200bf5a7a",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/tasks/test_crds.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "60b36e62f7e4ec76acdd6018e7d74890694820c0a697720de5a5814b718e0030",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/tasks/tests_helm_diff.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "555f50e2ef27d3e7586154928b586cc305c5674365d1a1527f9ca0b22f3d72c6",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/tasks/tests_repository.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d7edf018a2d6cc34435f2890cb2750a15c18d646b67ad2d5024b8b839798f14d",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/tasks/install.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "54919db25f314de8e80b1cc800f6a3e32f8170a7f2165122f062bb1acfe92b40",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5678696fb132c235483923bd99ccd511a3620b5ee9bc0aa93c185bcad61517b1",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/tasks/test_read_envvars.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "528b7d7adef32270f6cc633e70f5d208598060a19db35b802688cc5398025a7c",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/tasks/tests_chart",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/tasks/tests_chart/from_local_path.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a010fb332bac7c0e2e33dc0a41bb2a3508abb3ba9a6634620954852a0512cae4",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/tasks/tests_chart/from_url.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "327c9b0aa2c7de68839a5638497426d5ad9d60f79f7fd1418073205cc4e7cce0",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/tasks/tests_chart/from_repository.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f6c94ff2bc7e99d2ae88e72d1e0aaca36b77985cd5e3e4e895bf1b7ec5f22083",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/tasks/tests_chart.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "dcc5a254116052d62e2047e400846ac10fd21f2e0aeeee92fa4515240eaa5294",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/tasks/test_helm_not_installed.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ae35d2ed9175610f2fd284379c50c133a0ff87dce6a27c7ec4b98bd948e8121f",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/helm/tasks/run_test.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8722137b367ff9e95085aad6a15c4e40ad82ba8ba3f112d34c2c1bcd73e9b30e",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/defaults",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/defaults/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9d56230d6a6fd05f5d44c477f85e16f1a29aff3142d11e322c0fd49ae461e46f",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "65f0b88ba54774c971ec3b0f3faf3da0758ee00a877cd245ce8422981089c862",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/library",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/library/kubectl_file_compare.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ab94cb1cc5156b4495ac16ae800153cb720861f1d259161edd57866a7172978e",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/library/k8s_create_file.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a4eea0d5b390918bab8c43ffb075606e41503c918f5def8a37db66ff31d59825",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/files",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/files/simple_file.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "91e98678271aa6f939eae03a12d5e211da8ec60504f45b0a8fbd5c834881f2a0",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/files/simple_zip_file.txt.gz",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "67c773560130902e8731322c204334a51d43866c81923f1564a9f84f46953b09",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/files/archive.tar",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "66ea86ef8daa23872007eeeee592167eff42d97bf736d889fb04a863b17d66fd",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/files/hello",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "dcf399958401a4bcac951dfe3c73bf57086db9f6a736c57d858a30db2da49d69",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/files/data",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/files/data/ansible",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/files/data/ansible/module.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "31f6e65cb2317fe8d9e948ed1b41cfe276513fad87c89dcc7f7dc777e76f3f52",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/files/data/ansible/collection.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ee92d71eac83507748578826b70b4c7627c62fd762d25a5a1b9c6e01fcb3389b",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/files/data/file.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "6331d720a3a0ffdeed6f17cee165f55167ce05454d11c680105892a5ea5370c7",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/files/data/teams",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/files/data/teams/ansible.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "cfd95d6ae409c10e16b246437c6c397fe296b3c6ae5259ae6f97e61b8b733e98",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/tasks/test_multi_container_pod.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "dcf4ed81d1e8961a99a0d38cdd45cf4182bdc097e84b94a2f7208d3cd548fa5d",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b9a226635a00c7641eab15a94d92779656ff27bbd1b5911c05918ea999508d5b",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/tasks/test_copy_file.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "fb6bd6ff4ffabb252385e1498dc43aceb96e3a9102860e97758e025e73ac941d",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/tasks/test_copy_large_file.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "05d944b8035087cb6f18f4fa43f5b6b85137f343115bc21dddfc8e358999d442",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/tasks/test_copy_directory.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "07f8cd7f6c148f18912bf703230379121cb391042138c01d99d8c0d680637030",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/tasks/test_copy_errors.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "0d880792d8a1bdd6509556506076119bd8ff1ff594e1db87b463bd3e05ce8f64",
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/templates",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "molecule/default/roles/k8scopy/templates/pods_definition.j2",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "cc12f4d026dca32e384be21b594a185ad1b6fafc682a6d1a883a68839d22abd4",
+   "format": 1
+  },
+  {
+   "name": "codecov.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "caa848a2e02be5014890c5cbc7727e9a00d40394637c90886eb813d60f82c9c3",
+   "format": 1
+  },
+  {
+   "name": "meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "meta/runtime.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "0430c9e53efd37226f17badc6edd29c5fdf1b5c9f13242bccffffe1c832831f9",
+   "format": 1
+  },
+  {
+   "name": ".gitignore",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "636f92d53bd20a95dba036049ec86c4a7ebfc3793285f859b5def9fe3adf1854",
+   "format": 1
+  },
+  {
+   "name": "plugins",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/doc_fragments",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/doc_fragments/helm_common_options.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "34afde67e9cf24d13b825c952ce6b7d0d97021b52d1243b8ce283275f96f044b",
+   "format": 1
+  },
+  {
+   "name": "plugins/doc_fragments/k8s_delete_options.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5c2162cc3d66ef93eb642444166fc6d3a1dddfdcc7d4b5d3a912b9f3139693f6",
+   "format": 1
+  },
+  {
+   "name": "plugins/doc_fragments/k8s_resource_options.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a36c38c9234310340e8c91a152ccd2f7a2f410593903f476cf1eea4b143ed43c",
+   "format": 1
+  },
+  {
+   "name": "plugins/doc_fragments/__init__.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "format": 1
+  },
+  {
+   "name": "plugins/doc_fragments/k8s_auth_options.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7765429351b526540b2ac3cb0292cccf215b0df1fa8291a9c835ea19e0bfdcb5",
+   "format": 1
+  },
+  {
+   "name": "plugins/doc_fragments/k8s_scale_options.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9d8b786126b636f1850ce103101ac305324ede1f4bdbc1997fce29ad336190d7",
+   "format": 1
+  },
+  {
+   "name": "plugins/doc_fragments/k8s_wait_options.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "94f5cd51e6e18285a50363a601747227569303144c41582de808729123b9b3c4",
+   "format": 1
+  },
+  {
+   "name": "plugins/doc_fragments/k8s_name_options.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a5991e5295127033b7a62fa413a5e7f1c5ae0c563575bc196fd05af71d6e474e",
+   "format": 1
+  },
+  {
+   "name": "plugins/doc_fragments/k8s_state_options.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9d2423ecb2a56d60aa1a4cdeafc979cf8b355c81a940ac1ad5572cfa5424bcf0",
+   "format": 1
+  },
+  {
+   "name": "plugins/filter",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/filter/k8s.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8c5a43385f724be10bea904e3ef7b68f7b53ebf512ec02cb40d00154b34e211f",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/helm_template.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "794f22df86b7b4f6648d687581b74eaaa886da45c8725fa228081126e16b1ee0",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/helm_repository.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "85a59d36ecd4a97eaa6ccdd667144870e6d3d9fcee505738918b589ca25a62b0",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/k8s_rollback.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "eafd093599b8d4e3d566e811f7170a740cd29e6c0d1daf67ddea568ac0cf151a",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/k8s.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c1784aa27ecaafe66ab57530e2c102f4ba2600c078578e872ae9db1d0102d4ef",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/k8s_service.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "21f060589378b84372c1b067185c1eac289e1bab74b7a95c562fe1e0605d7838",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/__init__.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/k8s_scale.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b84fba9024bb6d856d2e4606911e055117503385bc983867f6ffbd1b70041960",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/k8s_log.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "80434bdbe76214f68b19364f7166a1238b2be9f0df23af1a0781a41c4eb7b629",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/helm_info.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a53fb59e35857a6454b496470259d7e662f150984afefdce1252bbd43abbd1e0",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/k8s_drain.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "4b48699d70bdc01b26eafb9c8661cec44182a5bf867d7f093add727f54308473",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/k8s_json_patch.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "03c6a42ea9ff7a50a003f1159137efa260610ba51e5228ea7d47bce386b2e9dd",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/k8s_exec.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "21f087705c557c355016e4cb436096ab5922f1d93ed929c59ab12e27ab7758a5",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/k8s_cp.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "14a00f6f4625ff2af3fbadc11b1fffda60e8683eee90e19bf393cbac2c1208a7",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/helm_plugin.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9d00b040d84784710e8bed4d90ebb90576a067d2869e48083280ba59162babd0",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/helm_plugin_info.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "cefef2d26099494ab4832f7809324de9b916dfdfd9468234a8b425b05c531508",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/helm.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d67c8bd83f5f4248ac0632bf52dc3d58a48eab6cd53d77c282b4c52d6f6bc0cf",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/k8s_cluster_info.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9d4228b23fb0a389d9cfcc5587b66b6ad1cd24c3da92fed39c30f763f5cd49d7",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/k8s_info.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "fd4d555eb623f0b3c79d1d2997f2ae47a2759afadca0600b41fb37154506f148",
+   "format": 1
+  },
+  {
+   "name": "plugins/action",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/action/helm_repository.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8fdf486a44df3867dd99b867e22006ae77149504094afc1490cc609491cf7762",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/k8s_rollback.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8fdf486a44df3867dd99b867e22006ae77149504094afc1490cc609491cf7762",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/k8s.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8fdf486a44df3867dd99b867e22006ae77149504094afc1490cc609491cf7762",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/k8s_service.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8fdf486a44df3867dd99b867e22006ae77149504094afc1490cc609491cf7762",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/k8s_scale.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8fdf486a44df3867dd99b867e22006ae77149504094afc1490cc609491cf7762",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/k8s_log.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8fdf486a44df3867dd99b867e22006ae77149504094afc1490cc609491cf7762",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/helm_info.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8fdf486a44df3867dd99b867e22006ae77149504094afc1490cc609491cf7762",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/ks8_json_patch.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8fdf486a44df3867dd99b867e22006ae77149504094afc1490cc609491cf7762",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/k8s_drain.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8fdf486a44df3867dd99b867e22006ae77149504094afc1490cc609491cf7762",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/k8s_exec.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8fdf486a44df3867dd99b867e22006ae77149504094afc1490cc609491cf7762",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/k8s_cp.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8fdf486a44df3867dd99b867e22006ae77149504094afc1490cc609491cf7762",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/helm_plugin.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8fdf486a44df3867dd99b867e22006ae77149504094afc1490cc609491cf7762",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/helm_plugin_info.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8fdf486a44df3867dd99b867e22006ae77149504094afc1490cc609491cf7762",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/helm.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8fdf486a44df3867dd99b867e22006ae77149504094afc1490cc609491cf7762",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/k8s_cluster_info.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8fdf486a44df3867dd99b867e22006ae77149504094afc1490cc609491cf7762",
+   "format": 1
+  },
+  {
+   "name": "plugins/action/k8s_info.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8fdf486a44df3867dd99b867e22006ae77149504094afc1490cc609491cf7762",
+   "format": 1
+  },
+  {
+   "name": "plugins/lookup",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/lookup/k8s.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "cfaf4be7aa34b6796b9996932235a525cdefaf59c24390b14ad0526f9122288e",
+   "format": 1
+  },
+  {
+   "name": "plugins/lookup/kustomize.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7b6cd8576391a39e7c01ff6a2d40279d7792d27d86820c6c8cc83c32d29823de",
+   "format": 1
+  },
+  {
+   "name": "plugins/connection",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/connection/kubectl.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c03b8ad52d530e67730c99a9dc2faa7137478cd805139a87212fe164e3d0cb56",
+   "format": 1
+  },
+  {
+   "name": "plugins/inventory",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/inventory/k8s.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e835c8f6382ee5a2a205135b2de9edd34e806f55309e61d21dceed1ec0760c6f",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/common.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d551d185ba55c984981075d162c074ddb0c5a82feee81bdc37897b6c5df47528",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/client",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/client/discovery.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e4098ba310b1785385a9f75d519da6fcba09b994af9b34f9a79c8e174d960dc5",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/client/resource.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5018aab927704af47ac4f13e0331650aab562136c632d3e6448026b01d08ce69",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/selector.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "652b48f411eede6d0ad747564e6960b6817f6c24437b435f8da40a1420a1a95d",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/ansiblemodule.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "2f920ae30ffc8d9f5794dacd2791b469aa4a9ac9fa5a9e98b4cad59125343e9f",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/__init__.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/k8sdynamicclient.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "21c10dc34ef4d9953f528c1c9fa9b69a9c3e17e98dae744a3ee49681afe8b927",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/exceptions.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "2bc7ca0d7f4f314985f1e3d56a8ee1059dee699bd35ec0ad5e592047f13383df",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/apply.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "0c188beb70da7556cfe5098c4da2f9e984696bfd4434346823455ab1b29f45ca",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/hashes.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f8e4c50d39b789b5b28ec039fc731163c9f4c87883d7509a7fb2281884b8b5fd",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/args_common.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "4f1f0d71e029989420590f65619b923bcf43927190a8b9707b90537f2cd78006",
+   "format": 1
+  },
+  {
+   "name": "plugins/module_utils/helm.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "440ae6a1991a8496d307914fea23afbfd060c4739ad3bf81ee3cf40c54050100",
+   "format": 1
+  },
+  {
+   "name": "CHANGELOG.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "4ce0caed920f9a4252894081679bec4ba3faf15e0f0d4f66bca9779cb6165827",
+   "format": 1
+  },
+  {
+   "name": "README.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9b25e7d015a78ac219bb976e3d6462b78fc9f5839eaeebc0e17f85e5766b4978",
+   "format": 1
+  },
+  {
+   "name": "changelogs",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "changelogs/config.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "2903835efadf1f03f8a05ba8428d1530259e322d039dcd3edbe707bcaea82e3d",
+   "format": 1
+  },
+  {
+   "name": "changelogs/changelog.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "10c4df2b61428aa11cb498582867944ec6fac6fd85c2a5a875acf472e792d618",
+   "format": 1
+  },
+  {
+   "name": "setup.cfg",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c1e4413f12a5de6d945015ab0a2c7512c3a7e5467633a116df0cf05b33b8b68b",
+   "format": 1
+  },
+  {
+   "name": "LICENSE",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8b1ba204bb69a0ade2bfcf65ef294a920f6bb361b317dba43c7ef29d96332b9b",
+   "format": 1
+  },
+  {
+   "name": "tests",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/sanity",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.10.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9b444ae253203cb7559db9f59af0f4fabcec0775e0e48311e04a1f035db65158",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.9.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5b4681626e17515fcc50afc1f28e0cb246b772cc047beabc7e46e430b7eedbe6",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.12.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7b234e3f642f762167fe1c131e51488299da73689233fe055899bd4719cc9acc",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/refresh_ignore_files",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "6bb92fda0936a854a9f423467b0d7ae31ab840e2b700263e2fe305ae9e093a08",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.11.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9b444ae253203cb7559db9f59af0f4fabcec0775e0e48311e04a1f035db65158",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.13.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "1336d671052abf0b928801f93fb310f526899a7dbb98b8e268f288e198df23ef",
+   "format": 1
+  },
+  {
+   "name": "tests/unit",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/unit/module_utils",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/unit/module_utils/test_marshal.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ee3f56dc09ee3911fa381acb0f07b2fede5d3afb9c12815028695c57fd354d36",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/module_utils/test_discoverer.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "fb6177631c97d3f0aff982bdafcd09046c8d1286a986631f9586fed00f5d0476",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/module_utils/test_hashes.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8ba1163ebc5dcf61aa0e4beedb0555e17dcdd7c8c01f82dc134d242186846946",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/module_utils/test_selector.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "1c9c390779d9085b9ea883b8f2d0db8af25e84b55605b33a79538e7f789b401d",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/module_utils/test_apply.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8b2c76f792040ec37f7f845ec5b74ca1448d67e5b3ebc1774611af11799831c0",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/module_utils/test_helm.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "18f2303ec78ef8a9b59dc404219f5a6a932fb1ca2396c2b1c75c6ca3c03b75df",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/module_utils/test_common.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e141aa557f97bedb3b5af53bd337f79c179a077b66decc08d29a276402c281ad",
+   "format": 1
+  },
+  {
+   "name": "tests/unit/requirements.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9786cc70a5b99e738917f0b25684cf4caa752c01d7c298be0d3526af282a0346",
+   "format": 1
+  },
+  {
+   "name": "tests/integration",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/meta/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ec4fa30fc4a7b9e002d1c7b3932286ace72ba36e4f532e2cc79f49d07e0794c3",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/library",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/library/README.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "94a73d0d4b8e6796159ef3bacd51868a11f5b684d3bb719d935123ff61259816",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/library/test_tempfile.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "efc92ba8bb66458bb67d33d65d0d596713bb2834ff460bf8a24de78a2d58dd52",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/README.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9e7409bbd4fae71733ca025b5b1c8f062b184989a7af4abe322cbea0881e146e",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/handlers",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/handlers/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "33dbdc47d3594105cbe82d177fe852a3b85c9a72d7bbc342580d8ebdb604209c",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/files",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/files/crd-resource.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "4921362ac3c4afac5f42ebb90b37bcb75e1fe20929bb0e45d0df4c190d28f577",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/files/setup-crd.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ec1fd5a8731fd07a20799b6b84aa815aa2ded58b2107bef808d96dfe58137d44",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/files/kuard-extra-property.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "69a69ba619f5b57a5ea0efbe038a4525bb3d75a2f6765635834ffa266d49e640",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/files/kuard-invalid-type.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "1933ad2286d677b22ad9b8aa45c185ee1114529d24b4f915f58f9b254a75b3fd",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/aliases",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "6cdcf35af12c60c96ac2bb52cfa492936962ae3c8a2bdc174a8c7b052c7ccf99",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/tasks",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/tasks/validate_not_installed.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d297104a468f78ea77c9d8580f58773632cdbb227b43043632b79d75fb751de8",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/tasks/new_config_getter.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c769c7009382e2bd16ab04e3d0edbce28edaac4ab8d4ad7f432f922eb4baf108",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/tasks/setup_remote_tmp_dir.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "489ccbebe22f66827ea2ddf71902e8a5122eb47dea0d0ae18ba1d3f93cbf67ae",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/tasks/validate_installed.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "413678923be60e4485ecad94538e31111a8b8bdfb01789cbc4a6fc4c0b48c1d3",
+   "format": 1
+  },
+  {
+   "name": "tests/integration/targets/kubernetes/tasks/main.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8c2bbd8d989bf44e5a006a7d0510a521b995eb0c1b4a130c502e3686f4c5e79e",
+   "format": 1
+  },
+  {
+   "name": "test-requirements.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "627cd6e09ae146bc4492f3f7fc2033170db5cea9e62c6d9988eae981c4bcef5a",
+   "format": 1
+  },
+  {
+   "name": "tox.ini",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b6656ee3beeed540de92f7882211e403969e9bc7084aece952cd1aa580ffe466",
+   "format": 1
+  },
+  {
+   "name": ".github",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": ".github/stale.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "923b49f6fb8b325ea890d05a42537b3f9c5aaf26b64a704c0fef4b696aa6a4bb",
+   "format": 1
+  },
+  {
+   "name": ".yamllint",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "3502ec6ac2192fb928af5c4e85df274d577553d4eb533f6f37c0957953cbec2a",
+   "format": 1
+  },
+  {
+   "name": "docs",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.k8s_log_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "171f75cb501b37c67a20dbe49962504b79a0074c947ef68fec91cee7747a5d1f",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.k8s_exec_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "9a1ecbaa8d9d3ceea9eda0a511ae81f88f6f1513db4b6c0c9024853d9e2e830b",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.helm_info_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "89adae8f40c2da10c350d9cfc1b3844104f9c8d51da2fbf13b9301cad91b5a96",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.k8s_cp_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8bc15435e07b82b919a4e3f20981bb067e5bded3edc7e131ac423bfd9f212189",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.helm_plugin_info_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "51ba9800d8f92207fb2580158d75a05c942882fe237dfdbceb1b16014e13ef5d",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.k8s_lookup.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "fac344797caf1dcdf99adeec0a0d850d1fd74fbf46f3a226b52931f1fa6bca0d",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.kubectl_connection.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7cb93572ffd283a453b53bd8d100ce0949a6a6cdce850c5deecd22cafa0eb4e8",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.k8s_cluster_info_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "97927f7947b4f94c5a56263ea4840d629ce166205b437888a56079fdc4cc27cb",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.helm_repository_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "4c7b2efcf6832cf1b53e9fec808449ae5ea973306ae2a3eeeed4ea7405327e06",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.helm_plugin_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b9ed32e51ca564332c6c070793ed4950b9c52394f62f37416658988d5d16efd0",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.k8s_scale_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "58d6f4424a832579d6b3bccb34c1cd2583bcf8b17138988cecd28e2d42655b87",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.k8s_rollback_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "2aad8c2bb3e0c5d47ae3079483e6c9bffff66d054b2b1d62427e17cd5b9b3ca2",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.kustomize_lookup.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b6006ecdeaec488a59651653d7c48c0f4d156f49fc3a12409f75a187eafb57b7",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.k8s_json_patch_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7dcb4e612884f0c6d12b0decf2ffea3a23e030d1708cf8300217e1ccc3f7f286",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.k8s_service_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "85993e1a567a65b2d301776646c3f751fe07c41cfe313d84696c90ceab5e54d0",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.helm_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "cc18f2261046ece4883db6195815dade09ed406a8aa91c2842fdc7d6ede35b44",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.helm_template_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "bf0be0db564c22aebc3c152001c90a220cbb2ec097acfe4c83c2614442ac2cd2",
+   "format": 1
+  },
+  {
+   "name": "docs/ansible_turbo_mode.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f2b28caa1289a1267341d148134c9fc6544a05eb5146d80a51da6703d995cecb",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.k8s_inventory.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f0e7072fe1ebf5e12870ba93e0de9bb571f3538322d60ee6925ac025023b4ff4",
+   "format": 1
+  },
+  {
+   "name": "docs/docsite",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "docs/docsite/extra-docs.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "79c40762026c71888c65490babe92e16d252af7113dec735cf75630af8245d47",
+   "format": 1
+  },
+  {
+   "name": "docs/docsite/rst",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "docs/docsite/rst/scenario_guide.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d14c604f7f6b2311f9b9688dcea5d18357920d7ccd228539b2cf0e52a997c822",
+   "format": 1
+  },
+  {
+   "name": "docs/docsite/rst/kubernetes_scenarios",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "docs/docsite/rst/kubernetes_scenarios/k8s_inventory.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "29e7c5d13c2ea6ed35247acf7a05a1008662f950ff79c8bc2a9b41887d004975",
+   "format": 1
+  },
+  {
+   "name": "docs/docsite/rst/kubernetes_scenarios/k8s_scenarios.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b98746ba71dce9ba385228e55c7c367888a3fc569bfa37261475bc24179406a8",
+   "format": 1
+  },
+  {
+   "name": "docs/docsite/rst/kubernetes_scenarios/k8s_intro.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "7ce06411318e79c00c9c46d0faf31f34de731bff5ef22e00b57c6e8f26c2dac8",
+   "format": 1
+  },
+  {
+   "name": "docs/docsite/rst/kubernetes_scenarios/scenario_k8s_object.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "ae77f43387b0ebb470fbfa866d53199821e96443c99dd64a8c4aec77b16ab66e",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.k8s_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "e420ab24126e0ca1f9a78f7475a966d57736d7057968b2197fa709dcef76f598",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.k8s_drain_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "97b4dade7519757000d6667d3adbc55bb99cd66fc8c9f741260861f17d5cac2a",
+   "format": 1
+  },
+  {
+   "name": "docs/kubernetes.core.k8s_info_module.rst",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "319d28cb6d5aa8afecf76c919ea3069af41513dbc92deff49a3aa71f171fb2ed",
+   "format": 1
+  },
+  {
+   "name": "requirements.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "f4d1053cac2a14673a9faf001292589693d10f6126b23255e34beb8223d1de91",
+   "format": 1
+  },
+  {
+   "name": "bindep.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "d9a17769c3c0697b8a0b59744552d7c1b174a67722c52285426d42f035f1f58f",
+   "format": 1
+  }
+ ],
+ "format": 1
+}

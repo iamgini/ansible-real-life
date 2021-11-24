@@ -1,0 +1,397 @@
+---
+# TODO - name: test 'validate_certs' parameter
+# TODO - name: test creating key pair with another_key_material with force=yes
+# ============================================================
+
+- module_defaults:
+    group/aws:
+      region: '{{ aws_region }}'
+      aws_access_key: '{{ aws_access_key }}'
+      aws_secret_key: '{{ aws_secret_key }}'
+      security_token: '{{ security_token | default(omit) }}'
+  block:
+
+    # ============================================================
+    - name: test with no parameters
+      ec2_key:
+      register: result
+      ignore_errors: true
+
+    - name: assert failure when called with no parameters
+      assert:
+        that:
+           - 'result.failed'
+           - 'result.msg == "missing required arguments: name"'
+
+    # ============================================================
+    - name: test removing a non-existent key pair (check mode)
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: absent
+      register: result
+      check_mode: true
+
+    - name: assert removing a non-existent key pair
+      assert:
+        that:
+          - 'not result.changed'
+
+    - name: test removing a non-existent key pair
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: absent
+      register: result
+
+    - name: assert removing a non-existent key pair
+      assert:
+        that:
+          - 'not result.changed'
+
+    # ============================================================
+    - name: test creating a new key pair (check_mode)
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: present
+        tags:
+          snake_case: 'a_snake_case_value'
+          CamelCase: 'CamelCaseValue'
+          "spaced key": 'Spaced value'
+      register: result
+      check_mode: true
+
+    - name: assert creating a new key pair
+      assert:
+        that:
+           - result is changed
+
+    - name: test creating a new key pair
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: present
+        tags:
+          snake_case: 'a_snake_case_value'
+          CamelCase: 'CamelCaseValue'
+          "spaced key": 'Spaced value'
+      register: result
+
+    - name: assert creating a new key pair
+      assert:
+        that:
+          - result is changed
+          - '"key" in result'
+          - '"name" in result.key'
+          - '"fingerprint" in result.key'
+          - '"private_key" in result.key'
+          - '"id" in result.key'
+          - '"tags" in result.key'
+          - result.key.name == ec2_key_name
+          - result.key.id.startswith('key-')
+          - '"snake_case" in result.key.tags'
+          - result.key.tags['snake_case'] == 'a_snake_case_value'
+          - '"CamelCase" in result.key.tags'
+          - result.key.tags['CamelCase'] == 'CamelCaseValue'
+          - '"spaced key" in result.key.tags'
+          - result.key.tags['spaced key'] == 'Spaced value'
+
+    - set_fact:
+        key_id_1: '{{ result.key.id }}'
+
+    - name: 'test re-"creating" the same key (check_mode)'
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: present
+        tags:
+          snake_case: 'a_snake_case_value'
+          CamelCase: 'CamelCaseValue'
+          "spaced key": 'Spaced value'
+      register: result
+      check_mode: true
+
+    - name: assert re-creating the same key
+      assert:
+        that:
+           - result is not changed
+
+    - name: 'test re-"creating" the same key'
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: present
+        tags:
+          snake_case: 'a_snake_case_value'
+          CamelCase: 'CamelCaseValue'
+          "spaced key": 'Spaced value'
+      register: result
+
+    # ============================================================
+    - name: test updating tags without purge (check mode)
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: present
+        tags:
+          newKey: 'Another value'
+        purge_tags: false
+      register: result
+      check_mode: true
+
+    - name: assert updated tags
+      assert:
+        that:
+           - result is changed
+
+    - name: test updating tags without purge
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: present
+        tags:
+          newKey: 'Another value'
+        purge_tags: false
+      register: result
+
+    - name: assert updated tags
+      assert:
+        that:
+          - result is changed
+          - '"key" in result'
+          - '"name" in result.key'
+          - '"fingerprint" in result.key'
+          - '"private_key" not in result.key'
+          - '"id" in result.key'
+          - result.key.id == key_id_1
+          - '"tags" in result.key'
+          - result.key.name == ec2_key_name
+          - '"snake_case" in result.key.tags'
+          - result.key.tags['snake_case'] == 'a_snake_case_value'
+          - '"CamelCase" in result.key.tags'
+          - result.key.tags['CamelCase'] == 'CamelCaseValue'
+          - '"spaced key" in result.key.tags'
+          - result.key.tags['spaced key'] == 'Spaced value'
+          - '"newKey" in result.key.tags'
+          - result.key.tags['newKey'] == 'Another value'
+
+    - name: test updating tags without purge - idempotency (check mode)
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: present
+        tags:
+          newKey: 'Another value'
+        purge_tags: false
+      register: result
+      check_mode: true
+
+    - name: assert updated tags
+      assert:
+        that:
+           - result is not changed
+
+    - name: test updating tags without purge - idempotency
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: present
+        tags:
+          newKey: 'Another value'
+        purge_tags: false
+      register: result
+
+    - name: assert updated tags
+      assert:
+        that:
+          - result is not changed
+          - '"key" in result'
+          - '"name" in result.key'
+          - '"fingerprint" in result.key'
+          - '"private_key" not in result.key'
+          - '"id" in result.key'
+          - '"tags" in result.key'
+          - result.key.name == ec2_key_name
+          - result.key.id == key_id_1
+          - '"snake_case" in result.key.tags'
+          - result.key.tags['snake_case'] == 'a_snake_case_value'
+          - '"CamelCase" in result.key.tags'
+          - result.key.tags['CamelCase'] == 'CamelCaseValue'
+          - '"spaced key" in result.key.tags'
+          - result.key.tags['spaced key'] == 'Spaced value'
+          - '"newKey" in result.key.tags'
+          - result.key.tags['newKey'] == 'Another value'
+
+    # ============================================================
+    - name: test updating tags with purge (check mode)
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: present
+        tags:
+          newKey: 'Another value'
+        purge_tags: true
+      register: result
+      check_mode: true
+
+    - name: assert updated tags
+      assert:
+        that:
+           - result is changed
+
+    - name: test updating tags with purge
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: present
+        tags:
+          newKey: 'Another value'
+        purge_tags: true
+      register: result
+
+    - name: assert updated tags
+      assert:
+        that:
+          - result is changed
+          - '"key" in result'
+          - '"name" in result.key'
+          - '"fingerprint" in result.key'
+          - '"private_key" not in result.key'
+          - '"id" in result.key'
+          - result.key.id == key_id_1
+          - '"tags" in result.key'
+          - result.key.name == ec2_key_name
+          - '"snake_case" not in result.key.tags'
+          - '"CamelCase" not in result.key.tags'
+          - '"spaced key" not in result.key.tags'
+          - '"newKey" in result.key.tags'
+          - result.key.tags['newKey'] == 'Another value'
+
+    - name: test updating tags with purge - idempotency (check mode)
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: present
+        tags:
+          newKey: 'Another value'
+        purge_tags: true
+      register: result
+      check_mode: true
+
+    - name: assert updated tags
+      assert:
+        that:
+           - result is not changed
+
+    - name: test updating tags with purge - idempotency
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: present
+        tags:
+          newKey: 'Another value'
+        purge_tags: true
+      register: result
+
+    - name: assert updated tags
+      assert:
+        that:
+          - result is not changed
+          - '"key" in result'
+          - '"name" in result.key'
+          - '"fingerprint" in result.key'
+          - '"private_key" not in result.key'
+          - '"id" in result.key'
+          - '"tags" in result.key'
+          - result.key.name == ec2_key_name
+          - result.key.id == key_id_1
+          - '"snake_case" not in result.key.tags'
+          - '"CamelCase" not in result.key.tags'
+          - '"spaced key" not in result.key.tags'
+          - '"newKey" in result.key.tags'
+          - result.key.tags['newKey'] == 'Another value'
+
+    # ============================================================
+    - name: test removing an existent key (check mode)
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: absent
+      register: result
+      check_mode: true
+
+    - name: assert removing an existent key
+      assert:
+        that:
+           - result is changed
+
+    - name: test removing an existent key
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: absent
+      register: result
+
+    - name: assert removing an existent key
+      assert:
+        that:
+           - result is changed
+           - '"key" in result'
+           - result.key == None
+
+    # ============================================================
+    - name: test state=present with key_material
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        key_material: '{{ key_material }}'
+        state: present
+      register: result
+
+    - name: assert state=present with key_material
+      assert:
+        that:
+          - 'result.changed == True'
+          - '"key" in result'
+          - '"name" in result.key'
+          - '"fingerprint" in result.key'
+          - '"private_key" not in result.key'
+          - '"id" in result.key'
+          - '"tags" in result.key'
+          - 'result.key.name == "{{ec2_key_name}}"'
+          - 'result.key.fingerprint == "{{fingerprint}}"'
+
+    # ============================================================
+
+    - name: test force=no with another_key_material (expect changed=false)
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        key_material: '{{ another_key_material }}'
+        force: no
+      register: result
+
+    - name: assert force=no with another_key_material (expect changed=false)
+      assert:
+        that:
+          - 'not result.changed'
+          - 'result.key.fingerprint == "{{ fingerprint }}"'
+
+    # ============================================================
+
+    - name: test updating a key pair using another_key_material (expect changed=True)
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        key_material: '{{ another_key_material }}'
+      register: result
+
+    - name: assert updating a key pair using another_key_material (expect changed=True)
+      assert:
+        that:
+          - 'result.changed'
+          - 'result.key.fingerprint != "{{ fingerprint }}"'
+
+    # ============================================================
+    - name: test state=absent (expect changed=true)
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: absent
+      register: result
+
+    - name: assert state=absent with key_material (expect changed=true)
+      assert:
+        that:
+           - 'result.changed'
+           - '"key" in result'
+           - 'result.key == None'
+
+  always:
+
+    # ============================================================
+    - name: Always delete the key we might create
+      ec2_key:
+        name: '{{ ec2_key_name }}'
+        state: absent
