@@ -37,9 +37,9 @@
     security_group: "{{ aws_security_group }}"
     instance_type: "{{ item.value.instance_type }}"
     image_id: "{{ aws_ami_id }}" 
-    state: present
-    wait: yes
-    wait_timeout: 300
+    state: running
+    wait: true
+    #wait_timeout: 300
     #count: 1
     region: "{{ aws_region }}"
     tags:
