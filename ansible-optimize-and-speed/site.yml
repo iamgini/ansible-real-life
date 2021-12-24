@@ -1,0 +1,9 @@
+---
+- name: Deploying Web Server
+  hosts: node1
+  become: true
+  #gather_facts: False
+  tasks:
+    - name: Deploy Web service
+      include_role: 
+        name: deploy-web-server

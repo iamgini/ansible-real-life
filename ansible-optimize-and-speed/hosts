@@ -1,0 +1,5 @@
+[me]
+localhost ansible_connection=local
+
+[node]
+node1 ansible_host=192.168.56.16 ansible_user=vagrant ansible_ssh_common_args='-o StrictHostKeyChecking=no ' ansible_ssh_private_key_file=~/.ssh/id_rsa
