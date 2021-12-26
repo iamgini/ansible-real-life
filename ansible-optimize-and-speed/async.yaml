@@ -1,0 +1,10 @@
+---
+- name: Async Demo
+  hosts: nodes
+  tasks:
+    
+    - name: Initiate custom snapshot
+      shell:
+        "/opt/diskutils/snapshot.sh init"
+      async: 120 # Maximum allowed time in Seconds
+      poll: 05 # Polling Interval in Seconds

@@ -1,0 +1,15 @@
+---
+- name: Create a file
+  hosts: node1
+  become: true
+  tasks:
+    - name: Create file using shell module
+      shell: 'echo "Hello" > /tmp/foo.conf'
+      
+    - name: Create file with permission using file module
+      ansible.builtin.copy:
+        content: "Hello"
+        dest: /tmp/foo.conf
+        owner: root
+        group: root
+        mode: '0644'
