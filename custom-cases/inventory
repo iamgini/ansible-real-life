@@ -1,0 +1,12 @@
+[local]
+localhost
+
+[java]
+node01 ansible_host=10.1.10.11
+node02 ansible_host=10.1.10.12
+node03 ansible_host=10.1.10.13
+
+[nodejs]
+node21 ansible_host=10.1.10.21
+node22 ansible_host=10.1.10.22
+node23 ansible_host=10.1.10.23

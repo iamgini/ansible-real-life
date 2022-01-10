@@ -1,0 +1,13 @@
+
+- name: Use hostvars and Loop
+  hosts: localhost
+  gather_facts: no
+  vars:
+    app: "java"
+
+  tasks:
+    - name: Display Temp Data 
+      debug:
+        msg: "{{ hostvars[item].ansible_host }} {{ item }}"
+      with_items: "{{ groups[app] }}"
+      

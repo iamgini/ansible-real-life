@@ -1,0 +1,14 @@
+
+- name: Handle duplicate entries and pick one
+  hosts: localhost
+  gather_facts: no
+    
+  tasks:
+
+    - name: Comment out only 2nd and 3rd Line entries without touching duplicate
+      replace:
+        path: ansible-lineinfile-handle-duplicate.txt
+        regexp: '^192.168.1.10'
+        replace: '#192.168.1.10'
+        after: '[Abc]'
+        before: '[Xyz]'

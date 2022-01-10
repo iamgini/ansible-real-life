@@ -1,0 +1,25 @@
+
+- name: Dynamic Variable, Items and Dictionaries
+  hosts: localhost
+  gather_facts: no
+  vars:
+    your_list_variable: []
+    temp_data:
+      - "sshd"
+      - "ntpd"
+      - "httpd"
+
+  tasks:
+    - name: Display Temp Data 
+      debug:
+        msg: "{{ temp_data }}"
+
+    - name: Collect Data Dynamically
+      set_fact:
+        your_list_variable: "{{ your_list_variable }} + [ 'This is {{ item }}' ]"
+      loop: "{{ temp_data }}"
+      #when: your-condition thing
+    
+    - name: Display Dynamic Variable
+      debug:
+        msg: "{{ your_list_variable }}"

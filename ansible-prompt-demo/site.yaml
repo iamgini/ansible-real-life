@@ -1,0 +1,4 @@
+- name: Continue with processing ?
+  pause:
+    prompt: Please confirm you want to continue. Press return to continue. Press Ctrl+c and then "a" to abort
+  when: a is defined
