@@ -1,0 +1,19 @@
+---
+- name: Sending notification email
+  mail:
+    host: "{{ email_smtp_server }}"
+    port: "{{ email_smtp_server_port }}"
+    secure: try
+    from: "{{ email_smtp_from_address }}"
+    to: "{{ email_smtp_to_address }}"
+    #cc: "{{ email_smtp_cc_address }}"
+    subject: "{{ email_smtp_subject }}"
+    body: "{{ email_report_body }}"
+    attach:
+      - "{{ report_file_name }}"
+    headers:
+      - Reply-To="{{ email_smtp_replyto_address }}"
+    username: "{{ email_smtp_username }}"
+    password: "{{ email_smtp_password }}"
+  delegate_to: localhost
+  
