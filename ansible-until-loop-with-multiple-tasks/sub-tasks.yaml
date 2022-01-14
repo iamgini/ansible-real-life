@@ -1,0 +1,21 @@
+# sub-tasks.yaml
+- name: block
+  block:
+    - name: "01 Task"
+      debug: 
+        msg: "Current value of loop_counter: {{ loop_counter }}"
+
+    - name: "02 Task - decrease counter"
+      set_fact:
+        loop_counter: "{{ loop_counter | int - 1 }}"
+
+    - name: "02 Task - print new value"
+      debug: 
+        msg: "New value of loop_counter: {{ loop_counter }}"
+        
+    - assert:
+        that:
+          - loop_counter | int < 1
+  rescue:
+    - name: Running loop again
+      include_tasks: sub-tasks.yaml

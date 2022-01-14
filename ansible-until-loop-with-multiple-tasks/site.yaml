@@ -1,0 +1,29 @@
+---
+- name: Ansible until loop
+  hosts: localhost
+  gather_facts: no
+  vars:
+    loop_counter: 10
+
+  tasks:
+    - name: "Until loop with condition"
+      include_tasks: sub-tasks.yaml
+    #    #until: full
+    #  until: loop_counter | int > 1
+    #  retries: 10
+
+    #- name: block
+    #  block:
+    #    - name: "01 Task"
+    #      debug: 
+    #        msg: "Current value of loop_counter: {{ loop_counter }}"
+#
+    #    - name: "02 Task - decrase counter"
+    #      set_fact:
+    #        loop_counter: "{{ loop_counter - 1}}"
+#
+    #    - name: "02 Task - print new value"
+    #      debug: 
+    #        msg: "New value of loop_counter: {{ loop_counter }}"
+    #  #until: loop_counter | int > 1
+    #  #retries: 10
