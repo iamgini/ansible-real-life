@@ -1,0 +1,17 @@
+---
+- name: reboot a linux machine
+  host: all
+  become: true
+
+  tasks:
+    - name: Reboot the machine
+      shell: "sleep 5 && reboot"
+      async: 1
+      poll: 0
+
+    - name: Wait for the machine to come back online after reboot
+      wait_for_connection:
+        connect_timeout: 60
+        sleep: 5
+        delay: 5
+        timeout: 300

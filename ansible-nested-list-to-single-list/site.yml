@@ -1,0 +1,19 @@
+---
+- name: Convert nested list to list
+  hosts: localhost
+  vars:
+    my_nested_list: [['appple','orange','banana'], ['tomato','ginger','potato']]
+    my_single_list: []
+  tasks:
+    - name: Print the List
+      debug:
+        msg: "{{ my_nested_list }}"
+
+    - name: Concatenate a list to string
+      set_fact:
+        my_single_list: "{{ my_single_list +  item }}"
+      loop: "{{ my_nested_list }}"
+
+    - name: Print the single list
+      debug:
+        msg: "{{ my_single_list }}"
