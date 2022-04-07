@@ -2,4 +2,4 @@
 localhost ansible_connection=local
 
 [nodes]
-node1 ansible_host=46.137.194.248 ansible_connection=community.aws.aws_ssm
+i-0ce9d6f6eca66a701
