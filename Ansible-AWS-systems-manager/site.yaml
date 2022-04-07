@@ -1,5 +1,5 @@
 ---
-- name: Install httpd
+- name: Access EC2 using AWS SSM connection
   hosts: nodes
   become: true
   #gather_facts: false
