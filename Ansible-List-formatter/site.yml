@@ -1,0 +1,32 @@
+---
+- name: Convert all items in the list as string
+  hosts: localhost
+  gather_facts: false
+  vars:
+    my_list:
+      - scsi0:0.redo
+      - scsi1:6.redo
+      - scsi0:2.redo
+      - scsi0:5.redo
+      - scsi1:2.redo
+    my_list_new: []
+  tasks:
+    - name: Print the List
+      debug:
+        msg: "{{ item  }}"
+      with_items: "{{ my_list }}"
+    
+    - name: Print the String
+      debug:
+        msg: "{{ my_list | sort }}"
+
+    - name: Concatenate a list to string
+      set_fact:
+        #my_string: "{{ item | join(',') }}"
+        my_list_new: "{{ my_list_new + [ item ] }}"
+
+      with_items: "{{ my_list }}"
+
+    - name: Print the String
+      debug:
+        msg: "{{ my_list_new }}"

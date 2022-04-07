@@ -1,0 +1,14 @@
+# aws_ec2.yaml inventory
+
+plugin: aws_ec2
+regions:
+  - eu-west-2
+keyed_groups:
+  - prefix: tag
+    key: tags
+  - prefix: aws_region
+    key: placement.region
+hostnames:
+  - i-0bc9fc987639f549b
+compose:
+  ansible_host: i-0bc9fc987639f549b
