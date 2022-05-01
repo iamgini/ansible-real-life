@@ -1,0 +1,25 @@
+---
+- name: Access EC2 using AWS SSM connection
+  hosts: nodes
+  become: true
+  #gather_facts: false
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    ansible_user: ssm-user
+    ansible_aws_ssm_profile: devops
+    ansible_connection: community.aws.aws_ssm
+    ansible_aws_ssm_bucket_name: "ansible-demo-bucket-2022apr07"
+    ansible_aws_ssm_region: ap-southeast-1
+  tasks:
+    - name: Install vim
+      ansible.builtin.package: 
+        name: vim
+        state: present
+
+    - name: Node info
+      debug: 
+        msg: "{{ ansible_all_ipv4_addresses }}"
+
+    - name: OS info
+      debug: 
+        msg: "{{ ansible_facts['distribution'] }}"

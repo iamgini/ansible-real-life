@@ -1,0 +1,5 @@
+[me]
+localhost ansible_connection=local
+
+[nodes]
+i-0ce9d6f6eca66a701

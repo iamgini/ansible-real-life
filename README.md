@@ -6,6 +6,8 @@ If you are new to Ansible, please see the **FREE Course**, **[Ansible for Absolu
 
 This repository is for Ansible real life samples and use cases.
 
+Check the YouTube playlist [Ansible Real Life use cases](https://www.youtube.com/playlist?list=PLH5uDiXcw8tSJBiIGyZ2n5dMTh00Dej6j) for past events and workshops.
+
 Do you have a use case to discuss ? Let's learn it together; leave a message to [gini@techbeatly.com](mailto:gini@techbeatly.com).
 
 **Content**
