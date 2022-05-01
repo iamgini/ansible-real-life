@@ -1,0 +1,23 @@
+---
+- name: Ansible mail notification
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    vars/smtp_secrets.yml
+  vars:
+    email_smtp_server: 'smtp.gmail.com'
+    email_smtp_server_port: '587'
+    email_smtp_from_address: 'ansible@lab.local (Ansible Automation)'
+    email_smtp_to_address:
+          - 'John Doe <john@lab.local>'
+          - 'Linda <linda@lab.local>'
+    #email_smtp_cc_address:
+    #      - 'John Doe <john@gmail.com>'
+    email_smtp_replyto_address: 'no-reply@lab.local'
+    email_report_body: "This is a demo email. Check demo attachment."
+    email_smtp_subject: "Ansible Email Notification - Demo"
+    report_file_name: ./demo-file.txt
+  tasks:
+    - name: Email notification
+      include_role:
+        name: send-email
