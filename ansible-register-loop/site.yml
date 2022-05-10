@@ -1,0 +1,17 @@
+---
+- name: Register loop
+  hosts: localhost
+  vars:
+    mycommands:
+      - date
+      - whoami
+      - uptime
+  tasks:
+    - name: run commands
+      shell: "{{ item }}"
+      with_items: "{{ mycommands }}"
+      register: myoutput
+
+    - debug: 
+        msg: "{{ item }}"
+      with_items: "{{ myoutput.results }}"
