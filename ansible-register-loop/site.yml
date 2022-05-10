@@ -15,3 +15,7 @@
     - debug: 
         msg: "{{ item }}"
       with_items: "{{ myoutput.results }}"
+
+    - debug: 
+        msg: "{{ item.stdout_lines }}"
+      with_items: "{{ myoutput.results }}"
