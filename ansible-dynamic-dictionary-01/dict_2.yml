@@ -73,3 +73,7 @@
 
     - debug:
         msg: "{{ myfulldict }}"
+      
+    - name: Print hello
+      ansible.builtin.debug:
+        msg: "hello"

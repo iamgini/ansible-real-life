@@ -1,0 +1,48 @@
+
+#- name: Write memory
+#  cisco.asa.asa_command:
+#    commands:
+#    - write memory
+#
+#- name: Take Cisco ASA Backup
+#  cisco.asa.asa_config:
+#    backup: yes
+#    backup_options:
+#      dir_path: "{{ hostvars[inventory_hostname].temp_backup_location.path }}"
+#      filename: "{{ backup_file_name }}"
+#  register: cisco_asa_backup_status
+
+#- debug:
+#    msg: "{{ cisco_asa_backup_status }}"
+
+#- name: Upload file to tftp server
+#  ansible.builtin.shell: |
+#    tftp {{ tftp_server }} <<EOF
+#    put "{{ cisco_asa_backup_status.backup_path }}"
+#    quit
+#    EOF
+#  args:
+#    chdir: "{{ hostvars[inventory_hostname].temp_backup_location.path }}"
+#  delegate_to: localhost
+#  register: ftp_upload_status
+#  #when: a is defined
+#
+#- debug: 
+#    msg: "{{ ftp_upload_status }}"
+#- debug:
+#    msg: "{{ hostvars[inventory_hostname].temp_backup_location.path }}"
+
+#- name: Upload file to tftp server
+#  ansible.builtin.shell: |
+#    curl -T {{ hostvars[inventory_hostname].temp_backup_location.path }}/{{ backup_file_name }} tftp://{{ tftp_server }}:{{ tftp_server_port }}
+#  delegate_to: localhost
+#  ignore_errors: true
+#  register: ftp_upload_status
+
+#- debug: 
+#    msg: "{{ ftp_upload_status }}"
+
+
+
+
+  

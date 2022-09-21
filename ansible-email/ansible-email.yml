@@ -1,7 +1,7 @@
 ---
 - name: Ansible mail notification
   hosts: localhost
-  gather_facts: no
+  gather_facts: false
   vars_files:
     vars/smtp_secrets.yml
   vars:
@@ -21,3 +21,6 @@
     - name: Email notification
       include_role:
         name: send-email
+    - name: Testing
+      ansible.builtin.debug:
+        msg: Hello world!

@@ -13,3 +13,4 @@
     - name: Display k8s Cluster details
       debug:
         msg: "{{ pod_list }}"
+  

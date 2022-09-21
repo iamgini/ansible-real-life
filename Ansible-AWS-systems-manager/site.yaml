@@ -2,7 +2,7 @@
 - name: Access EC2 using AWS SSM connection
   hosts: nodes
   become: true
-  #gather_facts: false
+  # gather_facts: false
   vars:
     ansible_python_interpreter: /usr/bin/python3
     ansible_user: ssm-user
@@ -12,12 +12,12 @@
     ansible_aws_ssm_region: ap-southeast-1
   tasks:
     - name: Install vim
-      ansible.builtin.package: 
+      ansible.builtin.package:
         name: vim
         state: present
 
     - name: Node info
-      debug: 
+      ansible.builtin.debug:
         msg: "{{ ansible_all_ipv4_addresses }}"
 
     - name: OS info

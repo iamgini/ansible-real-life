@@ -1,0 +1,19 @@
+---
+- name: "Multi List Loop"
+  hosts: localhost
+  vars:
+    fruits:
+      - "apple"
+      - "mango"
+      - "orange"
+    color:
+      - "red"
+      - "yellow"
+      - "green"
+  tasks:
+    - name: "Loop with multiple list"
+      debug:
+        msg: "{{ item[0] }} {{ item[1] }}"
+      with_nested:
+        - '{{ color }}'
+        - '{{ fruits }}'

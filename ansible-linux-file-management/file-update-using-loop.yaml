@@ -1,0 +1,110 @@
+# https://codeshare.io/X80xJM
+---
+- hosts: "{{ NODES }}"
+  gather_facts: false
+
+  vars:
+    output_file: output.txt
+  tasks:
+  - name: Create server output file
+    file:
+      path: "{{ output_file }}"
+      state: touch
+      owner: root
+      group: root
+      mode: '0644'
+    run_once: true
+    delegate_to: localhost
+
+  - name: Server details
+    shell: |
+      echo "$(uname -n)"
+      echo "Old kernel: xyz"
+      echo "Current kernel: $(uname -r)"
+    #when: (not 'ora' in inventory_hostname) and (not 'ql' in inventory_hostname) and (not 'syb' in inventory_hostname)
+    register: app
+
+  #- name: check with shell
+  #  shell: |
+  #    echo " {{ item }}" >>  /opt/depot/dinesh/{{ chg }}-Test.txt
+  #  loop:
+  #    - "{{ app.stdout }}"
+  #  when: (not 'ora' in inventory_hostname) and (not 'ql' in inventory_hostname) and (not 'syb' in inventory_hostname)
+  #  delegate_to: localhost
+
+  - name: Store app server oututs in a file
+#    local_action: lineinfile line="{{ item }}" insertafter=EOF path=/opt/depot/dinesh/{{ chg }}-Test.txt
+    lineinfile: 
+      line: "{{ item }}" 
+      insertafter: EOF 
+      path: "{{ output_file }}"
+    #blockinfile: block=" Hi {{ item }}" insertafter=EOF path=/opt/depot/dinesh/{{ chg }}-Test.txt
+    loop:
+      - "{{ hostvars[inventory_hostname].app.stdout_lines }}"
+    #when: (not 'ora' in inventory_hostname) and (not 'ql' in inventory_hostname) and (not 'syb' in inventory_hostname)
+  #  ignore_errors: True
+    delegate_to: localhost
+  # - debug:
+  #     msg: "{{ app }}"
+  - meta: end_play
+  - name: Database server outputs
+    shell: |
+      echo "************************************************************************************"
+      echo "$(uname -n) Output"
+      echo "-------------------------------"
+      echo "Old kernel: xyz"
+      echo "Current kernel: $(uname -r)"
+      echo "GRID services status"
+      echo "--------------------"
+      echo "No GRID setup found on server"
+    when: "'ora' in inventory_hostname"
+    register: db
+  - name: Postgres Database server outputs
+    shell: |
+      echo "************************************************************************************"
+      echo "$(uname -n) Output"
+      echo "-------------------------------"
+      echo "Old kernel: xyz"
+      echo "Current kernel: $(uname -r)"
+      ps -ef | grep /pgsql | grep -v grep > /dev/null
+      if [[ $? == 0 ]]; then echo "DB Checkout: Success"; else echo "DB Checkout: Fail"; fi
+      echo "-------------------------------"
+    when: " 'ql' in inventory_hostname"
+    register: pgsql
+  - name: Sybase Database server outputs
+    shell: |
+      echo "************************************************************************************"
+      echo "$(uname -n) Output"
+      echo "-------------------------------"
+      echo "Old kernel: xyz"
+      echo "Current kernel: $(uname -r)"
+      ps -ef | grep IQ | grep -v grep > /dev/null
+      if [[ $? == 0 ]]; then echo "DB Checkout: Success"; else echo "DB Checkout: Fail"; fi
+      echo "-------------------------------"
+    when: "'syb' in inventory_hostname"
+    register: syb
+  # - name: Store app server oututs in a file
+  #   local_action: lineinfile line="{{ item }}" insertafter=EOF path=/opt/depot/dinesh/{{ chg }}-Test.txt
+  #   loop:
+  #     - "{{ app.stdout | default()}}"
+  #   when: (not 'ora' in inventory_hostname) and (not 'ql' in inventory_hostname) and (not 'syb' in inventory_hostname)
+  #   ignore_errors: True
+  # - meta: end_play
+  - name: Store Oracle database server outputs in a file
+    local_action: lineinfile line="{{ item }}" insertafter=EOF path=/opt/depot/dinesh/{{ chg }}-Test.txt
+    loop:
+      - "{{ db.stdout | default() }}"
+    when: "'ora' in inventory_hostname"
+    ignore_errors: True
+  - name: Store Postgres database server outputs in a file
+    local_action: lineinfile line="{{ item }}" insertafter=EOF path=/opt/depot/dinesh/{{ chg }}-Test.txt
+    loop:
+      - "{{ pgsql.stdout | default() }}"
+    when: "'ql' in inventory_hostname"
+    ignore_errors: True
+  - name: Store Sybase database server outputs in a file
+    local_action: lineinfile line="{{ item }}" insertafter=EOF path=/opt/depot/dinesh/{{ chg }}-Test.txt
+    loop:
+      - "{{ syb.stdout | default() }}"
+    when: "'syb' in inventory_hostname"
+    ignore_errors: True
