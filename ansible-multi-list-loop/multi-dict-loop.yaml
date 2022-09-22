@@ -4,19 +4,19 @@
   gather_facts: false
   vars:
     dict_var1:
-      cmd1: "val1"
-      cmd2: "val2"
-      cmd3: "val3"
+      cmd1: "mycmd1"
+      cmd2: "mycmd2"
+      cmd3: "mycmd3"
     dict_var2:
-      file1: "va21"
-      file2: "va22"
-      file3: "va23"
+      file1: "myfile1"
+      file2: "myfile2"
+      file3: "myfile3"
   tasks:
     - debug:
         msg: "{{ dict_var1 }}"
     - name: "Loop with multiple list"
       debug:
-        msg: "{{ item[0] }} {{ item[1] }}"
+        msg: "{{ item[0].value }} {{ item[1].value }}"
       with_nested:
-        - '{{ dict_var1 }}'
-        - '{{ dict_var2 }}'
+        - '{{ dict_var1 | dict2items }}'
+        - '{{ dict_var2 | dict2items }}'
