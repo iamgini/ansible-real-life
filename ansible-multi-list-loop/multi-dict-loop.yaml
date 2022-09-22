@@ -1,0 +1,22 @@
+---
+- name: "Multi Dict Loop"
+  hosts: localhost
+  gather_facts: false
+  vars:
+    dict_var1:
+      cmd1: "val1"
+      cmd2: "val2"
+      cmd3: "val3"
+    dict_var2:
+      file1: "va21"
+      file2: "va22"
+      file3: "va23"
+  tasks:
+    - debug:
+        msg: "{{ dict_var1 }}"
+    - name: "Loop with multiple list"
+      debug:
+        msg: "{{ item[0] }} {{ item[1] }}"
+      with_nested:
+        - '{{ dict_var1 }}'
+        - '{{ dict_var2 }}'
