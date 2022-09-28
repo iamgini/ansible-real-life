@@ -1,0 +1,19 @@
+---
+version: 1
+
+build_arg_defaults:
+  EE_BASE_IMAGE: 'automationhub22-1.lab.local/ee-minimal-rhel8:latest'
+
+
+ansible_config: 'ansible.cfg'
+
+dependencies:
+  galaxy: requirements.yml
+  python: requirements.txt
+
+additional_build_steps:
+#  prepend:
+#    - RUN pip3 install --upgrade pip setuptools
+  append:
+    #- RUN pip3 list installed
+    - RUN microdnf install which
