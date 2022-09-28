@@ -1,6 +1,6 @@
 ---
 - name: Testing Custom Module
-  hosts: "{{ nodes }}"
+  hosts: localhost
   gather_facts: false
   tasks:
     - name: Calling customhello2 module
