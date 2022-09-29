@@ -5,31 +5,10 @@ roles:
   #  version: 1.9.6
 
 collections:
-  # Install a collection from Ansible Galaxy.
-  #- name: cisco.asa
-  #  version: 3.0.0
-  #  source: https://galaxy.ansible.com
-  #- name: cisco.nxos
-  #  version: 3.0.0
-  #  source: https://galaxy.ansible.com  
-
 
   - name: paloaltonetworks.panos
     version: 2.9.0
-
-  #- name: community.general
   
   - name: check_point.mgmt
     version: 3.0.0
-
-  #- name: f5networks.f5_modules
-  #  version: 1.17.0
-
-  #- name: fortinet.fortios
-  #  version: 2.1.6
-
-  #- name: cisco.meraki
-  #  version: 2.6.2
-
-  #- name: cisco.ios
-  #  version: 2.6.1
+    
