@@ -16,5 +16,5 @@
         my_string: "{{ my_list | join(',') }}"
 
     - name: Print the String
-      debug:
+      ansible.builtin.debug:
         msg: "{{ my_string }}"
