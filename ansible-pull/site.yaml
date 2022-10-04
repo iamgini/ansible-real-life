@@ -1,0 +1,7 @@
+---
+- name: Demo Ansible Pull Playbook
+  hosts: all
+  tasks:
+    - name: Hello message
+      debug: 
+        msg: "Hello from Ansible"
