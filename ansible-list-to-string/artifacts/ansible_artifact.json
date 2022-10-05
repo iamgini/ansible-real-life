@@ -1,25 +1,14 @@
 {
     "plays": [
         {
-            "___progress": "100%",
-            "__changed": 0,
-            "__failed": 0,
-            "__ignored": 0,
-            "__in progress": 0,
-            "__ok": 4,
-            "__percent_complete": 100,
             "__play_name": "List to String Conversion",
-            "__progress": "Complete",
-            "__skipped": 0,
-            "__task_count": 4,
-            "__unreachable": 0,
             "name": "List to String Conversion",
             "pattern": "localhost",
             "play": "List to String Conversion",
             "play_pattern": "localhost",
-            "play_uuid": "de608a03-61cd-d994-b600-000000000007",
+            "play_uuid": "228649ec-1757-068b-4c6b-000000000007",
             "playbook": "/home/gmadappa/ansible/ansible-real-life/ansible-list-to-string/site.yml",
-            "playbook_uuid": "f27bd985-098f-4da5-9723-241547e090f9",
+            "playbook_uuid": "15e384bd-3a29-4755-bc26-5f4486919198",
             "tasks": [
                 {
                     "__changed": false,
@@ -29,15 +18,15 @@
                     "__result": "Ok",
                     "__task": "Gathering Facts",
                     "__task_action": "gather_facts",
-                    "duration": 0.904879,
-                    "end": "2022-09-29T09:29:20.743425",
+                    "duration": 0.871123,
+                    "end": "2022-10-05T08:31:13.686298",
                     "event_loop": null,
                     "host": "localhost",
                     "play": "List to String Conversion",
                     "play_pattern": "localhost",
-                    "play_uuid": "de608a03-61cd-d994-b600-000000000007",
+                    "play_uuid": "228649ec-1757-068b-4c6b-000000000007",
                     "playbook": "/home/gmadappa/ansible/ansible-real-life/ansible-list-to-string/site.yml",
-                    "playbook_uuid": "f27bd985-098f-4da5-9723-241547e090f9",
+                    "playbook_uuid": "15e384bd-3a29-4755-bc26-5f4486919198",
                     "remote_addr": "localhost",
                     "res": {
                         "_ansible_no_log": null,
@@ -70,25 +59,25 @@
                                 "root": "/dev/mapper/fedora-root"
                             },
                             "ansible_date_time": {
-                                "date": "2022-09-29",
-                                "day": "29",
-                                "epoch": "1664443760",
-                                "epoch_int": "1664443760",
-                                "hour": "09",
-                                "iso8601": "2022-09-29T09:29:20Z",
-                                "iso8601_basic": "20220929T092920425868",
-                                "iso8601_basic_short": "20220929T092920",
-                                "iso8601_micro": "2022-09-29T09:29:20.425868Z",
-                                "minute": "29",
-                                "month": "09",
-                                "second": "20",
-                                "time": "09:29:20",
+                                "date": "2022-10-05",
+                                "day": "05",
+                                "epoch": "1664958673",
+                                "epoch_int": "1664958673",
+                                "hour": "08",
+                                "iso8601": "2022-10-05T08:31:13Z",
+                                "iso8601_basic": "20221005T083113416261",
+                                "iso8601_basic_short": "20221005T083113",
+                                "iso8601_micro": "2022-10-05T08:31:13.416261Z",
+                                "minute": "31",
+                                "month": "10",
+                                "second": "13",
+                                "time": "08:31:13",
                                 "tz": "UTC",
                                 "tz_dst": "UTC",
                                 "tz_offset": "+0000",
-                                "weekday": "Thursday",
-                                "weekday_number": "4",
-                                "weeknumber": "39",
+                                "weekday": "Wednesday",
+                                "weekday_number": "3",
+                                "weeknumber": "40",
                                 "year": "2022"
                             },
                             "ansible_device_links": {
@@ -313,14 +302,7 @@
                             "ansible_dns": {
                                 "nameservers": [
                                     "10.0.2.3",
-                                    "10.68.5.26",
-                                    "10.38.5.26",
-                                    "10.208.0.245",
-                                    "10.208.0.246"
-                                ],
-                                "search": [
-                                    "sin.redhat.com",
-                                    "redhat.com"
+                                    "192.168.1.254"
                                 ]
                             },
                             "ansible_domain": "",
@@ -329,8 +311,8 @@
                             "ansible_fibre_channel_wwn": [],
                             "ansible_fips": false,
                             "ansible_form_factor": "Notebook",
-                            "ansible_fqdn": "9d7fe517412b",
-                            "ansible_hostname": "9d7fe517412b",
+                            "ansible_fqdn": "88562e026f62",
+                            "ansible_hostname": "88562e026f62",
                             "ansible_hostnqn": "",
                             "ansible_is_chroot": false,
                             "ansible_iscsi_iqn": "",
@@ -339,92 +321,92 @@
                             "ansible_local": {},
                             "ansible_lsb": {},
                             "ansible_machine": "x86_64",
-                            "ansible_memfree_mb": 997,
+                            "ansible_memfree_mb": 3892,
                             "ansible_memory_mb": {
                                 "nocache": {
-                                    "free": 11597,
-                                    "used": 20163
+                                    "free": 12883,
+                                    "used": 18877
                                 },
                                 "real": {
-                                    "free": 997,
+                                    "free": 3892,
                                     "total": 31760,
-                                    "used": 30763
+                                    "used": 27868
                                 },
                                 "swap": {
-                                    "cached": 4,
-                                    "free": 16069,
+                                    "cached": 0,
+                                    "free": 16383,
                                     "total": 16383,
-                                    "used": 314
+                                    "used": 0
                                 }
                             },
                             "ansible_memtotal_mb": 31760,
                             "ansible_mounts": [
                                 {
-                                    "block_available": 32491711,
+                                    "block_available": 32412744,
                                     "block_size": 4096,
                                     "block_total": 106889296,
-                                    "block_used": 74397585,
+                                    "block_used": 74476552,
                                     "device": "/dev/mapper/fedora-home",
                                     "fstype": "ext4",
-                                    "inode_available": 26438310,
+                                    "inode_available": 26417208,
                                     "inode_total": 27222016,
-                                    "inode_used": 783706,
+                                    "inode_used": 804808,
                                     "mount": "/root/.ssh",
                                     "options": "rw,seclabel,relatime,bind",
-                                    "size_available": 133086048256,
+                                    "size_available": 132762599424,
                                     "size_total": 437818556416,
                                     "uuid": "N/A"
                                 },
                                 {
-                                    "block_available": 32491711,
+                                    "block_available": 32412744,
                                     "block_size": 4096,
                                     "block_total": 106889296,
-                                    "block_used": 74397585,
+                                    "block_used": 74476552,
                                     "device": "/dev/mapper/fedora-home",
                                     "fstype": "ext4",
-                                    "inode_available": 26438310,
+                                    "inode_available": 26417208,
                                     "inode_total": 27222016,
-                                    "inode_used": 783706,
+                                    "inode_used": 804808,
                                     "mount": "/home/runner/.ssh",
                                     "options": "rw,seclabel,relatime,bind",
-                                    "size_available": 133086048256,
+                                    "size_available": 132762599424,
                                     "size_total": 437818556416,
                                     "uuid": "N/A"
                                 },
                                 {
-                                    "block_available": 32491711,
+                                    "block_available": 32412744,
                                     "block_size": 4096,
                                     "block_total": 106889296,
-                                    "block_used": 74397585,
+                                    "block_used": 74476552,
                                     "device": "/dev/mapper/fedora-home",
                                     "fstype": "ext4",
-                                    "inode_available": 26438310,
+                                    "inode_available": 26417208,
                                     "inode_total": 27222016,
-                                    "inode_used": 783706,
+                                    "inode_used": 804808,
                                     "mount": "/home/gmadappa/ansible/ansible-real-life/ansible-list-to-string",
                                     "options": "rw,seclabel,relatime,bind",
-                                    "size_available": 133086048256,
+                                    "size_available": 132762599424,
                                     "size_total": 437818556416,
                                     "uuid": "N/A"
                                 },
                                 {
-                                    "block_available": 32491711,
+                                    "block_available": 32412744,
                                     "block_size": 4096,
                                     "block_total": 106889296,
-                                    "block_used": 74397585,
+                                    "block_used": 74476552,
                                     "device": "/dev/mapper/fedora-home",
                                     "fstype": "ext4",
-                                    "inode_available": 26438310,
+                                    "inode_available": 26417208,
                                     "inode_total": 27222016,
-                                    "inode_used": 783706,
+                                    "inode_used": 804808,
                                     "mount": "/home/runner/.ansible/plugins/callback",
                                     "options": "rw,seclabel,relatime,bind",
-                                    "size_available": 133086048256,
+                                    "size_available": 132762599424,
                                     "size_total": 437818556416,
                                     "uuid": "N/A"
                                 }
                             ],
-                            "ansible_nodename": "9d7fe517412b",
+                            "ansible_nodename": "88562e026f62",
                             "ansible_os_family": "RedHat",
                             "ansible_pkg_mgr": "dnf",
                             "ansible_proc_cmdline": {
@@ -514,7 +496,7 @@
                             },
                             "ansible_selinux_python_present": true,
                             "ansible_service_mgr": "dumb-init",
-                            "ansible_swapfree_mb": 16069,
+                            "ansible_swapfree_mb": 16383,
                             "ansible_swaptotal_mb": 16383,
                             "ansible_system": "Linux",
                             "ansible_system_capabilities": [
@@ -522,7 +504,7 @@
                             ],
                             "ansible_system_capabilities_enforced": "True",
                             "ansible_system_vendor": "LENOVO",
-                            "ansible_uptime_seconds": 116747,
+                            "ansible_uptime_seconds": 24849,
                             "ansible_user_dir": "/home/runner",
                             "ansible_user_gecos": "root",
                             "ansible_user_gid": 0,
@@ -553,13 +535,13 @@
                         ]
                     },
                     "resolved_action": "ansible.builtin.gather_facts",
-                    "start": "2022-09-29T09:29:19.838546",
+                    "start": "2022-10-05T08:31:12.815175",
                     "task": "Gathering Facts",
                     "task_action": "gather_facts",
                     "task_args": "",
                     "task_path": "/home/gmadappa/ansible/ansible-real-life/ansible-list-to-string/site.yml:2",
-                    "task_uuid": "de608a03-61cd-d994-b600-00000000000f",
-                    "uuid": "64c28824-bffb-4eda-972c-74e547d73d95"
+                    "task_uuid": "228649ec-1757-068b-4c6b-000000000010",
+                    "uuid": "860f7d06-dddb-4c5c-a061-3f2fcc93d00c"
                 },
                 {
                     "__changed": false,
@@ -569,15 +551,15 @@
                     "__result": "Ok",
                     "__task": "Print the List",
                     "__task_action": "debug",
-                    "duration": 0.01655,
-                    "end": "2022-09-29T09:29:20.781703",
+                    "duration": 0.023343,
+                    "end": "2022-10-05T08:31:13.730535",
                     "event_loop": null,
                     "host": "localhost",
                     "play": "List to String Conversion",
                     "play_pattern": "localhost",
-                    "play_uuid": "de608a03-61cd-d994-b600-000000000007",
+                    "play_uuid": "228649ec-1757-068b-4c6b-000000000007",
                     "playbook": "/home/gmadappa/ansible/ansible-real-life/ansible-list-to-string/site.yml",
-                    "playbook_uuid": "f27bd985-098f-4da5-9723-241547e090f9",
+                    "playbook_uuid": "15e384bd-3a29-4755-bc26-5f4486919198",
                     "remote_addr": "localhost",
                     "res": {
                         "_ansible_no_log": null,
@@ -590,13 +572,13 @@
                         ]
                     },
                     "resolved_action": "ansible.builtin.debug",
-                    "start": "2022-09-29T09:29:20.765153",
+                    "start": "2022-10-05T08:31:13.707192",
                     "task": "Print the List",
                     "task_action": "debug",
                     "task_args": "",
                     "task_path": "/home/gmadappa/ansible/ansible-real-life/ansible-list-to-string/site.yml:10",
-                    "task_uuid": "de608a03-61cd-d994-b600-000000000009",
-                    "uuid": "98491846-9d94-46e4-8940-6ff9b81628eb"
+                    "task_uuid": "228649ec-1757-068b-4c6b-000000000009",
+                    "uuid": "5969c495-a29e-4e81-9265-d818e2f88afb"
                 },
                 {
                     "__changed": false,
@@ -606,15 +588,15 @@
                     "__result": "Ok",
                     "__task": "Concatenate a list to string",
                     "__task_action": "set_fact",
-                    "duration": 0.032753,
-                    "end": "2022-09-29T09:29:20.826957",
+                    "duration": 0.048157,
+                    "end": "2022-10-05T08:31:13.801131",
                     "event_loop": null,
                     "host": "localhost",
                     "play": "List to String Conversion",
                     "play_pattern": "localhost",
-                    "play_uuid": "de608a03-61cd-d994-b600-000000000007",
+                    "play_uuid": "228649ec-1757-068b-4c6b-000000000007",
                     "playbook": "/home/gmadappa/ansible/ansible-real-life/ansible-list-to-string/site.yml",
-                    "playbook_uuid": "f27bd985-098f-4da5-9723-241547e090f9",
+                    "playbook_uuid": "15e384bd-3a29-4755-bc26-5f4486919198",
                     "remote_addr": "localhost",
                     "res": {
                         "_ansible_no_log": null,
@@ -624,13 +606,13 @@
                         "changed": false
                     },
                     "resolved_action": "ansible.builtin.set_fact",
-                    "start": "2022-09-29T09:29:20.794204",
+                    "start": "2022-10-05T08:31:13.752974",
                     "task": "Concatenate a list to string",
                     "task_action": "set_fact",
                     "task_args": "",
                     "task_path": "/home/gmadappa/ansible/ansible-real-life/ansible-list-to-string/site.yml:14",
-                    "task_uuid": "de608a03-61cd-d994-b600-00000000000a",
-                    "uuid": "52d7942d-f62b-4f52-a79f-6dcf54ea8664"
+                    "task_uuid": "228649ec-1757-068b-4c6b-00000000000a",
+                    "uuid": "4d39b7ea-bc18-4c2d-9d8d-656b1f9460f1"
                 },
                 {
                     "__changed": false,
@@ -640,15 +622,15 @@
                     "__result": "Ok",
                     "__task": "Print the String",
                     "__task_action": "debug",
-                    "duration": 0.016296,
-                    "end": "2022-09-29T09:29:20.853566",
+                    "duration": 0.029245,
+                    "end": "2022-10-05T08:31:13.852102",
                     "event_loop": null,
                     "host": "localhost",
                     "play": "List to String Conversion",
                     "play_pattern": "localhost",
-                    "play_uuid": "de608a03-61cd-d994-b600-000000000007",
+                    "play_uuid": "228649ec-1757-068b-4c6b-000000000007",
                     "playbook": "/home/gmadappa/ansible/ansible-real-life/ansible-list-to-string/site.yml",
-                    "playbook_uuid": "f27bd985-098f-4da5-9723-241547e090f9",
+                    "playbook_uuid": "15e384bd-3a29-4755-bc26-5f4486919198",
                     "remote_addr": "localhost",
                     "res": {
                         "_ansible_no_log": null,
@@ -657,16 +639,49 @@
                         "msg": "apple,mango,orange"
                     },
                     "resolved_action": "ansible.builtin.debug",
-                    "start": "2022-09-29T09:29:20.837270",
+                    "start": "2022-10-05T08:31:13.822857",
                     "task": "Print the String",
                     "task_action": "debug",
                     "task_args": "",
                     "task_path": "/home/gmadappa/ansible/ansible-real-life/ansible-list-to-string/site.yml:18",
-                    "task_uuid": "de608a03-61cd-d994-b600-00000000000b",
-                    "uuid": "69835bf1-bf1f-47d2-914c-2b1d4e96c834"
+                    "task_uuid": "228649ec-1757-068b-4c6b-00000000000b",
+                    "uuid": "b55f7456-db3d-45b3-8f87-b6679cfe4066"
+                },
+                {
+                    "__changed": false,
+                    "__duration": "0s",
+                    "__host": "localhost",
+                    "__number": 4,
+                    "__result": "Ok",
+                    "__task": "New Task Added",
+                    "__task_action": "ansible.builtin.debug",
+                    "duration": 0.025122,
+                    "end": "2022-10-05T08:31:13.902255",
+                    "event_loop": null,
+                    "host": "localhost",
+                    "play": "List to String Conversion",
+                    "play_pattern": "localhost",
+                    "play_uuid": "228649ec-1757-068b-4c6b-000000000007",
+                    "playbook": "/home/gmadappa/ansible/ansible-real-life/ansible-list-to-string/site.yml",
+                    "playbook_uuid": "15e384bd-3a29-4755-bc26-5f4486919198",
+                    "remote_addr": "localhost",
+                    "res": {
+                        "_ansible_no_log": null,
+                        "_ansible_verbose_always": true,
+                        "changed": false,
+                        "msg": "This is a new task added for demo"
+                    },
+                    "resolved_action": "ansible.builtin.debug",
+                    "start": "2022-10-05T08:31:13.877133",
+                    "task": "New Task Added",
+                    "task_action": "ansible.builtin.debug",
+                    "task_args": "",
+                    "task_path": "/home/gmadappa/ansible/ansible-real-life/ansible-list-to-string/site.yml:22",
+                    "task_uuid": "228649ec-1757-068b-4c6b-00000000000c",
+                    "uuid": "fc6969d3-7e1b-4cbd-9c87-920d4b641e0a"
                 }
             ],
-            "uuid": "de608a03-61cd-d994-b600-000000000007"
+            "uuid": "228649ec-1757-068b-4c6b-000000000007"
         }
     ],
     "settings_entries": {
@@ -713,7 +728,7 @@
             "execution-environment": {
                 "container-engine": "podman",
                 "enabled": true,
-                "image": "automationhub22-1.lab.local/ee-minimal-rhel8:latest",
+                "image": "automationhub22-1.lab.local/network_ee:latest",
                 "pull": {
                     "arguments": [
                         "--tls-verify=false"
@@ -731,7 +746,7 @@
                 "file": "/home/gmadappa/ansible/ansible-real-life/ansible-list-to-string/ansible-navigator.log",
                 "level": "debug"
             },
-            "mode": "interactive",
+            "mode": "stdout",
             "playbook-artifact": {
                 "enable": true,
                 "replay": "/home/gmadappa/ansible/ansible-real-life/ansible-list-to-string/artifacts/ansible_artifact.json",
@@ -763,7 +778,7 @@
         "ansible-navigator.ansible.inventory.entries": "Ansible configuration file",
         "ansible-navigator.ansible.inventory.help": "Defaults",
         "ansible-navigator.ansible.playbook.help": "Defaults",
-        "ansible-navigator.ansible.playbook.path": "Previous cli command",
+        "ansible-navigator.ansible.playbook.path": "Command line",
         "ansible-navigator.app": "Command line",
         "ansible-navigator.collection-doc-cache-path": "Defaults",
         "ansible-navigator.color.enable": "Defaults",
@@ -774,11 +789,11 @@
         "ansible-navigator.exec.shell": "Defaults",
         "ansible-navigator.execution-environment.container-engine": "Settings file",
         "ansible-navigator.execution-environment.container-options": "Not set",
-        "ansible-navigator.execution-environment.enabled": "Settings file",
+        "ansible-navigator.execution-environment.enabled": "Command line",
         "ansible-navigator.execution-environment.environment-variables.pass": "Not set",
         "ansible-navigator.execution-environment.environment-variables.set": "Not set",
-        "ansible-navigator.execution-environment.image": "Settings file",
-        "ansible-navigator.execution-environment.pull.arguments": "Previous cli command",
+        "ansible-navigator.execution-environment.image": "Command line",
+        "ansible-navigator.execution-environment.pull.arguments": "Command line",
         "ansible-navigator.execution-environment.pull.policy": "Defaults",
         "ansible-navigator.execution-environment.volume-mounts": "Not set",
         "ansible-navigator.images.details": "Defaults",
@@ -786,7 +801,7 @@
         "ansible-navigator.logging.append": "Defaults",
         "ansible-navigator.logging.file": "Defaults",
         "ansible-navigator.logging.level": "Settings file",
-        "ansible-navigator.mode": "Defaults",
+        "ansible-navigator.mode": "Command line",
         "ansible-navigator.playbook-artifact.enable": "Settings file",
         "ansible-navigator.playbook-artifact.replay": "Settings file",
         "ansible-navigator.playbook-artifact.save-as": "Settings file",
@@ -829,8 +844,13 @@
         "\u001b[0;32m    \"msg\": \"apple,mango,orange\"\u001b[0m",
         "\u001b[0;32m}\u001b[0m",
         "",
+        "TASK [New Task Added] **********************************************************",
+        "\u001b[0;32mok: [localhost] => {\u001b[0m",
+        "\u001b[0;32m    \"msg\": \"This is a new task added for demo\"\u001b[0m",
+        "\u001b[0;32m}\u001b[0m",
+        "",
         "PLAY RECAP *********************************************************************",
-        "\u001b[0;32mlocalhost\u001b[0m                  : \u001b[0;32mok=4   \u001b[0m changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   "
+        "\u001b[0;32mlocalhost\u001b[0m                  : \u001b[0;32mok=5   \u001b[0m changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   "
     ],
     "version": "2.0.0"
 }

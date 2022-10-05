@@ -18,3 +18,7 @@
     - name: Print the String
       debug:
         msg: "{{ my_string }}"
+
+    - name: "New Task Added"
+      ansible.builtin.debug:
+        msg: "This is a new task added for demo"
