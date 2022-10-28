@@ -7,3 +7,9 @@ FROM $EE_BASE_IMAGE
 ADD ansible.cfg ansible.cfg
 ADD python-packages.tar python
 RUN python3 -m pip install -r python/python-packages/requirements.txt --find-links=python/python-packages/ --no-index
+
+# install AWS CLI
+RUN microdnf install unzip
+# RUN curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o $HOME/awscliv2.zip
+# RUN unzip $HOME/awscliv2.zip
+# #RUN ./aws/install
