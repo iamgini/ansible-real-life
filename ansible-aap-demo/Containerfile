@@ -1,5 +1,5 @@
 ## Containerfile for custom execution environment
-ARG EE_BASE_IMAGE=registry.redhat.io/ansible-automation-platform-22/ee-minimal-rhel8:latest
+ARG EE_BASE_IMAGE=registry.redhat.io/ansible-automation-platform-22/ee-supported-rhel8:1.0.0-161
 ARG EE_BUILDER_IMAGE=registry.redhat.io/ansible-automation-platform-22/ansible-builder-rhel8
 
 FROM $EE_BASE_IMAGE
