@@ -1,0 +1,23 @@
+---
+- name: Floating Point Operation
+  hosts: localhost
+  gather_facts: false
+  vars:
+    - tagname: "0.0"
+  tasks:
+    - name: Print tagname
+      debug:
+        msg: "{{ tagname }}"
+
+    - name: Increment tagname value
+      set_fact:
+        tagname: "{{ tagname | float + 0.1  }}"
+
+    - name: Print the String
+      debug:
+        msg: "{{ tagname }}"
+
+
+    # - name: "New Task Added"
+    #   ansible.builtin.debug:
+    #     msg: "This is a new task added for demo"
