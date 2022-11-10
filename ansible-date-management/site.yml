@@ -1,0 +1,51 @@
+---
+- name: List to String Conversion
+  hosts: localhost
+  gather_facts: false
+  vars:
+    date_start: "2022-11-10"
+    time_start: "08:00:00"
+    date_end: "2022-11-10"
+    time_end: "21:00:00"
+  tasks:
+    - name: Prepare the date string
+      ansible.builtin.set_fact:
+        date_start_string: "{{ date_start + ' ' + time_start }}"
+
+    - name: Convert the string to date format
+      ansible.builtin.set_fact:
+        date_start_string: "{{ date_start_string | to_datetime }}"
+
+
+        # date_start_string: '{{  date_start + " " + time_start | string | to_datetime("%Y-%m-%d %H:%M:%S") }}'
+        
+        #date_end_string: "{{ date_end + ' ' + time_end | to_datetime }}"
+
+# 2022-11-10 08:00:00
+# 2016-08-14 20:00:12
+
+    - name: Print the List
+      debug:
+        msg: "{{ date_start_string }}"
+
+    - name: Time difference
+      debug:
+        msg: '{{ (("2016-08-14 20:00:12" | to_datetime) - ("2015-12-25" | to_datetime("%Y-%m-%d"))).total_seconds()  }}'
+
+
+
+    # - name: Print the List
+    #   debug:
+    #     msg: "{{ date_start_string }}, {{ date_end_string  }}"
+
+    # - name: Concatenate a list to string
+    #   set_fact:
+    #     my_string: "{{ my_list | join(',') }}"
+
+    # - name: Print the String
+    #   debug:
+    #     msg: "{{ my_string }}"
+
+    # - name: "New Task Added"
+    #   ansible.builtin.debug:
+    #     msg: "This is a new task added for demo"
