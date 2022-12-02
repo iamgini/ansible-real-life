@@ -1,0 +1,5 @@
+2022-12-02T11:07:31.870647+00:00 WARNING 'ansible_navigator.image_manager.puller._log_message' Image inspection failed, image assumed to be corrupted or missing
+2022-12-02T11:07:31.871018+00:00 WARNING 'ansible_navigator.image_manager.puller._log_message' stdout: []
+
+2022-12-02T11:07:31.871074+00:00 WARNING 'ansible_navigator.image_manager.puller._log_message' stderr: Error: inspecting object: quay.io/ansible/creator-ee:v0.9.1: image not known
+

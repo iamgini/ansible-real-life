@@ -3,7 +3,8 @@
   hosts: localhost
   gather_facts: false
   vars:
-    - tagname: "0.0"
+    tagname: 1.1
+    increment: 0.1
   tasks:
     - name: Print tagname
       debug:
@@ -11,7 +12,8 @@
 
     - name: Increment tagname value
       set_fact:
-        tagname: "{{ tagname | float + 0.1  }}"
+        #tagname: "{{ tagname | float }}" #" + 0.1  }}"
+        tagname: "{{ tagname | float  + increment | float }}"
 
     - name: Print the String
       debug:
