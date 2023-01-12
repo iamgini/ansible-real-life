@@ -1,0 +1,37 @@
+ansible/
+|-- production
+|   |-- group_vars/
+|   |   |-- all
+|   |-- host_vars/
+|   |-- inventory
+|-- staging
+|   |-- group_vars/
+|   |   |-- all
+|   |-- host_vars/
+|   |-- inventory
+|-- development
+|   |-- group_vars/
+|   |   |-- all
+|   |-- host_vars/
+|   |-- inventory
+|-- ansible.cfg
+|-- roles/
+|   |-- common/
+|   |   |-- tasks/
+|   |   |-- files/
+|   |   |-- templates/
+|   |   |-- vars/
+|   |   |-- defaults/
+|   |   |-- meta/
+|   |-- webservers/
+|   |   |-- tasks/
+|   |   |-- files/
+|   |   |-- templates/
+|   |   |-- vars/
+|   |   |-- defaults/
+|   |   |-- meta/
+
+
+use the blow to create skeleton for roles:
+
+ansible-galaxy init role_name
