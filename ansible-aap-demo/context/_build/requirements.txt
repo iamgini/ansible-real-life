@@ -1,6 +1,0 @@
-ansible-pylibssh
-paramiko
-
-## for panos
-pan-os-python
-xmltodict

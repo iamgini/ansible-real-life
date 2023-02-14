@@ -1,0 +1,82 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars_files:
+    - vcenter_vars.yml
+  vars:
+    cluster_name: 'Asia-Cluster1'
+    datastore_name: 'ds_200'
+    folder_name: 'prod'
+    vm_name: CentOS7_Rest_2
+  tasks:
+    - name: Get virtual machine info
+      vmware.vmware_rest.vcenter_vm_info:
+        vcenter_username: "{{ vcenter_username }}"
+        vcenter_password: "{{ vcenter_password }}"
+        vcenter_hostname: "{{ vcenter_hostname }}"
+        filter_names:
+        - "{{ vm_name }}"
+        vcenter_validate_certs: False
+      register: vm_info
+
+    - name: Get Cluster info
+      vmware.vmware_rest.vcenter_cluster_info:
+        vcenter_username: "{{ vcenter_username }}"
+        vcenter_password: "{{ vcenter_password }}"
+        vcenter_hostname: "{{ vcenter_hostname }}"
+        filter_names:
+        - "{{ cluster_name }}"
+        vcenter_validate_certs: False
+      register: cluster_info
+
+    - name: Get Resource info for {{ cluster_name }}
+      vmware.vmware_rest.vcenter_cluster_info:
+        vcenter_username: "{{ vcenter_username }}"
+        vcenter_password: "{{ vcenter_password }}"
+        vcenter_hostname: "{{ vcenter_hostname }}"
+        vcenter_validate_certs: False
+        cluster: "{{ cluster_info.value[0].cluster }}"
+      register: resource_pool_info
+
+    - name: Get datastore info
+      vmware.vmware_rest.vcenter_datastore_info:
+        vcenter_username: "{{ vcenter_username }}"
+        vcenter_password: "{{ vcenter_password }}"
+        vcenter_hostname: "{{ vcenter_hostname }}"
+        vcenter_validate_certs: False
+        filter_names:
+        - "{{ datastore_name }}"
+      register: datastore_info
+
+    - name: Get folder info
+      vmware.vmware_rest.vcenter_folder_info:
+        vcenter_username: "{{ vcenter_username }}"
+        vcenter_password: "{{ vcenter_password }}"
+        vcenter_hostname: "{{ vcenter_hostname }}"
+        vcenter_validate_certs: False
+        filter_names:
+        - '{{ folder_name }}'
+      register: folder_info
+
+    - set_fact:
+        source_vm_id: "{{ vm_info.value[0].vm }}"
+        cluster_id: '{{ cluster_info.value[0].cluster }}'
+        datastore_id: '{{ datastore_info.value[0].datastore }}'
+        folder_id: '{{ folder_info.value[0].folder }}'
+        resource_pool_id: '{{ resource_pool_info.value.resource_pool }}'
+        network_id: '{{ network_info.value[0].network }}'
+
+    - name: Create a VM
+      vmware.vmware_rest.vcenter_vm:
+        vcenter_username: "{{ vcenter_username }}"
+        vcenter_password: "{{ vcenter_password }}"
+        vcenter_hostname: "{{ vcenter_hostname }}"
+        vcenter_validate_certs: False
+        placement:
+          cluster: '{{ cluster_id }}'
+          datastore: '{{ datastore_id }}'
+          folder: '{{ folder_id }}'
+          resource_pool: '{{ resource_pool_id }}'
+        name: "{{ vm_name }}"
+        source: "{{ source_vm_id }}"
+        guest_OS: OTHER_LINUX_64

@@ -8,8 +8,8 @@ ansible-navigator:
   playbook-artifact:
     save-as: /home/devops/playbook-artifacts/{playbook_name}-artifact-{ts_utc}.json
 
-  logging:
-    level: debug
+  # logging:
+  #   level: debug
 
   editor:
     command: code-server {filename}
