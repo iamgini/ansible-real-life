@@ -23,41 +23,41 @@
       ansible.builtin.debug:
         msg: "This is a new task added for demo"
 
-    - name: Print the List
+    - name: Print the Job IDs
       debug:
-        msg: "{{ tower_job_id }}"  
+        msg: "Job ID - {{ tower_job_id | default('none') }}, Workflow Job ID - {{ awx_workflow_job_id | default('none') }} "  
 
-    - name: Display all variables/facts known for a host
-      debug:
-        var: hostvars[inventory_hostname]
-      tags: debug_info
+    # - name: Display all variables/facts known for a host
+    #   debug:
+    #     var: hostvars[inventory_hostname]
+    #   tags: debug_info
 
-    - name: Print some debug information 
-      vars: 
-        msg: |
-          Module Variables ("vars"):
-          --------------------------------
-          {{ vars | to_nice_json }} 
+    # - name: Print some debug information 
+    #   vars: 
+    #     msg: |
+    #       Module Variables ("vars"):
+    #       --------------------------------
+    #       {{ vars | to_nice_json }} 
           
-          Environment Variables ("environment"):
-          --------------------------------
-          {{ environment | to_nice_json }} 
+    #       Environment Variables ("environment"):
+    #       --------------------------------
+    #       {{ environment | to_nice_json }} 
           
-          GROUP NAMES Variables ("group_names"):
-          --------------------------------
-          {{ group_names | to_nice_json }}
+    #       GROUP NAMES Variables ("group_names"):
+    #       --------------------------------
+    #       {{ group_names | to_nice_json }}
           
-          GROUPS Variables ("groups"):
-          --------------------------------
-          {{ groups | to_nice_json }}
+    #       GROUPS Variables ("groups"):
+    #       --------------------------------
+    #       {{ groups | to_nice_json }}
           
-          HOST Variables ("hostvars"):
-          --------------------------------
-          {{ hostvars | to_nice_json }} 
+    #       HOST Variables ("hostvars"):
+    #       --------------------------------
+    #       {{ hostvars | to_nice_json }} 
     
-      debug: 
-        msg: "{{ msg.split('\n') }}"       
-      tags: debug_info
+    #   debug: 
+    #     msg: "{{ msg.split('\n') }}"       
+    #   tags: debug_info
     # - name: "Pause for testing"
     #   ansible.builtin.pause:
     #     minutes: 5
