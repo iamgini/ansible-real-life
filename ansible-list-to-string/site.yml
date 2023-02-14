@@ -22,7 +22,10 @@
     - name: "New Task Added"
       ansible.builtin.debug:
         msg: "This is a new task added for demo"
-    
-    - name: "Pause for testing"
-      ansible.builtin.pause:
-        minutes: 5
+
+    - name: Print the List
+      debug:
+        msg: "{{ workflow_url }}, {{ tower_job_id }}"    
+    # - name: "Pause for testing"
+    #   ansible.builtin.pause:
+    #     minutes: 5
