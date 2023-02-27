@@ -1,0 +1,20 @@
+---
+- name: List to String Conversion
+  hosts: localhost
+  gather_facts: false
+  vars:
+    my_list:
+      - 10.1.10.100
+      - 10.1.10.101
+      - 192.168.57.115
+
+  tasks:
+    - name: Ping
+      ansible.builtin.shell: 'ping -c2 {{ item }}'
+      loop: "{{ my_list }}"
+      ignore_errors: true
+      register: ping_result
+    
+    - name: ouput
+      ansible.builtin.debug:
+        msg: "{{ ping_result.results | selectattr('rc', 'equalto', 1 ) | map(attribute='item') | first }}"
