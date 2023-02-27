@@ -15,6 +15,10 @@
       ignore_errors: true
       register: ping_result
 
+    # - name: Display full
+    #   ansible.builtin.debug:
+    #     msg: "{{ ping_result }}"
+
     - name: ouput
       ansible.builtin.debug:
         msg: "{{ ping_result.results | selectattr('rc', 'equalto', 1 ) | map(attribute='item') | first }}"
