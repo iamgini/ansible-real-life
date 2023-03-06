@@ -1,0 +1,12 @@
+---
+- name: List to String Conversion
+  hosts: web
+  become: true
+  tasks:
+
+    - name: Add host to /etc/hosts
+      ansible.builtin.lineinfile:
+        path: /etc/hosts
+        state: present
+        line: "{{ hostvars[item].ansible_host }} {{ item }}"
+      loop: "{{ ansible_play_hosts_all  }}"

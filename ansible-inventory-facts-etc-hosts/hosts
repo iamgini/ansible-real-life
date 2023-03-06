@@ -1,0 +1,7 @@
+[me]
+localhost ansible_connection=local
+
+[web]
+server201 ansible_host=192.168.57.145 ansible_ssh_extra_args=' -o StrictHostKeyChecking=no ' ansible_user=devops # 
+server202 ansible_host=10.1.10.202
+server203 ansible_host=10.1.10.203
