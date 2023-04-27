@@ -1,0 +1,7 @@
+---
+- name: Credential retrieve test
+  hosts: localhost
+  tasks:
+    - name: Print variables
+      debug:
+        msg: "{{ ansible_facts }}"
