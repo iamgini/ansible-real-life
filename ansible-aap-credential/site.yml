@@ -5,3 +5,13 @@
     - name: Print variables
       debug:
         msg: "{{ ansible_user }}"
+
+    - name: Print variables
+      debug:
+        msg: "{{ ansible_ssh_private_key_file }}"
+
+
+    - name: Print variables
+      debug:
+        msg: '{{ lookup("env", "ANSIBLE_SSH_PRIVATE_KEY") }}'
+            
