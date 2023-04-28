@@ -8,7 +8,7 @@
 
     - name: Print variables
       debug:
-        msg: "{{ ansible_ssh_private_key_file }}"
+        msg: "{{ ansible_ssh_private_key_file | default('NA') }}"
 
 
     - name: Print variables
