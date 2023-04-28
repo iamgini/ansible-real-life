@@ -4,7 +4,8 @@
   tasks:
     - name: Print variables
       debug:
-        msg: "{{ ansible_user }}"
+        msg: "{{ hostvars['localhost'] }}"
+
 
     - name: Print variables
       debug:
