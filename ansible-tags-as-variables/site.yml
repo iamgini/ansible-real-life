@@ -13,6 +13,8 @@
   tasks:
     - ansible.builtin.debug:
         msg: "{{ tag_input }}"
+    - ansible.builtin.debug:
+        msg: "{{ mytags1 }}"
     - name: Message 1
       ansible.builtin.debug:
         msg: "hello world"
