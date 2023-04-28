@@ -11,6 +11,8 @@
       - tag22
 
   tasks:
+    - ansible.builtin.debug:
+        msg: "{{ tag_input }}"
     - name: Message 1
       ansible.builtin.debug:
         msg: "hello world"
