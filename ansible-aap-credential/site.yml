@@ -4,4 +4,4 @@
   tasks:
     - name: Print variables
       debug:
-        msg: "{{ ansible_facts }}"
+        msg: "{{ ansible_user }}"
