@@ -1,0 +1,22 @@
+---
+- name: Tags as variables
+  hosts: localhost
+  gather_facts: false
+  vars:
+    mytags1: 
+      - tag11
+      - tag12
+    mytags2:
+      - tag21
+      - tag22
+
+  tasks:
+    - name: Message 1
+      ansible.builtin.debug:
+        msg: "hello world"
+      tags: "{{ mytags1 }}"
+
+    - name: Message 1
+      ansible.builtin.debug:
+        msg: "hello earth"
+      tags: "{{ mytags2 }}"
