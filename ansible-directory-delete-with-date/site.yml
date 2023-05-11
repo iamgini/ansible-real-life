@@ -1,0 +1,25 @@
+---
+- name: Delete directories older than 30 days
+  hosts: all
+  become: yes
+
+  vars:
+    dir_path: /path/to/directory
+
+  tasks:
+    - name: Find directories older than 30 days
+      ansible.builtin.find:        
+        paths: "{{ dir_path }}"
+        age: "30d"
+        recurse: no
+        file_type: directory
+        excludes: 'processed'
+        age_stamp: mtime
+      register: old_dirs
+
+    - name: Delete directories older than 30 days
+      ansible.builtin.file:        
+        path: "{{ item.path }}"
+        state: absent
+        recursive: yes
+      with_items: "{{ old_dirs.files }}"
