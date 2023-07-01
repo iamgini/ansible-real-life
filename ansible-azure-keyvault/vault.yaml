@@ -1,0 +1,36 @@
+---
+- hosts: localhost
+  connection: local
+  collections:
+    - azure.azcollection
+
+  vars:
+    ansible_python_interpreter: /home/gmadappa/pyvirt/azure/bin/python
+    vault_name: ansible-demo-20230630
+    secret_name: demosecret101
+
+  tasks:
+
+  - name: Get Key Vault by name
+    azure_rm_keyvault_info:
+      resource_group: ansible-kv-test-rg
+      name: "{{ vault_name }}"
+    register: keyvault
+
+  - ansible.builtin.debug:
+      msg: "{{ keyvault }}"
+  - name: Set key vault URI fact
+    set_fact: keyvaulturi="{{ keyvault['keyvaults'][0]['vault_uri'] }}"
+
+  - name: Get secret value
+    azure_rm_keyvaultsecret_info:
+      vault_uri: "{{ keyvaulturi }}"
+      name: "{{ secret_name }}"
+    register: kvSecret
+
+  - name: set secret fact
+    set_fact: secretValue="{{ kvSecret['secrets'][0]['secret'] }}"
+
+  - name: Output key vault secret
+    debug: 
+      msg="{{ secretValue }}"

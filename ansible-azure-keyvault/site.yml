@@ -1,0 +1,64 @@
+---
+- name: Fetch Credential from Azure Key Vault
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    ansible_python_interpreter: /home/gmadappa/pyvirt/azure/bin/python
+    # azure_subscription_id: "your_subscription_id"
+    # azure_client_id: "your_client_id"
+    # azure_client_secret: "your_client_secret"
+    # azure_tenant_id: "your_tenant_id"
+    
+    key_vault_name: ansible-demo-20230630
+    key_vault_url: https://ansible-demo-20230630.vault.azure.net/
+    secret_name: demosecret101
+    secret_dest: "path_to_save_secret"
+
+  tasks:
+    # - name: Fetch Key Vault Secret
+    #   azure.azcollection.azure_rm_keyvaultsecret:
+    #     # subscription_id: "{{ azure_subscription_id }}"
+    #     # client_id: "{{ azure_client_id }}"
+    #     # secret: "{{ azure_client_secret }}"
+    #     # tenant: "{{ azure_tenant_id }}"
+    #     keyvault_uri: "https://{{ key_vault_name }}.vault.azure.net/"
+    #     secret_name: "{{ secret_name }}"
+    #     # dest: "{{ secret_dest }}"
+    #   register: secret_result
+
+    - name: Get latest version of specific secret
+      azure.azcollection.azure_rm_keyvaultsecret_info:
+        vault_uri: 'https://ansible-demo-20230630.vault.azure.net/'
+        #"https://{{ key_vault_name }}.vault.azure.net/"
+        name: "{{ secret_name }}"
+      register: secret_result
+
+    # - name: Create a secret
+    #   azure.azcollection.azure_rm_keyvaultsecret:        
+    #     secret_name: MySecret
+    #     secret_value: My_Pass_Sec
+    #     keyvault_uri: https://ansible-demo-20230630.vault.azure.net/        
+    #     tags:
+    #         testing: testing
+    #         delete: never
+
+    - name: Display Secret
+      ansible.builtin.debug:        
+        msg: "{{ secret_result  }}"
+
+    - name: Get secret value
+      azure.azcollection.azure_rm_keyvaultsecret_info:        
+        vault_uri: "{{ key_vault_url }}"
+        name: "{{ secret_name }}"
+      register: kvSecret
+    - debug:
+        msg: "{{ kvSecret }}"
+    - name: set secret fact
+      set_fact: secretValue="{{ kvSecret['secrets'][0]['secret'] }}"
+    
+    - debug:
+        msg: "{{ secretValue }}"
+    - name: Set key vault secret fact
+      ansible.builtin.set_fact:        
+        secretValue={{ lookup('azure.azcollection.azure_keyvault_secret',secret_name,vault_url=key_vault_url, client_id=client_id, secret=secret, tenant_id=tenant) }}

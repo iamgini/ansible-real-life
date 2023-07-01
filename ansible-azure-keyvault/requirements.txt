@@ -1,0 +1,3 @@
+# pip install 'ansible[azure]'
+ansible[azure]
+msrestazure
