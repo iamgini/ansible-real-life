@@ -1,0 +1,20 @@
+---
+ansible-navigator:
+  execution-environment:
+    container-engine: podman
+    image: registry.redhat.io/ansible-automation-platform-22/ee-supported-rhel8
+    enabled: true
+    pull:
+      policy: missing
+
+  # logging:
+  #   level: debug
+
+  editor:
+    command: code-server {filename}
+    console: false
+
+  playbook-artifact:
+    enable: false
+    replay: artifacts/ansible_artifact.json
+    save-as: artifacts/ansible_artifact.json
