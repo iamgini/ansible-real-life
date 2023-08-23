@@ -1,0 +1,9 @@
+- name: Test playbook to login and check win_whoami
+  hosts: windns
+  tasks:
+    - name: Test win_whoami
+      ansible.windows.win_whoami:
+      register: win_whoami_result
+
+    - debug: 
+        msg: "{{ win_whoami_result }}"

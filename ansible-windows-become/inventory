@@ -1,0 +1,27 @@
+[myself]
+localhost ansible_connection=local
+
+[vmwarenewvms]
+# 10.6.1.210 ansible_ssh_extra_args=' -o StrictHostKeyChecking=no ' ansible_user=ansible ansible_password=password
+# vagrantvm ansible_host=192.168.57.144 ansible_ssh_extra_args=' -o StrictHostKeyChecking=no ' ansible_user=devops # ansible_password=password
+
+# RHEL8
+server201 ansible_host=192.168.57.145 ansible_ssh_extra_args=' -o StrictHostKeyChecking=no ' ansible_user=devops # ansible_password=password
+
+# rhel8
+RHEL8_Ansible_Test ansible_host=10.1.10.100
+# RHEL8_Ansible_Test2 ansible_host=10.1.10.101
+
+[dnsserver]
+windns ansible_host=192.168.57.137
+
+[dnsserver:vars]
+# ansible_user= "Administrator"
+#### ====== user's Domain name must be in uppercase============
+ansible_user= "ansible-dns-user@EXAMPLE.COM"
+## ansible_password= "Welcome123"
+ansible_port= "5985"
+ansible_connection= "winrm"
+ansible_winrm_transport= "kerberos"
+# ansible_winrm_transport= "basic"
+ansible_winrm_server_cert_validation= ignore
