@@ -1,0 +1,29 @@
+- name: Playbook using multiple roles from collections
+  hosts: localhost # servers
+  become: true
+
+  collections:
+    - ginigangadharan.collection_demo_roles_modules
+
+  vars:
+    remote_user_name: 'devops'
+    remote_user_password: 'mypassword'
+    remote_user_public_key: '<public key string>'
+  tasks:
+    - name: New role
+      ansible.builtin.include_role:
+        name: newrole
+
+    - name: Print Hello World using Role
+      ansible.builtin.include_role:
+        name: helloworld
+
+    - name: Display System information using Role
+      ansible.builtin.include_role:
+        name: ginigangadharan.collection_demo_roles_modules.systeminfo
+
+    - name: Create new User
+      ansible.builtin.include_role:
+        name: ginigangadharan.collection_demo_roles_modules.setup_ansible_user
+
+

@@ -5,8 +5,7 @@
   vars:
     ansible_python_interpreter: /usr/bin/python3
   tasks:
-    # ========= Method 2: Using username & password and 
-    # then Token =======
+    # Method 1: Username & password to fetch the Token
     - name: Log in to OCP to obtain access token
       redhat.openshift.openshift_auth:
         host: "{{ ocp_host_api }}"
@@ -28,7 +27,7 @@
       ansible.builtin.debug:
         msg: "{{ pod_list }}"
 
-    # ========= Method 2: Using username & password =======
+    # Method 2: Using username & password
     # Please note that this only works with clusters configured 
     # to use HTTP Basic Auth. If your cluster has a different 
     # form of authentication (e.g. OAuth2 in OpenShift), this 

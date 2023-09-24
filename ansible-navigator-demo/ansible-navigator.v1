@@ -1,0 +1,28 @@
+---
+ansible-navigator:
+  execution-environment:
+    container-engine: podman
+    image: registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel8:1.0.0-395
+    enabled: true
+    pull:
+      policy: missing
+    volume-mounts:
+      - src: "/tmp/reports"
+        dest: "/tempreports/"
+        options: "Z"
+  editor:
+    command: code-server {filename}
+    console: false
+
+  logging:
+  #   level: debug
+    append: false
+
+  mode: stdout
+
+  playbook-artifact:
+    enable: true
+    replay: artifacts/ansible_artifact.json
+    # save-as: artifacts/ansible_artifact.json
+    save-as: artifacts/{playbook_name}-artifact-{ts_utc}.json
+    # save-as: artifacts/{playbook_name}-artifact-{time_stamp}.json

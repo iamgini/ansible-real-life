@@ -1,0 +1,13 @@
+version: 3
+
+images:
+  base_image:
+    name: registry.redhat.io/ansible-automation-platform-24/ee-minimal-rhel8:latest
+
+dependencies:
+  ansible_core:
+    package_pip: ansible-core==2.14.6
+  galaxy: requirements.yml
+
+options:
+  package_manager_path: /usr/bin/microdnf

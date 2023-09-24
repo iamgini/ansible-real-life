@@ -1,0 +1,8 @@
+---
+collections:
+  - name: ansible.utils
+    version: 2.8.0
+    source: https://galaxy.ansible.com
+  - name: ansible.netcommon
+    version: 4.1.0
+    source: https://galaxy.ansible.com

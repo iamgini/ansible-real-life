@@ -7,12 +7,15 @@ ansible-navigator:
     pull:
       policy: missing
 
-  # logging:
-  #   level: debug
-
   editor:
     command: code-server {filename}
     console: false
+
+  logging:
+  #   level: debug
+    append: false
+
+  mode: stdout
 
   playbook-artifact:
     enable: false

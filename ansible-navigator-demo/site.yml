@@ -1,0 +1,22 @@
+---
+- name: Demo playbook
+  hosts: localhost
+  vars:
+    my_list:
+      - "apple"
+      - "mango"
+      - "orange"
+
+  tasks:
+
+    - name: Print the List
+      ansible.builtin.debug:
+        msg: "{{ my_list }}"
+
+    - name: Concatenate a list to string
+      ansible.builtin.set_fact:
+        my_string: "{{ my_list | join(',') }}"
+
+    - name: Print the String
+      ansible.builtin.debug:
+        msg: "{{ my_string }}"
