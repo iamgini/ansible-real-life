@@ -91,10 +91,10 @@ localhost | SUCCESS => {
 ```shell
 $  ansible-navigator exec -m stdout -- ansible --version
 ansible [core 2.13.7]
-  config file = /home/gmadappa/ansible-bau/infrastructure-automation/ansible.cfg
+  config file = /home/iamgini/ansible-bau/infrastructure-automation/ansible.cfg
   configured module search path = ['/home/runner/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
   ansible python module location = /usr/lib/python3.9/site-packages/ansible
-  ansible collection location = /home/gmadappa/ansible-bau/infrastructure-automation/collections
+  ansible collection location = /home/iamgini/ansible-bau/infrastructure-automation/collections
   executable location = /usr/bin/ansible
   python version = 3.9.13 (main, Nov  9 2022, 13:16:24) [GCC 8.5.0 20210514 (Red Hat 8.5.0-15)]
   jinja version = 3.0.3

@@ -54,11 +54,11 @@ Ansible version:
 ```shell
 $ ansible --version
 ansible [core 2.11.12] 
-  config file = /home/gmadappa/ansible/ansible-real-life/ansible-floating-point-operation/ansible.cfg
-  configured module search path = ['/home/gmadappa/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
-  ansible python module location = /home/gmadappa/pyvirt/ansible-plain/lib64/python3.10/site-packages/ansible
-  ansible collection location = /home/gmadappa/.ansible/collections:/usr/share/ansible/collections
-  executable location = /home/gmadappa/pyvirt/ansible-plain/bin/ansible
+  config file = /home/iamgini/ansible/ansible-real-life/ansible-floating-point-operation/ansible.cfg
+  configured module search path = ['/home/iamgini/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/iamgini/pyvirt/ansible-plain/lib64/python3.10/site-packages/ansible
+  ansible collection location = /home/iamgini/.ansible/collections:/usr/share/ansible/collections
+  executable location = /home/iamgini/pyvirt/ansible-plain/bin/ansible
   python version = 3.10.8 (main, Oct 12 2022, 00:00:00) [GCC 12.2.1 20220819 (Red Hat 12.2.1-2)]
   jinja version = 3.1.2
   libyaml = True

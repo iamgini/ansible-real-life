@@ -69,8 +69,8 @@ $ aws ssm describe-instance-information
 ### Verify EC2 instance access from AWS CLI
 
 ```shell
-[gmadappa@gmadappa Ansible-AWS-systems-manager]$ ^[[200~aws ssm start-session --target ~^C
-[gmadappa@gmadappa Ansible-AWS-systems-manager]$ aws ssm start-session --target i-0bc9fc987639f549b
+[iamgini@iamgini Ansible-AWS-systems-manager]$ ^[[200~aws ssm start-session --target ~^C
+[iamgini@iamgini Ansible-AWS-systems-manager]$ aws ssm start-session --target i-0bc9fc987639f549b
 
 Starting session with SessionId: devops-0b1808ceee8dd5646
 sh-4.2$ 
@@ -108,7 +108,7 @@ Remember to pass the [`aws_ssm`](https://docs.ansible.com/ansible/latest/collect
 ```
 
 ```shell
-(ansible210) [gmadappa@gmadappa Ansible-AWS-systems-manager]$ ansible-playbook deploy-web.yaml 
+(ansible210) [iamgini@iamgini Ansible-AWS-systems-manager]$ ansible-playbook deploy-web.yaml 
 PLAY [Install httpd] *************************************************************************
 
 TASK [Gathering Facts] ***********************************************************************

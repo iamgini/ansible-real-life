@@ -4,7 +4,7 @@
   gather_facts: false
 
   vars:
-    ansible_python_interpreter: /home/gmadappa/pyvirt/azure/bin/python
+    ansible_python_interpreter: /home/iamgini/pyvirt/azure/bin/python
     # azure_subscription_id: "your_subscription_id"
     # azure_client_id: "your_client_id"
     # azure_client_secret: "your_client_secret"
