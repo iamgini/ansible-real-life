@@ -2,5 +2,5 @@
 
 *.tar.gz
 */artifacts/*
-ansible-navigator.log
+# ansible-navigator.log
 */context/*
