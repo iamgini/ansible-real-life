@@ -7,8 +7,10 @@ Demo
 - show collection inside the container and local
 - show collections in different image
 - show different ansible version in images
+  - ansible-navigator exec -m stdout -- ansible --version 
 - show help and explain the important options
 - show --eei, --ee
+- 
 - show subcommands
 - mention builder
 - inventory - --help-inventory
@@ -26,3 +28,6 @@ Demo
 - run site.yaml
 - show in interactive and stdout mode
 - show replay
+- how to pass environment variable
+  - show controller GUI and credentials
+  - show how to pass env vars to EE via navigator

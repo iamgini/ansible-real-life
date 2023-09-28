@@ -110,13 +110,13 @@ Configuration:
 ---
 ansible-navigator:
   playbook-artifact:
-    enable: True
-    replay: artifacts/ansible_artifact.json
-    save-as: artifacts/ansible_artifact.jsonl
+  enable: true
+    replay: artifacts/{playbook_name}-artifact-{time_stamp}.json
+    save-as: artifacts/{playbook_name}-artifact-{time_stamp}.json
 ```
 
 ```shell
-$ ansible-navigator replay artifacts/ansible_artifact.json
+$ ansible-navigator replay artifacts/site-artifact-2023-09-24T08:31:39.472901+00:00.json
 ```
 
 ```shell

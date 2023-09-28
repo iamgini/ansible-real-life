@@ -9,15 +9,15 @@ ansible-navigator:
     image: registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel8:1.0.0-395
     pull:
       policy: missing
-    volume-mounts:
-      - dest: /tempreports/
-        options: Z
-        src: /tmp/reports
+    # volume-mounts:
+    #   - dest: /tempreports/
+    #     options: Z
+    #     src: /tmp/reports
   logging:
     append: true
     level: info
     file: ansible-navigator.log
-  mode: stdout
+  # mode: stdout
   playbook-artifact:
     enable: true
     replay: artifacts/{playbook_name}-artifact-{time_stamp}.json
