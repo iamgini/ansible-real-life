@@ -1,0 +1,9 @@
+[me]
+localhost ansible_connection=local
+
+[rhel8]
+rhel101
+rhel102
+
+[rhel8:vars]
+httpd_port= 8080

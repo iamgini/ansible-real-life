@@ -1,0 +1,7 @@
+# collections:
+# - name: cisco-ios-4.2.0.tar.gz
+#   version: 4.2.0
+# - name: ansible-netcommon-4.1.0.tar.gz
+#   version: 4.1.0
+# - name: ansible-utils-2.8.0.tar.gz
+#   version: 2.8.0
