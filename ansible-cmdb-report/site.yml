@@ -1,22 +1,18 @@
 ---
 - name: Demo playbook
-  hosts: localhost
+  hosts: "{{ nodes | default('localhost') }}"
   vars:
-    my_list:
-      - "apple"
-      - "mango"
-      - "orange"
-
+    system_report_path: '/tmp/reports'
   tasks:
+    # - ansible.builtin.include_role:
+    #   name: system-report
+    - name: Set generation timestamp
+      set_fact:
+        date_time_text: "{{ lookup('pipe','date -d \"now + 8 hours\" +%Y-%m-%d_%H-%M-%S') | string }}"
 
-    - name: Print the List
-      ansible.builtin.debug:
-        msg: "{{ my_list }}"
-
-    - name: Concatenate a list to string
-      ansible.builtin.set_fact:
-        my_string: "{{ my_list | join(',') }}"
-
-    - name: Print the String
-      ansible.builtin.debug:
-        msg: "{{ my_string }}"
+    - name: Template with report
+      ansible.builtin.template:
+        src: system-report.html
+        dest: "{{ system_report_path }}/{{ ansible_hostname }}.html"
+        force: true
+      delegate_to: localhost

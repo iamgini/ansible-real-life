@@ -1,0 +1,45 @@
+  <!-- Nodes_start -->
+  {% if system_ssl_info is defined %}
+  <div class="center">
+    <h3>SSL Certificates</h3>  
+    <table> 
+      <tbody>    
+        <tr>
+        <th>SSL Secret Name</th>
+        <th>Namespace</th>
+        <th>Expiry</th>
+        <th>Valid for 7 Days</th>
+        <th>Valid for 400 Weeks</th>
+        <th>Type</th>
+        </tr>
+        <tbody>
+      
+        {% for ssl_cert in system_ssl_info.values() %}
+        <tr>
+        <td>
+          <strong>{{ ssl_cert.secret_name }}</strong>
+        </td>
+        <td>
+          {{ ssl_cert.namespace }}
+        </td>
+        <td>
+          {{ ssl_cert.expiry | to_datetime('%Y%m%d%H%M%S%z') }} <br>
+        </td>
+        <td {% if ssl_cert.ssl_check_point_1 != true %}class="red-cell" {% endif %}>
+          {{ ssl_cert.ssl_check_point_1 }}
+        </td>
+        <td {% if ssl_cert.ssl_check_point_2 != true %}class="red-cell" {% endif %}>
+          {{ ssl_cert.ssl_check_point_2 }}
+        </td>   
+        <td>
+          <div class="snippet">{{ ssl_cert.type }}</div>
+        </td>
+
+      
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+  </div>
+  {% endif %}
+  <!-- Nodes_end -->

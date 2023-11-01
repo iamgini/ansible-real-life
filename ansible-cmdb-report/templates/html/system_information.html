@@ -1,0 +1,36 @@
+<div class="center">
+  <h3>{{ ansible_hostname }}</h3>
+  <table>
+    <tr>
+    <th>IP Address(s)</th>
+    <th>Operating System</th>
+    <th>Hardware</th>
+    <!-- <th style="text-align: left;padding: 5px;">Container Status</th>
+    <th style="text-align: left;padding: 5px;">IP Address</th>
+    <th style="text-align: left;padding: 5px;">Host</th> -->
+    </tr>
+    <tbody>
+    <tr>
+      <td>
+        {% for ipaddress in ansible_all_ipv4_addresses %}
+          <p>{{ ipaddress }}</p>                   
+        {% endfor %}
+      </td>
+      <td>        
+        <p>{{ ansible_distribution }} {{ ansible_distribution_major_version }}</p>
+        <p>{{ ansible_kernel }}</p>
+        <p>{{ ansible_kernel_version }}</p>
+      </td>
+      <td>
+        <p>Bios: {{ ansible_bios_vendor }}</p>
+        <p>Motherboard: {{ ansible_board_vendor }}</p>
+        <p>Chasis: {{ ansible_chassis_vendor }}</p>
+        <p>Virtualization: {{ ansible_virtualization_type }}</p>
+        <p>Architecture: {{ ansible_architecture }}</p>
+        <p>CPU: {{ ansible_processor | join('|') }}</p>
+
+      </td>
+    </tr>
+    </tbody>
+    </table>
+</div>

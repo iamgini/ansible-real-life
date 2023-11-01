@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+
+{% include 'html/00-head.html' %}
+
+<body class="em_body" style="margin:0px; padding:0px; align: center; text-align: center; " >
+
+{% include 'html/01-header.html' %}
+
+<!--Content section new-->
+
+{% include 'html/cluster_information.html' %}
+
+{% include 'html/nodes_list.html' %}
+
+{% include 'html/pod_list_all.html' %}
+
+{% include 'html/pv_list.html' %}
+
+{% include 'html/storage_registry.html' %}
+
+{% include 'html/storage_elastic.html' %}
+
+<div class="center">
+  <h3>Cluster Configurations</h3>
+  {% include 'html/cluster_config_self_provisioning.html' %}
+
+  {% include 'html/cluster_config_api_encryption.html' %}
+
+</div>
+
+<!--//Content section--> 
+
+{% include 'html/99-footer.html' %}
+
+</body></html>

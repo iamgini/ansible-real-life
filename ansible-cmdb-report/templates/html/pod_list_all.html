@@ -1,0 +1,74 @@
+<div class="center">
+  <h3>Pod Status</h3>
+</div>  
+
+<div class="center">
+  <table>
+    <tr>
+    <th>Pod Name</th>
+    <th>Status</th>
+    <th>Container Status</th>
+    <th>IP Address</th>
+    <th>Host</th>
+    </tr>
+    <tbody>
+        
+    {% if pod_list_api.resources is defined %}
+    {% set pod_list = pod_list_api %}
+    {% set section_heading = 'API Pods' %}
+    {% include 'html/pod_list_common.html' %}    
+    {% endif %}
+            
+    {% if pod_list_dns.resources is defined %}
+    {% set pod_list = pod_list_dns %}
+    {% set section_heading = 'DNS Operator Pods' %}
+    {% include 'html/pod_list_common.html' %}    
+    {% endif %}
+
+    {% if pod_list_ingress.resources is defined %}
+    {% set pod_list = pod_list_ingress %}
+    {% set section_heading = 'Ingress Operator Pods' %}
+    {% include 'html/pod_list_common.html' %}    
+    {% endif %}
+
+    {% if pod_list_registry.resources is defined %}
+    {% set pod_list = pod_list_registry %}
+    {% set section_heading = 'Registry Pods' %}
+    {% include 'html/pod_list_common.html' %}    
+    {% endif %}
+
+    {% if pod_list_logging.resources is defined %}
+    {% set pod_list = pod_list_logging %}
+    {% set section_heading = 'Logging Pods' %}
+    {% include 'html/pod_list_common.html' %}    
+    {% endif %}
+
+    {% if pod_list_monitoring.resources is defined %}
+    {% set pod_list = pod_list_monitoring %}
+    {% set section_heading = 'Monitoring Pods' %}
+    {% include 'html/pod_list_common.html' %}    
+    {% endif %}
+
+    {% if pod_list_auth.resources is defined %}
+    {% set pod_list = pod_list_auth %}
+    {% set section_heading = 'Authentication Operator Pods' %}
+    {% include 'html/pod_list_common.html' %}    
+    {% endif %}
+
+    {% if pod_list_compliance.resources is defined %}
+    {% set pod_list = pod_list_compliance %}
+    {% set section_heading = 'Compliance Operator Pods' %}
+    {% include 'html/pod_list_common.html' %}    
+    {% endif %}
+
+    {% if pod_list_csi.resources is defined %}
+    {% set pod_list = pod_list_csi %}
+    {% set section_heading = 'CSI Operator Pods' %}
+    {# filter pods with 'operator' #}
+    {% set pod_filter = 'operator' %}
+    {% include 'html/pod_list_common.html' %}    
+    {% endif %}
+
+    </tbody>
+    </table>
+</div>

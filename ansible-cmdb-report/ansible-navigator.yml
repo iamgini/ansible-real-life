@@ -9,10 +9,10 @@ ansible-navigator:
     image: registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel8:1.0.0-395
     pull:
       policy: missing
-    # volume-mounts:
-    #   - dest: /tempreports/
-    #     options: Z
-    #     src: /tmp/reports
+    volume-mounts:
+      - dest: /tmp/reports
+        options: Z
+        src: /tmp/reports
   logging:
     append: false
     level: info

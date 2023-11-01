@@ -1,0 +1,30 @@
+{% if system_registry_pod_list.resources is defined%}
+<div class="center">
+  <h3>OpenShift Registry Storage</h3>
+  <table>
+    <tr>
+    <th>Pod</th>
+    <th>Storage information</th>
+    <th>Threshold Status({{ system_registry_storage_usage_threshold }}%)</th>
+    </tr>
+    <tbody>
+    
+    {% for pod in docker_pod_storage_details.values() %}
+    <tr>
+      <td>
+        {{ pod.pod_name }}
+      </td>
+      <td>
+        <div class="snippet">
+        {{ pod.storage_details }}
+        </div>
+      </td>
+      <td {% if pod.docker_pod_storage_utilization == 'exceeded' %}class="red-cell"{% endif %}>        
+        {{ pod.docker_pod_storage_utilization }}
+      </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+</div>
+{% endif %}
