@@ -1,0 +1,39 @@
+<div class="center">
+  <h2>Available Reports</h2>
+  <table>
+    <tr>
+    <th>System name</th>
+    <th>Report date</th>
+    <th>Size</th>
+    <!-- <th style="text-align: left;padding: 5px;">Container Status</th>
+    <th style="text-align: left;padding: 5px;">IP Address</th>
+    <th style="text-align: left;padding: 5px;">Host</th> -->
+    </tr>
+    <tbody>
+    {% if html_files_to_index.files is defined %}
+    {% for file in html_files_to_index.files %}
+    
+    <tr>
+      <td>
+        <a href="{{ file.path | basename }}">
+        {{ file.path | basename }}
+        </a>
+      </td>
+      <td>
+        {{ file.mtime }}   
+      </td>
+      <td>
+        {{ file.size }}   
+      </td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr>
+      <td colspan="3">
+        No CMDB Reports available.
+      </td>
+    </tr>
+    {% endif %}
+    </tbody>
+    </table>
+</div>

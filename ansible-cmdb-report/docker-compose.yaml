@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: ansible-cmdb
+    ports:
+      - "8089:80"
+    volumes:
+      - ./web:/usr/share/nginx/html:Z
+    # user: 'nginx:nginx'

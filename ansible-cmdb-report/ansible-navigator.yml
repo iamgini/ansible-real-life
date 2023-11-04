@@ -13,6 +13,9 @@ ansible-navigator:
       - dest: /tmp/reports
         options: Z
         src: /tmp/reports
+      - dest: /cmdb-reports
+        options: Z
+        src: ./web      
   logging:
     append: false
     level: info

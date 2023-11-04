@@ -1,8 +1,8 @@
 ---
 - name: Demo playbook
-  hosts: "{{ nodes | default('localhost') }}"
+  hosts: "{{ nodes | default('no-such-hosts') }}"
   vars:
-    system_report_path: '/tmp/reports'
+    system_report_path: '/cmdb-reports'
   tasks:
     # - ansible.builtin.include_role:
     #   name: system-report
@@ -13,6 +13,36 @@
     - name: Template with report
       ansible.builtin.template:
         src: system-report.html
-        dest: "{{ system_report_path }}/{{ ansible_hostname }}.html"
+        dest: "{{ system_report_path }}/{{ inventory_hostname }}.html"
         force: true
+      vars:
+        report_title: "{{ inventory_hostname }}"
       delegate_to: localhost
+
+    - name: Find html files in the {{ system_report_path }} directory
+      ansible.builtin.find:
+        paths: "{{ system_report_path }}/"
+        recurse: false
+        patterns: "*.html"
+        excludes: 'index.html'
+        # file_type: directory
+        # hidden: true
+      register: html_files_to_index
+      delegate_to: localhost
+      run_once: true
+    
+    - debug:
+        msg: "{{ html_files_to_index }}"
+      run_once: true
+
+    - name: Template index page
+      ansible.builtin.template:
+        src: system-report-index.html
+        dest: "{{ system_report_path }}/index.html"
+        force: true
+      vars:
+        report_title: "Home"
+      delegate_to: localhost
+      run_once: true
+
+    

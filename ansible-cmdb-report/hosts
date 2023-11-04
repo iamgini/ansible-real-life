@@ -12,6 +12,7 @@ httpd_port= 8080
 
 [utils]
 utility-101 ansible_host=192.168.57.106 ansible_user=devops
+utility-102 ansible_host=192.168.57.106 ansible_user=devops
 
 [web]
 webserver01

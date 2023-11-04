@@ -5,8 +5,3 @@
     <div class="footer-text">
       Report to <a href="mailto:{{ report_admin_email | default('system-admin@example.com')}}" target="_blank" style="text-decoration:none; color:#ccc;"><strong>{{ system_report_admin_email | default('system-admin@example.com')}}</strong></a> if you find any issues in the Report.
     </div>
-
-    <div class="footer-text">
-      If you do not wish to receive any further emails, please report to <a href="mailto:{{ system_report_admin_email| default(omit) }}" target="_blank" style="text-decoration:none; color:#ccc;"><strong>{{ system_report_admin_email | default('system-admin@example.com') }}</strong></a>.
-    </div>
-    
