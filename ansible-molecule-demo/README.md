@@ -15,6 +15,16 @@ molecule 6.0.3 using python 3.12
     default:6.0.3 from molecule
 ```
 
+## Configure `COLLECTIONS_PATHS`
+
+Add the custom collection path in `~/.ansible.cfg`
+
+```ini
+[defaults]
+COLLECTIONS_PATHS = ./collections:~/.ansible/collections/ansible_collections:/usr/share/ansible/collections/ansible_collections:/home/iamgini/ansible/ansible-real-life/ansible-molecule-demo/
+
+```
+
 ## Using Molecule
 
 ```shell
@@ -83,7 +93,7 @@ changed: [localhost] => (item=molecule/default/converge.yml)
 PLAY RECAP *********************************************************************
 localhost                  : ok=3    changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
 
-INFO     Initialized scenario in /home/gmadappa/ansible/ansible-real-life/ansible-molecule-demo/iamgini/moleculedemo/extensions/molecule/default successfully.
+INFO     Initialized scenario in /home/iamgini/ansible/ansible-real-life/ansible-molecule-demo/iamgini/moleculedemo/extensions/molecule/default successfully.
 ```
 
 ```shell
@@ -101,3 +111,6 @@ molecule/
 ## References
 
 - [Ansible Molecule Documentation](https://ansible.readthedocs.io/projects/molecule/)
+- [devspaces-samples/ansible-devspaces-demo](https://github.com/devspaces-samples/ansible-devspaces-demo)
+- [Developing and Testing Ansible Roles with Molecule and Podman - Part 1](https://www.ansible.com/blog/developing-and-testing-ansible-roles-with-molecule-and-podman-part-1)
+- [Developing and Testing Ansible Roles with Molecule and Podman - Part 2](https://www.ansible.com/blog/developing-and-testing-ansible-roles-with-molecule-and-podman-part-2)

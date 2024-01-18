@@ -1,0 +1,19 @@
+---
+# tasks file for web
+- name: Install and configure nginx web server
+  ansible.builtin.package:
+    name: nginx
+    state: installed
+
+- name: Start nginx server
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true
+
+- name: Copy Welcome message to default html
+  ansible.builtin.copy:
+    content: "Welcome to nginx webserver"
+    dest: /var/www/html/index.html
+    owner: root
+    mode: '0644'
