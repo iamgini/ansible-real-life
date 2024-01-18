@@ -1,5 +1,0 @@
----
-# tasks file for demo_role
-- name: A test task from Molecule demo role
-  ansible.builtin.debug:
-    msg: "A test task from Molecule demo role."
