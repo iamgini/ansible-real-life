@@ -114,3 +114,4 @@ molecule/
 - [devspaces-samples/ansible-devspaces-demo](https://github.com/devspaces-samples/ansible-devspaces-demo)
 - [Developing and Testing Ansible Roles with Molecule and Podman - Part 1](https://www.ansible.com/blog/developing-and-testing-ansible-roles-with-molecule-and-podman-part-1)
 - [Developing and Testing Ansible Roles with Molecule and Podman - Part 2](https://www.ansible.com/blog/developing-and-testing-ansible-roles-with-molecule-and-podman-part-2)
+- [Testing Ansible Automation with Molecule Pt. 2](https://medium.com/contino-engineering/testing-ansible-automation-with-molecule-pt-2-7e2ff5a70bcc)
