@@ -1,0 +1,25 @@
+---
+repos:
+  - repo: 'https://github.com/pre-commit/pre-commit-hooks'
+    rev: v4.5.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        exclude: syntax_highlighting_demo.yml
+      - id: no-commit-to-branch
+
+  - repo: 'https://github.com/ansible-community/ansible-lint.git'
+    rev: v6.22.1
+    hooks:
+      - id: ansible-lint
+        pass_filenames: false
+        always_run: true
+        entry: "ansible-lint"
+        args:
+          - "--profile=production"
+          - "-c=.ansible-lint"
+        additional_dependencies:
+          - "ansible-core>=2.13"
+          - "yamllint>=1.29,<2.0"

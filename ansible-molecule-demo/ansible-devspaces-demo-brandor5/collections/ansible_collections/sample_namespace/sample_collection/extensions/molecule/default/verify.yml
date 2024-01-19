@@ -1,0 +1,126 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  connection: community.okd.oc
+  # vars:
+  #   __backup_file_base: "{{ backup_file_source | basename }}"
+  #   __backup_file_base_suffix: "{{ backup_file_base }}{{ backup_file_dest_suffix }}"
+  #   __backup_file_destination_path: "{{ backup_file_dest_folder }}/{{ backup_file_dest_suffix }}"
+  tasks:
+    # TODO: change this to not be hard coded?
+    - name: Verifier | include default role vars
+      ansible.builtin.include_vars:
+        dir: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') }}/../roles/backup_file/defaults/"
+        extensions:
+          - 'yml'
+
+    - name: Verifier | Check if the backup destination directory exists
+      vars:
+        fail_msg: "FAIL - backup destination directory doesn't exist"
+      block:
+
+        - name: Verifier Backup Created | Check if backup destination directory exists
+          ansible.builtin.stat:
+            path: "{{ backup_file_dest_folder }}"
+          register: __backup_file_dest_dir_stat
+
+        - name: Verifier Backup Created | Assert backup file directory exists
+          ansible.builtin.assert:
+            that:
+              - __backup_file_dest_dir_stat is defined
+              - __backup_file_dest_dir_stat.stat.exists
+              - __backup_file_dest_dir_stat.stat.isdir
+      rescue:
+
+        - name: Verifier Backup Created | Store failure message
+          ansible.builtin.set_fact:
+            backup_file_verifier_fail: "{{ backup_file_verifier_fail | default([]) + [fail_msg] }}"
+
+    - name: Verifier | Check if the backup destination directory is writable
+      vars:
+        fail_msg: "FAIL - backup destination directory isn't writable at"
+      block:
+
+        - name: Verifier Backup Created | Assert backup file directory is writable
+          ansible.builtin.assert:
+            that:
+              - __backup_file_dest_dir_stat is defined
+              - __backup_file_dest_dir_stat.stat.exists
+              - __backup_file_dest_dir_stat.stat.isdir
+              - __backup_file_dest_dir_stat.stat.writeable
+      rescue:
+
+        - name: Verifier Backup Created | Store failure message
+          ansible.builtin.set_fact:
+            backup_file_verifier_fail: "{{ backup_file_verifier_fail | default([]) + [fail_msg] }}"
+
+    - name: Verifier | Check if the backup created
+      vars:
+        fail_msg: "FAIL - backup file doesn't exist or is a link"
+      block:
+
+        - name: Verifier Backup Created | Check if backup file was created
+          ansible.builtin.stat:
+            path: "{{ backup_file_dest_folder }}/{{ backup_file_source | basename }}{{ backup_file_dest_suffix }}"
+          register: __backup_file_dest_stat
+
+        - name: Verifier Backup Created | Assert backup file exists and isn't a link
+          ansible.builtin.assert:
+            that:
+              - __backup_file_dest_stat is defined
+              - __backup_file_dest_stat.stat.exists
+              - not __backup_file_dest_stat.stat.islnk
+      rescue:
+
+        - name: Verifier Backup Created | Store failure message
+          ansible.builtin.set_fact:
+            backup_file_verifier_fail: "{{ backup_file_verifier_fail | default([]) + [fail_msg] }}"
+
+    - name: Verifier | Check that backup matches source
+      vars:
+        fail_msg: "FAIL - backup file doesn't match source"
+      block:
+
+        - name: Verifier Backup Created | Fail immediately if backup file doesn't exist
+          ansible.builtin.fail:
+          when:
+            - __backup_file_dest_stat is not defined
+            - not __backup_file_dest_stat.stat.exists
+
+        - name: Verifier Backup Created | Store information about source
+          ansible.builtin.stat:
+            path: "{{ backup_file_source }}"
+          register: __backup_file_source_stat
+
+        - name: Verifier Backup Created | Assert source and backup file have matching checksums
+          ansible.builtin.assert:
+            that:
+              - __backup_file_dest_stat is defined
+              - __backup_file_dest_stat.stat.checksum is defined
+              - __backup_file_source_stat is defined
+              - __backup_file_source_stat.stat.checksum is defined
+              - __backup_file_source_stat.stat.checksum == __backup_file_source_stat.stat.checksum
+
+      rescue:
+
+        - name: Verifier Backup Created | Store failure message
+          ansible.builtin.set_fact:
+            backup_file_verifier_fail: "{{ backup_file_verifier_fail | default([]) + [fail_msg] }}"
+
+    - name: Verifier | Fail if any tests failed
+      when:
+        - backup_file_verifier_fail is defined
+      block:
+
+        - name: Verifier | Show failures
+          ansible.builtin.debug:
+            msg:
+              - "Role failed with the following messages"
+              - "{{ backup_file_verifier_fail }}"
+
+        - name: Verifier | Fail test
+          ansible.builtin.fail:
+            msg: "{{ backup_file_verifier_fail }}"

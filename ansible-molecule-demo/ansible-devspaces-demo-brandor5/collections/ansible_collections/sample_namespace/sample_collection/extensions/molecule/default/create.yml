@@ -1,0 +1,45 @@
+---
+- name: Create
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  no_log: "{{ molecule_no_log }}"
+  tasks:
+
+    - name: Create molecule instance as containers
+      community.okd.k8s:
+        kubeconfig: "{{ lookup('ansible.builtin.env', 'HOME') }}/.kube/config"
+        state: present
+        definition: "{{ lookup('template', 'templates/deployment.yml') | from_yaml }}"
+        wait: true
+      register: server
+      with_items: "{{ molecule_yml.platforms }}"
+
+    - name: Debug molecule creations
+      ansible.builtin.debug:
+        var: server
+
+    - name: Store container information  # noqa: no-handler
+      when: server.changed | default(false) | bool
+      block:
+
+        - name: Populate instance config dict
+          ansible.builtin.set_fact:
+            instance_conf_dict: {
+              'instance': "{{ item.result.status.containerStatuses[0].name }}",
+            }
+          with_items: "{{ server.results }}"
+          register: instance_config_dict
+
+        - name: Convert instance config dict to a list
+          ansible.builtin.set_fact:
+            instance_conf: "{{ instance_config_dict.results | map(attribute='ansible_facts.instance_conf_dict') | list }}"
+
+        - name: Dump instance config
+          ansible.builtin.copy:
+            content: |
+              # Molecule managed
+
+              {{ instance_conf | to_json | from_json | to_yaml }}
+            dest: "{{ molecule_instance_config }}"
+            mode: 0600

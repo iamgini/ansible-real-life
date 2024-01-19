@@ -1,0 +1,16 @@
+---
+mock_modules:
+  - community.okd.k8s
+
+mock_roles:
+  - backup_file
+
+exclude_paths:
+  - devfile.yml
+  - syntax_highlighting_demo.yml
+  - collections/ansible_collections/sample_namespace/sample_collection/roles/backup_file/molecule
+  - collections/ansible_collections/sample_namespace/sample_collection/extensions
+
+warn_list:
+  - galaxy[no-changelog]  # TODO: Implement changelog.
+  - schema[meta-runtime]  # TODO: Implement meta/runtime.yml

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ item.name }}"
+  namespace: "{{ backup_file_molecule_namespace }}"
+  labels:
+    app: "molecule-test-container"
+spec:
+  containers:
+    - name: molecule
+      image: "{{ item.image }}"
+      workingDir: "{{ item.workingDir }}"
+      tmpfs:
+        - /run
+        - /tmp
+      volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      capabilities:
+        - SYS_ADMIN
+      command:
+        - "/usr/sbin/init"
+      pre_build_image: true

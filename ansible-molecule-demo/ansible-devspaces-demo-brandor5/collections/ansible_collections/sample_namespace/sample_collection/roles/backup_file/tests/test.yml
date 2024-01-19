@@ -1,0 +1,6 @@
+---
+- name: Simple test case
+  hosts: all
+  connection: community.okd.oc
+  roles:
+    - backup_file

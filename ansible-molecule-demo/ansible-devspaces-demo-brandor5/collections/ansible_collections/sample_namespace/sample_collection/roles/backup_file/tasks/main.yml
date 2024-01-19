@@ -1,0 +1,22 @@
+---
+# tasks file for backup_file
+
+- name: Ping the host
+  ansible.builtin.ping:
+
+- name: Backup File | Create backup directory
+  ansible.builtin.file:
+    path: "{{ backup_file_dest_folder }}"
+    state: directory
+    owner: "{{ backup_file_dest_dir_owner }}"
+    group: "{{ backup_file_dest_dir_group }}"
+    mode: "{{ backup_file_dest_dir_mode }}"
+
+- name: Backup File | Copy source file to backup destination
+  ansible.builtin.copy:
+    src: "{{ backup_file_source }}"
+    dest: "{{ backup_file_dest_folder }}/{{ backup_file_source | basename }}{{ backup_file_dest_suffix }}"
+    owner: "{{ backup_file_dest_owner }}"
+    group: "{{ backup_file_dest_group }}"
+    mode: "{{ backup_file_dest_mode }}"
+    remote_src: "{{ backup_file_remote_source }}"

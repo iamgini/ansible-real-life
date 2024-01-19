@@ -1,0 +1,24 @@
+galaxy_info:
+  author: jeffcpullen
+  namespace: demo
+  description: "This is an example of a non-priviledged role using kubernetes as the driver and connection method"
+  company: Red Hat
+
+  license: GPL-3
+
+  min_ansible_version: '2.15'
+
+  platforms:
+    - name: Fedora
+      versions:
+        - all
+    - name: EL
+      versions:
+        - all
+
+  galaxy_tags:
+    - system
+    - ansible
+    - automation
+
+dependencies: []

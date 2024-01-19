@@ -1,0 +1,13 @@
+---
+# This is a sample playbook with linting issues.
+# This filename is excluded from ansible-lint so that the GitHub pipeline will pass.
+# Copy or rename this file to try ansible-lint and/or pre-commit.
+- name: Hello World Playbook
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Print Hello World
+      ansible.builtin.debug:
+        msg: "Hello World"
+    - debug: 
+        msg: "I am poorly written"

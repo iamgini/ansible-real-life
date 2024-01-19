@@ -1,0 +1,81 @@
+name: Build and Push Ansible Creator EE Image
+
+on:
+  push:
+    branches:
+      - 'devspaces-[0-9].[0-9]+-rhel-8'
+      - devspaces-3-rhel-8
+
+  workflow_call:
+    secrets:
+      QUAY_USERNAME:
+        required: true
+      QUAY_PASSWORD:
+        required: true
+
+jobs:
+  build_ansible_creator_ee_image:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          token: ${{secrets.VSVYDENK_GITHUB_TOKEN}}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: "Docker quay.io Login"
+        uses: docker/login-action@v2
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_PASSWORD }}
+
+      - name: Check Commit Message
+        id: check_message
+        run: |
+          commit_message=$(git log --format=%B -n 1 ${{ github.sha }})
+          prefix="chore(devfile):auto-update Ansible Creator EE image"
+          if [[ $commit_message == "$prefix"* ]]; then
+            echo "update_devfile=false" >> $GITHUB_OUTPUT
+          else
+            echo "update_devfile=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build and push Docker image; Update image in devfile
+        if: steps.check_message.outputs.update_devfile == 'true' || github.actor == 'devstudio-release'
+        run: |
+          echo "Branch name: ${{ github.ref }}"
+          branch_name=${{ github.ref }}
+          branch_name=${branch_name#refs/heads/}
+          if [[ $branch_name == "devspaces-3-rhel-8" ]]; then
+            tag="latest"
+          else
+            tag=$(echo "$branch_name" | grep -o '[0-9]\+\.[0-9]\+')
+          fi
+          echo "Tag: $tag"
+          image_id=$(docker build -q -t "quay.io/devspaces/ansible-creator-ee:${tag}" .)
+
+          short_sha=$(echo $image_id | cut -c8-12)
+          echo "Short SHA: $short_sha"
+          docker tag quay.io/devspaces/ansible-creator-ee:${tag} quay.io/devspaces/ansible-creator-ee:${tag}-${short_sha}
+          docker image push --all-tags quay.io/devspaces/ansible-creator-ee
+
+          # rewrite devfile to update digest for ansible-creator-ee
+          docker pull quay.io/devspaces/ansible-creator-ee:${tag}
+          digest=$(docker inspect --format='{{index .RepoDigests 0}}' quay.io/devspaces/ansible-creator-ee:${tag})
+          sed -r -i devfile.yaml -e "s|(image: .+devspaces/ansible-creator-ee.+)|image: ${digest}|g"
+
+      - name: Set up Git
+        if: steps.check_message.outputs.update_devfile == 'true' || github.actor == 'devstudio-release'
+        run: |
+          git config --global user.email "vsvydenk@redhat.com"
+          git config --global user.name "Valerii Svydenko"
+
+      - name: Commit and Push Changes
+        if: steps.check_message.outputs.update_devfile == 'true' || github.actor == 'devstudio-release'
+        run: |
+          git add .
+          git commit -m "chore(devfile):auto-update Ansible Creator EE image"
+          git push

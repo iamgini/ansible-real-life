@@ -1,0 +1,12 @@
+---
+# defaults file for backup_file
+backup_file_source: '/etc/hosts'
+backup_file_dest_folder: '/tmp/backups'
+backup_file_dest_suffix: '.bak'
+backup_file_dest_dir_owner: "{{ ansible_user_id }}"
+backup_file_dest_dir_group: "{{ ansible_user_gid }}"
+backup_file_dest_dir_mode: '0750'
+backup_file_dest_owner: "{{ ansible_user_id }}"
+backup_file_dest_group: "{{ ansible_user_gid }}"
+backup_file_dest_mode: '0640'
+backup_file_remote_source: true

@@ -1,0 +1,33 @@
+---
+- name: Destroy
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  no_log: "{{ molecule_no_log }}"
+  tasks:
+    # Developer must implement.
+
+    - name: Destroy molecule containers
+      community.okd.k8s:
+        kubeconfig: "{{ lookup('ansible.builtin.env', 'HOME') }}/.kube/config"
+        state: absent
+        definition: "{{ lookup('template', 'templates/deployment.yml') | from_yaml }}"
+        wait: true
+      register: server
+      with_items: "{{ molecule_yml.platforms }}"
+
+    # Mandatory configuration for Molecule to function.
+
+    - name: Populate instance config
+      ansible.builtin.set_fact:
+        instance_conf: {}
+
+    - name: Dump instance config  # noqa: no-handler
+      ansible.builtin.copy:
+        content: |
+          # Molecule managed
+
+          {{ instance_conf | to_json | from_json | to_yaml }}
+        dest: "{{ molecule_instance_config }}"
+        mode: 0600
+      when: server.changed | default(false) | bool

@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "*.yaml": "ansible",
+        "*.yml": "ansible"
+      },
+    "ansible.ansible.path": "/usr/local/bin/ansible",
+    "ansible.python.interpreterPath": "/bin/python",
+    "ansible.ansible.useFullyQualifiedCollectionNames": true,
+    "ansible.ansibleNavigator.path": "ansible-navigator",
+    "ansible.completion.provideModuleOptionAliases": true,
+    "ansible.completion.provideRedirectModules": true,
+    "ansible.validation.enabled": true,
+    "ansible.validation.lint.enabled": true,
+    "ansible.validation.lint.path": "/usr/local/bin/ansible-lint"
+}
