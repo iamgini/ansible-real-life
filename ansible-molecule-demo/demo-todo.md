@@ -1,0 +1,4 @@
+- show molecule --version
+- show ansible.cfg
+- show ansible --version
+-

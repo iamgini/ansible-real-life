@@ -1,6 +1,6 @@
 # Ansible Molecule
 
-Important: 
+Important:
 
 - Molecule supports only the latest two major versions of Ansible (N/N-1), meaning that if the latest version is 2.9.x, we will also test our code with 2.8.x.
 
@@ -10,7 +10,7 @@ Important:
 $ python3 -m pip install molecule
 
 $ molecule --version
-molecule 6.0.3 using python 3.12 
+molecule 6.0.3 using python 3.12
     ansible:2.16.2
     default:6.0.3 from molecule
 ```
@@ -28,6 +28,8 @@ COLLECTIONS_PATHS = ./collections:~/.ansible/collections/ansible_collections:/us
 ## Using Molecule
 
 ```shell
+$ cd collections/ansible_collections/
+
 $ ansible-galaxy collection init iamgini.moleculedemo
 - Collection iamgini.moleculedemo was created successfully
 ```
@@ -35,9 +37,9 @@ $ ansible-galaxy collection init iamgini.moleculedemo
 Create a demo role
 
 ```shell
-$  cd roles/
+$ cd roles/
 
-$  ansible-galaxy role init demo_role
+$ ansible-galaxy role init demo_role
 - Role demo_role was created successfully
 ```
 
@@ -51,7 +53,7 @@ Update the `demo_role/tasks/main.yml`
     msg: "A test task from Molecule demo role."
 ```
 
-Create a playbook in collection directory (`playbooks/demo.yaml`)
+Create a playbook in collection directory (`playbooks/install_web.yaml`)
 
 ```yaml
 ---
@@ -107,6 +109,8 @@ molecule/
 
 2 directories, 4 files
 ```
+
+
 
 ## References
 
