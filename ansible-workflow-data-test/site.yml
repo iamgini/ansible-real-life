@@ -7,13 +7,17 @@
       ansible.builtin.set_fact:
         workflow_data: "{{ workflow_data_passed | default({}) }}"
 
-    - name: Print dict
+    - name: Print dict before jobLevel
       debug:
         msg: "{{ workflow_data }}"
 
     - name: Initialize switch data
       ansible.builtin.set_fact:
         workflow_data: "{{ workflow_data | default({}) | combine({'jobLevel': job_level | default(100)}, recursive=True) }}"
+
+    - name: Print dict after jobLevel
+      debug:
+        msg: "{{ workflow_data }}"
 
     - name: Set workflow_data_passed
       ansible.builtin.set_stats:
