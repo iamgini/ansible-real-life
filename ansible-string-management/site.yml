@@ -7,7 +7,6 @@
       ansible.builtin.set_fact:
         # switch_health_check: "{{ switch_health_check | default({}) | combine({ switch_item: {'nodeState': 'NOENTRY', 'nodeName': 'NOENTRY'}}, recursive=True) }}"
         switch_health_check: "{{ switch_health_check | default({}) | combine({'switch1': {'nodeState': 'NOENTRY', 'nodeName': 'NOENTRY'},'switch2': {'nodeState': 'NOENTRY', 'nodeName': 'NOENTRY'},'switch3': {'nodeState': 'NOENTRY', 'nodeName': 'NOENTRY'},'switch4': {'nodeState': 'NOENTRY', 'nodeName': 'NOENTRY'}}, recursive=True) }}"
-        # switch_health_check: "{{ switch_health_check | default({}) | combine({ 'switch1': {'nodeState': 'NOENTRY', 'nodeName': 'NOENTRY'},{ 'switch2': {'nodeState': 'NOENTRY', 'nodeName': 'NOENTRY'},{ 'switch3': {'nodeState': 'NOENTRY', 'nodeName': 'NOENTRY'},{ 'switch4': {'nodeState': 'NOENTRY', 'nodeName': 'NOENTRY'}}, recursive=True) }}"
       # with_items:
       #   - 'switch1'
       #   - 'switch2'
