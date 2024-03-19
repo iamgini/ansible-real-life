@@ -11,9 +11,9 @@
       debug:
         msg: "{{ workflow_data }}"
 
-    - name: Initialize switch data
+    - name: Update workflow_data
       ansible.builtin.set_fact:
-        workflow_data: "{{ workflow_data | default({}) | combine({'jobLevel': job_level | default(100)}, recursive=True) }}"
+        workflow_data: "{{ workflow_data | default({}) | combine({jobLevel: {'jobLevel': job_level | default(100)}}, recursive=True) }}"
 
     - name: Print dict after jobLevel
       debug:
