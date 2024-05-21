@@ -1,0 +1,18 @@
+- hosts: localhost
+  tasks:
+    - name: Display table-style output
+      debug:
+        # msg: |
+        #   {% for item in my_list %}
+        #   {{ item.name | format(width=20, align='left') }} | {{ item.value | format(width=10, align='right') }}
+        #   {% endfor %}
+        msg: |
+          {% for item in my_list %}
+          {{ "{:<15} {}".format(item.name, item.value) }}
+          {% endfor %}
+      vars:
+        my_list:
+          - name: Field 1
+            value: Value 1
+          - name: Field 2 with longer value
+            value: Value 2

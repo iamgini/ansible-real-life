@@ -1,0 +1,14 @@
+---
+- name: Facts
+  hosts: "{{ nodes | default('nodes') }}"
+  gather_facts: false
+  tasks:
+    - name: Collect only os_family
+      ansible.builtin.setup:
+        gather_subset:
+          - '!all'
+          - 'os_family'
+
+    - name: Print values
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts }}"
