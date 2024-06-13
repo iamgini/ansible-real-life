@@ -1,0 +1,3 @@
+baseline_exclusions:
+  # mount operations
+  - '009.009'
