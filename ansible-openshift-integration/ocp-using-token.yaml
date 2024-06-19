@@ -1,0 +1,30 @@
+---
+- name: Ansible to OpenShift Integration
+  hosts: localhost
+  gather_facts: false
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+
+    # Method 1: Username & password to fetch the Token
+
+    - name: Log in to OCP to obtain access token
+      redhat.openshift.openshift_auth:
+        host: "{{ ocp_host_api }}"
+        username: "{{ lookup('ansible.builtin.env', 'OPENSHIFT_LOGIN_USERNAME') }}"
+        password: "{{ lookup('ansible.builtin.env', 'OPENSHIFT_LOGIN_PASSWORD') }}"
+        validate_certs: false
+      register: openshift_auth_results
+
+    - name: Get a list of all pods from openshift-apiserver
+      kubernetes.core.k8s_info:
+        host: "{{ ocp_host_api }}"
+        api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
+        kind: Pod
+        namespace: openshift-apiserver
+        validate_certs: false
+      register: pod_list
+
+    - name: Print details
+      ansible.builtin.debug:
+        msg: "{{ pod_list }}"

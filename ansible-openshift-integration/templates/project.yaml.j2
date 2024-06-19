@@ -1,0 +1,11 @@
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  annotations:
+    openshift.io/requester: "{{ project_requestor }}"
+    openshift.io/display-name: "{{ project_name }}"
+    openshift.io/description: "{{ project_description }}"
+  labels:
+    project: "{{ project_name }}"
+    app: "{{ project_app }}"
+  name: {{ project_name }}

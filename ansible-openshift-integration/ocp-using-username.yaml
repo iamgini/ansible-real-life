@@ -1,0 +1,24 @@
+---
+- name: Ansible to OpenShift Integration
+  hosts: localhost
+  gather_facts: false
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+
+    # Method 2: Using username & password
+
+    - name: Get a list of all pods from openshift-apiserver
+      kubernetes.core.k8s_info:
+        host: https://api.cluster-wx549.wx549.sandbox2812.opentlc.com:6443
+        username: "{{ lookup('ansible.builtin.env', 'OPENSHIFT_LOGIN_USERNAME') }}"
+        password: "{{ lookup('ansible.builtin.env', 'OPENSHIFT_LOGIN_PASSWORD') }}"
+        kind: Pod
+        namespace: openshift-apiserver
+        validate_certs: false
+      register: pod_list
+      ignore_errors: true
+
+    - name: Print details
+      ansible.builtin.debug:
+        msg: "{{ pod_list }}"

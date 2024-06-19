@@ -1,0 +1,13 @@
+---
+- name: Template the project details
+  ansible.builtin.set_fact:
+    project_definition: "{{ lookup('ansible.builtin.template', 'project.yaml.j2') }}"
+
+- name: Create project
+  # redhat.openshift.k8s:
+  kubernetes.core.k8s:
+    api_key: "{{ api_key }}"
+    host: "{{ cluster_api }}"
+    validate_certs: "{{ cert_validation | default(false) }}"
+    state: present
+    definition: "{{ project_definition }}"
