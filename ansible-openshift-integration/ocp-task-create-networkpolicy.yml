@@ -1,0 +1,12 @@
+---
+- name: Template the Network Policy details
+  ansible.builtin.set_fact:
+    netpol_definition: "{{ lookup('ansible.builtin.template', 'networkpolicy.yaml.j2') }}"
+
+- name: Create Network Policy
+  redhat.openshift.k8s:
+    api_key: "{{ api_key }}"
+    host: "{{ cluster_api }}"
+    validate_certs: "{{ cert_validation | default(false) }}"
+    state: present
+    definition: "{{ netpol_definition }}"
