@@ -4,4 +4,8 @@
   tasks:
     # - name: Create Service Object-Group in Cisco ASA
 
-    - name: Cisco ASA - Create a time range object
+    - name: Cisco ASA - Write current configuration to memory
+      ansible.builtin.command: /usr/sbin/asa_write_memory
+      become: true
+      become_user: root
+      changed_when: false
