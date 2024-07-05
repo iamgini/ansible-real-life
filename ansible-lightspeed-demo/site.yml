@@ -1,0 +1,7 @@
+---
+- name: Ansible Lightspeed Demo
+  hosts: RHEL9
+  tasks:
+    # - name: Create Service Object-Group in Cisco ASA
+
+    - name: Cisco ASA - Create a time range object

@@ -28,24 +28,24 @@
         msg: "{{ pod_list }}"
 
     # Method 2: Using username & password
-    # Please note that this only works with clusters configured 
-    # to use HTTP Basic Auth. If your cluster has a different 
-    # form of authentication (e.g. OAuth2 in OpenShift), this 
-    # option will not work as expected and you should look into 
-    # the community.okd.k8s_auth module, as that 
+    # Please note that this only works with clusters configured
+    # to use HTTP Basic Auth. If your cluster has a different
+    # form of authentication (e.g. OAuth2 in OpenShift), this
+    # option will not work as expected and you should look into
+    # the community.okd.k8s_auth module, as that
     # might do what you need.
 
     - name: Get a list of all pods from openshift-apiserver
       kubernetes.core.k8s_info:
         host: https://api.cluster-wx549.wx549.sandbox2812.opentlc.com:6443
         username: "{{ lookup('ansible.builtin.env', 'OPENSHIFT_LOGIN_USERNAME') }}"
-        password: "{{ lookup('ansible.builtin.env', 'OPENSHIFT_LOGIN_PASSWORD') }}"        
+        password: "{{ lookup('ansible.builtin.env', 'OPENSHIFT_LOGIN_PASSWORD') }}"
         kind: Pod
         namespace: openshift-apiserver
         validate_certs: false
       register: pod_list
-      ignore_errors: true    
+      ignore_errors: true
 
     - name: Print details
       ansible.builtin.debug:
-        msg: "{{ pod_list }}"    
+        msg: "{{ pod_list }}"
