@@ -5,6 +5,7 @@ localhost ansible_connection=local
 [rhel8]
 rhel101
 rhel102
+rhel103 ansible_host=192.168.57.91 ansible_user=vagrant
 
 [rhel8:vars]
 httpd_port= 8080

@@ -1,6 +1,0 @@
-- name: 'Download NPM'
-  unarchive:
-    src: 'https://ansible-ci-files.s3.amazonaws.com/test/integration/targets/npm/{{ nodejs_path }}.tar.gz'
-    dest: '{{ remote_tmp_dir }}'
-    remote_src: yes
-    creates: '{{ remote_tmp_dir }}/{{ nodejs_path }}.tar.gz'

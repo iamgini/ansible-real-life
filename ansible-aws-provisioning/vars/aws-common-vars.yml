@@ -1,0 +1,30 @@
+---
+
+# variables aws environment
+vpc_id: ""
+vpc_subnet_list: []
+
+region: ap-southeast-1
+aws_region: ap-southeast-1
+elbgroupname: webtarget
+
+inventory_webgroup: ec2webservers
+existing_ec2_list: []
+new_ec2_list: []
+existing_ec2_public_ips: []
+
+subnet1: subnet-0352cb0c0810ca5f0
+subnet2: subnet-0b53d9ad74d47486c
+ap_zone1: ap-southeast-1a
+ap_zone2: ap-southeast-1b
+aws_key_pem: /home/ansible/.ssh/akey.pem
+aws_demo_key: 'ansible_iac_demo_key'
+aws_security_group: 'ansible_iac_demo_sg'
+# aws_elb_target_group: 'ansible-iac-demo-elbtarget'
+aws_elb_app_lb: 'ansible-iac-demo-elb-app-lb'
+
+aws_ami_id: 'ami-02f26adf094f51167' # Amazon Linux 2 AMI in Singapore
+
+# variables for elb and target group
+# elb_target_group : elb-targetgrp-ansibe-demo
+# elb_name: elb-ansibe-demo

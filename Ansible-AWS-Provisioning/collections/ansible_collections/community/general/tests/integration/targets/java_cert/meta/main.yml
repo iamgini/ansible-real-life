@@ -1,4 +1,0 @@
-dependencies:
-  - setup_java_keytool
-  - setup_openssl
-  - setup_remote_tmp_dir
