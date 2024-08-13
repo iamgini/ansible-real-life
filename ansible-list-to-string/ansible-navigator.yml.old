@@ -1,0 +1,21 @@
+---
+ansible-navigator:
+  execution-environment:
+    container-engine: podman
+    image: automationhub22-1.lab.local/ee-minimal-rhel8
+    enabled: true
+
+  playbook-artifact:
+    save-as: /home/devops/playbook-artifacts/{playbook_name}-artifact-{ts_utc}.json
+
+  # logging:
+  #   level: debug
+
+  editor:
+    command: code-server {filename}
+    console: false
+
+  playbook-artifact:
+    enable: True
+    replay: artifacts/ansible_artifact.json
+    save-as: artifacts/ansible_artifact.json
