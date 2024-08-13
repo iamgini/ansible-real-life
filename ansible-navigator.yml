@@ -1,3 +1,4 @@
+# ansible-navigator.yml
 ---
 ansible-navigator:
   editor:
