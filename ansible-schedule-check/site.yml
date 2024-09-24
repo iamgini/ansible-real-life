@@ -8,8 +8,8 @@
         end:   "0000-00-00 07:00:00"
       - start: "0000-00-00 14:00:00"
         end:   "0000-00-00 16:00:00"
-      - start: "2024-10-24 14:00:00"
-        end:   "2024-10-25 18:00:00"
+      - start: "2024-10-30 14:00:00"
+        end:   "2024-10-31 18:00:00"
       - start: "2024-10-24 22:00:00"
         end:   "2024-10-25 10:00:00"
 
@@ -27,12 +27,6 @@
       ansible.builtin.set_fact:
         in_maintenance: true
       when: schedule_datetime_start | int < system_datetime | int and schedule_datetime_end | int > system_datetime | int
-      # ansible.builtin.debug:
-      #   msg:
-          # - "{{ schedule_datetime_start }}"
-          # - "{{ schedule_datetime_end }}"
-          # - "{{ maint_item.start | to_datetime('%Y-%m-%d %H:%M:%S') | to_timestamp  }} - {{ maint_item.end | to_datetime('%Y-%m-%d %H:%M:%S') | to_timestamp }}"
-          # - "{{ system_datetime }}, {{ ansible_date_time.date }} {{ ansible_date_time.time }}"
       vars:
         schedule_datetime_start: "{{ ansible_date_time.date | replace('-', '') | replace(' ', '') | replace(':', '') + maint_item.start[-8:] | replace('-', '') | replace(' ', '') | replace(':', '') if maint_item.start[0:10] == '0000-00-00' else maint_item.start | replace('-', '') | replace(' ', '') | replace(':', '') }}"
         schedule_datetime_end: "{{ ansible_date_time.date | replace('-', '') | replace(' ', '') | replace(':', '') + maint_item.end[-8:] | replace('-', '') | replace(' ', '') | replace(':', '')  if maint_item.end[0:10] == '0000-00-00' else maint_item.end | replace('-', '') | replace(' ', '') | replace(':', '') }}"
