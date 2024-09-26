@@ -5,12 +5,13 @@
   vars:
     maint_schedules:
       # sample every day schedules
-      - start: "0000-00-00 23:00:00"
-        end:   "0000-00-00 07:00:00"
+      - start: "0000-00-00 12:00:00"
+        end:   "0000-00-00 01:00:00"
+        overnight: true
       - start: "0000-00-00 14:00:00"
         end:   "0000-00-00 16:00:00"
       # sample date-time from to different date-time
-      - start: "2024-09-24 14:00:00"
+      - start: "2024-09-28 14:00:00"
         end:   "2024-09-31 18:00:00"
       # Sample holiday/vacation - 1 day or more
       - start: "2024-10-24 00:00:00"
@@ -25,21 +26,23 @@
     - name: Check downtime schedules
       ansible.builtin.set_fact:
         in_maintenance: true
-      when: schedule_datetime_start  < system_datetime  and schedule_datetime_end  > system_datetime
+      when: system_datetime > schedule_datetime_start and system_datetime < schedule_datetime_end
       vars:
         schedule_datetime_start: "{{ ansible_date_time.date | replace('-', '') | replace(' ', '') | replace(':', '') + maint_item.start[-8:] | replace('-', '') | replace(' ', '') | replace(':', '') if maint_item.start[0:10] == '0000-00-00' else maint_item.start | replace('-', '') | replace(' ', '') | replace(':', '') }}"
-        schedule_datetime_end: "{{ ansible_date_time.date | replace('-', '') | replace(' ', '') | replace(':', '') + maint_item.end[-8:] | replace('-', '') | replace(' ', '') | replace(':', '')  if maint_item.end[0:10] == '0000-00-00' else maint_item.end | replace('-', '') | replace(' ', '') | replace(':', '') }}"
+        # schedule_datetime_end: "{{ ansible_date_time.date | replace('-', '') | replace(' ', '') | replace(':', '') + maint_item.end[-8:] | replace('-', '') | replace(' ', '') | replace(':', '')  if maint_item.end[0:10] == '0000-00-00' else maint_item.end | replace('-', '') | replace(' ', '') | replace(':', '') }}"
+        schedule_datetime_end: "{{ '%Y-%m-%d'|strftime(ansible_date_time.epoch|int + 86400) | replace('-', '') | replace(' ', '') | replace(':', '') + maint_item.end[-8:] | replace('-', '') | replace(' ', '') | replace(':', '') if  maint_item.overnight | default(false) and maint_item.end[0:10] == '0000-00-00' else ansible_date_time.date | replace('-', '') | replace(' ', '') | replace(':', '') + maint_item.end[-8:] | replace('-', '') | replace(' ', '') | replace(':', '')  if maint_item.end[0:10] == '0000-00-00' else maint_item.end | replace('-', '') | replace(' ', '') | replace(':', '') }}"
+
       loop: "{{ maint_schedules }}"
       loop_control:
         loop_var: maint_item
-        label: "{{ maint_item.start }}-{{ maint_item.end }} ({{ schedule_datetime_start }}-{{schedule_datetime_end}})"
+        label: "{{ maint_item.start }}-{{ maint_item.end }} ({{ system_datetime}} -> {{ schedule_datetime_start }} -> {{schedule_datetime_end}})"
 
     - name: Skip if maintenance period
       ansible.builtin.debug:
-        msg: "Skipping tasks due to maintenance window."
+        msg: "In maintenance window: Skipping tasks!"
       when: in_maintenance | default(false)
 
     - name: Ru if not in maintenance period
       ansible.builtin.debug:
-        msg: "This task will run outside maintenance window."
+        msg: "Outside maintenance window: This task will run"
       when: not in_maintenance | default(false)
