@@ -18,16 +18,15 @@
       set_fact:
         date_time_epoch_value: "{{ (date_time_end | to_datetime('%Y-%m-%d %H:%M:%S')).strftime('%s') | int + 60 }}"
         # date_to_calc: "date -d \"{{ date_time_end }} + 8 hours\" +%Y-%m-%d_%H:%M:%S'"
-        date_to_calc: "date -d \"{{ date_time_end }} + 8 hours\" +%Y-%m-%d_%H:%M:%S"
+        date_to_calc: "date -d \"{{ date_time_end }}+0 + 1 hours\" +%Y-%m-%d\\ %H:%M:%S"
+        # +0 at the end means, source is UTC
 
     - name: Print date time
       ansible.builtin.debug:
         msg:
-          - "{{ date_to_calc }}"
-          - "Original: {{ (date_time_end | to_datetime) }}"
-          - "Original + 8 hours: {{ lookup('pipe', date_to_calc) }}"
-                                # "{{ lookup('pipe', 'date -d \"' + date_time_end + ' + 8 hours\" +%Y-%m-%d\\ %H:%M:%S') | string }}"
-                                # "{{ lookup('pipe', 'date -d \"' + date_time_end + ' + 8 hours\" +%Y-%m-%d\\ %H:%M:%S') }}
+          # - "{{ date_to_calc }}"
+          - "Original UTC: {{ (date_time_end | to_datetime) }}"
+          - "Original UTC + 1 hours: {{ lookup('pipe', date_to_calc) | string }}"
           - "epoch: {{ (date_time_end | to_datetime('%Y-%m-%d %H:%M:%S')).strftime('%s')  }}"
           - "epoch + 60 min: {{ (date_time_end | to_datetime('%Y-%m-%d %H:%M:%S')).strftime('%s') | int + 3600 }}"
           # - "epoch + 60 min: {{ (date_time_epoch_value | to_datetime) | strftime('%Y-%m-%d %H:%M:%S') }}"
