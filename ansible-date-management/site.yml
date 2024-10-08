@@ -29,7 +29,7 @@
                                 # "{{ lookup('pipe', 'date -d \"' + date_time_end + ' + 8 hours\" +%Y-%m-%d\\ %H:%M:%S') | string }}"
                                 # "{{ lookup('pipe', 'date -d \"' + date_time_end + ' + 8 hours\" +%Y-%m-%d\\ %H:%M:%S') }}
           - "epoch: {{ (date_time_end | to_datetime('%Y-%m-%d %H:%M:%S')).strftime('%s')  }}"
-          - "epoch + 60 min: {{ (date_time_end | to_datetime('%Y-%m-%d %H:%M:%S')).strftime('%s') | int + 60 }}"
+          - "epoch + 60 min: {{ (date_time_end | to_datetime('%Y-%m-%d %H:%M:%S')).strftime('%s') | int + 3600 }}"
           # - "epoch + 60 min: {{ (date_time_epoch_value | to_datetime) | strftime('%Y-%m-%d %H:%M:%S') }}"
           - "Cleaned: {{ date_time_end | replace('-', '') | replace(' ', '') | replace(':', '') }}"
           - "Current time: {{ lookup('pipe','date -d \"now \" +%Y-%m-%d\\ %H:%M:%S') }}"
