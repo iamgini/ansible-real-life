@@ -7,7 +7,38 @@
     time_start: "08:00:00"
     date_end: "2022-11-10"
     time_end: "21:00:00"
+
+    date_time_end: '2024-10-02 15:49:20'
+
+    # Get UTC date time to Singapore time
+    # date_time_string: "{{ lookup('pipe','date -d \"now + 8 hours\" +%Y-%m-%d_%H-%M-%S') | string }}"
   tasks:
+
+    - name: Set variables
+      set_fact:
+        date_time_epoch_value: "{{ (date_time_end | to_datetime('%Y-%m-%d %H:%M:%S')).strftime('%s') | int + 60 }}"
+        # date_to_calc: "date -d \"{{ date_time_end }} + 8 hours\" +%Y-%m-%d_%H:%M:%S'"
+        date_to_calc: "date -d \"{{ date_time_end }} + 8 hours\" +%Y-%m-%d_%H:%M:%S"
+
+    - name: Print date time
+      ansible.builtin.debug:
+        msg:
+          - "{{ date_to_calc }}"
+          - "Original: {{ (date_time_end | to_datetime) }}"
+          - "Original + 8 hours: {{ lookup('pipe', date_to_calc) }}"
+                                # "{{ lookup('pipe', 'date -d \"' + date_time_end + ' + 8 hours\" +%Y-%m-%d\\ %H:%M:%S') | string }}"
+                                # "{{ lookup('pipe', 'date -d \"' + date_time_end + ' + 8 hours\" +%Y-%m-%d\\ %H:%M:%S') }}
+          - "epoch: {{ (date_time_end | to_datetime('%Y-%m-%d %H:%M:%S')).strftime('%s')  }}"
+          - "epoch + 60 min: {{ (date_time_end | to_datetime('%Y-%m-%d %H:%M:%S')).strftime('%s') | int + 60 }}"
+          # - "epoch + 60 min: {{ (date_time_epoch_value | to_datetime) | strftime('%Y-%m-%d %H:%M:%S') }}"
+          - "Cleaned: {{ date_time_end | replace('-', '') | replace(' ', '') | replace(':', '') }}"
+          - "Current time: {{ lookup('pipe','date -d \"now \" +%Y-%m-%d\\ %H:%M:%S') }}"
+          - "Current time + 8 hrs: {{ lookup('pipe','date -d \"now + 8 hours\" +%Y-%m-%d\\ %H:%M:%S') }}"
+                                                    # (date -d \"2024-10-02 15:49:20 + 8 hours\" +%Y-%m-%d_%H:%M:%S')
+
+
+
+
     - name: Prepare the date string
       ansible.builtin.set_fact:
         date_start_string: "{{ date_start + ' ' + time_start }}"
@@ -18,7 +49,7 @@
 
 
         # date_start_string: '{{  date_start + " " + time_start | string | to_datetime("%Y-%m-%d %H:%M:%S") }}'
-        
+
         #date_end_string: "{{ date_end + ' ' + time_end | to_datetime }}"
 
 # 2022-11-10 08:00:00
