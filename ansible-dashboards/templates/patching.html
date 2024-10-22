@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <title>CorpApp - Patching Workflow Dashboard</title>
+    <style>
+        body {
+            font-family: 'Red Hat Display', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            width: 100%;
+        }
+
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 65%;
+        }
+
+        .task-box {
+            position: relative;
+            width: 180px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .task-name {
+            font-weight: bold;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Adjustments for coloring */
+        .task.completed { background-color: #28a745; } /* Green for completed */
+        .task.todo { background-color: #007bff; }      /* Blue for TODO */
+        .task.in-progress { background-color: #ffc107; } /* Yellow for in progress */
+        .task.error { background-color: #dc3545; }     /* Red for error */
+
+        .arrow {
+            width: 40px;
+            height: 1px;
+            background-color: #ccc;
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            margin-left: 5px;
+            transform: translateY(-50%);
+        }
+
+        .task-box:last-child .arrow {
+            display: none;
+        }
+
+        /* Pie Chart Styling */
+        .chart-container {
+            width: 30%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        canvas {
+            margin-top: 30px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: #333;
+            color: white;
+            width: 100%;
+        }
+
+        @media screen and (max-width: 1200px) {
+            .workflow {
+                width: 100%;
+                justify-content: space-evenly;
+            }
+
+            .chart-container {
+                width: 100%;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Windows Patching Workflow</h1>
+
+        <!-- Workflow Task Boxes -->
+        <div class="workflow">
+            <div class="task-box">
+                <div class="task-name task completed">Take Backup Config</div>
+                <div class="arrow"></div>
+            </div>
+            <div class="task-box">
+                <div class="task-name task completed">Take VMWare Snapshot</div>
+                <div class="arrow"></div>
+            </div>
+            <div class="task-box">
+                <div class="task-name task completed">Verify Health of Other Servers</div>
+                <div class="arrow"></div>
+            </div>
+            <div class="task-box">
+                <div class="task-name task completed">Remove App Server from LB - F5</div>
+                <div class="arrow"></div>
+            </div>
+            <div class="task-box">
+                <div class="task-name task completed">Clear Cache</div>
+                <div class="arrow"></div>
+            </div>
+            <div class="task-box">
+                <div class="task-name task in-progress">Stop MQ Server 1</div>
+                <div class="arrow"></div>
+            </div>
+            <div class="task-box">
+                <div class="task-name task todo">Patch MQ Server 1</div>
+                <div class="arrow"></div>
+            </div>
+            <div class="task-box">
+                <div class="task-name task todo">Stop App Server 1</div>
+                <div class="arrow"></div>
+            </div>
+            <div class="task-box">
+                <div class="task-name task todo">Patch App Server 1</div>
+                <div class="arrow"></div>
+            </div>
+            <div class="task-box">
+                <div class="task-name task todo">Stop Database Server 1</div>
+                <div class="arrow"></div>
+            </div>
+            <div class="task-box">
+                <div class="task-name task todo">Patch Database Server 1</div>
+                <div class="arrow"></div>
+            </div>
+            <div class="task-box">
+                <div class="task-name task todo">Start Database Server 1</div>
+                <div class="arrow"></div>
+            </div>
+            <div class="task-box">
+                <div class="task-name task todo">Verify Health of Database</div>
+                <div class="arrow"></div>
+            </div>
+            <div class="task-box">
+                <div class="task-name task todo">Start MQ Server 1</div>
+                <div class="arrow"></div>
+            </div>
+            <div class="task-box">
+                <div class="task-name task todo">Verify Health of MQ Server</div>
+                <div class="arrow"></div>
+            </div>
+            <div class="task-box">
+                <div class="task-name task todo">Start App Server 1</div>
+                <div class="arrow"></div>
+            </div>
+            <div class="task-box">
+                <div class="task-name task todo">Verify Health of App Server</div>
+                <div class="arrow"></div>
+            </div>
+            <div class="task-box">
+                <div class="task-name task todo">Add App Server 1 back to LB - F5</div>
+            </div>
+        </div>
+
+        <!-- Total Progress Pie Chart -->
+        <div class="chart-container">
+            <canvas id="progressChart"></canvas>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 AwesomeCorp</p>
+        <p>Generated using Red Hat Ansible Automation Platform</p>
+    </footer>
+
+    <!-- Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('progressChart').getContext('2d');
+        const progressChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['TODO', 'IN PROGRESS', 'COMPLETED', 'ERROR'],
+                datasets: [{
+                    label: 'Patching Progress',
+                    data: [12, 1, 5, 0], // Updated: 12 TODO, 1 IN PROGRESS, 5 COMPLETED, 0 ERROR
+                    backgroundColor: [
+                        '#007bff',  // Blue for TODO
+                        '#ffc107',  // Yellow for IN PROGRESS
+                        '#28a745',  // Green for COMPLETED
+                        '#dc3545'   // Red for ERROR
+                    ],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Total Patching Progress'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

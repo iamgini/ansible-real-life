@@ -1,0 +1,55 @@
+---
+- name: Generate Local Privilege ID Report on RHEL
+  hosts: localhost
+  gather_facts: yes  # We need user information
+  tasks:
+    - name: Gather all system users
+      command: cat /etc/passwd
+      register: passwd_output
+
+    - name: Gather all system groups
+      command: cat /etc/group
+      register: group_output
+
+    - name: Gather sudoers information
+      command: cat /etc/sudoers
+      register: sudoers_output
+      ignore_errors: yes  # Some systems may restrict reading sudoers directly
+
+    - name: Gather sudoers.d information
+      shell: cat /etc/sudoers.d/*
+      register: sudoersd_output
+      ignore_errors: yes
+
+    - name: Combine sudoers and sudoers.d information
+      set_fact:
+        sudoers_combined: "{{ sudoers_output.stdout }}\n{{ sudoersd_output.stdout }}"
+
+    - name: Parse user and group data
+      set_fact:
+        user_list: "{{ passwd_output.stdout_lines | map('split', ':') | map(attribute=0) | list }}"
+        group_list: "{{ group_output.stdout_lines | map('split', ':') | map(attribute=0) | list }}"
+
+    - name: Generate Report Header
+      copy:
+        content: "User,UserID,Group,Privilege\n"
+        dest: /tmp/privilege_id_report.csv
+
+    - name: Identify Users with Sudo Privileges
+      lineinfile:
+        path: /tmp/privilege_id_report.csv
+        line: "{{ item.0 }},{{ item.2 }},{{ item.3 }},Sudo"
+        create: yes
+      loop: "{{ passwd_output.stdout_lines | map('split', ':') | list }}"
+      when: "'{{ item.0 }}' in sudoers_combined"
+
+    - name: Identify Users without Sudo Privileges
+      lineinfile:
+        path: /tmp/privilege_id_report.csv
+        line: "{{ item.0 }},{{ item.2 }},{{ item.3 }},No Sudo"
+      loop: "{{ passwd_output.stdout_lines | map('split', ':') | list }}"
+      when: "'{{ item.0 }}' not in sudoers_combined"
+
+    - name: Display the report location
+      debug:
+        msg: "Privilege ID report generated at /tmp/privilege_id_report.csv"
