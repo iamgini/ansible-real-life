@@ -1,0 +1,55 @@
+status_data:
+  backup_task:
+    name: Take Backup Config
+    status: Completed
+  snapshot_vm:
+    name: Take VMWare Snapshot
+    status: Completed
+  verify_health:
+    name: Verify Health of Other Servers
+    status: Completed
+  remove_lb:
+    name: Remove App Server from LB - F5
+    status: Completed
+  clear_cache:
+    name: Clear Cache
+    status: Completed
+  stop_mq:
+    name: Stop MQ Server 1
+    status: In Progress
+  patch_mq:
+    name: Patch MQ Server 1
+    status: Error
+  stop_app_server:
+    name: Stop App Server 1
+    status: Todo
+  patch_app_server:
+    name: Patch App Server 1
+    status: Todo
+  stop_db_server:
+    name: Stop Database Server 1
+    status: Todo
+  patch_db_server:
+    name: Patch Database Server 1
+    status: Todo
+  start_db_server:
+    name: Start Database Server 1
+    status: Todo
+  verify_db_health:
+    name: Verify Health of Database
+    status: Todo
+  start_mq_server:
+    name: Start MQ Server 1
+    status: Todo
+  verify_mq_health:
+    name: Verify Health of MQ Server
+    status: Todo
+  start_app_server:
+    name: Start App Server 1
+    status: Todo
+  verify_app_health:
+    name: Verify Health of App Server
+    status: Todo
+  add_app_to_lb:
+    name: Add App Server 1 back to LB - F5
+    status: Todo
