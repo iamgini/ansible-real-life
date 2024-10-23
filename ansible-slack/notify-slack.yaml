@@ -6,21 +6,10 @@
   vars:
     status_title: "Demo App Stack - OS Patching Status"
     slack_channel: "#ansible"
-    # # slack_token: "xoxb-your-slack-token"  # Replace with your actual Slack token
-    # server_name: "Server-01"
-    # status: "Online"
-    # ip_address: "192.168.0.1"
-    # location: "Data Center A"
-
-    # slack_template: "slackstatus.json"    # Path to the template file
-
   tasks:
     - name: Render and post message to Slack
       ansible.builtin.include_role:
         name: notify-slack
       vars:
         slack_template: 'slack_status.json'
-        # token: "{{ slack_token }}"
         channel: "{{ slack_channel }}"
-
-        # blocks: "{{ lookup('ansible.builtin.template', slack_template) }}"

@@ -6,16 +6,14 @@
       ansible.builtin.set_fact:
         slack_message_body: "{{ lookup('ansible.builtin.template', slack_template | default('cas_Event_Status.json')) }}"
 
-    - name: Debug - display slack body
-      ansible.builtin.debug:
-         msg:
-          - "{{ slack_message_body }}"
-          - "{{ lookup('ansible.builtin.env', 'SLACK_BOT_TOKEN') }}"
+    # - name: Debug - display slack body
+    #   ansible.builtin.debug:
+    #     msg:
+    #       - "{{ slack_message_body }}"
 
     - name: Send notification message via Slack all options
       community.general.slack:
         token: "{{ lookup('ansible.builtin.env', 'SLACK_BOT_TOKEN') }}"
-        # msg: '{{ inventory_hostname }} completed'
         channel: "{{ slack_channel }}"
         blocks: "{{ slack_message_body }}"
       delegate_to: localhost

@@ -1,7 +1,9 @@
 # Slack Notification with Block
 
 ```shell
-export SLACK_BOT_TOKEN=<bot token>
+$ export SLACK_BOT_TOKEN=<bot token>
+
+$ ansible-playbook notify-slack.yaml
 ```
 
 
