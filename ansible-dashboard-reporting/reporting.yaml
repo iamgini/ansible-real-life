@@ -18,11 +18,10 @@
       when: send_slack | default(false)
 
     - name: Generate report
-      ansible.builtin.template:
-        src: patching-dashboard.html
-        dest: "{{ report_file_name }}"
-        owner: root
-        group: wheel
-        mode: '0644'
-      become: true
-      delegate_to: "{{ report_server }}"
+      ansible.builtin.include_role:
+        name: prepare-report
+      vars:
+        slack_template: 'slack_status.json'
+        channel: "{{ slack_channel }}"
+      loop: "{{ status_data.keys() }}"
+      # when: generate_report | default(false)

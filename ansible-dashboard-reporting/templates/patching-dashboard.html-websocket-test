@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="3">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,14 +35,16 @@
         <h1>{{ status_title | default("Windows Patching Workflow") }}</h1>
 
         <!-- Workflow Task Boxes -->
-        <div class="workflow">
+        <!-- <div class="workflowold">
             {% for task_key, task in status_data.items() %}
             <div class="task-box">
                 <div class="task-name task {{ task.status | lower | replace(" ", "-") }}">{{ task.name }}</div>
                 <div class="arrow"></div>
             </div>
             {% endfor %}
-        </div>
+        </div> -->
+
+        <div class="workflow"></div>
 
         <!-- Total Progress Pie Chart -->
         <div class="chart-container">
@@ -55,6 +56,28 @@
         <p>© 2024 AwesomeCorp</p>
         <p>Generated using Red Hat Ansible Automation Platform</p>
     </footer>
+    <script>
+        function updateDashboard(data) {
+            const workflowDiv = document.querySelector('.workflow');
+            workflowDiv.innerHTML = ''; // Clear existing tasks
+
+            for (const [key, task] of Object.entries(data)) {
+                const taskBox = document.createElement('div');
+                taskBox.innerText = `${task.name} - ${task.status}`;
+                workflowDiv.appendChild(taskBox);
+            }
+        }
+
+        function fetchData() {
+            fetch('http://utils.lab.iamgini.com/data/mydata.json') // Updated path
+                .then(response => response.json())
+                .then(data => updateDashboard(data))
+                .catch(err => console.error('Error fetching data:', err));
+        }
+
+        setInterval(fetchData, 5000); // Fetch every 5 seconds
+        fetchData(); // Initial fetch
+    </script>
 
     <!-- Chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

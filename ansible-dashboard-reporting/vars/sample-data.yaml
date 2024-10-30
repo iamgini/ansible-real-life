@@ -1,25 +1,25 @@
 status_data:
   backup_task:
     name: Take Backup Config
-    status: Completed
+    status: TODO
   snapshot_vm:
     name: Take VMWare Snapshot
-    status: Completed
+    status: TODO
   verify_health:
     name: Verify Health of Other Servers
-    status: Completed
+    status: TODO
   remove_lb:
     name: Remove App Server from LB - F5
-    status: Completed
+    status: TODO
   clear_cache:
     name: Clear Cache
-    status: Completed
+    status: TODO
   stop_mq:
     name: Stop MQ Server 1
-    status: In Progress
+    status: TODO
   patch_mq:
     name: Patch MQ Server 1
-    status: Error
+    status: TODO
   stop_app_server:
     name: Stop App Server 1
     status: Todo

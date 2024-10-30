@@ -2,6 +2,16 @@
 # tasks file for notify-slack
 - name: Notification
   block:
+
+    - name: Update task status - Dummy
+      ansible.builtin.set_fact:
+        random_number: "{{ [3,4,5,6] | random }}"
+        status_data: "{{ status_data | combine({item: {'name': status_data[item].name, 'status': 'Completed'}}) }}"
+
+    - name: wait for task to complete - Dummy
+      ansible.builtin.pause:
+        seconds: "{{ random_number }}"
+
     - name: Template slack message
       ansible.builtin.set_fact:
         slack_message_body: "{{ lookup('ansible.builtin.template', slack_template | default('cas_Event_Status.json')) }}"
