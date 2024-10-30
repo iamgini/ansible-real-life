@@ -1,0 +1,26 @@
+[
+  {
+    "type": "header",
+    "text": {
+      "type": "plain_text",
+      "text": "{{ status_title | default('Demo Message') }}",
+      "emoji": true
+    }
+  },
+  {% for task_key, task in status_data.items() %}
+    {
+      "type": "section",
+      "fields": [
+        {
+          "type": "mrkdwn",
+          "text": "*{{ task.name }}*"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "{% if task.status == 'Completed' %}:large_green_circle: Completed{% elif task.status == 'In Progress' %}:large_blue_circle: In Progress{% elif task.status == 'Todo' %}:large_yellow_circle: Todo{% else %}:red_circle: Error{% endif %}"
+        }
+      ]
+    }
+    {% if not loop.last %},{% endif %}
+  {% endfor %}
+]

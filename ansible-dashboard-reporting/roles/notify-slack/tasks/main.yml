@@ -1,0 +1,24 @@
+---
+# tasks file for notify-slack
+- name: Notification
+  block:
+    - name: Template slack message
+      ansible.builtin.set_fact:
+        slack_message_body: "{{ lookup('ansible.builtin.template', slack_template | default('cas_Event_Status.json')) }}"
+
+    # - name: Debug - display slack body
+    #   ansible.builtin.debug:
+    #     msg:
+    #       - "{{ slack_message_body }}"
+
+    - name: Send notification message via Slack all options
+      community.general.slack:
+        token: "{{ lookup('ansible.builtin.env', 'SLACK_BOT_TOKEN') }}"
+        channel: "{{ slack_channel }}"
+        blocks: "{{ slack_message_body }}"
+      delegate_to: localhost
+
+  rescue:
+    - name: Notify in log
+      ansible.builtin.debug:
+        msg: "Error: Unable to notify the slack channel! Please check your configuration or connectivity."

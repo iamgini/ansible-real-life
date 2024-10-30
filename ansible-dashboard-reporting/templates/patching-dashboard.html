@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <title>CorpApp - Patching Workflow Dashboard</title>
+    <style>
+        body { font-family: 'Red Hat Display', sans-serif; background-color: #f4f4f9; margin: 0; padding: 0; }
+        .container { max-width: 100%; margin: 20px auto; padding: 20px; background-color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); display: flex; justify-content: space-between; flex-wrap: wrap; }
+        h1 { text-align: center; color: #333; width: 100%; }
+        .workflow { display: flex; justify-content: space-between; flex-wrap: wrap; width: 65%; }
+        .task-box { position: relative; width: 180px; padding: 15px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); text-align: center; margin-bottom: 20px; }
+        .task-name { font-weight: bold; color: white; padding: 10px; border-radius: 5px; }
+        .task.completed { background-color: #28a745; }
+        .task.todo { background-color: #007bff; }
+        .task.in-progress { background-color: #ffc107; }
+        .task.error { background-color: #dc3545; }
+        .arrow { width: 40px; height: 1px; background-color: #ccc; position: absolute; top: 50%; left: 100%; margin-left: 5px; transform: translateY(-50%); }
+        .task-box:last-child .arrow { display: none; }
+        .chart-container { width: 30%; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        canvas { margin-top: 30px; }
+        footer { text-align: center; padding: 20px; margin-top: 40px; background-color: #333; color: white; width: 100%; }
+        @media screen and (max-width: 1200px) {
+            .workflow { width: 100%; justify-content: space-evenly; }
+            .chart-container { width: 100%; margin-top: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>{{ status_title | default("Windows Patching Workflow") }}</h1>
+
+        <!-- Workflow Task Boxes -->
+        <div class="workflow">
+            {% for task_key, task in status_data.items() %}
+            <div class="task-box">
+                <div class="task-name task {{ task.status | lower | replace(" ", "-") }}">{{ task.name }}</div>
+                <div class="arrow"></div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Total Progress Pie Chart -->
+        <div class="chart-container">
+            <canvas id="progressChart"></canvas>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 AwesomeCorp</p>
+        <p>Generated using Red Hat Ansible Automation Platform</p>
+    </footer>
+
+    <!-- Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('progressChart').getContext('2d');
+        const progressChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+            labels: ['TODO', 'IN PROGRESS', 'COMPLETED', 'ERROR'],
+            datasets: [{
+                label: 'Patching Progress',
+                data: [
+                    {{ status_data | dict2items | selectattr('value.status', 'equalto', 'Todo') | list | length }},
+                    {{ status_data | dict2items | selectattr('value.status', 'equalto', 'In Progress') | list | length }},
+                    {{ status_data | dict2items | selectattr('value.status', 'equalto', 'Completed') | list | length }},
+                    {{ status_data | dict2items | selectattr('value.status', 'equalto', 'Error') | list | length }}
+                ],
+                backgroundColor: ['#007bff', '#ffc107', '#28a745', '#dc3545'],
+                hoverOffset: 4
+            }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    title: { display: true, text: 'Total Patching Progress' }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
