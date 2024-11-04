@@ -17,7 +17,7 @@
         },
         {
           "type": "mrkdwn",
-          "text": "{% if task.status == 'Completed' %}:large_green_circle: Completed{% elif task.status == 'In Progress' %}:large_blue_circle: In Progress{% elif task.status == 'Todo' %}:large_yellow_circle: Todo{% else %}:red_circle: Error{% endif %}"
+          "text": "{% if task.status == 'Completed' %}:large_green_circle: Completed{% elif task.status == 'In Progress' %}:large_yellow_circle: In Progress{% elif task.status == 'Todo' %}:large_blue_circle: Todo{% else %}:red_circle: Error{% endif %}"
         }
       ]
     }

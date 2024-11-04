@@ -9,13 +9,13 @@
     report_file_name: /var/www/html/dashboards/index.html
     report_server: utils.lab.iamgini.com
   tasks:
-    - name: Render and post message to Slack
-      ansible.builtin.include_role:
-        name: notify-slack
-      vars:
-        slack_template: 'slack_status.json'
-        channel: "{{ slack_channel }}"
-      when: send_slack | default(false)
+    # - name: Render and post message to Slack
+    #   ansible.builtin.include_role:
+    #     name: notify-slack
+    #   vars:
+    #     slack_template: 'slack_status.json'
+    #     channel: "{{ slack_channel }}"
+    #   when: send_slack | default(false)
 
     - name: Generate report
       ansible.builtin.include_role:
