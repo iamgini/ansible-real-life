@@ -5,7 +5,7 @@
 
     - name: Template slack message
       ansible.builtin.set_fact:
-        slack_message_body: "{{ lookup('ansible.builtin.template', slack_template | default('cas_Event_Status.json')) }}"
+        slack_message_body: "{{ lookup('ansible.builtin.template', slack_template | default('slack_status.json')) }}"
 
     # - name: Debug - display slack body
     #   ansible.builtin.debug:
