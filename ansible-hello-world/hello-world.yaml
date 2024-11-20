@@ -1,0 +1,8 @@
+---
+- name: List to String Conversion
+  hosts: "{{ nodes | default('localhost') }}"
+  gather_facts: false
+  tasks:
+    - name: Print
+      ansible.builtin.debug:
+        msg: "Hello World"
