@@ -1,8 +1,8 @@
 ---
 - name: Reporting Automation - {{ status_data_task | default('') }}
   hosts: localhost
-  vars_files:
-    - vars/sample-data.yaml
+  # vars_files:
+  #   - vars/sample-data.yaml
   collections:
     - community.general
   vars:
@@ -12,6 +12,17 @@
     report_server: utils.lab.iamgini.com
     html_refresh_rate: 3
   tasks:
+    - name: Load variable for the first time
+      ansible.builtin.include_vars:
+        file: vars/sample-data.yaml
+      when:
+        - status_data is not defined
+        - status_data_passed is defined
+
+    - name: Set variables for the workflow
+      ansible.builtin.set_fact:
+        status_data: "{{ status_data_passed | default({}) }}"
+
 
     - name: Single task - demo
       block:
@@ -22,3 +33,9 @@
             slack_template: 'slack_status.json'
             channel: "{{ slack_channel }}"
             status_data_item: "{{ status_data_task }}"
+
+      always:
+        - name: Set status_data_passed
+          ansible.builtin.set_stats:
+            data:
+              status_data_passed: "{{ status_data | default({}) }}"
