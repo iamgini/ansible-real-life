@@ -22,6 +22,7 @@
     - name: Set variables for the workflow
       ansible.builtin.set_fact:
         status_data: "{{ status_data_passed | default({}) }}"
+      when: status_data_passed is defined
 
     - name: Single task - demo
       block:
