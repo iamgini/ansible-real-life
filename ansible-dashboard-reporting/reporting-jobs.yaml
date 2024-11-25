@@ -1,0 +1,22 @@
+---
+- name: Reporting Automation - {{ status_data_task | default('') }}
+  hosts: localhost
+  vars_files:
+    - vars/sample-data.yaml
+  vars:
+    status_title: "Demo App Stack - OS Patching Status"
+    slack_channel: "#ansible"
+    report_file_name: /var/www/html/dashboards/index.html
+    report_server: utils.lab.iamgini.com
+    html_refresh_rate: 3
+  tasks:
+
+    - name: Single task - demo
+      block:
+        - name: Generate report
+          ansible.builtin.include_role:
+            name: prepare-report
+          vars:
+            slack_template: 'slack_status.json'
+            channel: "{{ slack_channel }}"
+            status_data_item: "{{ status_data_task }}"

@@ -20,6 +20,7 @@
           vars:
             slack_template: 'slack_status.json'
             channel: "{{ slack_channel }}"
+            status_data_item: "{{ item }}"
           loop: "{{ status_data.keys() }}"
 
     # - name: Single loop block - demo
