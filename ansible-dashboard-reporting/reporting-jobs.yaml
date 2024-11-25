@@ -16,13 +16,12 @@
       ansible.builtin.include_vars:
         file: vars/sample-data.yaml
       when:
-        - status_data is not defined
+        - not status_data is defined
         - status_data_passed is defined
 
     - name: Set variables for the workflow
       ansible.builtin.set_fact:
         status_data: "{{ status_data_passed | default({}) }}"
-
 
     - name: Single task - demo
       block:
