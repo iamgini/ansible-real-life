@@ -17,7 +17,7 @@
         file: vars/sample-data.yaml
       when:
         - not status_data is defined
-        - status_data_passed is defined
+        - not status_data_passed is defined
 
     - name: Set variables for the workflow
       ansible.builtin.set_fact:
