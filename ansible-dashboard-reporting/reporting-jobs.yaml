@@ -3,6 +3,8 @@
   hosts: localhost
   vars_files:
     - vars/sample-data.yaml
+  collections:
+    - community.general.slack
   vars:
     status_title: "Demo App Stack - OS Patching Status"
     slack_channel: "#ansible"
