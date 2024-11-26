@@ -5,6 +5,8 @@ status_data:
   02_snapshot_vm:
     name: Take VMWare Snapshot
     status: Todo
+    url: https://google.com
+    message: Something wrong
   03_verify_health:
     name: Verify Health of Other Servers
     status: Todo
