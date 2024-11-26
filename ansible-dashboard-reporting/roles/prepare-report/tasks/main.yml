@@ -16,7 +16,7 @@
       vars:
         slack_template: 'slack_status.json'
         channel: "{{ slack_channel }}"
-      when: send_slack | default(false)
+      when: send_slack | default(true)
 
     - name: Update task status - Dummy
       ansible.builtin.set_fact:
