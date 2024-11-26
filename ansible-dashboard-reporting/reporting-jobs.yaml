@@ -11,6 +11,7 @@
     report_file_name: /var/www/html/dashboards/index.html
     report_server: utils.lab.iamgini.com
     html_refresh_rate: 3
+    controller_api_url: 'https://aap.lab.iamgini.com/api/v2/jobs/1247/'
   tasks:
     - name: Load variable for the first time
       ansible.builtin.include_vars:

@@ -16,6 +16,7 @@ status_data:
   05_clear_cache:
     name: Clear Cache
     status: Todo
+    failed: true
   06_stop_mq:
     name: Stop MQ Server 1
     status: Todo

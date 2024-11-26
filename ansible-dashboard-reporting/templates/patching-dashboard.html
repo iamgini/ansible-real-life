@@ -43,7 +43,7 @@
                 <div class="arrow"></div>
             </div> -->
             <div class="task-box">
-                {% if task.url | default(None) %}test
+                {% if task.url | default(None) %}
                     <a href="{{ task.url }}" target="_blank" class="task-name task {{ task.status | lower | replace(" ", "-") }}" style="color: white; text-decoration: none;">
                         {{ task.name }}
                     </a>
