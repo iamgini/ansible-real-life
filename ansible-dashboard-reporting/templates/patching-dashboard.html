@@ -36,30 +36,31 @@
         <h1>{{ status_title | default("Windows Patching Workflow") }}</h1>
 
         <!-- Workflow Task Boxes -->
-        <!-- <div class="workflow">
+        <div class="workflow">
             {% for task_key, task in status_data.items() %}
-            <div class="task-box">
+            <!-- <div class="task-box">
                 <div class="task-name task {{ task.status | lower | replace(" ", "-") }}">{{ task.name }}</div>
                 <div class="arrow"></div>
+            </div> -->
+            <div class="task-box">
+                {% if task.url | default(None) %}test
+                    <a href="{{ task.url }}" target="_blank" class="task-name task {{ task.status | lower | replace(" ", "-") }}" style="color: white; text-decoration: none;">
+                        {{ task.name }}
+                    </a>
+                {% else %}
+                    <div class="task-name task {{ task.status | lower | replace(" ", "-") }}">
+                        {{ task.name }}
+                    </div>
+                {% endif %}
+                {% if task.message | default(None) %}
+                    <div class="task-message" style="margin-top: 10px; font-size: 0.9em; color: #555;">
+                        {{ task.message }}
+                    </div>
+                {% endif %}
             </div>
             {% endfor %}
-        </div> -->
-        <div class="task-box">
-            {% if task.url %}
-                <a href="{{ task.url }}" target="_blank" class="task-name task {{ task.status | lower | replace(" ", "-") }}" style="color: white; text-decoration: none;">
-                    {{ task.name }}
-                </a>
-            {% else %}
-                <div class="task-name task {{ task.status | lower | replace(" ", "-") }}">
-                    {{ task.name }}
-                </div>
-            {% endif %}
-            {% if task.message %}
-                <div class="task-message" style="margin-top: 10px; font-size: 0.9em; color: #555;">
-                    {{ task.message }}
-                </div>
-            {% endif %}
         </div>
+
 
         <!-- Total Progress Pie Chart -->
         <div class="chart-container">
