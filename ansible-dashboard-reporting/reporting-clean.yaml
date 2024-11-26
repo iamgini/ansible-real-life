@@ -1,0 +1,36 @@
+---
+- name: Reporting Automation - Clean
+  hosts: localhost
+  vars_files:
+    - vars/sample-data.yaml
+  vars:
+    status_title: "Demo App Stack - OS Patching Status"
+    slack_channel: "#ansible"
+    report_file_name: /var/www/html/dashboards/index.html
+    report_server: utils.lab.iamgini.com
+    html_refresh_rate: 3
+  tasks:
+
+    - name: Single loop to clean
+      block:
+        - name: Generate report
+          ansible.builtin.include_role:
+            name: prepare-report
+            tasks_from: generate_report.yaml
+          vars:
+            slack_template: 'slack_status.json'
+            channel: "{{ slack_channel }}"
+            # status_data_item: "{{ item }}"
+          # loop: "{{ status_data.keys() }}"
+
+    # - name: Single loop block - demo
+    #   block:
+    #     - name: Generate report
+    #       ansible.builtin.include_role:
+    #         name: prepare-report
+    #       vars:
+    #         slack_template: 'slack_status.json'
+    #         channel: "{{ slack_channel }}"
+    #         report_task: "{{ task_to_update }}"
+
+    #   when: single_task | default(false)

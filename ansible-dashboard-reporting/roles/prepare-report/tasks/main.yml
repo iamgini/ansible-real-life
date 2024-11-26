@@ -6,15 +6,9 @@
         random_number: "{{ [3,4,5,6] | random }}"
         status_data: "{{ status_data | combine({status_data_item: {'name': status_data[status_data_item].name, 'status': 'In Progress'}}) }}"
 
-    - name: Generate report file - {{ report_file_name }}
-      ansible.builtin.template:
-        src: patching-dashboard.html
-        dest: "{{ report_file_name }}"
-        owner: root
-        group: wheel
-        mode: '0644'
-      become: true
-      delegate_to: "{{ report_server }}"
+    - name: Generate report
+      include_tasks:
+        file: generate_report.yaml
 
     - name: Render and post message to Slack
       ansible.builtin.include_role:
@@ -32,6 +26,7 @@
     - name: wait for the task to complete - Dummy
       ansible.builtin.shell: "sleep {{ random_number }}"
       delegate_to: localhost
+      when: demo_waiting | default(false)
 
     - name: Generate report file - {{ report_file_name }}
       ansible.builtin.template:

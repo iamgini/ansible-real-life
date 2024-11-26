@@ -1,0 +1,9 @@
+- name: Generate report file - {{ report_file_name }}
+  ansible.builtin.template:
+    src: patching-dashboard.html
+    dest: "{{ report_file_name }}"
+    owner: root
+    group: wheel
+    mode: '0644'
+  become: true
+  delegate_to: "{{ report_server }}"
