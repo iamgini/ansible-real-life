@@ -8,15 +8,13 @@ status_data:
   03_verify_health:
     name: Verify Health of Other Servers
     status: Todo
+    failed: true
   04_remove_lb:
     name: Remove App Server from LB - F5
     status: Todo
   05_clear_cache:
     name: Clear Cache
     status: Todo
-    failed: true
-    url: 'https://google.com'
-    message: 'Something wrong'
   06_stop_mq:
     name: Stop MQ Server 1
     status: Todo
