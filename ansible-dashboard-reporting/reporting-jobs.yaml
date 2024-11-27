@@ -40,3 +40,8 @@
           ansible.builtin.set_stats:
             data:
               status_data_passed: "{{ status_data | default({}) }}"
+
+        - name: Fail job based on status
+          ansible.builtin.fail:
+            msg: Failed Task
+          when: status_data[status_data_item].failed | default(false)

@@ -50,8 +50,8 @@
     - name: Notify in log
       ansible.builtin.debug:
         msg: "Error: Unable to generate report or notify the slack channel! Please check your configuration or connectivity."
-  always:
-    - name: Fail job based on status
-      ansible.builtin.fail:
-        msg: Failed Task
-      when: status_data_item.failed | default(false)
+  # always:
+  #   - name: Fail job based on status
+  #     ansible.builtin.fail:
+  #       msg: Failed Task
+  #     when: status_data[status_data_item].failed | default(false)
