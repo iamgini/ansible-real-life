@@ -36,10 +36,6 @@
             status_data_item: "{{ status_data_task }}"
 
       always:
-        - name: Gather status if failed
-          ansible.builtin.fail:
-            msg: Failed Task
-          when: status_data[status_data_item].failed | default(false)
 
         - name: Set status_data_passed
           ansible.builtin.set_stats:
