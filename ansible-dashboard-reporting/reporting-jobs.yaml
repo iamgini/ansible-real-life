@@ -45,4 +45,4 @@
         - name: Fail job based on status
           ansible.builtin.fail:
             msg: Failed Task
-          when: status_data[status_data_item].failed | default(false)
+          when: status_data[status_data_task].failed | default(false)
