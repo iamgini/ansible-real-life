@@ -43,19 +43,21 @@
                 <div class="arrow"></div>
             </div> -->
             <div class="task-box">
+                <div class="task-name task {{ task.status | lower | replace(" ", "-") }}">
+                    {{ task.name }}
+                </div>
+
                 {% if task.url | default(None) %}
-                    <a href="{{ task.url }}" target="_blank" class="task-name task {{ task.status | lower | replace(" ", "-") }}" style="color: white; text-decoration: none;">
-                        {{ task.name }}
+                    <a href="{{ task.url }}" target="_blank">
+
+                       {% if task.message | default(None) %}
+                        <div class="task-message" style="mar gin-top: 10px; font-size: 0.9em; color: #555;">
+                            {{ task.message }}
+                        </div>
+                        {% else %}
+                        Error
+                        {% endif %}
                     </a>
-                {% else %}
-                    <div class="task-name task {{ task.status | lower | replace(" ", "-") }}">
-                        {{ task.name }}
-                    </div>
-                {% endif %}
-                {% if task.message | default(None) %}
-                    <div class="task-message" style="margin-top: 10px; font-size: 0.9em; color: #555;">
-                        {{ task.message }}
-                    </div>
                 {% endif %}
             </div>
             {% endfor %}

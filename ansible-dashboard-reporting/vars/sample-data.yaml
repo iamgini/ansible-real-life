@@ -5,8 +5,6 @@ status_data:
   02_snapshot_vm:
     name: Take VMWare Snapshot
     status: Todo
-    url: 'https://google.com'
-    message: 'Something wrong'
   03_verify_health:
     name: Verify Health of Other Servers
     status: Todo
@@ -17,6 +15,8 @@ status_data:
     name: Clear Cache
     status: Todo
     failed: true
+    url: 'https://google.com'
+    message: 'Something wrong'
   06_stop_mq:
     name: Stop MQ Server 1
     status: Todo
