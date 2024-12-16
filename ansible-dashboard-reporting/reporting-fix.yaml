@@ -30,7 +30,7 @@
       block:
         - name: Update status - demo fix {{ task_to_fix }}
           ansible.builtin.set_fact:
-            status_data: "{{ status_data | combine({task_to_fix: {'name': status_data[task_to_fix].name, 'status': 'Fixed'}}, recursive=True) }}"
+            status_data: "{{ status_data | combine({task_to_fix: {'name': status_data[task_to_fix].name, 'status': 'Fixed', 'url': None}}, recursive=True) }}"
 
         - name: Generate report - {{ report_file_name }}
           ansible.builtin.include_role:

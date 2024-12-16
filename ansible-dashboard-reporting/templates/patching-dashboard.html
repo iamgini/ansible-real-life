@@ -18,6 +18,7 @@
         .task.completed { background-color: #28a745; }
         .task.todo { background-color: #007bff; }
         .task.in-progress { background-color: #ffc107; }
+        .task.fixed { background-color: #c907ff; }
         .task.error { background-color: #dc3545; }
         .arrow { width: 40px; height: 1px; background-color: #ccc; position: absolute; top: 50%; left: 100%; margin-left: 5px; transform: translateY(-50%); }
         .task-box:last-child .arrow { display: none; }
@@ -52,7 +53,7 @@
 
                        {% if task.message | default(None) %}
                         <div class="task-message" style="mar gin-top: 10px; font-size: 0.9em; color: #555;">
-                            {{ task.message }} {{ task.url }}
+                            <a href="{{ task.url }}" target="_blank">{{ task.message }}</a>
                         </div>
                         {% else %}
                         Error
