@@ -26,8 +26,7 @@
     - name: Update task status - Dummy
       ansible.builtin.set_fact:
         random_number: "{{ [3,4,5,6] | random }}"
-        status_data: "{{ status_data | combine({status_data_item: {'name': status_data[status_data_item].name, 'status': 'Error' if status_data[status_data_item].failed | default(false) else 'Completed'}}, recursive=True) }}"
-      when: not status_data[status_data_item].failed | default(false)
+        status_data: "{{ status_data | combine({status_data_item: {'name': status_data[status_data_item].name, 'status': 'Error' if demo_fail_task | default(false) else 'Completed'}}, recursive=True) }}"
 
     - name: Generate report - {{ report_file_name }}
       ansible.builtin.include_tasks:
@@ -61,7 +60,7 @@
     - name: Gather status if failed
       ansible.builtin.set_fact:
         status_data: "{{ status_data | combine({status_data_item: {'name': status_data[status_data_item].name, 'status': 'Error', 'message': 'Something went wrong', 'url': controller_api_url ~ awx_job_id }}, recursive=True) }}"
-      when: status_data[status_data_item].failed | default(false)
+      when: status_data[status_data_item].status | default(false) == 'Error'
 
   # always:
   #   - name: Fail job based on status
