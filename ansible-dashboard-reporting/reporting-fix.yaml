@@ -1,0 +1,19 @@
+---
+- name: Reporting Automation - Demo Fix
+  hosts: localhost
+  # vars_files:
+  #   - vars/sample-data.yaml
+  collections:
+    - community.general
+  tasks:
+
+    - name: Update fix data
+      when: task_to_fix != ''
+      block:
+        - name: Update status - demo fix {{ task_to_fix }}
+          ansible.builtin.set_fact:
+            status_data: "{{ status_data | combine({task_to_fix: {'name': status_data\[task_to_fix].name, 'status': 'Fixed'}}, recursive=True) }}"
+
+        - name: Generate report - {{ report_file_name }}
+          ansible.builtin.include_tasks:
+            file: generate_report.yaml
