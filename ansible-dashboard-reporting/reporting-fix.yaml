@@ -36,3 +36,9 @@
           ansible.builtin.include_role:
             name: prepare-report
             tasks_from: generate_report.yaml
+
+      always:
+        - name: Set status_data_passed
+          ansible.builtin.set_stats:
+            data:
+              status_data_passed: "{{ status_data | default({}) }}"
