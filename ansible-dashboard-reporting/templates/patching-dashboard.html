@@ -83,14 +83,16 @@
         const progressChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
-            labels: ['TODO', 'IN PROGRESS', 'COMPLETED', 'ERROR'],
+            labels: ['TODO', 'IN PROGRESS', 'COMPLETED', 'FIXED', 'ERROR'],
             datasets: [{
                 label: 'Patching Progress',
                 data: [
                     {{ status_data | dict2items | selectattr('value.status', 'equalto', 'Todo') | list | length }},
                     {{ status_data | dict2items | selectattr('value.status', 'equalto', 'In Progress') | list | length }},
                     {{ status_data | dict2items | selectattr('value.status', 'equalto', 'Completed') | list | length }},
+                    {{ status_data | dict2items | selectattr('value.status', 'equalto', 'Fixed') | list | length }},
                     {{ status_data | dict2items | selectattr('value.status', 'equalto', 'Error') | list | length }}
+
                 ],
                 backgroundColor: ['#007bff', '#ffc107', '#28a745', '#dc3545'],
                 hoverOffset: 4
