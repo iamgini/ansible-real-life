@@ -33,5 +33,6 @@
             status_data: "{{ status_data | combine({task_to_fix: {'name': status_data[task_to_fix].name, 'status': 'Fixed'}}, recursive=True) }}"
 
         - name: Generate report - {{ report_file_name }}
-          ansible.builtin.include_tasks:
-            file: generate_report.yaml
+          ansible.builtin.include_role:
+            name: prepare-report
+            tasks_from: generate_report.yaml
