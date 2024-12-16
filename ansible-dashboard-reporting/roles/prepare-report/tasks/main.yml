@@ -6,8 +6,8 @@
         random_number: "{{ [3,4,5,6] | random }}"
         status_data: "{{ status_data | combine({status_data_item: {'name': status_data[status_data_item].name, 'status': 'In Progress'}}, recursive=True) }}"
 
-    - name: Generate report
-      include_tasks:
+    - name: Generate report - {{ report_file_name }}
+      ansible.builtin.include_tasks:
         file: generate_report.yaml
 
     - name: Render and post message to Slack
@@ -18,26 +18,30 @@
         channel: "{{ slack_channel }}"
       when: send_slack | default(true)
 
-    - name: Update task status - Dummy
-      ansible.builtin.set_fact:
-        random_number: "{{ [3,4,5,6] | random }}"
-        status_data: "{{ status_data | combine({status_data_item: {'name': status_data[status_data_item].name, 'status': 'Completed'}}, recursive=True) }}"
-      when: not status_data[status_data_item].failed | default(false)
-
     - name: wait for the task to complete - Dummy
       ansible.builtin.shell: "sleep {{ random_number }}"
       delegate_to: localhost
       when: demo_waiting | default(false)
 
-    - name: Generate report file - {{ report_file_name }}
-      ansible.builtin.template:
-        src: patching-dashboard.html
-        dest: "{{ report_file_name }}"
-        owner: root
-        group: wheel
-        mode: '0644'
-      become: true
-      delegate_to: "{{ report_server }}"
+    - name: Update task status - Dummy
+      ansible.builtin.set_fact:
+        random_number: "{{ [3,4,5,6] | random }}"
+        status_data: "{{ status_data | combine({status_data_item: {'name': status_data[status_data_item].name, 'status': 'Error' if status_data[status_data_item].failed | default(false) else 'Completed'}}, recursive=True) }}"
+      when: not status_data[status_data_item].failed | default(false)
+
+    - name: Generate report - {{ report_file_name }}
+      ansible.builtin.include_tasks:
+        file: generate_report.yaml
+
+    # - name: Generate report file - {{ report_file_name }}
+    #   ansible.builtin.template:
+    #     src: patching-dashboard.html
+    #     dest: "{{ report_file_name }}"
+    #     owner: root
+    #     group: wheel
+    #     mode: '0644'
+    #   become: true
+    #   delegate_to: "{{ report_server }}"
 
     - name: Render and post message to Slack
       ansible.builtin.include_role:
