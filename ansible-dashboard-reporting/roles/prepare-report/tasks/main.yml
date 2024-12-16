@@ -62,6 +62,10 @@
         status_data: "{{ status_data | combine({status_data_item: {'name': status_data[status_data_item].name, 'status': 'Error', 'message': 'Something went wrong', 'url': controller_api_url ~ awx_job_id }}, recursive=True) }}"
       when: status_data[status_data_item].status | default(false) == 'Error'
 
+    - name: Generate report - {{ report_file_name }}
+      ansible.builtin.include_tasks:
+        file: generate_report.yaml
+
   # always:
   #   - name: Fail job based on status
   #     ansible.builtin.fail:
