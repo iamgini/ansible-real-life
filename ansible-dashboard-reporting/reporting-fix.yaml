@@ -5,6 +5,14 @@
   #   - vars/sample-data.yaml
   collections:
     - community.general
+  vars:
+    status_title: "Demo App Stack - OS Patching Status"
+    slack_channel: "#ansible"
+    report_file_name: /var/www/html/dashboards/index.html
+    report_server: utils.lab.iamgini.com
+    html_refresh_rate: 3
+    controller_job_url: 'https://aap.lab.iamgini.com/#/jobs/playbook/'
+    controller_api_url: 'https://aap.lab.iamgini.com/api/v2/jobs/'
   tasks:
 
     - name: Set variables for the workflow
