@@ -22,7 +22,7 @@
       ansible.builtin.set_fact:
         random_number: "{{ [3,4,5,6] | random }}"
         status_data: "{{ status_data | combine({status_data_item: {'name': status_data[status_data_item].name, 'status': 'Completed'}}, recursive=True) }}"
-      when: status_data[status_data_item].failed | default(false)
+      when: not status_data[status_data_item].failed | default(false)
 
     - name: wait for the task to complete - Dummy
       ansible.builtin.shell: "sleep {{ random_number }}"
