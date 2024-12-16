@@ -75,7 +75,7 @@
         - name: Set fix on approval
           ansible.builtin.set_stats:
             data:
-              task_to_fix: "{{ status_data_item }}"
+              task_to_fix_passed: "{{ status_data_item }}"
 
 
 

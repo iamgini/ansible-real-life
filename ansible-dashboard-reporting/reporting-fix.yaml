@@ -7,6 +7,16 @@
     - community.general
   tasks:
 
+    - name: Set variables for the workflow
+      ansible.builtin.set_fact:
+        status_data: "{{ status_data_passed | default({}) }}"
+      when: status_data_passed is defined
+
+    - name: Set variables for the workflow
+      ansible.builtin.set_fact:
+        task_to_fix: "{{ task_to_fix_passed | default({}) }}"
+      when: task_to_fix_passed is defined
+
     - name: Update fix data
       when: task_to_fix != ''
       block:
