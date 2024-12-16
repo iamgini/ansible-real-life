@@ -52,7 +52,7 @@
 
                        {% if task.message | default(None) %}
                         <div class="task-message" style="mar gin-top: 10px; font-size: 0.9em; color: #555;">
-                            {{ task.message }}
+                            {{ task.message }} {{ task.url }}
                         </div>
                         {% else %}
                         Error
