@@ -56,15 +56,17 @@
         msg: "Error: Unable to generate report or notify the slack channel! Please check your configuration or connectivity."
 
   always:
-
-    - name: Gather status if failed
-      ansible.builtin.set_fact:
-        status_data: "{{ status_data | combine({status_data_item: {'name': status_data[status_data_item].name, 'status': 'Error', 'message': 'Something went wrong', 'url': controller_api_url ~ awx_job_id }}, recursive=True) }}"
+    - name: Update error data
       when: status_data[status_data_item].status | default(false) == 'Error'
+      block:
+        - name: Gather status if failed
+          ansible.builtin.set_fact:
+            status_data: "{{ status_data | combine({status_data_item: {'name': status_data[status_data_item].name, 'status': 'Error', 'message': 'Something went wrong', 'url': controller_job_url ~ awx_job_id ~ '/output' }}, recursive=True) }}"
+          when: status_data[status_data_item].status | default(false) == 'Error'
 
-    - name: Generate report - {{ report_file_name }}
-      ansible.builtin.include_tasks:
-        file: generate_report.yaml
+        - name: Generate report - {{ report_file_name }}
+          ansible.builtin.include_tasks:
+            file: generate_report.yaml
 
   # always:
   #   - name: Fail job based on status
