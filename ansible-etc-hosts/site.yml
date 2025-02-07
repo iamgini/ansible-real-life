@@ -1,6 +1,6 @@
 ---
 - name: Update /etc/hosts
-  hosts: localhost
+  hosts: all
   gather_facts: false
   vars:
     hosts_entries: |
