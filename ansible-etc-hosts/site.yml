@@ -1,0 +1,15 @@
+---
+- name: Update /etc/hosts
+  hosts: localhost
+  gather_facts: false
+  vars:
+    hosts_entries: |
+      192.168.100.10 ansible
+      192.168.100.4 node
+  tasks:
+
+    - name: Update /etc/hosts with node entries
+      ansible.builtin.blockinfile:
+        path: /etc/hosts
+        block: "{{ hosts_entries }}"
+      become: true
