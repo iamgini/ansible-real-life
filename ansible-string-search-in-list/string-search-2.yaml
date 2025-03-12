@@ -1,0 +1,29 @@
+---
+- name: String Search
+  hosts: localhost
+  gather_facts: False
+  vars:
+    check_stings: "-j=service1, -j=service2, -j=service3"
+
+  tasks:
+    - name: Convert check_strings to a list
+      ansible.builtin.set_fact:
+        expected_strings: "{{ check_stings.split(', ') }}"
+
+    - name: Print
+      ansible.builtin.debug:
+        msg: "{{ item }} - {{ item | regex_replace('[^a-zA-Z0-9]', '')  }}"
+      loop: "{{ expected_strings }}"
+      loop_control:
+        loop_var: item
+
+    - name: Assert that all expected strings are found in output
+      when: check_result.stdout_lines is defined
+      ansible.builtin.assert:
+        that:
+          - item in check_result.stdout_lines
+        fail_msg: "Missing expected string: {{ item }}"
+        success_msg: "Found expected string: {{ item }}"
+      loop: "{{ expected_strings }}"
+      loop_control:
+        loop_var: item

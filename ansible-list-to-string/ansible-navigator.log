@@ -1,18 +1,4 @@
-2024-08-14T07:27:23.412474+00:00 INFO 'ansible_navigator.setup_logger' New ansible-navigator instance, logging initialized
-2024-08-14T07:27:23.412848+00:00 INFO 'ansible_navigator.setup_logger' New ansible-runner instance, logging initialized
-2024-08-14T07:27:23.412958+00:00 INFO 'ansible_navigator.main' EE support enabled: found 'ansible.cfg' in current working directory.
-2024-08-14T07:27:23.413003+00:00 INFO 'ansible_navigator.main' Collection doc cache: version was empty or incorrect, rebuilding
-2024-08-14T07:27:23.413029+00:00 INFO 'ansible_navigator.main' Collection doc cache: 'current version' is '1.1'
-2024-08-14T07:27:23.413138+00:00 INFO 'ansible_navigator.image_manager.puller._log_message' Image tag is: 1.0.0-395
-2024-08-14T07:27:23.562395+00:00 WARNING 'ansible_navigator.image_manager.puller._log_message' Image inspection failed, image assumed to be corrupted or missing
-2024-08-14T07:27:23.562478+00:00 WARNING 'ansible_navigator.image_manager.puller._log_message' stdout: []
-
-2024-08-14T07:27:23.562527+00:00 WARNING 'ansible_navigator.image_manager.puller._log_message' stderr: Error: registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel8:1.0.0-395: image not known
-
-2024-08-14T07:27:23.562647+00:00 INFO 'ansible_navigator.image_manager.puller._log_message' Execution environment image name:: registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel8:1.0.0-395
-2024-08-14T07:27:23.562701+00:00 INFO 'ansible_navigator.image_manager.puller._log_message' Execution environment image tag:: 1.0.0-395
-2024-08-14T07:27:23.562748+00:00 INFO 'ansible_navigator.image_manager.puller._log_message' Execution environment pull arguments:: None
-2024-08-14T07:27:23.562795+00:00 INFO 'ansible_navigator.image_manager.puller._log_message' Execution environment pull policy:: missing
-2024-08-14T07:27:23.562839+00:00 INFO 'ansible_navigator.image_manager.puller._log_message' Execution environment pull needed:: True
-2024-08-14T07:27:23.681046+00:00 ERROR 'ansible_navigator.image_manager.puller._log_message' Execution environment pull failed
-2024-08-14T07:27:23.681194+00:00 INFO 'ansible_navigator.image_manager.puller._log_message' Check the execution environment image name, connectivity to and permissions for the registry, and try again
+2025-03-04T07:48:17.248991+00:00 INFO 'ansible_navigator.setup_logger' New ansible-navigator instance, logging initialized
+2025-03-04T07:48:17.249216+00:00 INFO 'ansible_navigator.setup_logger' New ansible-runner instance, logging initialized
+2025-03-04T07:48:17.249325+00:00 INFO 'ansible_navigator.main' EE support enabled: found 'ansible.cfg' in current working directory.
+2025-03-04T07:48:17.249434+00:00 INFO 'ansible_navigator.image_manager.puller._log_message' Image tag is: 1.0.0-395

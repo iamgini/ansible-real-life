@@ -23,6 +23,6 @@ ansible-navigator:
     file: ansible-navigator.log
   mode: stdout
   playbook-artifact:
-    enable: false
+    enable: true
     replay: artifacts/{playbook_name}-artifact-{time_stamp}.json
     save-as: artifacts/{playbook_name}-artifact-{time_stamp}.json
