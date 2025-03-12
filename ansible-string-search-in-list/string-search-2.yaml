@@ -1,5 +1,5 @@
 ---
-- name: String Search
+- name: String Search in List - 2
   hosts: localhost
   gather_facts: False
   vars:
