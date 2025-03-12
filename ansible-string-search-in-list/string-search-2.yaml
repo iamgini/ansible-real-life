@@ -3,12 +3,15 @@
   hosts: localhost
   gather_facts: False
   vars:
-    check_stings: "-j=service1, -j=service2, -j=service3"
+    check_stings:
+      - -j=service1
+      - -j=service2
+      - -j=service3
 
   tasks:
     - name: Convert check_strings to a list
       ansible.builtin.set_fact:
-        expected_strings: "{{ check_stings.split(', ') }}"
+        expected_strings: "{{ check_stings }}" # "{{ check_stings.split(', ') }}"
 
     - name: Print
       ansible.builtin.debug:
