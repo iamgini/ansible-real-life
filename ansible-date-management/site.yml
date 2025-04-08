@@ -10,9 +10,17 @@
 
     date_time_sample: '2024-10-02 15:49:20'
 
+    current_year_month_string: "{{ lookup('pipe', 'date -d \"8 hours\" +%Y%m') }}"
+    current_year_month_date_string: "{{ lookup('pipe', 'date -d \"8 hours\" +%Y%m%d') }}"
     # Get UTC date time to Singapore time
     # date_time_string: "{{ lookup('pipe','date -d \"now + 8 hours\" +%Y-%m-%d_%H-%M-%S') | string }}"
   tasks:
+
+    - name: Print date variables
+      ansible.builtin.debug:
+        msg:
+          - "current_year_month_string: {{ current_year_month_string }}"
+          - "current_year_month_date_string: {{ current_year_month_date_string   }}"
 
     - name: Set variables
       set_fact:

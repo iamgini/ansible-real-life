@@ -15,7 +15,7 @@
 
     - name: Print
       ansible.builtin.debug:
-        msg: "{{ item }} - {{ item | regex_replace('[^a-zA-Z0-9]', '')  }}"
+        msg: "{{ item }} - {{ item | regex_replace('[^a-zA-Z0-9]', '_')  }}"
       loop: "{{ expected_strings }}"
       loop_control:
         loop_var: item

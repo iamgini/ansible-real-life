@@ -1,0 +1,18 @@
+---
+- name: List to String Conversion
+  hosts: "{{ nodes | default('localhost') }}"
+  gather_facts: false
+  tasks:
+    - name: Pause for 5 seconds
+      ansible.builtin.pause:
+        seconds: 5
+        prompt: "Waiting time to ensure the service is started"
+        # echo: true
+
+    - name: Silent pause for 5 seconds
+      shell: sleep 5
+      delegate_to: localhost
+
+    - name: Print
+      ansible.builtin.debug:
+        msg: "Hello World"
