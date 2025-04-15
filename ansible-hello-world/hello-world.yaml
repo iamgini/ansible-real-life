@@ -5,4 +5,4 @@
   tasks:
     - name: Print
       ansible.builtin.debug:
-        msg: "Hello World"
+        msg: "Hello {{ your_name | default('World') }}"
