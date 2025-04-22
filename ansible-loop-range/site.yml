@@ -1,0 +1,11 @@
+---
+- name: Register loop
+  hosts: localhost
+  gather_facts: false
+  vars:
+    my_var: 5
+  tasks:
+    - name: Loop with range
+      debug:
+        msg: "Item: {{ item }}"
+      loop: "{{ range(0, my_var) | list }}"
