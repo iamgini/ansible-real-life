@@ -1,0 +1,11 @@
+---
+- name: List to String Conversion
+  hosts: localhost
+  gather_facts: false
+  vars:
+    my_var: 'hello'
+  tasks:
+    - name: A single condition
+      ansible.builtin.assert:
+        that: "my_var == 'hello'"
+        quiet: true
