@@ -4,7 +4,7 @@ Note: Due to the timeline constraints, we 'forked' the `redhat.eap` as `jboss.ea
 
 This is a tracker for the changes we made to the collection; hopefully we can prepare a PR later to the original collection once we have time.
 
-Also check [`collection-diff-auto.md`](collection-diff-auto.md)
+Also check [`collection-diff-auto`](collection-diff-auto.log)
 
 (diff -r collections/ansible_collections/jboss/eap8/roles/ ~/ansible-bau/jboss/redhat-eap-1.5.7/roles/ > collection-diff-auto.md)
 

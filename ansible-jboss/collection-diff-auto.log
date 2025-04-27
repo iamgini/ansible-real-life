@@ -40,7 +40,7 @@ diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_
 <     owner: "{{ eap_systemd.user }}"
 <     mode: '0755'
 <     remote_src: true
-<
+< 
 < - name: 'Create PID directory path if not exists - {{ eap_systemd.instance_name }}'
 ---
 > - name: 'Create PID directory path if not exists'
@@ -55,9 +55,9 @@ diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_
 Only in /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_systemd/tasks: systemd-v2.yml
 diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_systemd/tasks/systemd.yml /home/gmadappa/ansible-bau/jboss/redhat-eap-1.5.7/roles/eap_systemd/tasks/systemd.yml
 7a8
->
+> 
 19d19
-<
+< 
 diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_systemd/templates/wfly.conf.j2 /home/gmadappa/ansible-bau/jboss/redhat-eap-1.5.7/roles/eap_systemd/templates/wfly.conf.j2
 8,9c8,9
 < JBOSS_PIDFILE={{ eap_systemd.selinux.pid_path }}/{{ eap_systemd.instance_name }}.pid
@@ -109,7 +109,7 @@ diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_
 >     - name: "Ensure systemd service associated to {{ eap_uninstall_service_name }}"
 diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_uninstall/tasks/service.yml /home/gmadappa/ansible-bau/jboss/redhat-eap-1.5.7/roles/eap_uninstall/tasks/service.yml
 14,16d13
-<
+< 
 <     # - "'{{ eap_uninstall_service_name }}' in ansible_facts.services"
 <     # - ansible_facts.services[eap_uninstall_service_name] is defined
 18c15
