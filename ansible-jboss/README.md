@@ -6,7 +6,7 @@ This is a tracker for the changes we made to the collection; hopefully we can pr
 
 Also check [`collection-diff-auto`](collection-diff-auto.log)
 
-(diff -r collections/ansible_collections/jboss/eap8/roles/ ~/ansible-bau/jboss/redhat-eap-1.5.7/roles/ > collection-diff-auto.md)
+(diff -r ~/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/ ~/ansible-bau/jboss/redhat-eap-1.5.7/roles/ > collection-diff-auto.log)
 
 - [Changes made to redhat.eap collection](#changes-made-to-redhateap-collection)
   - [eap\_install/tasks/systemd-v2.yml](#eap_installtaskssystemd-v2yml)
