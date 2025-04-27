@@ -1,7 +1,7 @@
 ---
 # tasks file for rhel-patching-pre-tasks
 
-- name: Running RHEL Upgrade Pre-Tasks 
+- name: Running RHEL Upgrade Pre-Tasks
   debug:
     msg: "Backup config and snapshots"
 
@@ -24,7 +24,7 @@
   set_fact:
     any_service_running: true
   when: running_services is search(item)
-  with_items: 
+  with_items:
     - "{{ service_list }}"
 
 - name: "Some listed services still running. Do you want to continue patching ?"
@@ -38,4 +38,4 @@
 
 - name: Initiating Snapshot
   debug:
-    msg: "Calling Snapshot job............................."    
+    msg: "Calling Snapshot job............................."

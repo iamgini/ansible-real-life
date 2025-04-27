@@ -1,0 +1,124 @@
+diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_install/README.md /home/gmadappa/ansible-bau/jboss/redhat-eap-1.5.7/roles/eap_install/README.md
+65c65
+<     - jboss.eap8
+---
+>     - redhat.eap
+82c82
+<     - jboss.eap8
+---
+>     - redhat.eap
+diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_install/tasks/install.yml /home/gmadappa/ansible-bau/jboss/redhat-eap-1.5.7/roles/eap_install/tasks/install.yml
+169,170d168
+<   when: jbosseap8 is defined
+<   # disabled this as we are using different directory for app instance
+diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_install/tasks/user.yml /home/gmadappa/ansible-bau/jboss/redhat-eap-1.5.7/roles/eap_install/tasks/user.yml
+23c23
+<     system: true
+---
+>     system: True
+diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_systemd/defaults/main.yml /home/gmadappa/ansible-bau/jboss/redhat-eap-1.5.7/roles/eap_systemd/defaults/main.yml
+18d17
+< eap_service_config_file_location: '/etc/sysconfig'
+21a21
+> eap_service_config_file_location: '/etc/sysconfig'
+diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_systemd/tasks/main.yml /home/gmadappa/ansible-bau/jboss/redhat-eap-1.5.7/roles/eap_systemd/tasks/main.yml
+15c15
+<     quiet: true
+---
+>     quiet: True
+27c27
+< - name: Check if PID directory exists - {{ eap_systemd.instance_name }}
+---
+> - name: 'Check if PID directory exists'
+33,43c33
+< - name: Clone standalone dir to {{ eap_systemd.instance_name }}
+<   become: true
+<   ansible.builtin.copy:
+<     src: "{{ eap_home }}/standalone/"
+<     dest: "{{ eap_home }}/{{ eap_systemd.instance_name }}/"
+<     group: "{{ eap_systemd.group }}"
+<     owner: "{{ eap_systemd.user }}"
+<     mode: '0755'
+<     remote_src: true
+<
+< - name: 'Create PID directory path if not exists - {{ eap_systemd.instance_name }}'
+---
+> - name: 'Create PID directory path if not exists'
+59c49
+<   ansible.builtin.include_tasks: systemd-v2.yml
+---
+>   ansible.builtin.include_tasks: systemd.yml
+61c51
+<     basedir: "{{ eap_basedir_prefix | default(eap_systemd.home) }}/{{ eap_systemd.instance_name }}"
+---
+>     basedir: "{{ eap_basedir_prefix | default(eap_systemd.home) }}/standalone"
+Only in /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_systemd/tasks: systemd-v2.yml
+diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_systemd/tasks/systemd.yml /home/gmadappa/ansible-bau/jboss/redhat-eap-1.5.7/roles/eap_systemd/tasks/systemd.yml
+7a8
+>
+19d19
+<
+diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_systemd/templates/wfly.conf.j2 /home/gmadappa/ansible-bau/jboss/redhat-eap-1.5.7/roles/eap_systemd/templates/wfly.conf.j2
+8,9c8,9
+< JBOSS_PIDFILE={{ eap_systemd.selinux.pid_path }}/{{ eap_systemd.instance_name }}.pid
+< EAP_SERVER_CONFIG={{ eap_config_base }}
+---
+> JBOSS_PIDFILE={{ eap_systemd.selinux.pid_path }}/{{ eap_instance_name }}.pid
+> EAP_SERVER_CONFIG={{ eap_instance_name }}.xml
+16c16
+<  -Djboss.node.name={{ eap_systemd.instance_name }} \
+---
+>  -Djboss.node.name={{ eap_instance_name }} \
+diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_systemd/templates/wfly.service.j2 /home/gmadappa/ansible-bau/jboss/redhat-eap-1.5.7/roles/eap_systemd/templates/wfly.service.j2
+13c13
+< RuntimeDirectory={{ eap_systemd.instance_name }}
+---
+> RuntimeDirectory={{ eap_instance_name }}
+diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_systemd/vars/main.yml /home/gmadappa/ansible-bau/jboss/redhat-eap-1.5.7/roles/eap_systemd/vars/main.yml
+3d2
+<   instance_name: "{{ eap_app_name }}{{ eap_instance_item }}"
+19c18
+<     pid_path: "/run/{{ eap_app_name }}{{ eap_instance_item }}"
+---
+>     pid_path: "{{ eap_pidfile_homedir }}"
+diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_uninstall/defaults/main.yml /home/gmadappa/ansible-bau/jboss/redhat-eap-1.5.7/roles/eap_uninstall/defaults/main.yml
+5,10c5,6
+< eap_uninstall_config_file_location: '/etc/sysconfig'
+< eap_uninstall_conf_file_suffix: '.conf'
+< eap_uninstall_service_config_location: '/etc/systemd/system'
+< eap_uninstall_service_config_file_suffix: '.service'
+< eap_uninstall_systemd_service_file: "{{ eap_uninstall_service_config_location }}/{{ eap_uninstall_service_name }}{{ eap_uninstall_service_config_file_suffix }}"
+< eap_uninstall_systemd_service_conf_file: "{{ eap_uninstall_config_file_location }}/{{ eap_uninstall_service_name }}{{ eap_uninstall_conf_file_suffix }}"
+---
+> eap_uninstall_systemd_service_file: "/usr/lib/systemd/system/{{ eap_uninstall_service_name }}.service"
+> eap_uninstall_systemd_service_conf_file: "/etc/{{ eap_uninstall_service_name }}.conf"
+Only in /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_uninstall/handlers: main.yml
+Only in /home/gmadappa/ansible-bau/jboss/redhat-eap-1.5.7/roles/eap_uninstall/handlers: systemd.yml
+diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_uninstall/tasks/main.yml /home/gmadappa/ansible-bau/jboss/redhat-eap-1.5.7/roles/eap_uninstall/tasks/main.yml
+8,14d7
+< - debug:
+<     msg:
+<       # - "{{ jboss_cli_controller_host }}"
+<       # - "{{ jboss_cli_controller_port }}"
+<       - "{{ eap_uninstall_service_name }}"
+<       - "{{ eap_uninstall_home }}"
+<       - "{{ eap_port_range_offset }}"
+19c12
+<     - name: "Cleanup systemd - {{ eap_uninstall_service_name }}"
+---
+>     - name: "Ensure systemd service associated to {{ eap_uninstall_service_name }}"
+diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_uninstall/tasks/service.yml /home/gmadappa/ansible-bau/jboss/redhat-eap-1.5.7/roles/eap_uninstall/tasks/service.yml
+14,16d13
+<
+<     # - "'{{ eap_uninstall_service_name }}' in ansible_facts.services"
+<     # - ansible_facts.services[eap_uninstall_service_name] is defined
+18c15
+<     - name: "Ensure systemd service removed - {{ eap_uninstall_service_name }}"
+---
+>     - name: "Ensure systemd service associated to {{ eap_uninstall_service_name }}"
+Only in /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_uninstall/tasks: stop-and-delete.yml
+diff -r /home/gmadappa/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/eap_validation/README.md /home/gmadappa/ansible-bau/jboss/redhat-eap-1.5.7/roles/eap_validation/README.md
+44c44
+<     - jboss.eap8
+---
+>     - redhat.eap

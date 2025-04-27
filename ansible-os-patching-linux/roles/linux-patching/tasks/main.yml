@@ -1,12 +1,12 @@
 ---
 # tasks file for rhel-patching-tasks
-- name: Continue with processing ?
-  pause:
-    prompt: Please confirm you want to continue. Press return to continue. Press Ctrl+c and then "a" to abort
-  when: a is defined
+# - name: Continue with processing ?
+#   pause:
+#     prompt: Please confirm you want to continue. Press return to continue. Press Ctrl+c and then "a" to abort
+#   when: a is defined
 
 ## you can use OS specific modules like dnf or apt with os distribution checks
-## Also can filter packages related to security or 
+## Also can filter packages related to security or
 - name: Updating all packages on Host
   yum:
     name: '*'
@@ -41,7 +41,7 @@
 
 
 # Shutdown/stop any services before reboot if needed
-- name: Pre-Reboot Scripts 
+- name: Pre-Reboot Scripts
   debug:
     msg: "Running Pre-Reboot scripts............."
 
