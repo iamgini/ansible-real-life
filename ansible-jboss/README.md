@@ -39,7 +39,9 @@ eap_systemd:
   instance_name: "{{ eap_app_name }}{{ eap_instance_item }}"
   .
   .
-  pid_path: "/run/{{ eap_app_name }}{{ eap_instance_item }}"
+  selinux:
+    pid_path: "/run/{{ eap_app_name }}{{ eap_instance_item }}"
+  log_dir: "{{ eap_home }}/log"
 ```
 
 ## eap_systemd/templates/wfly.conf.j2
@@ -61,6 +63,8 @@ eap_systemd:
 - `RuntimeDirectory={{ eap_instance_name }}`
 
 > `RuntimeDirectory={{ eap_systemd.instance_name }}`
+
+- Added
 
 ## eap_systemd/tasks/main.yml
 

@@ -15,7 +15,24 @@
     # Get UTC date time to Singapore time
     # date_time_string: "{{ lookup('pipe','date -d \"now + 8 hours\" +%Y-%m-%d_%H-%M-%S') | string }}"
   tasks:
+    - name: Get current SG Time
+      ansible.builtin.set_fact:
+        sg_date_time_before: "{{ lookup('pipe','date -d \"now + 8 hours\" +%Y%m%d%H%M%SZ') | string }}"
 
+    - name: Wait for 5 seconds
+      ansible.builtin.pause:
+        seconds: 5
+
+    - name: Get current SG Time again
+      ansible.builtin.set_fact:
+        sg_date_time_after: "{{ lookup('pipe','date -d \"now + 8 hours\" +%Y%m%d%H%M%SZ') | string }}"
+
+    - name: Time difference
+      ansible.builtin.debug:
+        msg:
+          - "{{ (sg_date_time_after | to_datetime('%Y%m%d%H%M%SZ') - sg_date_time_before | to_datetime('%Y%m%d%H%M%SZ')).total_seconds() | int  }}"
+
+    - pause:
     - name: Print date variables
       ansible.builtin.debug:
         msg:
@@ -90,3 +107,61 @@
     # - name: "New Task Added"
     #   ansible.builtin.debug:
     #     msg: "This is a new task added for demo"
+
+
+
+# ---
+# - name: Fetch details from database
+#   hosts: localhost
+#   gather_facts: false
+#   vars:
+#     current_date: "{{ lookup('pipe', 'date -u +%Y%m%d%H%M%SZ') }}"
+#     current_date2: "{{ lookup('pipe','date -d \"now + 8 hours\" +%Y%m%d%H%M%SZ') | string }}"
+#     another_date: '2025-05-08 14:40:00'
+
+#   vars_files:
+#     - vars/general.yaml
+#   tasks:
+#     - ansible.builtin.set_fact:
+#         new_date: "{{ another_date | regex_replace('[-: ]', '') ~ 'Z' }}"
+#         sg_date_time: "{{ current_date2 }}"
+#     - name: Debug current_date raw value
+#       ansible.builtin.debug:
+#         msg:
+#           - "Raw current_date: {{ current_date }}"
+#           - "SG: {{ sg_date_time }}"
+#           - "another 1: {{ another_date }}"
+#           - "another 2: {{ another_date | regex_replace('[-: ]', '') ~ 'Z' }}"
+#           - "another 3: {{ new_date }}"
+#           - "another 4: {{ new_date | to_datetime('%Y%m%d%H%M%SZ') }}"
+
+
+#     - name: Check how long the certificate is valid
+#       ansible.builtin.set_fact:
+#         day_difference: >-
+#           {{
+#             (current_date | to_datetime('%Y%m%d%H%M%SZ') -
+#             new_date | to_datetime('%Y%m%d%H%M%SZ'))
+#             .days
+#           }}
+
+#     - name: Validate time
+#       assert:
+#         that:
+#           - sg_date_time | to_datetime('%Y%m%d%H%M%SZ') > new_date | to_datetime('%Y%m%d%H%M%SZ')
+
+
+#     - name: Debug current_date raw value
+#       ansible.builtin.debug:
+#         msg: "New: {{ current_date_formatted }}"
+
+#     - name: Format current date like database timestamps
+#       ansible.builtin.set_fact:
+#         current_date_formatted: "{{ current_date | to_datetime('%Y%m%d%H%M%SZ') | strftime('%Y-%m-%d %H:%M:%S') }}"
+
+#     - name: Display details (DEBUG)
+#       ansible.builtin.debug:
+#         msg:
+#           # - "From: {{ cr_date_from }}"
+#           # - "To: {{ cr_date_to }}"
+#           - "Current date: {{ current_date_formatted }}"
