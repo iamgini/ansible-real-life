@@ -6,6 +6,7 @@ This is a tracker for the changes we made to the collection; hopefully we can pr
 
 Also check [`collection-diff-auto`](collection-diff-auto.log)
 
+
 (diff -r ~/ansible-bau/ansible-jboss-automation/collections/ansible_collections/jboss/eap8/roles/ ~/ansible-bau/jboss/redhat-eap-1.5.7/roles/ > collection-diff-auto.log)
 
 - [Changes made to redhat.eap collection](#changes-made-to-redhateap-collection)
@@ -17,6 +18,7 @@ Also check [`collection-diff-auto`](collection-diff-auto.log)
   - [eap\_uninstall/handlers/systemd.yml](#eap_uninstallhandlerssystemdyml)
   - [eap\_uninstall/handlers/main.yml](#eap_uninstallhandlersmainyml)
   - [eap\_uninstall/defaults/main.yml](#eap_uninstalldefaultsmainyml)
+  - [eap\_utils/tasks/jboss\_cli.yml](#eap_utilstasksjboss_cliyml)
 
 ## eap_install/tasks/systemd-v2.yml
 
@@ -102,3 +104,10 @@ eap_uninstall_service_config_file_suffix: '.service'
 eap_uninstall_systemd_service_file: "{{ eap_uninstall_service_config_location }}/{{ eap_uninstall_service_name }}.{{ eap_uninstall_service_config_file_suffix }}"
 eap_uninstall_systemd_service_conf_file: "{{ eap_uninstall_config_file_location }}/{{ eap_uninstall_service_name }}{{ eap_uninstall_conf_file_suffix }}"
 ```
+
+(2025-05-16 onwards)
+
+## eap_utils/tasks/jboss_cli.yml
+
+Setting `jboss_cli_controller_port` variable will increase the value unnecessarily when we call the `jboss_cli.yml` multiple times.
+And if any error, the `Reset CLI port to default` task will be skipped! Hence, moved the execution inside a block and `Reset CLI port to default` to  the `always` section.
