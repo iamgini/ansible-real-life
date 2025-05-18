@@ -1,0 +1,21 @@
+---
+- name: Add item to list
+  hosts: localhost
+  gather_facts: false
+  vars:
+    my_list:
+      - "apple"
+      - "mango"
+      - "orange"
+  tasks:
+    - name: Show the list before adding item
+      ansible.builtin.debug:
+        var: my_list
+
+    - name: Add to list using combine (dictionary trick)
+      ansible.builtin.set_fact:
+        my_list: "{{ my_list | default([]) + ['grape'] }}"
+
+    - name: Show the final list
+      ansible.builtin.debug:
+        var: my_list

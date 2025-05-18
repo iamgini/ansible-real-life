@@ -1,0 +1,19 @@
+---
+- name: Sorting list
+  hosts: localhost
+  gather_facts: false
+  vars:
+    my_list:
+      - scsi0:0.redo
+      - scsi1:6.redo
+      - scsi0:2.redo
+      - scsi0:5.redo
+      - scsi1:2.redo
+  tasks:
+    - name: Print the List as it is
+      ansible.builtin.debug:
+        msg: "{{ my_list }}"
+
+    - name: Print the list in sorted format
+      ansible.builtin.debug:
+        msg: "{{ my_list | sort }}"
