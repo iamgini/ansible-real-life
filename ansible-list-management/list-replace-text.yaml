@@ -1,0 +1,18 @@
+---
+- name: Replace text in a list
+  hosts: localhost
+  gather_facts: false
+  vars:
+    my_list:
+      - command1 VAR1_NAME
+      - command2 VAR2_NAME
+      - command3
+    var_name: hello
+  tasks:
+    - name: Print the List as it is
+      ansible.builtin.debug:
+        msg: "{{ my_list }}"
+
+    - name: Print the list in sorted format
+      ansible.builtin.debug:
+        msg: "{{ my_list | map('regex_replace', 'VAR1_NAME', var_name) | list }}"

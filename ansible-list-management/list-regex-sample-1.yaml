@@ -1,0 +1,30 @@
+---
+- name: Find regex text in a list
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Simulate device command output
+      ansible.builtin.set_fact:
+        command_output:
+          stdout_lines:
+            - "Some output..."
+            - "Another line output."
+            - "======================================================================="
+            - "Total: 6 Devices attempted, 2 Devices completed"
+
+    - name: Extract MO summary line - {{ log_task }}
+      ansible.builtin.set_fact:
+        devices_summary_line: >-
+          {{ command_output.stdout_lines | default([]) | select('match', '^Total: \d+ Devices attempted, \d+ Devices completed$') | list | last }}
+
+    - name: Test regex extraction
+      debug:
+        msg:
+          - "Attempted: {{ devices_summary_line | regex_search('Total: ([0-9]+) Devices attempted', '\\1') }}"
+          - "Set: {{ devices_summary_line | regex_search('Devices attempted, ([0-9]+) Devices completed', '\\1') }}"
+
+
+    - name: Parse Devices attempted and set - {{ log_task }}
+      set_fact:
+        devices_attempted: "{{ (devices_summary_line | regex_search('Total: ([0-9]+) Devices attempted', '\\1') | default([0]))[0] | int }}"
+        devices_completed: "{{ (devices_summary_line | regex_search('Devices attempted, ([0-9]+) Devices completed', '\\1') | default([0]))[0] | int }}"
