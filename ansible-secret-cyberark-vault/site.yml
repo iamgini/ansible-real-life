@@ -2,16 +2,15 @@
 - name: Example playbook using CyberArk PAS
   hosts: "{{ remote_nodes }}"
   gather_facts: false
-  
-  collections:
-    - cyberark.pas
+
+  # collections:
+  #   - cyberark.pas
 
   tasks:
-    - name: Retrieve credentials from CyberArk PVWA
+    - name: Retrieve credentials using Central Credential Provider
       cyberark.pas.cyberark_credential:
         api_base_url: "https://cyberark.example.com"
-        app_id: "ansible"        
-        aim_object: "target_system_object_name"
+        app_id: "ansible"
         validate_certs: false
         reason: "requesting credential for Ansible deployment"
         connection_timeout: 60
@@ -24,10 +23,11 @@
 
     - name: Set ansible_password to remote node
       ansible.builtin.set_fact:
-        ansible_user: "{{ ansible_user }}"
+        ansible_user: "{{ ca_cred.result.UserName }}"
         ansible_password: "{{ ca_cred.result.Content }}"
       no_log: true
 
     - name: Execute some command
       ansible.builtin.shell: "hostname"
       register: shell_output
+...

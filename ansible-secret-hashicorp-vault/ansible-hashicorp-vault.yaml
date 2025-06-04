@@ -1,0 +1,39 @@
+---
+- name: Example playbook using local HashiCorp Vault
+  hosts: "{{ remote_nodes }}"
+  gather_facts: false
+
+  vars:
+    vault_addr: "http://localhost:8200"
+    vault_token: "root"
+
+  tasks:
+    - name: Get Vault username
+      community.hashi_vault.hashi_vault:
+        url: "{{ vault_addr }}"
+        token: "{{ vault_token }}"
+        secret: "secret/data/myapp/admin"
+        key: username
+      register: vault_username
+      delegate_to: localhost
+      no_log: true
+
+    - name: Get Vault password
+      community.hashi_vault.hashi_vault:
+        url: "{{ vault_addr }}"
+        token: "{{ vault_token }}"
+        secret: "secret/data/myapp/admin"
+        key: password
+      register: vault_password
+      delegate_to: localhost
+      no_log: true
+
+    - name: Set connection variables
+      ansible.builtin.set_fact:
+        ansible_user: "{{ vault_username.value }}"
+        ansible_password: "{{ vault_password.value }}"
+      no_log: true
+
+    - name: Run command on remote node
+      ansible.builtin.shell: "hostname"
+      register: shell_output
