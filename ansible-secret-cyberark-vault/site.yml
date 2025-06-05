@@ -3,9 +3,6 @@
   hosts: "{{ remote_nodes }}"
   gather_facts: false
 
-  # collections:
-  #   - cyberark.pas
-
   tasks:
     - name: Retrieve credentials using Central Credential Provider
       cyberark.pas.cyberark_credential:

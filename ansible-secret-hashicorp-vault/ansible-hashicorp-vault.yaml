@@ -1,39 +1,42 @@
 ---
-- name: Example playbook using local HashiCorp Vault
-  hosts: "{{ remote_nodes }}"
+- name: Example playbook using HashiCorp Vault (KV v2) with lookup
+  hosts: "{{ remote_nodes | default('no-such-hosts') }}"
   gather_facts: false
 
   vars:
     vault_addr: "http://localhost:8200"
     vault_token: "root"
+    vault_secret_path: "secret/data/systems"  # Note: 'data' is required for KV v2
+    vault_secret_username_key: "username"
+    vault_secret_password_key: "password"
+    vault_username: 'vaultuser'
+    vault_password: 'vaultpass'
 
   tasks:
-    - name: Get Vault username
-      community.hashi_vault.hashi_vault:
+    - name: Login and use the resulting token
+      community.hashi_vault.vault_login:
         url: "{{ vault_addr }}"
-        token: "{{ vault_token }}"
-        secret: "secret/data/myapp/admin"
-        key: username
-      register: vault_username
+        auth_method: userpass
+        username: "{{ vault_username }}"
+        password: '{{ vault_password }}'
+        validate_certs: false # true for PRD
+      register: login_data
       delegate_to: localhost
-      no_log: true
+      # no_log: true # enable this in PRD
 
-    - name: Get Vault password
-      community.hashi_vault.hashi_vault:
-        url: "{{ vault_addr }}"
-        token: "{{ vault_token }}"
-        secret: "secret/data/myapp/admin"
-        key: password
-      register: vault_password
+    - name: Retrieve using hashi_vault lookup
+      ansible.builtin.debug:
+        msg: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=' ~ vault_secret_path ~ ' token=' ~ vault_token ~ ' url=' ~ vault_addr) }}"
       delegate_to: localhost
-      no_log: true
 
-    - name: Set connection variables
+
+    - name: Set ansible_user and ansible_password using Vault secrets
       ansible.builtin.set_fact:
-        ansible_user: "{{ vault_username.value }}"
-        ansible_password: "{{ vault_password.value }}"
-      no_log: true
+        ansible_user: "{{ lookup('community.hashi_vault.hashi_vault', vault_secret_path ~ ' key=' ~ vault_secret_username_key ~ ' token=' ~ vault_token ~ ' url=' ~ vault_addr) }}"
+        ansible_password: "{{ lookup('community.hashi_vault.hashi_vault', vault_secret_path ~ ' key=' ~ vault_secret_password_key ~ ' token=' ~ vault_token ~ ' url=' ~ vault_addr) }}"
+      # no_log: true
+      delegate_to: localhost
 
-    - name: Run command on remote node
+    - name: Run command on remote machine
       ansible.builtin.shell: "hostname"
       register: shell_output
