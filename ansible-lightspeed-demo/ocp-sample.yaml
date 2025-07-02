@@ -1,0 +1,13 @@
+- name: if Oc debug not working then try to call api
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Block for try with oc debug command if fails try api call
+      block:
+        - name: Oc debug hello world
+          ansible.builtin.command: oc debug hello world
+      rescue:
+        - name: try with api call
+          ansible.builtin.uri:
+            url: https://openshift.example.com/apis
+            validate_certs: false

@@ -23,5 +23,3 @@
       ansible.builtin.set_stats:
         data:
           workflow_data_passed: "{{ workflow_data | default({}) }}"
-
-    - name: Install httpd server
