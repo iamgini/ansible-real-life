@@ -1,0 +1,17 @@
+plugin: ansible.builtin.generator
+strict: false
+
+hosts:
+  name: "demo_host"
+
+layers:
+    operation:
+        - build
+        - launch
+    environment:
+        - dev
+        - test
+        - prod
+    application:
+        - web
+        - api
