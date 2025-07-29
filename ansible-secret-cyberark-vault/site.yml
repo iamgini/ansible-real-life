@@ -2,16 +2,19 @@
 - name: Example playbook using CyberArk PAS
   hosts: "{{ remote_nodes }}"
   gather_facts: false
-
+  vars:
+    cyberark_url: https://cyberark.example.com
+    vault_safe: UAT-SAFE
+    username: sysadmin
   tasks:
     - name: Retrieve credentials using Central Credential Provider
       cyberark.pas.cyberark_credential:
-        api_base_url: "https://cyberark.example.com"
+        api_base_url: "{{ cyberark_url }}"
         app_id: "ansible"
         validate_certs: false
         reason: "requesting credential for Ansible deployment"
         connection_timeout: 60
-        query: "Safe=test;UserName=admin"
+        query: "Safe={{ vault_safe }};UserName={{ username }}"
         query_format: "Exact"
         fail_request_on_password_change: True
       register: ca_cred
