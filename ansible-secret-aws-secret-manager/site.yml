@@ -1,0 +1,34 @@
+- name: Fetch credentials from AWS Secrets Manager and run a command
+  hosts: all
+  gather_facts: false
+
+  vars:
+    secret_path: "/path/to/secrets"   # ARN or name
+    aws_region: "ap-southeast-1"
+
+  tasks:
+
+    - name: Lookup secret from Secrets Manager
+      ansible.builtin.set_fact:
+        aws_secret_data: >-
+          {{ lookup(
+              'amazon.aws.aws_secret',
+              secret_path,
+              bypath=True,
+              region=aws_region
+          ) }}
+      no_log: true
+
+    - name: Set connection vars
+      ansible.builtin.set_fact:
+        ansible_user: "{{ aws_secret_data.username }}"
+        ansible_password: "{{ aws_secret_data.password }}"
+      no_log: true
+
+    - name: Run a command using the fetched credentials
+      ansible.builtin.shell: hostname
+      register: shell_output
+
+    - name: Debug output
+      ansible.builtin.debug:
+        var: shell_output.stdout

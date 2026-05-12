@@ -1,0 +1,137 @@
+{
+    "_meta": {
+        "hostvars": {
+            "cisco101": {
+                "mycutom_var": "prod"
+            },
+            "cisco102": {
+                "env": "dev"
+            },
+            "dbsample1": {
+                "db_port": 5432
+            },
+            "dbsample2": {
+                "db_port": 5432
+            },
+            "dbsample3": {
+                "db_port": 5432
+            },
+            "dbsample4": {
+                "db_port": 5432
+            },
+            "eap": {
+                "ansible_host": "192.168.57.121",
+                "service_start_script": "/opt/jboss/start_script.sh",
+                "service_stop_script": "/opt/jboss/stop_script.sh"
+            },
+            "node10sample": {
+                "mycutom_var": "testing",
+                "port": 8443
+            },
+            "rhel8-101": {
+                "ansible_host": "192.168.57.91",
+                "ansible_user": "vagrant",
+                "baseline_exclusions": [
+                    "009.009"
+                ]
+            },
+            "utils.lab.iamgini.com": {
+                "ansible_user": "devops"
+            },
+            "webserver101": {
+                "http_app": "nginx",
+                "web_http_port": 8080
+            },
+            "webserver102": {
+                "http_app": "nginx",
+                "web_http_port": 8080
+            },
+            "webserver201": {
+                "web_http_port": 8080
+            },
+            "webserver202": {
+                "web_http_port": 8080
+            },
+            "win2019": {
+                "ansible_become_method": "runas",
+                "ansible_connection": "winrm",
+                "ansible_host": "192.168.57.162",
+                "ansible_port": 5985,
+                "ansible_shell_type": "powershell",
+                "ansible_winrm_transport": "basic"
+            },
+            "win2019dummy": {
+                "ansible_become_method": "runas",
+                "ansible_connection": "winrm",
+                "ansible_host": "192.168.99.105",
+                "ansible_port": 5985,
+                "ansible_shell_type": "powershell",
+                "ansible_winrm_transport": "basic"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "demohosts",
+            "jboss",
+            "demodb",
+            "network",
+            "web",
+            "rhel88",
+            "wind2019",
+            "utils"
+        ]
+    },
+    "demodb": {
+        "hosts": [
+            "dbsample1",
+            "dbsample2",
+            "dbsample3",
+            "dbsample4"
+        ]
+    },
+    "demohosts": {
+        "hosts": [
+            "node1sample",
+            "node2sample",
+            "node10sample"
+        ]
+    },
+    "jboss": {
+        "hosts": [
+            "eap"
+        ]
+    },
+    "network": {
+        "hosts": [
+            "cisco101",
+            "cisco102"
+        ]
+    },
+    "rhel88": {
+        "hosts": [
+            "rhel8-101",
+            "rhel8-201-dummy"
+        ]
+    },
+    "utils": {
+        "hosts": [
+            "utils.lab.iamgini.com"
+        ]
+    },
+    "web": {
+        "hosts": [
+            "webserver101",
+            "webserver102",
+            "webserver201",
+            "webserver202"
+        ]
+    },
+    "wind2019": {
+        "hosts": [
+            "win2019",
+            "win2019dummy"
+        ]
+    }
+}
