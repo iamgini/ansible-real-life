@@ -1,0 +1,248 @@
+---
+# dynamic_variable_lookup.yml
+#
+# Demonstrates two patterns for dynamic variable resolution:
+#
+#   PART 1 — Dynamic credential lookup (username/password)
+#     lookup('vars', ...) with fallback to lookup('ansible.builtin.env', ...)
+#
+#   PART 2 — Dynamic variable name construction
+#     Build a variable name at runtime from multiple parts, then resolve it.
+#     e.g. "storage_" + db_operation + "_script"
+#          → storage_db_status_script  OR  storage_db_failover_script
+#
+# ============================================================================
+# Run scenarios:
+#
+#   Scenario 1 - Ansible var set (credential lookup):
+#     ansible-playbook dynamic_variable_lookup.yml \
+#       -e "manage_services_credential=db_service" \
+#       -e "db_service_username=ansible_db_user" \
+#       -e "db_service_password=ansible_db_pass"
+#
+#   Scenario 2 - Env vars set (credential lookup):
+#     export DB_SERVICE_USERNAME=env_db_user
+#     export DB_SERVICE_PASSWORD=env_db_pass
+#     ansible-playbook dynamic_variable_lookup.yml \
+#       -e "manage_services_credential=db_service"
+#
+#   Scenario 3 - Both set (Ansible var wins):
+#     export DB_SERVICE_USERNAME=env_db_user
+#     export DB_SERVICE_PASSWORD=env_db_pass
+#     ansible-playbook dynamic_variable_lookup.yml \
+#       -e "manage_services_credential=db_service" \
+#       -e "db_service_username=ansible_db_user" \
+#       -e "db_service_password=ansible_db_pass"
+#
+#   Scenario 4 - Neither set (assert fails with clear message):
+#     ansible-playbook dynamic_variable_lookup.yml \
+#       -e "manage_services_credential=db_service"
+#
+#   Scenario 5 - Dynamic variable name (db_operation drives which script var is read):
+#     ansible-playbook dynamic_variable_lookup.yml -e "db_operation=db_status"
+#     ansible-playbook dynamic_variable_lookup.yml -e "db_operation=db_failover"
+# ============================================================================
+
+- name: "Dynamic Variable Lookup - Explanation Playbook"
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    # -------------------------------------------------------------------------
+    # PART 1 vars — credential lookup
+    # -------------------------------------------------------------------------
+    # The credential "key" — drives all dynamic lookups.
+    # Override at runtime: -e "manage_services_credential=api_service"
+    manage_services_credential: "db_service"
+
+    # -------------------------------------------------------------------------
+    # PART 2 vars — dynamic variable name construction
+    # -------------------------------------------------------------------------
+    # The operation type — becomes the middle segment of the variable name.
+    # Override at runtime: -e "db_operation=db_failover"
+    db_operation: "db_status"
+
+    # These are the actual script variables resolved dynamically.
+    # In real usage these live in group_vars, host_vars, or a vars file.
+    storage_db_status_script: "/opt/scripts/storage/check_status.sh"
+    storage_db_failover_script: "/opt/scripts/storage/run_failover.sh"
+    storage_db_backup_script: "/opt/scripts/storage/run_backup.sh"
+
+    # Same pattern, different service prefix
+    network_db_status_script: "/opt/scripts/network/check_status.sh"
+    network_db_failover_script: "/opt/scripts/network/run_failover.sh"
+    # network_db_backup_script intentionally not defined — to show graceful default
+
+  tasks:
+
+    # ==========================================================================
+    # PART 1 — Dynamic credential lookup (username / password)
+    # ==========================================================================
+    # Pattern:
+    #   lookup('vars', <credential_key> + '_username')
+    #     → resolves e.g.  db_service_username  from Ansible var scope
+    #   fallback:
+    #   lookup('ansible.builtin.env', <CREDENTIAL_KEY> + '_USERNAME')
+    #     → resolves e.g.  DB_SERVICE_USERNAME  from shell environment
+    # ==========================================================================
+
+    - name: "PART 1 | Show which variable / env-var names will be checked"
+      ansible.builtin.debug:
+        msg:
+          - "Credential key       : {{ manage_services_credential }}"
+          - "Ansible var checked  : {{ manage_services_credential }}_username"
+          - "Env var checked      : {{ manage_services_credential | upper }}_USERNAME"
+
+    - name: "PART 1 | Resolve username (Ansible var → env var fallback)"
+      ansible.builtin.set_fact:
+        resolved_username: >-
+          {{
+            lookup('vars', manage_services_credential + '_username', default='')
+            or
+            lookup('ansible.builtin.env', manage_services_credential | upper + '_USERNAME')
+          }}
+
+    - name: "PART 1 | Resolve password (Ansible var → env var fallback)"
+      ansible.builtin.set_fact:
+        resolved_password: >-
+          {{
+            lookup('vars', manage_services_credential + '_password', default='')
+            or
+            lookup('ansible.builtin.env', manage_services_credential | upper + '_PASSWORD')
+          }}
+      no_log: true   # always mask passwords in real playbooks
+
+    - name: "PART 1 | Show resolved credentials"
+      ansible.builtin.debug:
+        msg:
+          - "Username : {{ resolved_username | default('(not found)') }}"
+          - "Password : (masked — remove no_log only for debugging)"
+
+    - name: "PART 1 | Assert credentials were resolved"
+      ansible.builtin.assert:
+        that:
+          - resolved_username | length > 0
+          - resolved_password | length > 0
+        fail_msg: >-
+          Could not resolve credentials for '{{ manage_services_credential }}'.
+          Set Ansible var '{{ manage_services_credential }}_username/_password'
+          OR env vars '{{ manage_services_credential | upper }}_USERNAME/_PASSWORD'.
+        success_msg: "Credentials resolved for '{{ manage_services_credential }}'."
+
+    - name: "PART 1 | Switch to api_service and re-resolve (runtime key change)"
+      ansible.builtin.set_fact:
+        manage_services_credential: "api_service"
+
+    - name: "PART 1 | Resolve username for api_service"
+      ansible.builtin.set_fact:
+        api_username: >-
+          {{
+            lookup('vars', manage_services_credential + '_username', default='')
+            or
+            lookup('ansible.builtin.env', manage_services_credential | upper + '_USERNAME')
+          }}
+
+    - name: "PART 1 | Show api_service username"
+      ansible.builtin.debug:
+        msg:
+          - "Service  : {{ manage_services_credential }}"
+          - "Username : {{ api_username | default('(not found — set api_service_username or API_SERVICE_USERNAME)') }}"
+
+    # ==========================================================================
+    # PART 2 — Dynamic variable name construction
+    # ==========================================================================
+    # Pattern:
+    #   Build the variable name as a string, then resolve it with lookup('vars', ...)
+    #
+    #   Variable name = prefix + "_" + dynamic_segment + "_" + suffix
+    #                 = "storage" + "_" + db_operation  + "_" + "script"
+    #
+    #   db_operation = "db_status"    → looks up: storage_db_status_script
+    #   db_operation = "db_failover"  → looks up: storage_db_failover_script
+    #   db_operation = "db_backup"    → looks up: storage_db_backup_script
+    # ==========================================================================
+
+    - name: "PART 2 | Show what variable name will be constructed"
+      ansible.builtin.debug:
+        msg:
+          - "db_operation                    : {{ db_operation }}"
+          - "Constructed name (template)     : storage_{{ db_operation }}_script"
+          - "Constructed name (concatenation): {{ 'storage_' + db_operation + '_script' }}"
+          # Both methods produce the same result — template syntax is more readable
+
+    # Step 1: Build the variable name as a string
+    - name: "PART 2 | Build the target variable name"
+      ansible.builtin.set_fact:
+        target_var_name: "storage_{{ db_operation }}_script"
+
+    # Step 2: Resolve the variable whose name was just built
+    - name: "PART 2 | Resolve the script path from the constructed variable name"
+      ansible.builtin.set_fact:
+        resolved_script_path: >-
+          {{ lookup('vars', target_var_name, default='(variable not found: ' + target_var_name + ')') }}
+
+    - name: "PART 2 | Show resolved script path"
+      ansible.builtin.debug:
+        msg:
+          - "Target variable name : {{ target_var_name }}"
+          - "Resolved value       : {{ resolved_script_path }}"
+
+    # -------------------------------------------------------------------------
+    # Scenario: Loop over all operations for one prefix — shows all 3 resolving
+    # -------------------------------------------------------------------------
+    - name: "PART 2 | Resolve all operations for 'storage' prefix"
+      ansible.builtin.debug:
+        msg: "storage_{{ item }}_script = {{ lookup('vars', 'storage_' + item + '_script', default='(not defined)') }}"
+      loop:
+        - db_status
+        - db_failover
+        - db_backup
+
+    # -------------------------------------------------------------------------
+    # Scenario: Same operations, different prefix — shows graceful default
+    # -------------------------------------------------------------------------
+    - name: "PART 2 | Same operations, 'network' prefix (backup not defined)"
+      ansible.builtin.debug:
+        msg: "network_{{ item }}_script = {{ lookup('vars', 'network_' + item + '_script', default='(not defined)') }}"
+      loop:
+        - db_status
+        - db_failover
+        - db_backup    # network_db_backup_script is not defined → shows default
+
+    # -------------------------------------------------------------------------
+    # Scenario: BOTH prefix AND operation are dynamic at runtime
+    #   service_type=network  +  db_operation=db_failover
+    #   → constructs and resolves: network_db_failover_script
+    # -------------------------------------------------------------------------
+    - name: "PART 2 | Both prefix and operation are dynamic"
+      vars:
+        service_type: "network"         # could also come from -e or set_fact
+      ansible.builtin.set_fact:
+        fully_dynamic_script: >-
+          {{ lookup('vars', service_type + '_' + db_operation + '_script', default='(not defined)') }}
+
+    - name: "PART 2 | Show fully dynamic resolution result"
+      vars:
+        service_type: "network"
+      ansible.builtin.debug:
+        msg:
+          - "service_type     : {{ service_type }}"
+          - "db_operation     : {{ db_operation }}"
+          - "Constructed name : {{ service_type }}_{{ db_operation }}_script"
+          - "Resolved value   : {{ fully_dynamic_script }}"
+
+    # ==========================================================================
+    # QUICK REFERENCE
+    # ==========================================================================
+    # PART 1 — credential lookup (two-source resolution)
+    #   lookup('vars', credential + '_username', default='')
+    #   or lookup('ansible.builtin.env', credential | upper + '_USERNAME')
+    #   → Ansible var wins; env var is the CI/CD fallback
+    #
+    # PART 2 — dynamic variable name construction (one-source resolution)
+    #   target = "storage_" + db_operation + "_script"
+    #   lookup('vars', target, default='...')
+    #   → a single control variable (db_operation) selects which var is read
+    #   → extend to any number of segments: prefix + middle + suffix
+    #   → combine with PART 1 to build a name AND do two-source fallback
+    # ==========================================================================
