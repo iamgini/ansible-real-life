@@ -1,6 +1,0 @@
-<strong>Health Check Failed!</strong> 
-<br>
-{% if openshift_auth_results.failed is true %}
-<br>Message: {{ openshift_auth_results.msg }}
-<br>Cluster API: "{{ ocp_cluster_list[ocp_cluster_alias]['cluster_api'] }}"
-{% endif %}
