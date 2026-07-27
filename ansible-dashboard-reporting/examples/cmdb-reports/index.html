@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+    <title>Home | Ansible CMDB Report</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #f5f7fa;
+      font-family: 'Red Hat Display', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #2d3748;
+    }
+    .top-banner {
+      background: linear-gradient(135deg, #a30000 0%, #ee0000 100%);
+      color: #ffffff;
+      padding: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    .banner-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 25px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .banner-left h1 {
+      font-size: 1.75em;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 5px;
+    }
+    .banner-subtitle {
+      font-size: 0.9em;
+      opacity: 0.9;
+      font-weight: 400;
+    }
+    .banner-right {
+      text-align: right;
+    }
+    .banner-meta {
+      font-size: 0.85em;
+      opacity: 0.9;
+    }
+    .banner-meta div {
+      margin: 3px 0;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 30px auto;
+      padding: 0 30px;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .card-header {
+      padding: 15px 25px;
+      border-bottom: 1px solid #e2e8f0;
+      background: #f8fafc;
+    }
+    .card-header h2, .card-header h3 {
+      font-size: 1.1em;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 0;
+    }
+    .card-body {
+      padding: 0;
+    }
+    .snippet {
+      font-family: ui-monospace,
+                 Menlo, Monaco,
+                 "Cascadia Mono", "Segoe UI Mono",
+                 "Roboto Mono",
+                 "Oxygen Mono",
+                 "Ubuntu Monospace",
+                 "Source Code Pro",
+                 "Fira Mono",
+                 "Droid Sans Mono",
+                 "Courier New", monospace;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    thead {
+      background: #f8fafc;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    th {
+      padding: 12px 25px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.85em;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    td {
+      padding: 14px 25px;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 0.9em;
+      vertical-align: top;
+    }
+    tbody tr {
+      transition: background 0.2s;
+    }
+    tbody tr:hover {
+      background: #f8fafc;
+    }
+    p {
+      margin: 4px 0;
+    }
+    a {
+      color: #cc0000;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #a30000;
+    }
+    .green-cell {
+      background-color: #d1fae5;
+      color: #065f46;
+    }
+    .red-cell {
+      background-color: #fee2e2;
+      color: #991b1b;
+    }
+    .gray-cell {
+      background-color: #f1f5f9;
+      color: #475569;
+    }
+    footer {
+      background: #1e293b;
+      color: #94a3b8;
+      padding: 30px 0;
+      margin-top: 50px;
+    }
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 30px;
+      text-align: center;
+    }
+    .footer-content p {
+      margin: 5px 0;
+      font-size: 0.9em;
+    }
+    .footer-brand {
+      color: #e2e8f0;
+      font-weight: 600;
+    }
+    .footer-content a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .footer-content a:hover {
+      color: #e2e8f0;
+      text-decoration: underline;
+    }
+    .usage-bar {
+      background: #e2e8f0;
+      border-radius: 4px;
+      height: 14px;
+      width: 100%;
+      min-width: 80px;
+      overflow: hidden;
+      margin-bottom: 2px;
+    }
+    .usage-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.3s;
+    }
+    .usage-ok { background: #22c55e; }
+    .usage-warning { background: #f59e0b; }
+    .usage-critical { background: #ef4444; }
+    .usage-text {
+      font-size: 0.75em;
+      color: #64748b;
+      white-space: nowrap;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75em;
+      font-weight: 600;
+      margin: 1px 2px;
+    }
+    .badge-up {
+      background: #d1fae5;
+      color: #065f46;
+    }
+    .badge-down {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+    .badge-info {
+      background: #e0e7ff;
+      color: #3730a3;
+    }
+    .pagination-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 25px;
+      border-top: 1px solid #e2e8f0;
+      background: #f8fafc;
+      font-size: 0.85em;
+      color: #475569;
+    }
+    .pagination-left select {
+      padding: 4px 8px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 1em;
+      margin: 0 4px;
+      outline: none;
+    }
+    .pagination-left select:focus {
+      border-color: #cc0000;
+    }
+    .pagination-center {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .page-btn {
+      padding: 4px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #ffffff;
+      font-family: inherit;
+      font-size: 0.9em;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .page-btn:hover:not(:disabled) {
+      border-color: #cc0000;
+      color: #cc0000;
+    }
+    .page-btn:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+    .page-active {
+      background: #cc0000;
+      color: #ffffff;
+      border-color: #cc0000;
+    }
+    .page-active:hover {
+      background: #a30000;
+      color: #ffffff;
+      border-color: #a30000;
+    }
+    .page-dots {
+      padding: 0 4px;
+      color: #94a3b8;
+    }
+    .filter-bar {
+      padding: 15px 25px;
+      border-bottom: 1px solid #e2e8f0;
+      background: #f8fafc;
+    }
+    .filter-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .filter-row:last-child {
+      margin-bottom: 0;
+    }
+    .filter-label {
+      font-size: 0.8em;
+      font-weight: 600;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      min-width: 55px;
+    }
+    .filter-search {
+      flex: 1;
+    }
+    .filter-search input {
+      width: 100%;
+      padding: 8px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.9em;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .filter-search input:focus {
+      border-color: #cc0000;
+      box-shadow: 0 0 0 2px rgba(204,0,0,0.1);
+    }
+    .filter-chip {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 0.78em;
+      font-weight: 500;
+      font-family: inherit;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-chip:hover {
+      border-color: #94a3b8;
+      background: #f1f5f9;
+    }
+    .filter-chip.active {
+      background: #cc0000;
+      color: #ffffff;
+      border-color: #cc0000;
+    }
+    .filter-chip.active:hover {
+      background: #a30000;
+      border-color: #a30000;
+    }
+    .filter-reset {
+      border-color: #e2e8f0;
+      color: #94a3b8;
+      font-size: 0.75em;
+    }
+    .filter-reset:hover {
+      color: #cc0000;
+      border-color: #cc0000;
+    }
+    .nav-home {
+      display: inline-block;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 0.85em;
+      font-weight: 500;
+      padding: 4px 12px;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 6px;
+      margin-bottom: 8px;
+      transition: all 0.2s;
+    }
+    .nav-home:hover {
+      background: rgba(255,255,255,0.15);
+      color: #ffffff;
+      text-decoration: none;
+      border-color: rgba(255,255,255,0.6);
+    }
+    .scrollable-section {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .pre-output {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 15px 20px;
+      font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Roboto Mono", "Courier New", monospace;
+      font-size: 0.82em;
+      line-height: 1.6;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 0;
+      border-radius: 0 0 12px 12px;
+    }
+    .section-count {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 2px 10px;
+      border-radius: 10px;
+      font-size: 0.75em;
+      font-weight: 600;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .na-text {
+      color: #94a3b8;
+      font-style: italic;
+      padding: 20px 25px;
+    }
+    .kv-table td:first-child {
+      font-weight: 600;
+      width: 40%;
+      color: #475569;
+    }
+    @media (max-width: 768px) {
+      .banner-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+      .banner-right {
+        text-align: left;
+      }
+    }
+    </style>
+        </head>
+<body>
+
+<div class="top-banner">
+  <div class="banner-content">
+    <div class="banner-left">
+      <h1>Ansible CMDB Report</h1>
+      <div class="banner-subtitle">Infrastructure System Inventory</div>
+    </div>
+    <div class="banner-right">
+      <div class="banner-meta">
+        <div><strong>Generated:</strong> 2026-07-27_13-56-43</div>
+        <div><strong>Powered by:</strong> Red Hat Ansible Automation Platform</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="card">
+    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+      <h3>Host Overview</h3>
+      <span id="host-count" style="font-size: 0.85em; color: #64748b;"></span>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <div class="filter-row">
+        <div class="filter-search">
+          <input type="text" id="search-input" placeholder="Search hosts, IPs, OS, kernel..." autocomplete="off">
+        </div>
+      </div>
+      <div class="filter-row" id="filter-groups">
+        <span class="filter-label">Groups:</span>
+      </div>
+      <div class="filter-row" id="filter-os">
+        <span class="filter-label">OS:</span>
+      </div>
+      <div class="filter-row">
+        <span class="filter-label">Usage:</span>
+        <button class="filter-chip" data-filter="usage" data-value="mem70">Mem &gt; 70%</button>
+        <button class="filter-chip" data-filter="usage" data-value="mem90">Mem &gt; 90%</button>
+        <button class="filter-chip" data-filter="usage" data-value="disk70">Disk &gt; 70%</button>
+        <button class="filter-chip" data-filter="usage" data-value="disk90">Disk &gt; 90%</button>
+        <span style="flex:1"></span>
+        <button class="filter-chip filter-reset" id="clear-filters">Clear All</button>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <table id="host-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Groups</th>
+            <th>Main IP</th>
+            <th>OS</th>
+            <th>Kernel</th>
+            <th>vCPUs</th>
+            <th>RAM</th>
+            <th>Mem Usage</th>
+            <th>Disk Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+                                                                                                            <tr data-mem-pct="80" data-disk-pct="2">
+            <td><a href="appserver01.html"><strong>appserver01</strong></a></td>
+            <td>
+                            <span class="badge badge-info">appserver</span>
+                            <span class="badge badge-info">servers</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 80%"></div>
+              </div>
+              <span class="usage-text">80% (363/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="79" data-disk-pct="2">
+            <td><a href="appserver02.html"><strong>appserver02</strong></a></td>
+            <td>
+                            <span class="badge badge-info">appserver</span>
+                            <span class="badge badge-info">servers</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 79%"></div>
+              </div>
+              <span class="usage-text">79% (360/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="80" data-disk-pct="2">
+            <td><a href="appserver03.html"><strong>appserver03</strong></a></td>
+            <td>
+                            <span class="badge badge-info">appserver</span>
+                            <span class="badge badge-info">servers</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 80%"></div>
+              </div>
+              <span class="usage-text">80% (365/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="76" data-disk-pct="2">
+            <td><a href="ceph-node01.html"><strong>ceph-node01</strong></a></td>
+            <td>
+                            <span class="badge badge-info">servers</span>
+                            <span class="badge badge-info">storage</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 76%"></div>
+              </div>
+              <span class="usage-text">76% (346/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="76" data-disk-pct="2">
+            <td><a href="ceph-node02.html"><strong>ceph-node02</strong></a></td>
+            <td>
+                            <span class="badge badge-info">servers</span>
+                            <span class="badge badge-info">storage</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 76%"></div>
+              </div>
+              <span class="usage-text">76% (345/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="79" data-disk-pct="2">
+            <td><a href="dbserver01.html"><strong>dbserver01</strong></a></td>
+            <td>
+                            <span class="badge badge-info">dbserver</span>
+                            <span class="badge badge-info">servers</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 79%"></div>
+              </div>
+              <span class="usage-text">79% (362/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="79" data-disk-pct="2">
+            <td><a href="dbserver02.html"><strong>dbserver02</strong></a></td>
+            <td>
+                            <span class="badge badge-info">dbserver</span>
+                            <span class="badge badge-info">servers</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 79%"></div>
+              </div>
+              <span class="usage-text">79% (361/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="79" data-disk-pct="2">
+            <td><a href="grafana01.html"><strong>grafana01</strong></a></td>
+            <td>
+                            <span class="badge badge-info">monitoring</span>
+                            <span class="badge badge-info">servers</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 79%"></div>
+              </div>
+              <span class="usage-text">79% (362/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="79" data-disk-pct="2">
+            <td><a href="haproxy01.html"><strong>haproxy01</strong></a></td>
+            <td>
+                            <span class="badge badge-info">loadbalancer</span>
+                            <span class="badge badge-info">servers</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 79%"></div>
+              </div>
+              <span class="usage-text">79% (362/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="75" data-disk-pct="2">
+            <td><a href="haproxy02.html"><strong>haproxy02</strong></a></td>
+            <td>
+                            <span class="badge badge-info">loadbalancer</span>
+                            <span class="badge badge-info">servers</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 75%"></div>
+              </div>
+              <span class="usage-text">75% (344/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="76" data-disk-pct="2">
+            <td><a href="nfs-server01.html"><strong>nfs-server01</strong></a></td>
+            <td>
+                            <span class="badge badge-info">servers</span>
+                            <span class="badge badge-info">storage</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 76%"></div>
+              </div>
+              <span class="usage-text">76% (347/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="79" data-disk-pct="2">
+            <td><a href="prometheus01.html"><strong>prometheus01</strong></a></td>
+            <td>
+                            <span class="badge badge-info">monitoring</span>
+                            <span class="badge badge-info">servers</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 79%"></div>
+              </div>
+              <span class="usage-text">79% (362/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="79" data-disk-pct="2">
+            <td><a href="rhel101.html"><strong>rhel101</strong></a></td>
+            <td>
+                            <span class="badge badge-info">rhel8</span>
+                            <span class="badge badge-info">servers</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 79%"></div>
+              </div>
+              <span class="usage-text">79% (362/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="80" data-disk-pct="2">
+            <td><a href="rhel102.html"><strong>rhel102</strong></a></td>
+            <td>
+                            <span class="badge badge-info">rhel8</span>
+                            <span class="badge badge-info">servers</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 80%"></div>
+              </div>
+              <span class="usage-text">80% (363/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="79" data-disk-pct="2">
+            <td><a href="rhel103.html"><strong>rhel103</strong></a></td>
+            <td>
+                            <span class="badge badge-info">rhel8</span>
+                            <span class="badge badge-info">servers</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 79%"></div>
+              </div>
+              <span class="usage-text">79% (362/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="80" data-disk-pct="2">
+            <td><a href="utility-101.html"><strong>utility-101</strong></a></td>
+            <td>
+                            <span class="badge badge-info">servers</span>
+                            <span class="badge badge-info">utils</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 80%"></div>
+              </div>
+              <span class="usage-text">80% (363/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="80" data-disk-pct="2">
+            <td><a href="utility-102.html"><strong>utility-102</strong></a></td>
+            <td>
+                            <span class="badge badge-info">servers</span>
+                            <span class="badge badge-info">utils</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 80%"></div>
+              </div>
+              <span class="usage-text">80% (363/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="79" data-disk-pct="2">
+            <td><a href="webserver01.html"><strong>webserver01</strong></a></td>
+            <td>
+                            <span class="badge badge-info">servers</span>
+                            <span class="badge badge-info">web</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 79%"></div>
+              </div>
+              <span class="usage-text">79% (360/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                                                                                                            <tr data-mem-pct="79" data-disk-pct="2">
+            <td><a href="webserver02.html"><strong>webserver02</strong></a></td>
+            <td>
+                            <span class="badge badge-info">servers</span>
+                            <span class="badge badge-info">web</span>
+                          </td>
+            <td class="snippet">10.0.2.15</td>
+            <td>RedHat 9.1</td>
+            <td class="snippet" style="font-size: 0.8em;">5.14.0-162.6.1.el9_1.x86_64</td>
+            <td>1</td>
+            <td>0.4 GB</td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-warning" style="width: 79%"></div>
+              </div>
+              <span class="usage-text">79% (362/453 MB)</span>
+                          </td>
+            <td>
+                            <div class="usage-bar">
+                <div class="usage-fill usage-ok" style="width: 2%"></div>
+              </div>
+              <span class="usage-text">2% (2.5/124.9 GB)</span>
+                          </td>
+          </tr>
+                </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-bar" id="pagination-bar">
+      <div class="pagination-left">
+        <label>Show
+          <select id="page-size">
+            <option value="10">10</option>
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="0">All</option>
+          </select>
+          per page
+        </label>
+      </div>
+      <div class="pagination-center" id="page-buttons"></div>
+      <div class="pagination-right" id="page-info"></div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function() {
+  var table = document.getElementById('host-table');
+  var rows = Array.prototype.slice.call(table.querySelectorAll('tbody tr'));
+  var searchInput = document.getElementById('search-input');
+  var countEl = document.getElementById('host-count');
+  var activeGroups = {};
+  var activeOS = {};
+  var activeUsage = {};
+  var currentPage = 1;
+  var pageSize = 25;
+  var filteredRows = [];
+  var pageSizeSelect = document.getElementById('page-size');
+  var pageButtons = document.getElementById('page-buttons');
+  var pageInfo = document.getElementById('page-info');
+
+  // Build group chips
+  var groups = {};
+  rows.forEach(function(r) {
+    var badges = r.querySelectorAll('td:nth-child(2) .badge');
+    badges.forEach(function(b) { groups[b.textContent.trim()] = true; });
+  });
+  var groupContainer = document.getElementById('filter-groups');
+  Object.keys(groups).sort().forEach(function(g) {
+    var btn = document.createElement('button');
+    btn.className = 'filter-chip';
+    btn.setAttribute('data-filter', 'group');
+    btn.setAttribute('data-value', g);
+    btn.textContent = g;
+    btn.addEventListener('click', function() {
+      if (activeGroups[g]) { delete activeGroups[g]; btn.classList.remove('active'); }
+      else { activeGroups[g] = true; btn.classList.add('active'); }
+      applyFilters();
+    });
+    groupContainer.appendChild(btn);
+  });
+
+  // Build OS chips
+  var osMap = {};
+  rows.forEach(function(r) {
+    var os = r.querySelector('td:nth-child(4)').textContent.trim();
+    if (os && os !== 'N/A') osMap[os] = true;
+  });
+  var osContainer = document.getElementById('filter-os');
+  Object.keys(osMap).sort().forEach(function(o) {
+    var btn = document.createElement('button');
+    btn.className = 'filter-chip';
+    btn.setAttribute('data-filter', 'os');
+    btn.setAttribute('data-value', o);
+    btn.textContent = o;
+    btn.addEventListener('click', function() {
+      if (activeOS[o]) { delete activeOS[o]; btn.classList.remove('active'); }
+      else { activeOS[o] = true; btn.classList.add('active'); }
+      applyFilters();
+    });
+    osContainer.appendChild(btn);
+  });
+
+  // Usage filter buttons
+  var usageBtns = document.querySelectorAll('[data-filter="usage"]');
+  usageBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var v = btn.getAttribute('data-value');
+      if (activeUsage[v]) { delete activeUsage[v]; btn.classList.remove('active'); }
+      else { activeUsage[v] = true; btn.classList.add('active'); }
+      applyFilters();
+    });
+  });
+
+  // Search
+  searchInput.addEventListener('input', function() { applyFilters(); });
+
+  // Clear all
+  document.getElementById('clear-filters').addEventListener('click', function() {
+    activeGroups = {}; activeOS = {}; activeUsage = {};
+    searchInput.value = '';
+    document.querySelectorAll('.filter-chip.active').forEach(function(b) { b.classList.remove('active'); });
+    applyFilters();
+  });
+
+  // Page size change
+  pageSizeSelect.addEventListener('change', function() {
+    pageSize = parseInt(this.value);
+    currentPage = 1;
+    applyFilters();
+  });
+
+  function applyFilters() {
+    var query = searchInput.value.toLowerCase();
+    var gKeys = Object.keys(activeGroups);
+    var oKeys = Object.keys(activeOS);
+    filteredRows = [];
+
+    rows.forEach(function(r) {
+      var text = r.textContent.toLowerCase();
+      var show = true;
+
+      if (query && text.indexOf(query) === -1) show = false;
+
+      if (show && gKeys.length > 0) {
+        var badges = Array.prototype.slice.call(r.querySelectorAll('td:nth-child(2) .badge'));
+        var rowGroups = badges.map(function(b) { return b.textContent.trim(); });
+        var match = gKeys.some(function(g) { return rowGroups.indexOf(g) !== -1; });
+        if (!match) show = false;
+      }
+
+      if (show && oKeys.length > 0) {
+        var os = r.querySelector('td:nth-child(4)').textContent.trim();
+        if (oKeys.indexOf(os) === -1) show = false;
+      }
+
+      if (show) {
+        var memPct = parseInt(r.getAttribute('data-mem-pct') || '0');
+        var diskPct = parseInt(r.getAttribute('data-disk-pct') || '0');
+        if (activeUsage['mem70'] && memPct <= 70) show = false;
+        if (activeUsage['mem90'] && memPct <= 90) show = false;
+        if (activeUsage['disk70'] && diskPct <= 70) show = false;
+        if (activeUsage['disk90'] && diskPct <= 90) show = false;
+      }
+
+      r.style.display = 'none';
+      if (show) filteredRows.push(r);
+    });
+
+    var totalPages = pageSize > 0 ? Math.ceil(filteredRows.length / pageSize) : 1;
+    if (currentPage > totalPages) currentPage = totalPages || 1;
+    renderPage();
+    countEl.textContent = filteredRows.length + ' of ' + rows.length + ' hosts';
+  }
+
+  function renderPage() {
+    var total = filteredRows.length;
+    var totalPages = pageSize > 0 ? Math.ceil(total / pageSize) : 1;
+    var start = pageSize > 0 ? (currentPage - 1) * pageSize : 0;
+    var end = pageSize > 0 ? Math.min(start + pageSize, total) : total;
+
+    filteredRows.forEach(function(r, i) {
+      r.style.display = (i >= start && i < end) ? '' : 'none';
+    });
+
+    // Page info
+    if (total > 0) {
+      pageInfo.textContent = (start + 1) + '–' + end + ' of ' + total;
+    } else {
+      pageInfo.textContent = '0 of 0';
+    }
+
+    // Page buttons
+    pageButtons.innerHTML = '';
+    if (totalPages <= 1) return;
+
+    var prev = document.createElement('button');
+    prev.className = 'page-btn';
+    prev.textContent = '← Prev';
+    prev.disabled = currentPage <= 1;
+    prev.addEventListener('click', function() { currentPage--; renderPage(); });
+    pageButtons.appendChild(prev);
+
+    var maxBtns = 7;
+    var startPage = Math.max(1, currentPage - Math.floor(maxBtns / 2));
+    var endPage = Math.min(totalPages, startPage + maxBtns - 1);
+    if (endPage - startPage < maxBtns - 1) startPage = Math.max(1, endPage - maxBtns + 1);
+
+    if (startPage > 1) {
+      pageButtons.appendChild(makePageBtn(1));
+      if (startPage > 2) { var d = document.createElement('span'); d.className = 'page-dots'; d.textContent = '...'; pageButtons.appendChild(d); }
+    }
+    for (var p = startPage; p <= endPage; p++) {
+      pageButtons.appendChild(makePageBtn(p));
+    }
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) { var d2 = document.createElement('span'); d2.className = 'page-dots'; d2.textContent = '...'; pageButtons.appendChild(d2); }
+      pageButtons.appendChild(makePageBtn(totalPages));
+    }
+
+    var next = document.createElement('button');
+    next.className = 'page-btn';
+    next.textContent = 'Next →';
+    next.disabled = currentPage >= totalPages;
+    next.addEventListener('click', function() { currentPage++; renderPage(); });
+    pageButtons.appendChild(next);
+  }
+
+  function makePageBtn(p) {
+    var btn = document.createElement('button');
+    btn.className = 'page-btn' + (p === currentPage ? ' page-active' : '');
+    btn.textContent = p;
+    btn.addEventListener('click', function() { currentPage = p; renderPage(); });
+    return btn;
+  }
+
+  applyFilters();
+})();
+</script>
+
+<footer>
+  <div class="footer-content">
+    <p class="footer-brand">Powered by Red Hat Ansible Automation Platform</p>
+    <p>Report to <a href="mailto:system-admin@example.com">system-admin@example.com</a> if you find any issues.</p>
+  </div>
+</footer>
+</body>
+</html>
