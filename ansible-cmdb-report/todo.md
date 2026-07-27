@@ -1,2 +1,0 @@
-Demo
-- mention ansible-cmdb
