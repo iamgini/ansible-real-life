@@ -2,7 +2,7 @@
 
 This project has been superseded by the **ansible-collection-compliance** project, which provides a complete Ansible collection (`iamgini.compliance`) for OpenSCAP-based compliance scanning and remediation.
 
-See: [ansible-collection-compliance](../../ansible-collection-compliance/)
+See: [ansible-collection-compliance](https://github.com/iamgini/ansible-collection-compliance)
 
 Features of the new project:
 
