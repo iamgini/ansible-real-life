@@ -33,7 +33,12 @@
       "Read(//home/gmadappa/.lola/modules/ansible-documentation/module/**)",
       "Read(//home/gmadappa/.lola/modules/ansible-collection-sdlc/module/**)",
       "Read(//home/gmadappa/.lola/modules/ansible-collection-standards/module/**)",
-      "Bash(echo \"exit: $?\")"
+      "Bash(echo \"exit: $?\")",
+      "Bash(git -C /home/gmadappa/ansible/ansible-real-life ls-files --cached .lola/)",
+      "Bash(git -C /home/gmadappa/ansible/ansible-real-life status --short)",
+      "Bash(git -C /home/gmadappa/ansible/ansible-real-life config user.name)",
+      "Bash(git -C /home/gmadappa/ansible/ansible-real-life config user.email)",
+      "Bash(git *)"
     ]
   }
 }
