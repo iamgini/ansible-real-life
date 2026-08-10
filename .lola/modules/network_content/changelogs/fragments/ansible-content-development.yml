@@ -1,0 +1,8 @@
+---
+minor_changes:
+  - >-
+    Add ansible-content-development module with four skills for writing and testing Ansible content
+    following official best practices. Includes write-module (Python module scaffolding and review),
+    write-content (YAML content authoring with Red Hat CoP good practices), write-module-tests
+    (pytest/ansible-test unit and integration tests), and write-content-tests (Molecule functional
+    testing emphasising outcome verification over structural assertions).

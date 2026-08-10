@@ -1,0 +1,116 @@
+---
+repos:
+  # Markdownlint
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.13.0
+    hooks:
+      - id: markdownlint-cli2
+        name: Lint Markdown files
+        args: ["--config", ".markdownlint.json"]
+        exclude: ^(tmp/|\.git/)
+
+  # YAML lint
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.35.1
+    hooks:
+      - id: yamllint
+        name: Lint YAML files
+        args: ["-d", "{extends: default, rules: {line-length: {max: 200}, truthy: {check-keys: false}}}"]
+        exclude: ^(tmp/|\.git/|node_modules/)
+
+  # Shellcheck
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+        name: Check shell scripts
+        exclude: ^(tmp/|\.git/|node_modules/)
+
+  # Actionlint - GitHub Actions workflow validation
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.7
+    hooks:
+      - id: actionlint
+
+  # Skillmark - Agent Skills spec validation
+  - repo: https://github.com/michellepellon/skillmark
+    rev: v0.1.0
+    hooks:
+      - id: skillmark
+        language: rust
+        args: [--config, .skillmark.toml]
+      - id: skillmark-fix
+        language: rust
+        args: [--config, .skillmark.toml]
+        stages: [manual]
+
+  # Ruff - Python linting and formatting
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.12
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+        files: ^scripts/
+      - id: ruff-format
+        files: ^scripts/
+
+  # Mypy - Python static type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.16.0
+    hooks:
+      - id: mypy
+        files: ^scripts/
+        additional_dependencies: [types-PyYAML]
+
+  # JSON and file formatting
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-json
+        name: Validate JSON files
+      - id: end-of-file-fixer
+        name: Fix end of files
+        exclude: ^(tmp/|\.git/|node_modules/)
+      - id: trailing-whitespace
+        name: Trim trailing whitespace
+        exclude: ^(tmp/|\.git/|node_modules/)
+      - id: mixed-line-ending
+        name: Fix mixed line endings
+        exclude: ^(tmp/|\.git/|node_modules/)
+
+  # Local validation hooks (gaps not covered by skillmark)
+  - repo: local
+    hooks:
+      - id: check-module-structure
+        name: Validate Lola module structure
+        entry: python scripts/check_module_structure.py
+        language: python
+        pass_filenames: false
+        always_run: true
+      - id: check-command-frontmatter
+        name: Validate command frontmatter
+        entry: python scripts/check_command_frontmatter.py
+        language: python
+        additional_dependencies: [pyyaml]
+        pass_filenames: false
+        always_run: true
+      - id: check-mcps-json
+        name: Validate mcps.json schema
+        entry: python scripts/check_mcps_json.py
+        language: python
+        pass_filenames: false
+        always_run: true
+      - id: check-manifest-skills
+        name: Validate all skills in manifest
+        entry: python scripts/check_manifest_skills.py
+        language: python
+        additional_dependencies: [pyyaml]
+        pass_filenames: false
+        always_run: true
+      - id: check-skill-frontmatter
+        name: Validate SKILL.md frontmatter (superset of E030)
+        entry: python scripts/check_skill_frontmatter.py
+        language: python
+        additional_dependencies: [pyyaml]
+        pass_filenames: false
+        always_run: true

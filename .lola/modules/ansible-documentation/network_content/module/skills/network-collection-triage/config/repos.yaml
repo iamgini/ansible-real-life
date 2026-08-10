@@ -1,0 +1,30 @@
+---
+# Repository configuration for network-collection-triage skill
+# Edit this file to customize which repositories are scanned
+#
+# Structure:
+#   <github-org>:
+#     ci_and_bug_repos:     # Repos to scan for both CI status and bugs/PRs
+#       - repo.name
+#     bug_specific_repos:   # Repos to scan for bugs/PRs only (no CI check)
+#       - repo.name
+#
+# Example configuration (customize for your needs):
+#
+# ansible-collections:
+#   ci_and_bug_repos:
+#     - cisco.ios
+#     - cisco.nxos
+#     - arista.eos
+#   bug_specific_repos:
+#     - community.yang
+#
+# To use this config:
+#   1. Edit this file with your repositories
+#   2. Run: python scripts/triager-json.py --bugs --repos-config config/repos.yaml
+#
+# Or set REPO_CONFIG environment variable with JSON:
+#   export REPO_CONFIG='{"ansible-collections": {"ci_and_bug_repos": ["cisco.ios"]}}'
+
+# Default: empty - user must configure
+{}

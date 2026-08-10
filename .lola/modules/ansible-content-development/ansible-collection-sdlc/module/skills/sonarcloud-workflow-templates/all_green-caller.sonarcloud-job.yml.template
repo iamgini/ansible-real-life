@@ -1,0 +1,25 @@
+# Caller job: paste under `jobs:` in **all_green_check.yaml** (same file that defines **all_green** + **coverage**).
+# Reference: ansible-collections/kubernetes.core Sonar coverage work (e.g. PR #1124).
+#
+# Requirements:
+# - **coverage** job uploads **one** artifact: **name: coverage** (see workflow_call Sonar template).
+# - **all_green** aggregate job completes first (**needs** below).
+# - Use **explicit** `secrets:` mapping (not `secrets: inherit`) when **sonarcloud.yml** declares
+#   `workflow_call.secrets` only for **ANSIBLE_COLLECTIONS_ORG_SONAR_TOKEN_CICD_BOT** — GitHub rejects
+#   inherit with: "Only pass required secrets to this workflow."
+# - Fork PRs: job is skipped when `head.repo` is not this repository (no org token on untrusted forks).
+
+  sonarcloud:
+    name: SonarCloud scan
+    needs:
+      - all_green
+      - coverage
+    if: >-
+      ${{ needs.all_green.result == 'success'
+      && secrets.ANSIBLE_COLLECTIONS_ORG_SONAR_TOKEN_CICD_BOT != ''
+      && (github.event_name == 'push'
+      || (github.event_name == 'pull_request'
+      && github.event.pull_request.head.repo.full_name == github.repository)) }}
+    uses: ./.github/workflows/sonarcloud.yml
+    secrets:
+      ANSIBLE_COLLECTIONS_ORG_SONAR_TOKEN_CICD_BOT: ${{ secrets.ANSIBLE_COLLECTIONS_ORG_SONAR_TOKEN_CICD_BOT }}

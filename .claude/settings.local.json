@@ -13,7 +13,27 @@
       "Bash(mv /home/gmadappa/ansible/ansible-real-life/ansible-dashboard-reporting/templates/email/email-project-validation-failed.html.j2 /home/gmadappa/ansible/ansible-real-life/ansible-dashboard-reporting/templates/email_project_validation_failed.html.j2)",
       "Bash(mv /home/gmadappa/ansible/ansible-real-life/ansible-dashboard-reporting/templates/notifications/health-check-failed.html /home/gmadappa/ansible/ansible-real-life/ansible-dashboard-reporting/templates/notify_health_check_failed.html)",
       "Bash(python3 generate-index.py)",
-      "Bash(grep -v '.j2$')"
+      "Bash(grep -v '.j2$')",
+      "Bash(gh repo *)",
+      "WebFetch(domain:github.com)",
+      "Bash(lola --version)",
+      "Bash(lola install *)",
+      "Bash(lola *)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Read(//home/gmadappa/.claude/commands/**)",
+      "Read(//home/gmadappa/.claude/skills/**)",
+      "Bash(python3 -m json.tool)",
+      "WebSearch",
+      "WebFetch(domain:docs.getlola.dev)",
+      "WebFetch(domain:developers.redhat.com)",
+      "Read(//home/gmadappa/.lola/modules/ansible-content-development/module/**)",
+      "Read(//home/gmadappa/.lola/modules/ansible-role/module/**)",
+      "Read(//home/gmadappa/.lola/modules/cloud_content/module/**)",
+      "Read(//home/gmadappa/.lola/modules/network_content/module/**)",
+      "Read(//home/gmadappa/.lola/modules/ansible-documentation/module/**)",
+      "Read(//home/gmadappa/.lola/modules/ansible-collection-sdlc/module/**)",
+      "Read(//home/gmadappa/.lola/modules/ansible-collection-standards/module/**)",
+      "Bash(echo \"exit: $?\")"
     ]
   }
 }

@@ -1,25 +1,15 @@
+# Ansible OpenSCAP
 
-audit
+This project has been superseded by the **ansible-collection-compliance** project, which provides a complete Ansible collection (`iamgini.compliance`) for OpenSCAP-based compliance scanning and remediation.
 
-```shell
-$ oscap xccdf eval \
-    --profile xccdf_org.ssgproject.content_profile_rht-ccp \
-    --results ssg-rhel8-xccdf-result.xml \
-    --report ssg-rhel8-report.html \
-    /usr/share/xml/scap/ssg/rhel8/ssg-rhel8-ds.xml
-```
+See: [ansible-collection-compliance](../../ansible-collection-compliance/)
 
+Features of the new project:
 
-
-```shell
-$ oscap xccdf generate fix --fix-type ansible \
-  --fetch-remote-resources \
-  --output hardening-playbook.yml \
-  --result-id xccdf_org.ssgproject.content_profile_cis_level2_server \
-  scap-security-guide-0.1.73/ssg-ubuntu2204-ds.xml
-
-$ oscap xccdf generate fix \
-    --profile ospp \
-    --fix-type ansible
-    /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml > playbook.yml
-```
+- OpenSCAP scanning with multiple execution modes (direct, EE, agentless)
+- CIS and STIG profile support with custom profile overlays
+- Automated fix generation from scan results
+- Report collection and push to central report servers
+- Exception management for known acceptable findings
+- Molecule-based testing (container and full VM scenarios)
+- Dashboard integration via ansible-dashboard-reporting

@@ -1,0 +1,72 @@
+# Ansible Collection Release Configuration Template
+#
+# This is an OPTIONAL configuration file for the ansible-collection-sdlc module.
+# The skills work with sensible defaults - only create this file if you need
+# to customize the behavior.
+#
+# Usage:
+#   1. Copy this file: cp ansible-release.conf.template ~/.ansible-release.conf
+#   2. Edit ~/.ansible-release.conf with your values
+#   3. Source it before running skills: source ~/.ansible-release.conf
+#
+# Or set these as permanent environment variables in your shell profile.
+
+# ============================================================================
+# Collection Paths
+# ============================================================================
+
+# Base path where Ansible collections are stored
+# Default: ~/dev/collections/ansible_collections
+# export ANSIBLE_COLLECTIONS_PATH="$HOME/dev/collections/ansible_collections"
+
+# ============================================================================
+# GitHub Configuration
+# ============================================================================
+
+# Your GitHub username (for forking and creating PRs)
+# Default: derived from git config user.name
+# export GITHUB_USERNAME="your-github-username"
+
+# Upstream organization for Ansible collections
+# Default: ansible-collections
+# export UPSTREAM_ORG="ansible-collections"
+
+# Git remote name for upstream repository
+# Default: upstream
+# export REMOTE_UPSTREAM="upstream"
+
+# ============================================================================
+# Quality Check Configuration
+# ============================================================================
+
+# Sanity test mode: smart | full | changed-only
+# Default: smart (tests only changed files)
+# export SANITY_MODE="smart"
+
+# Automatically run sanity tests before commits
+# Default: true
+# export SANITY_ON_COMMIT="true"
+
+# Automatically run linters before commits
+# Default: true
+# export LINT_ON_COMMIT="true"
+
+# ============================================================================
+# Pull Request Configuration
+# ============================================================================
+
+# Automatically create PR after successful release preparation
+# Options: true | false | prompt
+# Default: prompt (ask user each time)
+# export AUTO_CREATE_PR="prompt"
+
+# ============================================================================
+# Collection-Specific Overrides
+# ============================================================================
+
+# Override sanity mode for specific collections (use underscores for dots)
+# Example: Run full sanity for amazon.aws collection
+# export amazon_aws_SANITY_MODE="full"
+
+# Example: Run full sanity for community.general collection
+# export community_general_SANITY_MODE="full"

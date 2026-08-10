@@ -1,0 +1,3 @@
+content_dirname: ansible-collection-sdlc/module
+source: https://github.com/ansible-community/ai-forge.git
+type: git

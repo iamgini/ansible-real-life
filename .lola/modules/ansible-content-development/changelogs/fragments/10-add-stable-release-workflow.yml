@@ -1,0 +1,6 @@
+---
+minor_changes:
+  - >-
+    Add comprehensive stable release workflow skills for Ansible collections,
+    including release analysis, preparation, documentation generation, and
+    quality checks with orchestrator skill for end-to-end automation.

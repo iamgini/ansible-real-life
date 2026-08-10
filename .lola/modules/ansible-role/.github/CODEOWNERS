@@ -1,0 +1,9 @@
+# CODEOWNERS for ansible-community/ai-forge
+#
+# These owners will be requested for review when someone opens a pull request
+# that modifies files in the specified paths.
+#
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owners for everything in the repo
+*       @alinabuzachis @Andersson007 @dbrennand @GomathiselviS @mikemorency @mjohns91 @tremble

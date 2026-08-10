@@ -1,0 +1,385 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ansible.network/skills/network-collection-triage/triage-report.schema.json",
+  "title": "Network Collection Triage Report",
+  "description": "Structured output from the network-collection-triage skill (scan mode).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "meta",
+    "statistics",
+    "priorityMatrix",
+    "criticalItems",
+    "highPriorityItems",
+    "prReviewHighlights",
+    "recommendedActions",
+    "repositories"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "description": "Schema version identifier, e.g. \"1.1\".",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generatedAt", "timelineStart", "timelineEnd", "repos"],
+      "properties": {
+        "generatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when the report was generated."
+        },
+        "timelineStart": {
+          "type": "string",
+          "format": "date",
+          "description": "Start of the triage window (inclusive)."
+        },
+        "timelineEnd": {
+          "type": "string",
+          "format": "date",
+          "description": "End of the triage window (inclusive)."
+        },
+        "repos": {
+          "type": "array",
+          "description": "Short repo names scanned (owner/repo).",
+          "items": {
+            "type": "string",
+            "pattern": "^[^/]+/[^/]+$"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "statistics": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "required": ["totalIssues", "totalPrs", "criticalCount"],
+      "properties": {
+        "totalIssues": { "type": "integer", "minimum": 0 },
+        "totalPrs": { "type": "integer", "minimum": 0 },
+        "criticalCount": { "type": "integer", "minimum": 0 },
+        "staleCount": { "type": "integer", "minimum": 0 },
+        "highCount": { "type": "integer", "minimum": 0 },
+        "majorCount": { "type": "integer", "minimum": 0 },
+        "minorCount": { "type": "integer", "minimum": 0 },
+        "trivialCount": { "type": "integer", "minimum": 0 },
+        "issuesOpen": { "type": "integer", "minimum": 0 },
+        "prsOpen": { "type": "integer", "minimum": 0 },
+        "issuesWithAssignees": { "type": "integer", "minimum": 0 },
+        "issuesWithoutAssignees": { "type": "integer", "minimum": 0 },
+        "prsApproved": { "type": "integer", "minimum": 0 },
+        "prsChangesRequested": { "type": "integer", "minimum": 0 },
+        "prsReviewRequired": { "type": "integer", "minimum": 0 },
+        "averagePrAgeDays": { "type": "integer", "minimum": 0 },
+        "oldestPrDays": { "type": "integer", "minimum": 0 },
+        "newestPrDays": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "priorityMatrix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["critical", "high", "medium", "low"],
+      "properties": {
+        "critical": { "$ref": "#/$defs/priorityBucket" },
+        "high": { "$ref": "#/$defs/priorityBucket" },
+        "medium": { "$ref": "#/$defs/priorityBucket" },
+        "low": { "$ref": "#/$defs/priorityBucket" }
+      }
+    },
+    "criticalItems": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/priorityItem" }
+    },
+    "highPriorityItems": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/priorityItem" }
+    },
+    "prReviewHighlights": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/prReviewHighlight" }
+    },
+    "recommendedActions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "repositories": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/repository" }
+    },
+    "executiveSummaryMarkdown": {
+      "type": "string",
+      "description": "Optional bullet-style markdown summary for chat."
+    }
+  },
+  "$defs": {
+    "triageSeverity": {
+      "type": "string",
+      "enum": ["critical", "major", "minor", "trivial"],
+      "description": "Triage category severity from scan-mode categorization."
+    },
+    "priorityBucket": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["immediate", "thisWeek", "thisMonth", "backlog"],
+      "properties": {
+        "immediate": { "type": "integer", "minimum": 0 },
+        "thisWeek": { "type": "integer", "minimum": 0 },
+        "thisMonth": { "type": "integer", "minimum": 0 },
+        "backlog": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "priorityItem": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "url",
+        "title",
+        "repo",
+        "severity",
+        "impact",
+        "recommendedOwner",
+        "nextAction",
+        "component"
+      ],
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "title": { "type": "string", "minLength": 1 },
+        "repo": {
+          "type": "string",
+          "pattern": "^[^/]+/[^/]+$"
+        },
+        "severity": { "$ref": "#/$defs/triageSeverity" },
+        "impact": { "type": "string", "minLength": 1 },
+        "recommendedOwner": { "type": "string", "minLength": 1 },
+        "nextAction": { "type": "string", "minLength": 1 },
+        "component": { "type": "string", "minLength": 1 }
+      }
+    },
+    "prReviewHighlight": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["url", "title", "reviewStatus", "recommendedAction"],
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "title": { "type": "string", "minLength": 1 },
+        "reviewStatus": { "type": "string", "minLength": 1 },
+        "recommendedAction": { "type": "string", "minLength": 1 },
+        "repo": {
+          "type": "string",
+          "pattern": "^[^/]+/[^/]+$"
+        },
+        "number": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "label": {
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name"],
+          "properties": {
+            "name": { "type": "string", "minLength": 1 }
+          }
+        }
+      ]
+    },
+    "assignee": {
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["login"],
+          "properties": {
+            "login": { "type": "string", "minLength": 1 }
+          }
+        }
+      ]
+    },
+    "issue": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "number",
+        "title",
+        "url",
+        "state",
+        "severity",
+        "summary",
+        "labels",
+        "assignees",
+        "component",
+        "recommendedOwner",
+        "nextAction"
+      ],
+      "properties": {
+        "number": { "type": "integer", "minimum": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" },
+        "state": {
+          "type": "string",
+          "enum": ["open", "closed"]
+        },
+        "severity": { "$ref": "#/$defs/triageSeverity" },
+        "summary": { "type": "string", "minLength": 1 },
+        "labels": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/label" }
+        },
+        "assignees": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/assignee" }
+        },
+        "author": { "type": "string", "minLength": 1 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "component": { "type": "string", "minLength": 1 },
+        "recommendedOwner": { "type": "string", "minLength": 1 },
+        "nextAction": { "type": "string", "minLength": 1 }
+      },
+      "not": {
+        "required": ["reviewStatus"]
+      }
+    },
+    "pullRequest": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "number",
+        "title",
+        "url",
+        "state",
+        "severity",
+        "summary",
+        "labels",
+        "assignees",
+        "component",
+        "recommendedOwner",
+        "nextAction",
+        "reviewStatus"
+      ],
+      "properties": {
+        "number": { "type": "integer", "minimum": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" },
+        "state": {
+          "type": "string",
+          "enum": ["open", "closed", "merged"]
+        },
+        "severity": { "$ref": "#/$defs/triageSeverity" },
+        "summary": { "type": "string", "minLength": 1 },
+        "labels": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/label" }
+        },
+        "assignees": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/assignee" }
+        },
+        "author": { "type": "string", "minLength": 1 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "component": { "type": "string", "minLength": 1 },
+        "recommendedOwner": { "type": "string", "minLength": 1 },
+        "nextAction": { "type": "string", "minLength": 1 },
+        "reviewStatus": { "type": "string", "minLength": 1 }
+      }
+    },
+    "ciRun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["conclusion", "status", "createdAt", "headBranch"],
+      "properties": {
+        "conclusion": {
+          "type": ["string", "null"],
+          "enum": [
+            "success",
+            "failure",
+            "cancelled",
+            "skipped",
+            "timed_out",
+            "action_required",
+            "neutral",
+            "startup_failure",
+            "stale",
+            null
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["completed", "in_progress", "queued", "requested", "waiting", "pending"]
+        },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "headBranch": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" }
+      }
+    },
+    "ciStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "workflow",
+        "branch",
+        "checkedAt",
+        "passCount",
+        "totalCount",
+        "health",
+        "runs"
+      ],
+      "properties": {
+        "workflow": { "type": "string", "minLength": 1 },
+        "branch": { "type": "string", "minLength": 1 },
+        "checkedAt": { "type": "string", "format": "date-time" },
+        "passCount": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "totalCount": { "type": "integer", "const": 5 },
+        "health": {
+          "type": "string",
+          "enum": ["green", "yellow", "red"]
+        },
+        "runs": {
+          "type": "array",
+          "maxItems": 5,
+          "items": { "$ref": "#/$defs/ciRun" }
+        }
+      }
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "url", "issues", "pullRequests", "ci-status"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[^/]+/[^/]+$"
+        },
+        "url": { "type": "string", "format": "uri" },
+        "issues": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/issue" }
+        },
+        "pullRequests": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/pullRequest" }
+        },
+        "ci-status": {
+          "oneOf": [
+            { "$ref": "#/$defs/ciStatus" },
+            { "type": "null" }
+          ],
+          "description": "Latest main-branch CI from gh run list, or null when CI could not be fetched."
+        }
+      }
+    }
+  }
+}

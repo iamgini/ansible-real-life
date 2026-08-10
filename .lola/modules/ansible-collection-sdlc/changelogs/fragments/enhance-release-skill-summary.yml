@@ -1,0 +1,9 @@
+---
+minor_changes:
+  - >-
+    release skill - Emphasize release summary fragment must be created before
+    running antsibull-changelog. Split into separate fragment creation (Step 7)
+    and changelog generation (Step 8) steps with clear ordering requirements.
+  - >-
+    release skill - Add guidance to verify semantic version ordering in
+    changelog.yaml (10.x should come after 9.x, not before 2.x).

@@ -1,0 +1,45 @@
+[project]
+name = "ai-forge"
+version = "0.0.1"
+requires-python = ">=3.11"
+
+[tool.ruff]
+target-version = "py311"
+src = ["scripts"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "COM812",  # trailing-comma — conflicts with ruff-format
+  "ISC001",  # single-line-implicit-string-concatenation — conflicts with ruff-format
+]
+
+[tool.ruff.lint.isort]
+required-imports = ["from __future__ import annotations"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/*" = [
+  "INP001",  # implicit-namespace-package — scripts/ is not a package
+  "T201",    # print — scripts use print for user output
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+disallow_any_explicit = true
+disallow_any_generics = true
+warn_return_any = true
+warn_unused_configs = true
+files = ["scripts/"]
+
+[tool.tox]
+env_list = ["lint"]
+
+[tool.tox.env.lint]
+description = "Run all linters and validators via prek"
+skip_install = true
+allowlist_externals = ["prek"]
+commands = [["prek", "run", "--all-files"]]

@@ -1,0 +1,5 @@
+---
+minor_changes:
+  - aws-terminator-analyze - Analyzes Ansible AWS collection PRs to determine required terminator classes and IAM permissions.
+  - aws-terminator-implement - Implements terminator classes and IAM permissions in aws-terminator repository.
+  - aws-terminator-workflow - End-to-end orchestrator coordinating analysis, implementation, testing, and PR creation.

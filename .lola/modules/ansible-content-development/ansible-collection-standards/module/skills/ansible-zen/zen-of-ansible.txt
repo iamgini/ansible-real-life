@@ -1,0 +1,20 @@
+Ansible is not Python.
+YAML sucks for coding.
+Playbooks are not for programming.
+Ansible users are (most likely) not programmers.
+Clear is better than cluttered.
+Concise is better than verbose.
+Simple is better than complex.
+Readability counts.
+Helping users get things done matters most.
+User experience beats ideological purity.
+"Magic" conquers the manual.
+When giving users options, use convention over configuration.
+Declarative is better than imperative -- most of the time.
+Focus avoids complexity.
+Complexity kills productivity.
+If the implementation is hard to explain, it's a bad idea.
+Every shell command and UI interaction is an opportunity to automate.
+Just because something works, doesn't mean it can't be improved.
+Friction should be eliminated whenever possible.
+Automation is a journey that never ends.

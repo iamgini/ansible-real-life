@@ -1,0 +1,29 @@
+# SonarCloud project configuration for __COLLECTION_NAME__
+#
+# Placeholder legend (replace every __...__ token):
+#   __COLLECTION_NAME__     Human label, e.g. kubernetes.core
+#   __SONAR_PROJECT_KEY__   Must match SonarCloud UI (e.g. ansible-collections_kubernetes.core)
+#   __SONAR_ORGANIZATION__    SonarCloud org slug (e.g. ansible-collections)
+#   __SONAR_PROJECT_NAME__  Often same as collection name for display
+#   __SONAR_PYTHON_VERSION__ Primary Python used in CI for analysis, e.g. 3.12
+#   __SONAR_NEW_CODE_BRANCH__ Git default branch name (main, devel, ...)
+#
+# Copy to repository root as sonar-project.properties and replace every __PLACEHOLDER__ below.
+# Parameter reference: https://docs.sonarqube.org/latest/analysis/analysis-parameters/
+
+# Must match SonarCloud project key exactly (Analyze new project in UI).
+sonar.projectKey=__SONAR_PROJECT_KEY__
+# SonarCloud organization key (slug), e.g. ansible-collections
+sonar.organization=__SONAR_ORGANIZATION__
+
+sonar.sources=.
+sonar.projectName=__SONAR_PROJECT_NAME__
+
+sonar.python.coverage.reportPaths=coverage.xml
+
+# Adjust paths to match the collection tree if needed.
+sonar.tests=tests/unit,tests/integration
+sonar.python.version=__SONAR_PYTHON_VERSION__
+sonar.newCode.referenceBranch=__SONAR_NEW_CODE_BRANCH__
+
+sonar.exclusions=tests/**,.tox/**

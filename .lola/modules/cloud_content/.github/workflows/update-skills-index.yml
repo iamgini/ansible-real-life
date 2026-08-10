@@ -1,0 +1,59 @@
+---
+name: Update Skills Index
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '*/module/skills/*/SKILL.md'
+
+jobs:
+  update-skills-index:
+    name: Update SKILLS.md
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check for new skills
+        id: check-new
+        run: |
+          # Check if any SKILL.md files were added in this push
+          NEW_SKILLS=$(git diff --name-status --diff-filter=A HEAD~1 HEAD -- '*/module/skills/*/SKILL.md' | wc -l)
+          echo "new_skills=$NEW_SKILLS" >> "$GITHUB_OUTPUT"
+          if [ "$NEW_SKILLS" -gt 0 ]; then
+            echo "Found $NEW_SKILLS new skill(s)"
+            git diff --name-status --diff-filter=A HEAD~1 HEAD -- '*/module/skills/*/SKILL.md'
+          else
+            echo "No new skills added"
+          fi
+
+      - name: Set up Python
+        if: steps.check-new.outputs.new_skills != '0'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        if: steps.check-new.outputs.new_skills != '0'
+        run: pip install pyyaml
+
+      - name: Generate SKILLS.md
+        if: steps.check-new.outputs.new_skills != '0'
+        run: python3 .github/scripts/generate-skills-index.py
+
+      - name: Commit and push
+        if: steps.check-new.outputs.new_skills != '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add SKILLS.md
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "docs: update SKILLS.md index [skip ci]"
+            git push
+          fi

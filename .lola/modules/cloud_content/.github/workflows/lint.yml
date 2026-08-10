@@ -1,0 +1,21 @@
+---
+name: Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Install prek
+        uses: j178/prek-action@v2
+        with:
+          install-only: true
+      - run: uvx --with tox-uv tox -e lint
