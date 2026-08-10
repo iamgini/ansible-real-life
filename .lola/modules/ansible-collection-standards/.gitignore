@@ -1,5 +1,0 @@
-# Node.js (not needed - linting done via GitHub Actions)
-node_modules/
-package.json
-package-lock.json
-.venv/

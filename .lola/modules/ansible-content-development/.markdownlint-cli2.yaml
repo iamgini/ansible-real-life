@@ -1,9 +1,0 @@
----
-# markdownlint-cli2 configuration
-config: .markdownlint.json
-ignores:
-  - node_modules
-  - tmp
-  - .git
-globs:
-  - "**/*.md"

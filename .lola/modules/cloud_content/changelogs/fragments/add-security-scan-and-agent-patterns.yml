@@ -1,6 +1,0 @@
----
-minor_changes:
-  - Add ``security-scan`` skill for scanning Ansible collections for vulnerabilities, hardcoded secrets, and compromised dependencies.
-  - Add agent role definitions (Module Developer, Test, Release, Review, CI/CD) with scope, capabilities, and constraints.
-  - Add architectural invariants section documenting non-negotiable rules for collection development.
-  - Add quality gates checklist and handoff protocols for agent transitions.

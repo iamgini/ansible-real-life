@@ -1,3 +1,0 @@
-content_dirname: ansible-collection-standards/module
-source: https://github.com/ansible-community/ai-forge.git
-type: git
