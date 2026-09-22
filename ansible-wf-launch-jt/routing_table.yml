@@ -1,0 +1,12 @@
+---
+# Routing table: site_id → service_category → service_operation → AAP Job Template name
+# Add new routes here to extend the decision engine without changing the playbook logic.
+jt_routing_table:
+  site-north:
+    web-app:
+      deploy: "AppDeploy - Deploy Web Frontend"
+      restart: "AppDeploy - Restart Web Service"
+  site-south:
+    data-pipeline:
+      backup: "DataOps - Run Pipeline Backup"
+      restore: "DataOps - Restore Pipeline"

@@ -1,0 +1,96 @@
+---
+# Launches a target AAP job template by name via REST API, then polls until completion.
+# Requires env vars CONTROLLER_HOST and CONTROLLER_TOKEN injected by AAP API Token credential.
+- name: Launch and Track Target Job Template via API
+  hosts: localhost
+  gather_facts: false
+  vars:
+    controller_host: "{{ lookup('env', 'CONTROLLER_HOST') }}"
+    controller_token: "{{ lookup('env', 'CONTROLLER_TOKEN') }}"
+    api_headers:
+      Authorization: "Bearer {{ controller_token }}"
+      Content-Type: "application/json"
+    poll_delay: 15
+    poll_retries: 80
+  tasks:
+    - name: Validate target_jt_name is available
+      ansible.builtin.fail:
+        msg: >-
+          target_jt_name is empty or undefined.
+          Ensure the decision playbook (decide-target-jt.yml) ran successfully
+          and passed target_jt_name via set_stats.
+      when: target_jt_name is not defined or target_jt_name == ''
+
+    - name: Search for job template by name
+      ansible.builtin.uri:
+        url: "{{ controller_host }}/api/v2/job_templates/?name={{ target_jt_name | replace(' ', '%20') }}"
+        method: GET
+        headers: "{{ api_headers }}"
+        validate_certs: false
+        return_content: true
+      register: jt_search
+      failed_when:
+        - jt_search.status != 200
+
+    - name: Fail if job template not found
+      ansible.builtin.fail:
+        msg: "Job template '{{ target_jt_name }}' not found in AAP. Verify it exists and is accessible."
+      when: jt_search.json.count == 0
+
+    - name: Extract job template ID
+      ansible.builtin.set_fact:
+        target_jt_id: "{{ jt_search.json.results[0].id }}"
+
+    - name: Launch the job template
+      ansible.builtin.uri:
+        url: "{{ controller_host }}/api/v2/job_templates/{{ target_jt_id }}/launch/"
+        method: POST
+        headers: "{{ api_headers }}"
+        body: "{{ {} | to_json }}"
+        body_format: json
+        validate_certs: false
+        status_code: 201
+      register: launch_response
+
+    - name: Extract launched job ID
+      ansible.builtin.set_fact:
+        launched_job_id: "{{ launch_response.json.id }}"
+
+    - name: Print job URL for operator
+      ansible.builtin.debug:
+        msg: |
+          ========================================
+          Job launched successfully!
+          Job Template : {{ target_jt_name }}
+          Job ID       : {{ launched_job_id }}
+          Job URL      : {{ controller_host }}/#/jobs/playbook/{{ launched_job_id }}/output
+          API URL      : {{ controller_host }}/api/v2/jobs/{{ launched_job_id }}/
+          ========================================
+          Polling for completion every {{ poll_delay }}s (max {{ poll_retries }} attempts)...
+
+    - name: Poll job status until completion
+      ansible.builtin.uri:
+        url: "{{ controller_host }}/api/v2/jobs/{{ launched_job_id }}/"
+        method: GET
+        headers: "{{ api_headers }}"
+        validate_certs: false
+      register: job_poll
+      until: job_poll.json.status in ['successful', 'failed', 'error', 'canceled']
+      retries: "{{ poll_retries }}"
+      delay: "{{ poll_delay }}"
+
+    - name: Print final job result
+      ansible.builtin.debug:
+        msg: |
+          ========================================
+          Job {{ launched_job_id }} completed.
+          Status : {{ job_poll.json.status | upper }}
+          URL    : {{ controller_host }}/#/jobs/playbook/{{ launched_job_id }}/output
+          ========================================
+
+    - name: Fail playbook if launched job did not succeed
+      ansible.builtin.fail:
+        msg: >-
+          Job {{ launched_job_id }} ended with status '{{ job_poll.json.status }}'.
+          Review: {{ controller_host }}/#/jobs/playbook/{{ launched_job_id }}/output
+      when: job_poll.json.status != 'successful'

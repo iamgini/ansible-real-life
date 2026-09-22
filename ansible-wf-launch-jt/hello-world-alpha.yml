@@ -1,0 +1,34 @@
+---
+# Alpha Services target playbook — web-app operations (deploy / restart)
+- name: Alpha Services - Web Application Operation
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Display operation details
+      ansible.builtin.debug:
+        msg: |
+          ==============================================
+          ALPHA SERVICES  |  Web Application Operation
+          ==============================================
+          Site          : {{ site_id | default('N/A') }}
+          Service       : {{ service_category | default('N/A') }}
+          Operation     : {{ service_operation | default('N/A') }}
+          Change Ref    : {{ change_request_id | default('N/A') }}
+          ==============================================
+
+    - name: Simulate pre-operation health check
+      ansible.builtin.debug:
+        msg: "Pre-check: All web application services responding on {{ site_id | default('site-north') }}."
+
+    - name: Simulate operation execution
+      ansible.builtin.pause:
+        seconds: 5
+        prompt: "Simulating {{ service_operation | default('operation') }} on web-app tier..."
+
+    - name: Simulate post-operation verification
+      ansible.builtin.debug:
+        msg: "Post-check: Web application {{ service_operation | default('operation') }} completed. All endpoints healthy."
+
+    - name: Operation summary
+      ansible.builtin.debug:
+        msg: "Alpha Services operation '{{ service_operation | default('N/A') }}' finished successfully."

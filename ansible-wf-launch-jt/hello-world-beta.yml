@@ -1,0 +1,34 @@
+---
+# Beta Services target playbook — data-pipeline operations (backup / restore)
+- name: Beta Services - Data Pipeline Operation
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Display operation details
+      ansible.builtin.debug:
+        msg: |
+          ==============================================
+          BETA SERVICES  |  Data Pipeline Operation
+          ==============================================
+          Site          : {{ site_id | default('N/A') }}
+          Service       : {{ service_category | default('N/A') }}
+          Operation     : {{ service_operation | default('N/A') }}
+          Change Ref    : {{ change_request_id | default('N/A') }}
+          ==============================================
+
+    - name: Simulate pipeline connectivity check
+      ansible.builtin.debug:
+        msg: "Pre-check: Data pipeline endpoints reachable on {{ site_id | default('site-south') }}."
+
+    - name: Simulate pipeline operation
+      ansible.builtin.pause:
+        seconds: 5
+        prompt: "Simulating {{ service_operation | default('operation') }} on data-pipeline..."
+
+    - name: Simulate data integrity verification
+      ansible.builtin.debug:
+        msg: "Post-check: Data integrity verified. Pipeline {{ service_operation | default('operation') }} completed without errors."
+
+    - name: Operation summary
+      ansible.builtin.debug:
+        msg: "Beta Services operation '{{ service_operation | default('N/A') }}' finished successfully."

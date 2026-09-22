@@ -1,0 +1,62 @@
+---
+# Decision Engine: maps survey inputs to target job template name.
+# Passes result to subsequent workflow nodes via set_stats.
+- name: Route Request to Target Job Template
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - routing_table.yml
+  tasks:
+    - name: Validate required survey variables are present
+      ansible.builtin.fail:
+        msg: "Missing required variable: {{ item }}"
+      loop:
+        - site_id
+        - service_category
+        - service_operation
+      when: vars[item] is not defined or vars[item] == ''
+
+    - name: Look up target job template from routing table
+      ansible.builtin.set_fact:
+        target_jt_name: >-
+          {{ jt_routing_table
+             | dict2items
+             | selectattr('key', 'equalto', site_id)
+             | map(attribute='value')
+             | first
+             | default({})
+             | dict2items
+             | selectattr('key', 'equalto', service_category)
+             | map(attribute='value')
+             | first
+             | default({})
+             | dict2items
+             | selectattr('key', 'equalto', service_operation)
+             | map(attribute='value')
+             | first
+             | default('') }}
+
+    - name: Fail if no matching route found in routing table
+      ansible.builtin.fail:
+        msg: >-
+          No job template found for:
+            site_id         = {{ site_id }}
+            service_category = {{ service_category }}
+            service_operation = {{ service_operation }}
+          Check routing_table.yml for valid combinations.
+      when: target_jt_name == ''
+
+    - name: Show selected job template
+      ansible.builtin.debug:
+        msg: |
+          === Routing Decision ===
+          Site:       {{ site_id }}
+          Category:   {{ service_category }}
+          Operation:  {{ service_operation }}
+          Target JT:  {{ target_jt_name }}
+          Change Ref: {{ change_request_id | default('N/A') }}
+
+    - name: Expose target_jt_name to subsequent workflow nodes
+      ansible.builtin.set_stats:
+        data:
+          target_jt_name: "{{ target_jt_name }}"
