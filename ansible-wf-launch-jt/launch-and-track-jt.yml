@@ -5,10 +5,10 @@
   hosts: localhost
   gather_facts: false
   vars:
-    controller_host: "{{ lookup('env', 'CONTROLLER_HOST') }}"
+    controller_host: "{{ lookup('env', 'CONTROLLER_HOST') | regex_replace('/$', '') }}"
     controller_token: "{{ lookup('env', 'CONTROLLER_TOKEN') }}"
     # AAP 2.5+ uses /api/controller/v2 — override to /api/v2 for standalone controller (AAP 2.4)
-    controller_api: "{{ lookup('env', 'CONTROLLER_HOST') }}/api/controller/v2"
+    controller_api: "{{ lookup('env', 'CONTROLLER_HOST') | regex_replace('/$', '') }}/api/controller/v2"
     api_headers:
       Authorization: "Bearer {{ controller_token }}"
       Content-Type: "application/json"
