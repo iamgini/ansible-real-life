@@ -1,9 +1,13 @@
 ---
 # Launches a target AAP job template by name via REST API, then polls until completion.
 # Requires env vars CONTROLLER_HOST and CONTROLLER_TOKEN injected by AAP API Token credential.
+# Resolves target JT name independently from routing_table.yml using the same survey vars
+# passed by the workflow — does not depend on set_stats from the decision node.
 - name: Launch and Track Target Job Template via API
   hosts: localhost
   gather_facts: false
+  vars_files:
+    - routing_table.yml
   vars:
     controller_host: "{{ lookup('env', 'CONTROLLER_HOST') | regex_replace('/$', '') }}"
     controller_token: "{{ lookup('env', 'CONTROLLER_TOKEN') }}"
@@ -15,13 +19,60 @@
     poll_delay: 10
     poll_retries: 80
   tasks:
-    - name: Validate target_jt_name is available
+    - name: Validate required survey variables are present
+      ansible.builtin.fail:
+        msg: "Missing required survey variable: {{ item }}"
+      loop:
+        - site_id
+        - service_category
+        - service_operation
+      when: vars[item] is not defined or vars[item] == ''
+
+    - name: Resolve target job template from routing table
+      ansible.builtin.set_fact:
+        target_jt_name: >-
+          {{ jt_routing_table
+             | dict2items
+             | selectattr('key', 'equalto', site_id)
+             | map(attribute='value')
+             | first
+             | default({})
+             | dict2items
+             | selectattr('key', 'equalto', service_category)
+             | map(attribute='value')
+             | first
+             | default({})
+             | dict2items
+             | selectattr('key', 'equalto', service_operation)
+             | map(attribute='value')
+             | first
+             | default('') }}
+
+    - name: Fail if no route found for the given survey inputs
       ansible.builtin.fail:
         msg: >-
-          target_jt_name is empty or undefined.
-          Ensure the decision playbook (decide-target-jt.yml) ran successfully
-          and passed target_jt_name via set_stats.
-      when: target_jt_name is not defined or target_jt_name == ''
+          No job template found for:
+            site_id          = {{ site_id }}
+            service_category = {{ service_category }}
+            service_operation = {{ service_operation }}
+          Check routing_table.yml for valid combinations.
+      when: target_jt_name == ''
+
+    - name: Print launch summary before executing
+      ansible.builtin.debug:
+        msg:
+          - "======================================================"
+          - "  Launching Job Template"
+          - "======================================================"
+          - "Requested by     : {{ awx_user_name | default('unknown') }}"
+          - "Change ticket    : {{ change_request_id | default('Not provided') }}"
+          - "------------------------------------------------------"
+          - "Site             : {{ site_id }}"
+          - "Service          : {{ service_category }}"
+          - "Operation        : {{ service_operation }}"
+          - "------------------------------------------------------"
+          - ">>> JOB TEMPLATE : {{ target_jt_name }} <<<"
+          - "======================================================"
 
     - name: Search for job template by name
       ansible.builtin.uri:
