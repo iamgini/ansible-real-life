@@ -66,7 +66,7 @@
           - "Job Template : {{ target_jt_name }}"
           - "Job ID       : {{ launched_job_id }}"
           - "Job URL (click to open):"
-          - "{{ controller_host }}/#/jobs/playbook/{{ launched_job_id }}/output"
+          - "{{ controller_host }}/execution/jobs/playbook/{{ launched_job_id }}/output"
           - "========================================"
           - "Polling for completion every {{ poll_delay }}s (max {{ poll_retries }} attempts)..."
 
@@ -87,7 +87,7 @@
           - "========================================"
           - "Job {{ launched_job_id }} completed with status: {{ job_poll.json.status | upper }}"
           - "View output (click to open):"
-          - "{{ controller_host }}/#/jobs/playbook/{{ launched_job_id }}/output"
+          - "{{ controller_host }}/execution/jobs/playbook/{{ launched_job_id }}/output"
           - "========================================"
 
     - name: Fail playbook if launched job did not succeed
