@@ -43,12 +43,20 @@
       ansible.builtin.set_fact:
         target_jt_id: "{{ jt_search.json.results[0].id }}"
 
+    - name: Build launch payload
+      ansible.builtin.set_fact:
+        launch_payload:
+          extra_vars:
+            service_operation: "{{ service_operation }}"
+            service_category: "{{ service_category }}"
+            site_id: "{{ site_id | default('') }}"
+
     - name: Launch the job template
       ansible.builtin.uri:
         url: "{{ controller_api }}/job_templates/{{ target_jt_id }}/launch/"
         method: POST
         headers: "{{ api_headers }}"
-        body: "{{ {'extra_vars': {'service_operation': service_operation, 'service_category': service_category}} | to_json }}"
+        body: "{{ launch_payload | to_json }}"
         body_format: json
         validate_certs: false
         status_code: 201
