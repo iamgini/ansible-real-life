@@ -12,7 +12,7 @@
     api_headers:
       Authorization: "Bearer {{ controller_token }}"
       Content-Type: "application/json"
-    poll_delay: 15
+    poll_delay: 10
     poll_retries: 80
   tasks:
     - name: Validate target_jt_name is available
