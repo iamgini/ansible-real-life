@@ -48,7 +48,7 @@
         url: "{{ controller_api }}/job_templates/{{ target_jt_id }}/launch/"
         method: POST
         headers: "{{ api_headers }}"
-        body: "{{ {} | to_json }}"
+        body: "{{ {'extra_vars': {'service_operation': service_operation, 'service_category': service_category}} | to_json }}"
         body_format: json
         validate_certs: false
         status_code: 201

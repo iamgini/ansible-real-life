@@ -4,9 +4,9 @@
 jt_routing_table:
   site-north:
     web-app:
-      deploy: "AppDeploy - Deploy Web Frontend"
-      restart: "AppDeploy - Restart Web Service"
+      start: "AppDeploy - Deploy Web Frontend"
+      stop: "AppDeploy - Restart Web Service"
   site-south:
     data-pipeline:
-      backup: "DataOps - Run Pipeline Backup"
-      restore: "DataOps - Restore Pipeline"
+      start: "DataOps - Run Pipeline Backup"
+      stop: "DataOps - Restore Pipeline"
