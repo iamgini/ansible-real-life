@@ -46,6 +46,23 @@
           Check routing_table.yml for valid combinations.
       when: target_jt_name == ''
 
+    - name: Approval summary — approver open this node output before deciding
+      ansible.builtin.debug:
+        msg:
+          - "======================================================"
+          - "  REVIEW BEFORE APPROVING — Job Template to Execute"
+          - "======================================================"
+          - "Requested by    : {{ awx_user_name | default('unknown') }}"
+          - "Email           : {{ awx_user_email | default('N/A') }}"
+          - "Change ticket   : {{ change_request_id | default('Not provided') }}"
+          - "------------------------------------------------------"
+          - "Site            : {{ site_id }}"
+          - "Service         : {{ service_category }}"
+          - "Operation       : {{ service_operation }}"
+          - "------------------------------------------------------"
+          - ">>> JOB TEMPLATE : {{ target_jt_name }} <<<"
+          - "======================================================"
+
     - name: Expose decision result and approval context to workflow
       ansible.builtin.set_stats:
         data:
