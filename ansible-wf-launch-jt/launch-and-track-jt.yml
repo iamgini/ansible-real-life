@@ -60,15 +60,15 @@
 
     - name: Print job URL for operator
       ansible.builtin.debug:
-        msg: |
-          ========================================
-          Job launched successfully!
-          Job Template : {{ target_jt_name }}
-          Job ID       : {{ launched_job_id }}
-          Job URL      : {{ controller_host }}/#/jobs/playbook/{{ launched_job_id }}/output
-          API URL      : {{ controller_api }}/jobs/{{ launched_job_id }}/
-          ========================================
-          Polling for completion every {{ poll_delay }}s (max {{ poll_retries }} attempts)...
+        msg:
+          - "========================================"
+          - "Job launched successfully!"
+          - "Job Template : {{ target_jt_name }}"
+          - "Job ID       : {{ launched_job_id }}"
+          - "Job URL (click to open):"
+          - "{{ controller_host }}/#/jobs/playbook/{{ launched_job_id }}/output"
+          - "========================================"
+          - "Polling for completion every {{ poll_delay }}s (max {{ poll_retries }} attempts)..."
 
     - name: Poll job status until completion
       ansible.builtin.uri:
@@ -83,12 +83,12 @@
 
     - name: Print final job result
       ansible.builtin.debug:
-        msg: |
-          ========================================
-          Job {{ launched_job_id }} completed.
-          Status : {{ job_poll.json.status | upper }}
-          URL    : {{ controller_host }}/#/jobs/playbook/{{ launched_job_id }}/output
-          ========================================
+        msg:
+          - "========================================"
+          - "Job {{ launched_job_id }} completed with status: {{ job_poll.json.status | upper }}"
+          - "View output (click to open):"
+          - "{{ controller_host }}/#/jobs/playbook/{{ launched_job_id }}/output"
+          - "========================================"
 
     - name: Fail playbook if launched job did not succeed
       ansible.builtin.fail:
