@@ -46,17 +46,15 @@
           Check routing_table.yml for valid combinations.
       when: target_jt_name == ''
 
-    - name: Show selected job template
-      ansible.builtin.debug:
-        msg: |
-          === Routing Decision ===
-          Site:       {{ site_id }}
-          Category:   {{ service_category }}
-          Operation:  {{ service_operation }}
-          Target JT:  {{ target_jt_name }}
-          Change Ref: {{ change_request_id | default('N/A') }}
-
-    - name: Expose target_jt_name to subsequent workflow nodes
+    - name: Expose decision result and approval context to workflow
       ansible.builtin.set_stats:
         data:
           target_jt_name: "{{ target_jt_name }}"
+          approval_requested_by: "{{ awx_user_name | default('unknown') }}"
+          approval_requester_email: "{{ awx_user_email | default('N/A') }}"
+          approval_change_ticket: "{{ change_request_id | default('Not provided') }}"
+          approval_site: "{{ site_id }}"
+          approval_service: "{{ service_category }}"
+          approval_operation: "{{ service_operation }}"
+          approval_job_template: "{{ target_jt_name }}"
+          approval_workflow_job: "{{ awx_workflow_job_id | default('N/A') }}"
