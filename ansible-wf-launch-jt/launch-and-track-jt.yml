@@ -7,6 +7,8 @@
   vars:
     controller_host: "{{ lookup('env', 'CONTROLLER_HOST') }}"
     controller_token: "{{ lookup('env', 'CONTROLLER_TOKEN') }}"
+    # AAP 2.5+ uses /api/controller/v2 — override to /api/v2 for standalone controller (AAP 2.4)
+    controller_api: "{{ lookup('env', 'CONTROLLER_HOST') }}/api/controller/v2"
     api_headers:
       Authorization: "Bearer {{ controller_token }}"
       Content-Type: "application/json"
@@ -23,7 +25,7 @@
 
     - name: Search for job template by name
       ansible.builtin.uri:
-        url: "{{ controller_host }}/api/v2/job_templates/?name={{ target_jt_name | replace(' ', '%20') }}"
+        url: "{{ controller_api }}/job_templates/?name={{ target_jt_name | replace(' ', '%20') }}"
         method: GET
         headers: "{{ api_headers }}"
         validate_certs: false
@@ -43,7 +45,7 @@
 
     - name: Launch the job template
       ansible.builtin.uri:
-        url: "{{ controller_host }}/api/v2/job_templates/{{ target_jt_id }}/launch/"
+        url: "{{ controller_api }}/job_templates/{{ target_jt_id }}/launch/"
         method: POST
         headers: "{{ api_headers }}"
         body: "{{ {} | to_json }}"
@@ -64,13 +66,13 @@
           Job Template : {{ target_jt_name }}
           Job ID       : {{ launched_job_id }}
           Job URL      : {{ controller_host }}/#/jobs/playbook/{{ launched_job_id }}/output
-          API URL      : {{ controller_host }}/api/v2/jobs/{{ launched_job_id }}/
+          API URL      : {{ controller_api }}/jobs/{{ launched_job_id }}/
           ========================================
           Polling for completion every {{ poll_delay }}s (max {{ poll_retries }} attempts)...
 
     - name: Poll job status until completion
       ansible.builtin.uri:
-        url: "{{ controller_host }}/api/v2/jobs/{{ launched_job_id }}/"
+        url: "{{ controller_api }}/jobs/{{ launched_job_id }}/"
         method: GET
         headers: "{{ api_headers }}"
         validate_certs: false
