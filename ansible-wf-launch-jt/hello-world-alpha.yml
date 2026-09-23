@@ -3,6 +3,8 @@
 - name: Alpha Services - Web Application Operation
   hosts: localhost
   gather_facts: false
+  vars:
+    demo_delay: 30
   tasks:
     - name: Display operation details
       ansible.builtin.debug:
@@ -22,8 +24,8 @@
 
     - name: Simulate operation execution
       ansible.builtin.pause:
-        seconds: 5
-        prompt: "Simulating {{ service_operation | default('operation') }} on web-app tier..."
+        seconds: "{{ demo_delay }}"
+        prompt: "Simulating {{ service_operation | default('operation') }} on web-app tier... (waiting {{ demo_delay }}s)"
 
     - name: Simulate post-operation verification
       ansible.builtin.debug:

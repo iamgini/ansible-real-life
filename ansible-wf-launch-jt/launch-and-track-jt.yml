@@ -65,7 +65,6 @@
           - "Job launched successfully!"
           - "Job Template : {{ target_jt_name }}"
           - "Job ID       : {{ launched_job_id }}"
-          - "Job URL (click to open):"
           - "{{ controller_host }}/execution/jobs/playbook/{{ launched_job_id }}/output"
           - "========================================"
           - "Polling for completion every {{ poll_delay }}s (max {{ poll_retries }} attempts)..."

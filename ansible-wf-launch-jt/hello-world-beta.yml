@@ -3,6 +3,8 @@
 - name: Beta Services - Data Pipeline Operation
   hosts: localhost
   gather_facts: false
+  vars:
+    demo_delay: 30
   tasks:
     - name: Display operation details
       ansible.builtin.debug:
@@ -22,8 +24,8 @@
 
     - name: Simulate pipeline operation
       ansible.builtin.pause:
-        seconds: 5
-        prompt: "Simulating {{ service_operation | default('operation') }} on data-pipeline..."
+        seconds: "{{ demo_delay }}"
+        prompt: "Simulating {{ service_operation | default('operation') }} on data-pipeline... (waiting {{ demo_delay }}s)"
 
     - name: Simulate data integrity verification
       ansible.builtin.debug:
